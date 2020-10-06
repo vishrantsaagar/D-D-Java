@@ -45,7 +45,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             int roomid = Integer.parseInt(attributes.getValue("room"));
             Room room = new Room(roomid);
             dungeon.addRoom(room);
-            
+            //add it to the arraylist
         } else if(qName.equalsIgnoreCase("visible")) {
             bvisible = true;
         } else if(qName.equalsIgnoreCase("posX")) {
