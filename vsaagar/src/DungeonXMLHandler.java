@@ -90,14 +90,15 @@ public class DungeonXMLHandler extends DefaultHandler {
         }
 
         str += "roomsBeingParsed: " + roomsParsed.toString() + "\n";
-        str += "creaturesBeingParsed: " + creaturesParsed.toString() + "\n";
-        str += "bvisible: " + bvisible.toString() + "\n";
-        str += "bposX: " + bposX.toString() + "\n";
-        str += "bposY: " + bposY.toString() + "\n";
-        str += "bwidth: " + bwidth.toString() + "\n";
-        str += "bheight: " + bheight.toString() + "\n";
+        //str += "creaturesBeingParsed: " + creaturesParsed + "\n";
+        str += "bvisible: " + bvisible + "\n";
+        str += "bposX: " + bposX + "\n";
+        str += "bposY: " + bposY + "\n";
+        str += "bwidth: " + bwidth + "\n";
+        str += "bheight: " + bheight + "\n";
 
         //Need to still add rooms, room, monster, player, and scroll
+        return str;
     }
 
 }
