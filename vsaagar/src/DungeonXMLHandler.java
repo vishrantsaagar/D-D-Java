@@ -81,4 +81,23 @@ public class DungeonXMLHandler extends DefaultHandler {
         data.append(new String(ch, start, length));
     }
 
+    @Override
+    public String toString(){
+        String str = "DungeonXMLHandler\n";
+
+        for(int i = 0; i < rooms.size(); i++){
+            str += rooms.get(i).toString() + "\n";
+        }
+
+        str += "roomsBeingParsed: " + roomsParsed.toString() + "\n";
+        str += "creaturesBeingParsed: " + creaturesParsed.toString() + "\n";
+        str += "bvisible: " + bvisible.toString() + "\n";
+        str += "bposX: " + bposX.toString() + "\n";
+        str += "bposY: " + bposY.toString() + "\n";
+        str += "bwidth: " + bwidth.toString() + "\n";
+        str += "bheight: " + bheight.toString() + "\n";
+
+        //Need to still add rooms, room, monster, player, and scroll
+    }
+
 }
