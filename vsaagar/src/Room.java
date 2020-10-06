@@ -1,8 +1,8 @@
 public class Room extends Structure{
     
-    private String _r1;
+    private int _r1;
 
-    public Room(String r1)
+    public Room(int r1)
     {
         _r1 = r1;
         System.out.println("Room:Room" + _r1);

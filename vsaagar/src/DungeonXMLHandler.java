@@ -8,7 +8,6 @@ public class DungeonXMLHandler extends DefaultHandler {
     private StringBuilder data = null;
 
     private Dungeon dungeon;
-    private ArrayList<Room> rooms;
     
     private Room roomsParsed = null;
 
@@ -27,10 +26,6 @@ public class DungeonXMLHandler extends DefaultHandler {
 
     private boolean bhpMoves = false;
 
-	public ArrayList<Room> getRoom() {
-		return rooms;
-    }
-
     public DungeonXMLHandler() {
     }
 
@@ -45,10 +40,12 @@ public class DungeonXMLHandler extends DefaultHandler {
             int bottomHeight = Integer.parseInt(attributes.getValue("bottomHeight"));
             dungeon.getDungeon(name, gameHeight, width);
         } else if(qName.equalsIgnoreCase("Rooms")) { //order followed in testDrawing.xml
-            //What do you put here?
+
         } else if(qName.equalsIgnoreCase("Room")) {
             int roomid = Integer.parseInt(attributes.getValue("room"));
-            //How do you declare room here?
+            Room room = new Room(roomid);
+            dungeon.addRoom(room);
+            
         } else if(qName.equalsIgnoreCase("visible")) {
             bvisible = true;
         } else if(qName.equalsIgnoreCase("posX")) {
@@ -72,33 +69,30 @@ public class DungeonXMLHandler extends DefaultHandler {
     public void endElement(String uri, String localName, String qName) throws SAXException {
     }
 
-    private void addRoom(Room room) {
-    rooms.add(room); 
-    }
 
     @Override
     public void characters(char ch[], int start, int length) throws SAXException {
         data.append(new String(ch, start, length));
     }
 
-    @Override
-    public String toString(){
-        String str = "DungeonXMLHandler\n";
-
-        for(int i = 0; i < rooms.size(); i++){
-            str += rooms.get(i).toString() + "\n";
-        }
-
-        str += "roomsBeingParsed: " + roomsParsed.toString() + "\n";
-        //str += "creaturesBeingParsed: " + creaturesParsed + "\n";
-        str += "bvisible: " + bvisible + "\n";
-        str += "bposX: " + bposX + "\n";
-        str += "bposY: " + bposY + "\n";
-        str += "bwidth: " + bwidth + "\n";
-        str += "bheight: " + bheight + "\n";
-
-        //Need to still add rooms, room, monster, player, and scroll
-        return str;
-    }
+    //@Override
+    //public String toString(){
+    //    String str = "DungeonXMLHandler\n";
+//
+    //    for(int i = 0; i < rooms.size(); i++){
+    //        str += rooms.get(i).toString() + "\n";
+    //    }
+//
+    //    str += "roomsBeingParsed: " + roomsParsed.toString() + "\n";
+    //    //str += "creaturesBeingParsed: " + creaturesParsed + "\n";
+    //    str += "bvisible: " + bvisible + "\n";
+    //    str += "bposX: " + bposX + "\n";
+    //    str += "bposY: " + bposY + "\n";
+    //    str += "bwidth: " + bwidth + "\n";
+    //    str += "bheight: " + bheight + "\n";
+//
+    //    //Need to still add rooms, room, monster, player, and scroll
+    //    return str;
+    //}
 
 }
