@@ -43,7 +43,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             int topHeight = Integer.parseInt(attributes.getValue("topHeight"));
             int gameHeight = Integer.parseInt(attributes.getValue("gameHeight"));
             int bottomHeight = Integer.parseInt(attributes.getValue("bottomHeight"));
-            dungeon.getDungtion(name, gameHeight, width);
+            dungeon.getDungeon(name, gameHeight, width);
         } else if(qName.equalsIgnoreCase("Rooms")) { //order followed in testDrawing.xml
             //What do you put here?
         } else if(qName.equalsIgnoreCase("Room")) {

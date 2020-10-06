@@ -4,7 +4,7 @@ public class Dungeon {
     private int _width;
     private int _gameHeight;
 
-    public void getDungtion(String name, int width, int gameHeight)
+    public void getDungeon(String name, int width, int gameHeight)
     {
         _name = name;
         _width = width;
