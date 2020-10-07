@@ -38,12 +38,13 @@ public class DungeonXMLHandler extends DefaultHandler {
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
     
         if (qName.equalsIgnoreCase("Dungeon")) {
-            String name = attributes.getValue("name");
+            String dunName = attributes.getValue("name");
             int width = Integer.parseInt(attributes.getValue("width"));
             int topHeight = Integer.parseInt(attributes.getValue("topHeight"));
             int gameHeight = Integer.parseInt(attributes.getValue("gameHeight"));
             int bottomHeight = Integer.parseInt(attributes.getValue("bottomHeight"));
-            dungeon.getDungeon(name, gameHeight, width);
+            dungeon.getDungeon(dunName, gameHeight, width);
+
         } else if(qName.equalsIgnoreCase("Rooms")) { //order followed in testDrawing.xml
 
         } else if(qName.equalsIgnoreCase("Room")) {
@@ -62,6 +63,40 @@ public class DungeonXMLHandler extends DefaultHandler {
         } else if(qName.equalsIgnoreCase("height")) {
             bheight = true;
         } else if(qName.equalsIgnoreCase("Monster")) {
+
+            String monName = attributes.getValue("name");
+            int monRoom = Integer.parseInt(attributes.getValue("room"));
+            int monSerial = Integer.parseInt(attributes.getValue("serial"));
+            
+            Monster m1 = new Monster();
+            m1.setName(monName);
+            m1.setID(monRoom, monSerial);
+
+            dungeon.addCreature(m1);
+
+        } else if(qName.equalsIgnoreCase("visible")) {
+            bvisible = true;
+        } else if(qName.equalsIgnoreCase("posX")) {
+            bposX = true;
+        } else if(qName.equalsIgnoreCase("posY")) {
+            bposY = true;
+        } else if(qName.equalsIgnoreCase("type")) {
+            btype = true;
+        } else if(qName.equalsIgnoreCase("hp")) {
+            bhp = true;
+        } else if(qName.equalsIgnoreCase("maxhit")) {
+            bmaxhit = true;
+
+        } else if(qName.equalsIgnoreCase("CreatureAction")) {
+          //doubt
+        } else if(qName.equalsIgnoreCase("actionMessage")) {
+            bactionMessage = true;
+
+        } else if(qName.equalsIgnoreCase("actionIntValue")) {
+            bactionIntValue = true;
+        
+        } else if(qName.equalsIgnoreCase("actionCharValue")) {
+            bactionCharValue = true;
 
         } else if(qName.equalsIgnoreCase("Player")) {
 
