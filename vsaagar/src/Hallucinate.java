@@ -1,6 +1,6 @@
 public class Hallucinate extends ItemAction{
    
-    Hallucinate(Creature owner){
+    Hallucinate(Item owner){
         super(owner);
         System.out.println("Hallucinate");
 

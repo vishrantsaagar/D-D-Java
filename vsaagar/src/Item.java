@@ -3,4 +3,10 @@ public class Item extends Displayable{
     {
         System.out.println("Item");
     }
+
+    public void addItemAction(ItemAction itemaction)
+    {
+        System.out.println("ItemAction");
+    }
+
 }

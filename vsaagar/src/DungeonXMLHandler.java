@@ -12,6 +12,9 @@ public class DungeonXMLHandler extends DefaultHandler {
 
     private Dungeon dungeon = null;
     private Room currRoom = null;
+    private Creature currCreature = null;
+    private Action currAction = null;
+    private Item currItem = null;
 
     public Dungeon getDungeon(){
         return dungeon;
@@ -51,7 +54,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             int roomid = Integer.parseInt(attributes.getValue("room"));
             Room room = new Room(roomid);
             dungeon.addRoom(room);
-            //add it to the arraylist
+            currRoom = room; 
         } else if(qName.equalsIgnoreCase("visible")) {
             bvisible = true;
         } else if(qName.equalsIgnoreCase("posX")) {
@@ -73,6 +76,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             m1.setID(monRoom, monSerial);
 
             dungeon.addCreature(m1);
+            currCreature = m1;
 
         //Why is visible, posX, and posY here again? Its already up in line 55
         } else if(qName.equalsIgnoreCase("visible")) {
@@ -93,17 +97,25 @@ public class DungeonXMLHandler extends DefaultHandler {
 
             String creatureName = attributes.getValue("name");
             String creatureType = attributes.getValue("type");
+            CreatureAction c1 = null;
 
             if(creatureName == "Remove"){
-                //Remove r1 = new Remove() what parameters do we pass through remove - what is name and owner
-
+                c1 = new Remove(creatureName, currCreature); //what parameters do we pass through remove - what is name and owner
             }
 
             else if(creatureName == "YouWin"){
-                //YouWin yw1 = new YouWin() what parameters do we pass through YouWin - what is name and owner
+                c1 = new YouWin(creatureName, currCreature); //what parameters do we pass through YouWin - what is name and owner
             }
-        } 
 
+            if(creatureType == "death"){
+                currCreature.setDeathAction(c1);
+            }
+
+            else if(creatureType == "hit"){
+                currCreature.setHitAction(c1);
+            }
+
+        } 
         else if(qName.equalsIgnoreCase("actionMessage")) {
             bactionMessage = true;
 
@@ -112,21 +124,71 @@ public class DungeonXMLHandler extends DefaultHandler {
         
         } else if(qName.equalsIgnoreCase("actionCharValue")) {
             bactionCharValue = true;
+        
+        }else if(qName.equalsIgnoreCase("Scroll")) {
+            String scrollName = attributes.getValue("name");
+            int scrollRoom = Integer.parseInt(attributes.getValue("room"));
+            int scrollSerial = Integer.parseInt(attributes.getValue("serial"));
+
+            Scroll s1 = new Scroll(scrollName);
+            s1.setID(scrollRoom, scrollSerial);
+            currItem = s1;
+
+        } else if(qName.equalsIgnoreCase("visible")) {
+            bvisible = true;
+        } else if(qName.equalsIgnoreCase("posX")) {
+            bposX = true;
+        } else if(qName.equalsIgnoreCase("posY")) {
+            bposY = true;
+
+        }else if(qName.equalsIgnoreCase("ItemAction")) {
+
+            String itemName = attributes.getValue("name");
+            String itemType = attributes.getValue("type");
+
+            if(itemName == "BlessArmor"){
+                BlessCurseOwner bco1 = new BlessCurseOwner(currItem); //what parameters do we pass through remove - what is name and owner
+                currItem.addItemAction(bco1);
+                currAction = bco1; 
+            }
+
+            else if(itemName == "Hallucinate"){
+                Hallucinate h1 = new Hallucinate(currItem);
+                currItem.addItemAction(h1);
+                currAction = h1;
+            }
+        }else if(qName.equalsIgnoreCase("actionMessage")) {
+                bactionMessage = true;
+    
+        } else if(qName.equalsIgnoreCase("actionIntValue")) {
+                bactionIntValue = true;
+            
+        } else if(qName.equalsIgnoreCase("actionCharValue")) {
+                bactionCharValue = true;
+            
 
         } else if(qName.equalsIgnoreCase("Player")) {
-            String player_name = attributes.getValue("name");
-            String player_room = attributes.getValue("room");
-            String player_serial = attributes.getValue("serial");
-
+            //String player_name = attributes.getValue("name");
+            //int playerRoom = Integer.parseInt(attributes.getValue("room"));
+            //int playerSerial = Integer.parseInt(attributes.getValue("serial"));
             //which class should we use for this?
 
-        } 
+        } else if(qName.equalsIgnoreCase("visible")) {
+            bvisible = true;
+        } else if(qName.equalsIgnoreCase("posX")) {
+            bposX = true;
+        } else if(qName.equalsIgnoreCase("posY")) {
+            bposY = true;
+        } else if(qName.equalsIgnoreCase("hp")) {
+            bhp = true;
+        } else if(qName.equalsIgnoreCase("hpMoves")) {
+            bhpMoves = true;
+        } else if(qName.equalsIgnoreCase("maxhit")) {
+            bmaxhit = true;
 
-        else if(qName.equalsIgnoreCase("Scroll")) {
+        }else if(qName.equalsIgnoreCase("Passages")){
 
-        }
-
-        else if(qName.equalsIgnoreCase("Passage")){
+        }else if(qName.equalsIgnoreCase("Passage")){
             String room1 = attributes.getValue("room1");
             String room2 = attributes.getValue("room2");
 
