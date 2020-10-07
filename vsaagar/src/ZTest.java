@@ -40,14 +40,14 @@ public class ZTest {
             // just copy this.  This will parse the xml file given by fileName
                 saxParser.parse(new File(fileName), handler);
 
-                ArrayList<Room> r1 = handler.getRoom();
+                //ArrayList<Room> r1 = handler.getRoom();
                 //Dungeon dungeon = handler.getDungeon();
 
 	    // print out all of the students.  This will change depending on 
 	    // what kind of XML we are parsing
-            for (Room rooms : r1) {
-                System.out.println(rooms);
-            }
+            //for (Room rooms : r1) {
+            //    System.out.println(rooms);
+            //}
             //System.out.println(dungeon);
         // these lines should be copied exactly.
             } catch (ParserConfigurationException | SAXException | IOException e) {

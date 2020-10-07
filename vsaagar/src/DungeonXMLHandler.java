@@ -7,23 +7,28 @@ public class DungeonXMLHandler extends DefaultHandler {
     
     private StringBuilder data = null;
 
-    private Dungeon dungeon;
-    
-    private Room roomsParsed = null;
+    private ArrayList<Displayable> disparray = null;
+    private ArrayList<Action> actarray = null;
+
+    private Dungeon dungeon = null;
+    private Room currRoom = null;
+
+    public Dungeon getDungeon(){
+        return dungeon;
+    }
 
     private boolean bvisible = false;
     private boolean bposX = false;
     private boolean bposY = false;
     private boolean bwidth = false;
     private boolean bheight = false;
-
     private boolean bhp = false;
     private boolean bmaxhit = false;
     private boolean bactionMessage = false;
     private boolean bactionIntValue = false;
     private boolean bactionCharValue = false;
+    private boolean bItemIntValue = false;
     private boolean btype = false;
-
     private boolean bhpMoves = false;
 
     public DungeonXMLHandler() {
@@ -78,11 +83,11 @@ public class DungeonXMLHandler extends DefaultHandler {
     //@Override
     //public String toString(){
     //    String str = "DungeonXMLHandler\n";
-//
+
     //    for(int i = 0; i < rooms.size(); i++){
     //        str += rooms.get(i).toString() + "\n";
     //    }
-//
+
     //    str += "roomsBeingParsed: " + roomsParsed.toString() + "\n";
     //    //str += "creaturesBeingParsed: " + creaturesParsed + "\n";
     //    str += "bvisible: " + bvisible + "\n";
@@ -90,7 +95,7 @@ public class DungeonXMLHandler extends DefaultHandler {
     //    str += "bposY: " + bposY + "\n";
     //    str += "bwidth: " + bwidth + "\n";
     //    str += "bheight: " + bheight + "\n";
-//
+
     //    //Need to still add rooms, room, monster, player, and scroll
     //    return str;
     //}
