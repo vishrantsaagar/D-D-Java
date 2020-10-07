@@ -74,6 +74,7 @@ public class DungeonXMLHandler extends DefaultHandler {
 
             dungeon.addCreature(m1);
 
+        //Why is visible, posX, and posY here again? Its already up in line 55
         } else if(qName.equalsIgnoreCase("visible")) {
             bvisible = true;
         } else if(qName.equalsIgnoreCase("posX")) {
@@ -89,7 +90,21 @@ public class DungeonXMLHandler extends DefaultHandler {
 
         } else if(qName.equalsIgnoreCase("CreatureAction")) {
           //doubt
-        } else if(qName.equalsIgnoreCase("actionMessage")) {
+
+            String creatureName = attributes.getValue("name");
+            String creatureType = attributes.getValue("type");
+
+            if(creatureName == "Remove"){
+                //Remove r1 = new Remove() what parameters do we pass through remove - what is name and owner
+
+            }
+
+            else if(creatureName == "YouWin"){
+                //YouWin yw1 = new YouWin() what parameters do we pass through YouWin - what is name and owner
+            }
+        } 
+
+        else if(qName.equalsIgnoreCase("actionMessage")) {
             bactionMessage = true;
 
         } else if(qName.equalsIgnoreCase("actionIntValue")) {
@@ -99,14 +114,79 @@ public class DungeonXMLHandler extends DefaultHandler {
             bactionCharValue = true;
 
         } else if(qName.equalsIgnoreCase("Player")) {
+            String player_name = attributes.getValue("name");
+            String player_room = attributes.getValue("room");
+            String player_serial = attributes.getValue("serial");
 
-        } else if(qName.equalsIgnoreCase("Scroll")) {
+            //which class should we use for this?
 
+        } 
+
+        else if(qName.equalsIgnoreCase("Scroll")) {
+
+        }
+
+        else if(qName.equalsIgnoreCase("Passage")){
+            String room1 = attributes.getValue("room1");
+            String room2 = attributes.getValue("room2");
+
+            //Object?
         }
     }
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
+        Room room;
+        Monster monster;
+        CreatureAction creature_action;
+
+        if(bvisible){
+            
+        }
+
+        else if(bposX){
+
+        }
+
+        else if(bposY){
+
+        }
+
+        else if(bwidth){
+
+        }
+
+        else if(bheight){
+
+        }
+
+        else if(bhp){
+
+        }
+
+        else if(bmaxhit){
+
+        }
+
+        else if(bactionMessage){
+
+        }
+
+        else if(bactionCharValue){
+
+        }
+
+        else if(bItemIntValue){
+
+        }
+
+        else if(btype){
+
+        }
+
+        else if(bhpMoves){
+
+        }
     }
 
 
