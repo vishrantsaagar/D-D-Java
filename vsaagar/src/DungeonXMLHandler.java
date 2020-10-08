@@ -287,10 +287,7 @@ public class DungeonXMLHandler extends DefaultHandler {
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        Room room;
-        Monster monster;
-        CreatureAction creature_action;
-
+    
         if(bvisible){
             
         }
