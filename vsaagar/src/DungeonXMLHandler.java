@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Stack;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -7,14 +7,17 @@ public class DungeonXMLHandler extends DefaultHandler {
     
     private StringBuilder data = null;
 
-    private ArrayList<Displayable> disparray = null;
-    private ArrayList<Action> actarray = null;
+    private Stack<Displayable> dispstack = null;
+    private Stack<Action> actstack = null;
 
     private Dungeon dungeon = null;
     private Room currRoom = null;
     private Creature currCreature = null;
     private Action currAction = null;
     private Item currItem = null;
+    private Armor currArmor = null;
+    private Passage currPassage = null;
+    private Sword currSword = null;
 
     public Dungeon getDungeon(){
         return dungeon;
@@ -46,7 +49,12 @@ public class DungeonXMLHandler extends DefaultHandler {
             int topHeight = Integer.parseInt(attributes.getValue("topHeight"));
             int gameHeight = Integer.parseInt(attributes.getValue("gameHeight"));
             int bottomHeight = Integer.parseInt(attributes.getValue("bottomHeight"));
+            
+            ObjectDisplayGrid.getObjectDisplayGrid(gameHeight, width, topHeight, bottomHeight);
+            
             dungeon.getDungeon(dunName, gameHeight, width);
+
+            //dispstack.push(dungeon); do we have to make dungeon an extended version of Displayable or do we not need to push it on there?
 
         } else if(qName.equalsIgnoreCase("Rooms")) { //order followed in testDrawing.xml
 
@@ -55,6 +63,9 @@ public class DungeonXMLHandler extends DefaultHandler {
             Room room = new Room(roomid);
             dungeon.addRoom(room);
             currRoom = room; 
+
+            dispstack.push(currRoom);
+
         } else if(qName.equalsIgnoreCase("visible")) {
             bvisible = true;
         } else if(qName.equalsIgnoreCase("posX")) {
@@ -77,6 +88,8 @@ public class DungeonXMLHandler extends DefaultHandler {
 
             dungeon.addCreature(m1);
             currCreature = m1;
+
+            dispstack.push(currCreature);
 
         } else if(qName.equalsIgnoreCase("visible")) {
             bvisible = true;
@@ -124,6 +137,9 @@ public class DungeonXMLHandler extends DefaultHandler {
             else if(creatureType == "hit"){
                 currCreature.setHitAction(c1);
             }
+
+            currAction = c1;
+            actstack.push(currAction);
         } 
         else if(qName.equalsIgnoreCase("actionMessage")) {
             bactionMessage = true;
@@ -135,6 +151,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             bactionCharValue = true;
         
         }else if(qName.equalsIgnoreCase("Scroll")) {
+
             String scrollName = attributes.getValue("name");
             int scrollRoom = Integer.parseInt(attributes.getValue("room"));
             int scrollSerial = Integer.parseInt(attributes.getValue("serial"));
@@ -142,6 +159,8 @@ public class DungeonXMLHandler extends DefaultHandler {
             Scroll s1 = new Scroll(scrollName);
             s1.setID(scrollRoom, scrollSerial);
             currItem = s1;
+
+            dispstack.push(currItem);
 
         } else if(qName.equalsIgnoreCase("visible")) {
             bvisible = true;
@@ -153,7 +172,7 @@ public class DungeonXMLHandler extends DefaultHandler {
         }else if(qName.equalsIgnoreCase("ItemAction")) {
 
             String itemName = attributes.getValue("name");
-            String itemType = attributes.getValue("type");
+            //String itemType = attributes.getValue("type"); unnecessary?
 
             if(itemName == "BlessArmor"){
                 BlessCurseOwner bco1 = new BlessCurseOwner(currItem); //what parameters do we pass through remove - what is name and owner
@@ -166,6 +185,9 @@ public class DungeonXMLHandler extends DefaultHandler {
                 currItem.addItemAction(h1);
                 currAction = h1;
             }
+
+            actstack.push(currAction);
+
         }else if(qName.equalsIgnoreCase("actionMessage")) {
                 bactionMessage = true;
     
@@ -179,7 +201,8 @@ public class DungeonXMLHandler extends DefaultHandler {
             //String player_name = attributes.getValue("name");
             //int playerRoom = Integer.parseInt(attributes.getValue("room"));
             //int playerSerial = Integer.parseInt(attributes.getValue("serial"));
-            //which class should we use for this?
+
+            //Do we need to push this dispstack?
 
         } else if(qName.equalsIgnoreCase("visible")) {
             bvisible = true;
@@ -194,30 +217,7 @@ public class DungeonXMLHandler extends DefaultHandler {
         } else if(qName.equalsIgnoreCase("maxhit")) {
             bmaxhit = true;
 
-        }else if(qName.equalsIgnoreCase("Passages")){
-
-        }else if(qName.equalsIgnoreCase("Passage")){
-            
-            int room1 = Integer.parseInt(attributes.getValue("room1"));
-            int room2 = Integer.parseInt(attributes.getValue("room2"));
-
-            Passage p1 = new Passage();
-            p1.setID(room1, room2);
-        }
-
-        else if(qName.equalsIgnoreCase("visible")) {
-            bvisible = true;
-        } else if(qName.equalsIgnoreCase("posX")) {
-            bposX = true;
-        } else if(qName.equalsIgnoreCase("posY")) {
-            bposY = true;
-        } else if(qName.equalsIgnoreCase("width")) {
-            bwidth = true;
-        } else if(qName.equalsIgnoreCase("height")) {
-            bheight = true;
-        }
-
-        else if(qName.equalsIgnoreCase("Armor")){
+        }else if(qName.equalsIgnoreCase("Armor")){
             String armor_name = attributes.getValue("name");
             int armor_room = Integer.parseInt(attributes.getValue("room"));
             int armor_serial = Integer.parseInt(attributes.getValue("serial"));
@@ -225,7 +225,9 @@ public class DungeonXMLHandler extends DefaultHandler {
             Armor a1 = new Armor(armor_name);
             a1.setName(armor_name);
             a1.setID(armor_room, armor_serial);
-
+            
+            currArmor = a1;
+            dispstack.push(currArmor);
         }
 
         else if(qName.equalsIgnoreCase("visible")) {
@@ -247,6 +249,9 @@ public class DungeonXMLHandler extends DefaultHandler {
 
             Sword sw1 = new Sword(swordName);
             sw1.setID(swordRoom, swordSerial);
+            
+            currSword = sw1;
+            dispstack.push(currSword);
         }
 
         else if(qName.equalsIgnoreCase("visible")) {
@@ -255,12 +260,31 @@ public class DungeonXMLHandler extends DefaultHandler {
             bposX = true;
         } else if(qName.equalsIgnoreCase("posY")) {
             bposY = true;
-        }
-
-        else if(qName.equalsIgnoreCase("ItemIntValue")){
+        } else if(qName.equalsIgnoreCase("ItemIntValue")){
             bItemIntValue = true;
-        }
+        }else if(qName.equalsIgnoreCase("Passages")){ 
 
+        }else if(qName.equalsIgnoreCase("Passage")){
+
+            int room1 = Integer.parseInt(attributes.getValue("room1"));
+            int room2 = Integer.parseInt(attributes.getValue("room2"));     
+            Passage p1 = new Passage();
+            p1.setID(room1, room2);
+            currPassage = p1;
+
+            dispstack.push(currPassage);
+        }       
+        else if(qName.equalsIgnoreCase("visible")) {
+            bvisible = true;
+        } else if(qName.equalsIgnoreCase("posX")) {
+            bposX = true;
+        } else if(qName.equalsIgnoreCase("posY")) {
+            bposY = true;
+        } else if(qName.equalsIgnoreCase("width")) {
+            bwidth = true;
+        } else if(qName.equalsIgnoreCase("height")) {
+            bheight = true;
+        }       
     }
 
     @Override
