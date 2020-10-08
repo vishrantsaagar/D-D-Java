@@ -89,12 +89,6 @@ public class DungeonXMLHandler extends DefaultHandler {
 
             dispstack.push(currCreature);
 
-        } else if(qName.equalsIgnoreCase("visible")) {
-            bvisible = true;
-        } else if(qName.equalsIgnoreCase("posX")) {
-            bposX = true;
-        } else if(qName.equalsIgnoreCase("posY")) {
-            bposY = true;
         } else if(qName.equalsIgnoreCase("type")) {
             btype = true;
         } else if(qName.equalsIgnoreCase("hp")) {
@@ -160,13 +154,6 @@ public class DungeonXMLHandler extends DefaultHandler {
 
             dispstack.push(currItem);
 
-        } else if(qName.equalsIgnoreCase("visible")) {
-            bvisible = true;
-        } else if(qName.equalsIgnoreCase("posX")) {
-            bposX = true;
-        } else if(qName.equalsIgnoreCase("posY")) {
-            bposY = true;
-
         }else if(qName.equalsIgnoreCase("ItemAction")) {
 
             String itemName = attributes.getValue("name");
@@ -202,19 +189,8 @@ public class DungeonXMLHandler extends DefaultHandler {
 
             //Do we need to push this dispstack?
 
-        } else if(qName.equalsIgnoreCase("visible")) {
-            bvisible = true;
-        } else if(qName.equalsIgnoreCase("posX")) {
-            bposX = true;
-        } else if(qName.equalsIgnoreCase("posY")) {
-            bposY = true;
-        } else if(qName.equalsIgnoreCase("hp")) {
-            bhp = true;
-        } else if(qName.equalsIgnoreCase("hpMoves")) {
+        }else if(qName.equalsIgnoreCase("hpMoves")) {
             bhpMoves = true;
-        } else if(qName.equalsIgnoreCase("maxhit")) {
-            bmaxhit = true;
-
         }else if(qName.equalsIgnoreCase("Armor")){
             String armor_name = attributes.getValue("name");
             int armor_room = Integer.parseInt(attributes.getValue("room"));
@@ -228,13 +204,6 @@ public class DungeonXMLHandler extends DefaultHandler {
             dispstack.push(currItem);
         }
 
-        else if(qName.equalsIgnoreCase("visible")) {
-            bvisible = true;
-        } else if(qName.equalsIgnoreCase("posX")) {
-            bposX = true;
-        } else if(qName.equalsIgnoreCase("posY")) {
-            bposY = true;
-        }
 
         else if(qName.equalsIgnoreCase("ItemIntValue")){
             bItemIntValue = true;
@@ -252,13 +221,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             dispstack.push(currItem);
         }
 
-        else if(qName.equalsIgnoreCase("visible")) {
-            bvisible = true;
-        } else if(qName.equalsIgnoreCase("posX")) {
-            bposX = true;
-        } else if(qName.equalsIgnoreCase("posY")) {
-            bposY = true;
-        } else if(qName.equalsIgnoreCase("ItemIntValue")){
+        else if(qName.equalsIgnoreCase("ItemIntValue")){
             bItemIntValue = true;
         }else if(qName.equalsIgnoreCase("Passages")){ 
 
@@ -272,13 +235,7 @@ public class DungeonXMLHandler extends DefaultHandler {
 
             dispstack.push(currPassage);
         }       
-        else if(qName.equalsIgnoreCase("visible")) {
-            bvisible = true;
-        } else if(qName.equalsIgnoreCase("posX")) {
-            bposX = true;
-        } else if(qName.equalsIgnoreCase("posY")) {
-            bposY = true;
-        } else if(qName.equalsIgnoreCase("width")) {
+        else if(qName.equalsIgnoreCase("width")) {
             bwidth = true;
         } else if(qName.equalsIgnoreCase("height")) {
             bheight = true;
@@ -292,7 +249,10 @@ public class DungeonXMLHandler extends DefaultHandler {
         CreatureAction creature_action;
 
         if(bvisible){
-            // String dungeon = 
+            Displayable x = dispstack.peek();
+            if(x == (Displayable) currRoom){
+                x = (Room)x;
+            }
         }
 
         else if(bposX){
