@@ -160,7 +160,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             //String itemType = attributes.getValue("type"); unnecessary?
 
             if(itemName == "BlessArmor"){
-                BlessCurseOwner bco1 = new BlessCurseOwner(currItem); //what parameters do we pass through remove - what is name and owner
+                BlessCurseOwner bco1 = new BlessCurseOwner(currItem); 
                 currItem.addItemAction(bco1);
                 currAction = bco1; 
             }
@@ -183,11 +183,15 @@ public class DungeonXMLHandler extends DefaultHandler {
                 bactionCharValue = true;
             
         } else if(qName.equalsIgnoreCase("Player")) {
-            //String player_name = attributes.getValue("name");
-            //int playerRoom = Integer.parseInt(attributes.getValue("room"));
-            //int playerSerial = Integer.parseInt(attributes.getValue("serial"));
 
-            //Do we need to push this dispstack?
+            //String player_name = attributes.getValue("name");
+            int playerRoom = Integer.parseInt(attributes.getValue("room"));
+            int playerSerial = Integer.parseInt(attributes.getValue("serial"));
+
+            Player p1 = new Player();
+            p1.setID(playerRoom, playerSerial);
+            currCreature = p1;
+            dispstack.push(currCreature);
 
         }else if(qName.equalsIgnoreCase("hpMoves")) {
             bhpMoves = true;

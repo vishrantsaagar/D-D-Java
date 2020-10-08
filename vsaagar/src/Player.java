@@ -1,5 +1,10 @@
 public class Player extends Creature{
     
+    public Player( )
+    {
+      System.out.println("Player");
+    }
+
     public void setWeapon(Item sword)
     {
         System.out.println("Player:setWeapon");
@@ -9,4 +14,10 @@ public class Player extends Creature{
     {
         System.out.println("Player:setArmor");
     }
+
+    public void setID(int room, int serial)
+    {
+       System.out.println("Monster:setID"+room + "\n" +serial);
+ 
+    }    
 }
