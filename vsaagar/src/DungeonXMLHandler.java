@@ -246,7 +246,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             int swordSerial = Integer.parseInt(attributes.getValue("serial"));
 
             Sword sw1 = new Sword(swordName);
-            sw1.setId(swordName, swordSerial);
+            sw1.setID(swordRoom, swordSerial);
         }
 
         else if(qName.equalsIgnoreCase("visible")) {
@@ -260,9 +260,6 @@ public class DungeonXMLHandler extends DefaultHandler {
         else if(qName.equalsIgnoreCase("ItemIntValue")){
             bItemIntValue = true;
         }
-
-        
-
 
     }
 
