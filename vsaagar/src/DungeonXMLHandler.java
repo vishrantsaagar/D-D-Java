@@ -78,7 +78,6 @@ public class DungeonXMLHandler extends DefaultHandler {
             dungeon.addCreature(m1);
             currCreature = m1;
 
-        //Why is visible, posX, and posY here again? Its already up in line 55
         } else if(qName.equalsIgnoreCase("visible")) {
             bvisible = true;
         } else if(qName.equalsIgnoreCase("posX")) {
@@ -93,7 +92,6 @@ public class DungeonXMLHandler extends DefaultHandler {
             bmaxhit = true;
 
         } else if(qName.equalsIgnoreCase("CreatureAction")) {
-          //doubt
 
             String creatureName = attributes.getValue("name");
             String creatureType = attributes.getValue("type");
@@ -114,7 +112,6 @@ public class DungeonXMLHandler extends DefaultHandler {
             else if(creatureType == "hit"){
                 currCreature.setHitAction(c1);
             }
-
         } 
         else if(qName.equalsIgnoreCase("actionMessage")) {
             bactionMessage = true;
@@ -166,7 +163,6 @@ public class DungeonXMLHandler extends DefaultHandler {
         } else if(qName.equalsIgnoreCase("actionCharValue")) {
                 bactionCharValue = true;
             
-
         } else if(qName.equalsIgnoreCase("Player")) {
             //String player_name = attributes.getValue("name");
             //int playerRoom = Integer.parseInt(attributes.getValue("room"));
@@ -189,6 +185,7 @@ public class DungeonXMLHandler extends DefaultHandler {
         }else if(qName.equalsIgnoreCase("Passages")){
 
         }else if(qName.equalsIgnoreCase("Passage")){
+            
             String room1 = attributes.getValue("room1");
             String room2 = attributes.getValue("room2");
 
