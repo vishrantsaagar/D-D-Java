@@ -98,11 +98,23 @@ public class DungeonXMLHandler extends DefaultHandler {
             CreatureAction c1 = null;
 
             if(creatureName == "Remove"){
-                c1 = new Remove(creatureName, currCreature); //what parameters do we pass through remove - what is name and owner
+                c1 = new Remove(creatureName, currCreature); 
             }
 
             else if(creatureName == "YouWin"){
-                c1 = new YouWin(creatureName, currCreature); //what parameters do we pass through YouWin - what is name and owner
+                c1 = new YouWin(creatureName, currCreature); 
+            }
+
+            else if(creatureName == "ChangeDisplayType"){
+                c1 = new ChangedDisplayType(creatureName, currCreature);
+            }
+
+            else if(creatureName == "UpdateDisplay"){
+                c1 = new UpdateDisplay(creatureName, currCreature);
+            }
+
+            else if(creatureName == "EndGame"){
+                c1 = new EndGame(creatureName, currCreature);
             }
 
             if(creatureType == "death"){
@@ -186,11 +198,72 @@ public class DungeonXMLHandler extends DefaultHandler {
 
         }else if(qName.equalsIgnoreCase("Passage")){
             
-            String room1 = attributes.getValue("room1");
-            String room2 = attributes.getValue("room2");
+            int room1 = Integer.parseInt(attributes.getValue("room1"));
+            int room2 = Integer.parseInt(attributes.getValue("room2"));
 
-            //Object?
+            Passage p1 = new Passage();
+            p1.setID(room1, room2);
         }
+
+        else if(qName.equalsIgnoreCase("visible")) {
+            bvisible = true;
+        } else if(qName.equalsIgnoreCase("posX")) {
+            bposX = true;
+        } else if(qName.equalsIgnoreCase("posY")) {
+            bposY = true;
+        } else if(qName.equalsIgnoreCase("width")) {
+            bwidth = true;
+        } else if(qName.equalsIgnoreCase("height")) {
+            bheight = true;
+        }
+
+        else if(qName.equalsIgnoreCase("Armor")){
+            String armor_name = attributes.getValue("name");
+            int armor_room = Integer.parseInt(attributes.getValue("room"));
+            int armor_serial = Integer.parseInt(attributes.getValue("serial"));
+
+            Armor a1 = new Armor(armor_name);
+            a1.setName(armor_name);
+            a1.setID(armor_room, armor_serial);
+
+        }
+
+        else if(qName.equalsIgnoreCase("visible")) {
+            bvisible = true;
+        } else if(qName.equalsIgnoreCase("posX")) {
+            bposX = true;
+        } else if(qName.equalsIgnoreCase("posY")) {
+            bposY = true;
+        }
+
+        else if(qName.equalsIgnoreCase("ItemIntValue")){
+            bItemIntValue = true;
+        }
+
+        else if(qName.equalsIgnoreCase("Sword")){
+            String swordName = attributes.getValue("name");
+            int swordRoom = Integer.parseInt(attributes.getValue("room"));
+            int swordSerial = Integer.parseInt(attributes.getValue("serial"));
+
+            Sword sw1 = new Sword(swordName);
+            sw1.setId(swordName, swordSerial);
+        }
+
+        else if(qName.equalsIgnoreCase("visible")) {
+            bvisible = true;
+        } else if(qName.equalsIgnoreCase("posX")) {
+            bposX = true;
+        } else if(qName.equalsIgnoreCase("posY")) {
+            bposY = true;
+        }
+
+        else if(qName.equalsIgnoreCase("ItemIntValue")){
+            bItemIntValue = true;
+        }
+
+        
+
+
     }
 
     @Override
