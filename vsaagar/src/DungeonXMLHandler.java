@@ -15,9 +15,7 @@ public class DungeonXMLHandler extends DefaultHandler {
     private Creature currCreature = null;
     private Action currAction = null;
     private Item currItem = null;
-    private Armor currArmor = null;
     private Passage currPassage = null;
-    private Sword currSword = null;
 
     public Dungeon getDungeon(){
         return dungeon;
@@ -226,8 +224,8 @@ public class DungeonXMLHandler extends DefaultHandler {
             a1.setName(armor_name);
             a1.setID(armor_room, armor_serial);
             
-            currArmor = a1;
-            dispstack.push(currArmor);
+            currItem = a1;
+            dispstack.push(currItem);
         }
 
         else if(qName.equalsIgnoreCase("visible")) {
@@ -250,8 +248,8 @@ public class DungeonXMLHandler extends DefaultHandler {
             Sword sw1 = new Sword(swordName);
             sw1.setID(swordRoom, swordSerial);
             
-            currSword = sw1;
-            dispstack.push(currSword);
+            currItem = sw1;
+            dispstack.push(currItem);
         }
 
         else if(qName.equalsIgnoreCase("visible")) {
