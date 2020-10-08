@@ -292,7 +292,7 @@ public class DungeonXMLHandler extends DefaultHandler {
         CreatureAction creature_action;
 
         if(bvisible){
-            
+            // String dungeon = 
         }
 
         else if(bposX){
@@ -352,7 +352,7 @@ public class DungeonXMLHandler extends DefaultHandler {
 
     //@Override
     //public String toString(){
-    //    String str = "DungeonXMLHandler\n";
+    //    String str = CLASSID + "DungeonXMLHandler\n";
 
     //    for(int i = 0; i < rooms.size(); i++){
     //        str += rooms.get(i).toString() + "\n";
