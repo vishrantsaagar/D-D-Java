@@ -6,6 +6,7 @@ import org.xml.sax.helpers.DefaultHandler;
 public class DungeonXMLHandler extends DefaultHandler {
     
     private StringBuilder data = null;
+    private static final String CLASSID = "DungeonXMLHandler";
 
     private Stack<Displayable> dispstack = null;
     private Stack<Action> actstack = null;
@@ -16,6 +17,7 @@ public class DungeonXMLHandler extends DefaultHandler {
     private Action currAction = null;
     private Item currItem = null;
     private Passage currPassage = null;
+    private Player currPlayer = null;
 
     public Dungeon getDungeon(){
         return dungeon;
@@ -53,8 +55,6 @@ public class DungeonXMLHandler extends DefaultHandler {
             ObjectDisplayGrid.getObjectDisplayGrid(gameHeight, width, topHeight, bottomHeight);
             
             dungeon.getDungeon(dunName, gameHeight, width);
-
-            //dispstack.push(dungeon); do we have to make dungeon an extended version of Displayable or do we not need to push it on there?
 
         } else if(qName.equalsIgnoreCase("Rooms")) { //order followed in testDrawing.xml
 
@@ -192,8 +192,8 @@ public class DungeonXMLHandler extends DefaultHandler {
 
             Player p1 = new Player();
             p1.setID(playerRoom, playerSerial);
-            currCreature = p1;
-            dispstack.push(currCreature);
+            currPlayer = p1;
+            dispstack.push(currPlayer);
 
         }else if(qName.equalsIgnoreCase("hpMoves")) {
             bhpMoves = true;
@@ -208,11 +208,10 @@ public class DungeonXMLHandler extends DefaultHandler {
             a1.setName(armor_name);
             a1.setID(armor_room, armor_serial);
             
+            currPlayer.setArmor(a1);
             currItem = a1;
             dispstack.push(currItem);
         }
-
-
         else if(qName.equalsIgnoreCase("ItemIntValue")){
             bItemIntValue = true;
         }
@@ -227,12 +226,10 @@ public class DungeonXMLHandler extends DefaultHandler {
             Sword sw1 = new Sword(swordName);
             sw1.setID(swordRoom, swordSerial);
             
+            currPlayer.setWeapon(sw1);
             currItem = sw1;
             dispstack.push(currItem);
-        }
 
-        else if(qName.equalsIgnoreCase("ItemIntValue")){
-            bItemIntValue = true;
         }else if(qName.equalsIgnoreCase("Passages")){ 
 
         }else if(qName.equalsIgnoreCase("Passage")){
@@ -253,200 +250,95 @@ public class DungeonXMLHandler extends DefaultHandler {
         Displayable d1 = new Displayable();
         Action a1 = new Action();
     
-            if(bvisible){
-                Displayable x = dispstack.pop();
-                if(x == (Displayable) currRoom){
-                // int vis = int(x);
-
-                    d1.setVisible(Integer.parseInt(data.toString()));
-                    bvisible = false;
-            }
-
-            else if(x == (Displayable) currCreature){
-                // int vis = int(x);
-
-                d1.setVisible(Integer.parseInt(data.toString()));
-                bvisible = false;
-            }
-
-            else if(x == (Displayable) currItem){
-                // int vis = int(x);
-
-                d1.setVisible(Integer.parseInt(data.toString()));
-                bvisible = false;
-            }
-
-            else if(x == (Displayable) currPassage){
-                // int vis = int(x);
-
-                d1.setVisible(Integer.parseInt(data.toString()));
-
-                bvisible = false;
-
-            }
-
-
+        if(bvisible){
+            Displayable x = dispstack.peek();
+            d1 = x;
+            d1.setVisible(Integer.parseInt(data.toString()));
+            bvisible = false;
         }
 
         else if(bposX){
-            Displayable x = dispstack.pop();
-            if(x == (Displayable) currRoom){
-
-                d1.SetPosX(Integer.parseInt(data.toString()));
-                bposX = false;
-            }
-
-            else if(x == (Displayable) currCreature){
-
-                d1.SetPosX(Integer.parseInt(data.toString()));
-                bposX = false;
-
-            }
-
-            else if(x == (Displayable) currItem){
-
-                d1.SetPosX(Integer.parseInt(data.toString()));
-                bposX = false;
-
-            }
-
-            else if(x == (Displayable) currPassage){
-
-                d1.SetPosX(Integer.parseInt(data.toString()));
-                bposX = false;
-
-            }
+            Displayable x = dispstack.peek();
+            d1 = x;
+            d1.SetPosX(Integer.parseInt(data.toString()));
+            bposX = false;
         }
 
         else if(bposY){
-            Displayable x = dispstack.pop();
-            if(x == (Displayable) currRoom){
-
-                d1.setPosY(Integer.parseInt(data.toString()));
-
-                bposY = false;
-            }
-
-            else if(x == (Displayable) currCreature){
-
-                d1.setPosY(Integer.parseInt(data.toString()));
-
-                bposY = false;
-            }
-
-            else if(x == (Displayable) currItem){
-
-                d1.setPosY(Integer.parseInt(data.toString()));
-
-                bposY = false;
-            }
-
-            else if(x == (Displayable) currPassage){
-
-                d1.setPosY(Integer.parseInt(data.toString()));
-
-                bposY = false;
-            }
+            Displayable x = dispstack.peek();
+            d1 = x;
+            d1.setPosY(Integer.parseInt(data.toString()));
+            bposY = false;
         }
 
         else if(bwidth){
-            Displayable x = dispstack.pop();
-            if(x == (Displayable) currRoom){
-                // int width = (int) x;
-
-                d1.SetWidth(Integer.parseInt(data.toString()));
-                bwidth = false;
-            }
+            Displayable x = dispstack.peek();
+            d1 = x;
+            d1.SetWidth(Integer.parseInt(data.toString()));
+            bwidth = false;
         }
 
         else if(bheight){
-            Displayable x = dispstack.pop();
-            if(x == (Displayable) currRoom){
-               d1.setHeight(Integer.parseInt(data.toString()));
-
-               bheight = false;
-            }
+            Displayable x = dispstack.peek();
+            d1 = x;
+            d1.setHeight(Integer.parseInt(data.toString()));
+            bheight = false;
         }
-
+        
         else if(bhp){
-            Displayable x = dispstack.pop();
-            if(x == (Displayable) currCreature){
-                d1.setHp(Integer.parseInt(data.toString()));
-                bhp = false;
-            }
+            Displayable x = dispstack.peek();
+            d1 = x;
+            d1.setHp(Integer.parseInt(data.toString()));
+            bhp = false;
         }
 
         else if(bmaxhit){
-            Displayable x = dispstack.pop();
-            if(x == (Displayable) currCreature){
-                d1.setMaxHit(Integer.parseInt(data.toString()));
-                bmaxhit = false;
-            }
+            Displayable x = dispstack.peek();
+            d1 = x;
+            d1.setMaxHit(Integer.parseInt(data.toString()));
+            bmaxhit = false;
         }
 
         else if(bactionMessage){
-            Action x = actstack.pop();
-            if(x == (Action) currAction){
-
-                a1.setMessage(data.toString());
-                bactionMessage = false;
-            }
+            Action x = actstack.peek();
+            a1 = x;
+            a1.setMessage(data.toString());
+            bactionMessage = false;
         }
 
         else if(bactionCharValue){
-            Action x = actstack.pop();
-            if(x == (Action) currAction){
-                a1.setCharValue(data.toString().charAt(0)); //string to character
-                bactionCharValue = false;
-            }
-
+            Action x = actstack.peek();
+            a1 = x;
+            a1.setCharValue(data.toString().charAt(0)); //string to character
+            bactionCharValue = false;
         }
 
         else if(bactionIntValue){
-            Action x = actstack.pop();
-            if(x == (Action) currAction){
-                a1.setIntValue(Integer.parseInt(data.toString()));
-                bactionIntValue = false;
-            }
-
+            Action x = actstack.peek();
+            a1 = x;
+            a1.setIntValue(Integer.parseInt(data.toString()));
+            bactionIntValue = false;
         }
 
         else if(bItemIntValue){
-            Displayable x = dispstack.pop();
-            if(x == (Displayable) currItem){
-
-                if(barmor){
-                    d1.setIntValue(Integer.parseInt(data.toString()));
-                    barmor = false;
-                }
-                
-                else if(bsword){
-                    d1.setIntValue(Integer.parseInt(data.toString()));
-
-                    bsword = false;
-                }
-
-                bItemIntValue = false;
-            }
+            Displayable x = dispstack.peek();
+            d1 = x;
+            d1.setIntValue(Integer.parseInt(data.toString()));
+            bItemIntValue = false;
         }
 
         else if(btype){
-            Displayable x = dispstack.pop();
-            if(x == (Displayable) currCreature){
-
-                d1.setType(data.toString().charAt(0)); //String to character
-
-                btype = false;
-            }
+            Displayable x = dispstack.peek();
+            d1 = x;
+            d1.setType(data.toString().charAt(0)); //String to character
+            btype = false;
         }
 
         else if(bhpMoves){
-            Displayable x = dispstack.pop();
-            if(x == (Displayable) currCreature){
-
+            Displayable x = dispstack.peek();
+                d1 = x;
                 d1.setHpMove(Integer.parseInt(data.toString()));
                 bhpMoves = false;
-            }
         }
 
         if(qName.equalsIgnoreCase("Dungeon")){
@@ -458,63 +350,100 @@ public class DungeonXMLHandler extends DefaultHandler {
 
         else if(qName.equalsIgnoreCase("Room")){
             currRoom = null;
+            dispstack.pop();
         }
 
         else if(qName.equalsIgnoreCase("Monster")){
             currCreature = null;
+            dispstack.pop();
         }
 
         else if(qName.equalsIgnoreCase("Player")){
-            currCreature = null;
+            currPlayer = null;
+            dispstack.pop();
         }
 
         else if(qName.equalsIgnoreCase("Sword")){
             currItem = null;
+            dispstack.pop();
         }
 
         else if(qName.equalsIgnoreCase("Armor")){
             currItem = null;
+            dispstack.pop();
         }
 
         else if(qName.equalsIgnoreCase("Passage")){
             currPassage = null;
+            dispstack.pop();
         }
 
         else if(qName.equalsIgnoreCase("CreatureAction")){
             currAction = null;
+            dispstack.pop();
         }
     }
-
 
     @Override
     public void characters(char ch[], int start, int length) throws SAXException {
         data.append(new String(ch, start, length));
     }
 
-    //@Override
-    //public String toString(){
-    //    String str = CLASSID + "DungeonXMLHandler\n";
+    @Override
+    public String toString(){
+        String str = CLASSID + ",DungeonXMLHandler:\n";
+        
+        if(dispstack != null) {
+            str += " stack:\n";
+            for(Displayable displayable : dispstack){
+                str += displayable.toString();
+            }
+        } else {
+            str += " stack: null\n";
+        }
 
+        if(actstack != null){
+            str += " stack:\n";
+            for(Action action : actstack){
+                str += action.toString();
+            }
+        } else {
+            str += " stack: null";
+        }
 
-    //    str += "roomsBeingParsed: " + roomsParsed.toString() + "\n";
-    //    //str += "creaturesBeingParsed: " + creaturesParsed + "\n";
-    //    str += "bvisible: " + bvisible + "\n";
-    //    str += "bposX: " + bposX + "\n";
-    //    str += "bposY: " + bposY + "\n";
-    //    str += "bwidth: " + bwidth + "\n";
-    //    str += "bheight: " + bheight + "\n";
-    //    str += "bhp: " + bhp + "\n";
-    //    str += "bmaxhit: " + bmaxhit + "\n";
-    //    str += "bactionMessage: " + bactionMessage + "\n";
-    //    str += "bactionIntValue: " + bactionIntValue + "\n";
-    //    str += "bactionCharValue: " + bactionCharValue + "\n";
-    //    str += "btype: " + btype + "\n";
-    //    str += "bhpMoves: " + bhpMoves + "\n";
-    //    str += "barmor: " + barmor + "\n";
-    //    str += "bsword: " + bsword + "\n";
+        str += " data:" + data.toString() + "\n";
 
-    //    //Need to still add rooms, room, monster, player, and scroll
-    //    return str;
-    //}
+        if(currRoom != null)
+        {
+            str += " currRoom:\n";
+            str += currRoom.toString();
+        } else {
+            str += " currRoom: null\n";
+        }
+
+        if(dungeon != null)
+        {
+            str += " dungeon:\n";
+            str += dungeon.toString();
+        } else {
+            str += " dungeon: null\n";
+        }
+
+        str += "bvisible: " + bvisible + "\n";
+        str += "bposX: " + bposX + "\n";
+        str += "bposY: " + bposY + "\n";
+        str += "bwidth: " + bwidth + "\n";
+        str += "bheight: " + bheight + "\n";
+        str += "bhp: " + bhp + "\n";
+        str += "bmaxhit: " + bmaxhit + "\n";
+        str += "bactionMessage: " + bactionMessage + "\n";
+        str += "bactionIntValue: " + bactionIntValue + "\n";
+        str += "bactionCharValue: " + bactionCharValue + "\n";
+        str += "btype: " + btype + "\n";
+        str += "bhpMoves: " + bhpMoves + "\n";
+        str += "barmor: " + barmor + "\n";
+        str += "bsword: " + bsword + "\n";
+        return str;
+    }
 
 }
