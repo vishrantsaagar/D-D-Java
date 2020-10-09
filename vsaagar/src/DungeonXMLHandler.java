@@ -373,6 +373,11 @@ public class DungeonXMLHandler extends DefaultHandler {
             dispstack.pop();
         }
 
+        else if(qName.equalsIgnoreCase("Scroll")){
+            currItem = null;
+            dispstack.pop();
+        }
+
         else if(qName.equalsIgnoreCase("Passage")){
             currPassage = null;
             dispstack.pop();
