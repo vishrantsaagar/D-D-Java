@@ -271,20 +271,20 @@ public class DungeonXMLHandler extends DefaultHandler {
                 y = (Action)y;
             }
 
-            else if(y == (Action) currRoom){
-                y = (Room)y;
+            else if(x == (Action) currRoom){
+                x = (Room)x;
             }
 
-            else if(y == (Action) currCreature){
-                y = (Creature)y;
+            else if(x == (Action) currCreature){
+                x = (Creature)x;
             }
 
-            else if(y == (Action) currItem){
-                y = (Item)y;
+            else if(x == (Action) currItem){
+                x = (Item)x;
             }
 
-            else if(y == (Action) currPassage){
-                y = (Passage)y;
+            else if(x == (Action) currPassage){
+                x = (Passage)x;
             }
         }
 
@@ -309,27 +309,6 @@ public class DungeonXMLHandler extends DefaultHandler {
             else if(x == (Displayable) currAction){
                 x = (Action)x;
             }
-
-            Action y = actstack.peek();
-            if(y == (Action) currAction){
-                y = (Action)y;
-            }
-
-            else if(y == (Action) currRoom){
-                y = (Room)y;
-            }
-
-            else if(y == (Action) currCreature){
-                y = (Creature)y;
-            }
-
-            else if(y == (Action) currItem){
-                y = (Item)y;
-            }
-
-            else if(y == (Action) currPassage){
-                y = (Passage)y;
-            }
         }
 
         else if(bposY){
@@ -353,70 +332,12 @@ public class DungeonXMLHandler extends DefaultHandler {
             else if(x == (Displayable) currAction){
                 x = (Action)x;
             }
-
-            Action y = actstack.peek();
-            if(y == (Action) currAction){
-                y = (Action)y;
-            }
-
-            else if(y == (Action) currRoom){
-                y = (Room)y;
-            }
-
-            else if(y == (Action) currCreature){
-                y = (Creature)y;
-            }
-
-            else if(y == (Action) currItem){
-                y = (Item)y;
-            }
-
-            else if(y == (Action) currPassage){
-                y = (Passage)y;
-            }
         }
 
         else if(bwidth){
             Displayable x = dispstack.peek();
             if(x == (Displayable) currRoom){
                 x = (Room)x;
-            }
-
-            else if(x == (Displayable) currCreature){
-                x = (Creature)x;
-            }
-
-            else if(x == (Displayable) currItem){
-                x = (Item)x;
-            }
-
-            else if(x == (Displayable) currPassage){
-                x = (Passage)x;
-            }
-
-            else if(x == (Displayable) currAction){
-                x = (Action)x;
-            }
-
-            Action y = actstack.peek();
-            if(y == (Action) currAction){
-                y = (Action)y;
-            }
-
-            else if(y == (Action) currRoom){
-                y = (Room)y;
-            }
-
-            else if(y == (Action) currCreature){
-                y = (Creature)y;
-            }
-
-            else if(y == (Action) currItem){
-                y = (Item)y;
-            }
-
-            else if(y == (Action) currPassage){
-                y = (Passage)y;
             }
         }
 
@@ -425,394 +346,72 @@ public class DungeonXMLHandler extends DefaultHandler {
             if(x == (Displayable) currRoom){
                 x = (Room)x;
             }
-
-            else if(x == (Displayable) currCreature){
-                x = (Creature)x;
-            }
-
-            else if(x == (Displayable) currItem){
-                x = (Item)x;
-            }
-
-            else if(x == (Displayable) currPassage){
-                x = (Passage)x;
-            }
-
-            else if(x == (Displayable) currAction){
-                x = (Action)x;
-            }
-
-            Action y = actstack.peek();
-            if(y == (Action) currAction){
-                y = (Action)y;
-            }
-
-            else if(y == (Action) currRoom){
-                y = (Room)y;
-            }
-
-            else if(y == (Action) currCreature){
-                y = (Creature)y;
-            }
-
-            else if(y == (Action) currItem){
-                y = (Item)y;
-            }
-
-            else if(y == (Action) currPassage){
-                y = (Passage)y;
-            }
         }
 
         else if(bhp){
             Displayable x = dispstack.peek();
-            if(x == (Displayable) currRoom){
-                x = (Room)x;
+            if(x == (Displayable) currCreature){
+                Creature creature = (Creature)x;
+
+                creature.setHp(data.toString());
+                bhp = false;
             }
 
-            else if(x == (Displayable) currCreature){
-                x = (Creature)x;
-            }
 
-            else if(x == (Displayable) currItem){
-                x = (Item)x;
-            }
-
-            else if(x == (Displayable) currPassage){
-                x = (Passage)x;
-            }
-
-            else if(x == (Displayable) currAction){
-                x = (Action)x;
-            }
-
-            Action y = actstack.peek();
-            if(y == (Action) currAction){
-                y = (Action)y;
-            }
-
-            else if(y == (Action) currRoom){
-                y = (Room)y;
-            }
-
-            else if(y == (Action) currCreature){
-                y = (Creature)y;
-            }
-
-            else if(y == (Action) currItem){
-                y = (Item)y;
-            }
-
-            else if(y == (Action) currPassage){
-                y = (Passage)y;
-            }
         }
 
         else if(bmaxhit){
             Displayable x = dispstack.peek();
-            if(x == (Displayable) currRoom){
-                x = (Room)x;
-            }
+            if(x == (Displayable) currCreature){
+                Creature creature = (Creature)x;
 
-            else if(x == (Displayable) currCreature){
-                x = (Creature)x;
-            }
-
-            else if(x == (Displayable) currItem){
-                x = (Item)x;
-            }
-
-            else if(x == (Displayable) currPassage){
-                x = (Passage)x;
-            }
-
-            else if(x == (Displayable) currAction){
-                x = (Action)x;
-            }
-
-            Action y = actstack.peek();
-            if(y == (Action) currAction){
-                y = (Action)y;
-            }
-
-            else if(y == (Action) currRoom){
-                y = (Room)y;
-            }
-
-            else if(y == (Action) currCreature){
-                y = (Creature)y;
-            }
-
-            else if(y == (Action) currItem){
-                y = (Item)y;
-            }
-
-            else if(y == (Action) currPassage){
-                y = (Passage)y;
+                creature.setHitAction(data.toString());
+                bhp = false;
             }
         }
 
         else if(bactionMessage){
-            Displayable x = dispstack.peek();
-            if(x == (Displayable) currRoom){
-                x = (Room)x;
-            }
-
-            else if(x == (Displayable) currCreature){
-                x = (Creature)x;
-            }
-
-            else if(x == (Displayable) currItem){
-                x = (Item)x;
-            }
-
-            else if(x == (Displayable) currPassage){
-                x = (Passage)x;
-            }
-
-            else if(x == (Displayable) currAction){
-                x = (Action)x;
-            }
-
-            Action y = actstack.peek();
-            if(y == (Action) currAction){
-                y = (Action)y;
-            }
-
-            else if(y == (Action) currRoom){
-                y = (Room)y;
-            }
-
-            else if(y == (Action) currCreature){
-                y = (Creature)y;
-            }
-
-            else if(y == (Action) currItem){
-                y = (Item)y;
-            }
-
-            else if(y == (Action) currPassage){
-                y = (Passage)y;
-            }
+            //There is no creatureAction currCreatureAction...we have currAction but we cant access creatureAction methods from type Action variable
         }
 
         else if(bactionCharValue){
-            Displayable x = dispstack.peek();
-            if(x == (Displayable) currRoom){
-                x = (Room)x;
-            }
+            //There is no creatureAction currCreatureAction...we have currAction but we cant access creatureAction methods from type Action variable
 
-            else if(x == (Displayable) currCreature){
-                x = (Creature)x;
-            }
-
-            else if(x == (Displayable) currItem){
-                x = (Item)x;
-            }
-
-            else if(x == (Displayable) currPassage){
-                x = (Passage)x;
-            }
-
-            else if(x == (Displayable) currAction){
-                x = (Action)x;
-            }
-
-            Action y = actstack.peek();
-            if(y == (Action) currAction){
-                y = (Action)y;
-            }
-
-            else if(y == (Action) currRoom){
-                y = (Room)y;
-            }
-
-            else if(y == (Action) currCreature){
-                y = (Creature)y;
-            }
-
-            else if(y == (Action) currItem){
-                y = (Item)y;
-            }
-
-            else if(y == (Action) currPassage){
-                y = (Passage)y;
-            }
         }
 
         else if(bactionIntValue){
-            Displayable x = dispstack.peek();
-            if(x == (Displayable) currRoom){
-                x = (Room)x;
-            }
+            //There is no creatureAction currCreatureAction...we have currAction but we cant access creatureAction methods from type Action variable
 
-            else if(x == (Displayable) currCreature){
-                x = (Creature)x;
-            }
-
-            else if(x == (Displayable) currItem){
-                x = (Item)x;
-            }
-
-            else if(x == (Displayable) currPassage){
-                x = (Passage)x;
-            }
-
-            else if(x == (Displayable) currAction){
-                x = (Action)x;
-            }
-
-            Action y = actstack.peek();
-            if(y == (Action) currAction){
-                y = (Action)y;
-            }
-
-            else if(y == (Action) currRoom){
-                y = (Room)y;
-            }
-
-            else if(y == (Action) currCreature){
-                y = (Creature)y;
-            }
-
-            else if(y == (Action) currItem){
-                y = (Item)y;
-            }
-
-            else if(y == (Action) currPassage){
-                y = (Passage)y;
-            }
         }
 
         else if(bItemIntValue){
             Displayable x = dispstack.peek();
-            if(x == (Displayable) currRoom){
-                x = (Room)x;
-            }
-
-            else if(x == (Displayable) currCreature){
-                x = (Creature)x;
-            }
-
             else if(x == (Displayable) currItem){
-                x = (Item)x;
-            }
+                Action action = new Action();
 
-            else if(x == (Displayable) currPassage){
-                x = (Passage)x;
-            }
-
-            else if(x == (Displayable) currAction){
-                x = (Action)x;
-            }
-
-            Action y = actstack.peek();
-            if(y == (Action) currAction){
-                y = (Action)y;
-            }
-
-            else if(y == (Action) currRoom){
-                y = (Room)y;
-            }
-
-            else if(y == (Action) currCreature){
-                y = (Creature)y;
-            }
-
-            else if(y == (Action) currItem){
-                y = (Item)y;
-            }
-
-            else if(y == (Action) currPassage){
-                y = (Passage)y;
+                //how do we know if it is sword or armor?
+                
+                bhp = false;
             }
         }
 
         else if(btype){
             Displayable x = dispstack.peek();
-            if(x == (Displayable) currRoom){
-                x = (Room)x;
-            }
+            if(x == (Displayable) currCreature){
+                Creature creature = (Creature)x;
 
-            else if(x == (Displayable) currCreature){
-                x = (Creature)x;
-            }
-
-            else if(x == (Displayable) currItem){
-                x = (Item)x;
-            }
-
-            else if(x == (Displayable) currPassage){
-                x = (Passage)x;
-            }
-
-            else if(x == (Displayable) currAction){
-                x = (Action)x;
-            }
-
-            Action y = actstack.peek();
-            if(y == (Action) currAction){
-                y = (Action)y;
-            }
-
-            else if(y == (Action) currRoom){
-                y = (Room)y;
-            }
-
-            else if(y == (Action) currCreature){
-                y = (Creature)y;
-            }
-
-            else if(y == (Action) currItem){
-                y = (Item)y;
-            }
-
-            else if(y == (Action) currPassage){
-                y = (Passage)y;
+                creature.setHp(data.toString());
+                bhp = false;
             }
         }
 
         else if(bhpMoves){
             Displayable x = dispstack.peek();
-            if(x == (Displayable) currRoom){
-                x = (Room)x;
-            }
+            if(x == (Displayable) currCreature){
+                Creature creature = (Creature)x;
 
-            else if(x == (Displayable) currCreature){
-                x = (Creature)x;
-            }
-
-            else if(x == (Displayable) currItem){
-                x = (Item)x;
-            }
-
-            else if(x == (Displayable) currPassage){
-                x = (Passage)x;
-            }
-
-            else if(x == (Displayable) currAction){
-                x = (Action)x;
-            }
-
-            Action y = actstack.peek();
-            if(y == (Action) currAction){
-                y = (Action)y;
-            }
-
-            else if(y == (Action) currRoom){
-                y = (Room)y;
-            }
-
-            else if(y == (Action) currCreature){
-                y = (Creature)y;
-            }
-
-            else if(y == (Action) currItem){
-                y = (Item)y;
-            }
-
-            else if(y == (Action) currPassage){
-                y = (Passage)y;
+                creature.setHp(data.toString());
+                bhp = false;
             }
         }
     }
