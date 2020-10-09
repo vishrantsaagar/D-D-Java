@@ -34,6 +34,8 @@ public class DungeonXMLHandler extends DefaultHandler {
     private boolean bItemIntValue = false;
     private boolean btype = false;
     private boolean bhpMoves = false;
+    private boolean barmor = false;
+    private boolean bsword = false;
 
     public DungeonXMLHandler() {
     }
@@ -200,6 +202,8 @@ public class DungeonXMLHandler extends DefaultHandler {
             int armor_room = Integer.parseInt(attributes.getValue("room"));
             int armor_serial = Integer.parseInt(attributes.getValue("serial"));
 
+            barmor = true;
+
             Armor a1 = new Armor(armor_name);
             a1.setName(armor_name);
             a1.setID(armor_room, armor_serial);
@@ -217,6 +221,8 @@ public class DungeonXMLHandler extends DefaultHandler {
             String swordName = attributes.getValue("name");
             int swordRoom = Integer.parseInt(attributes.getValue("room"));
             int swordSerial = Integer.parseInt(attributes.getValue("serial"));
+
+            bsword = true;
 
             Sword sw1 = new Sword(swordName);
             sw1.setID(swordRoom, swordSerial);
@@ -245,7 +251,7 @@ public class DungeonXMLHandler extends DefaultHandler {
     public void endElement(String uri, String localName, String qName) throws SAXException {
     
         if(bvisible){
-            Displayable x = dispstack.peek();
+            Displayable x = dispstack.pop();
             if(x == (Displayable) currRoom){
                 x = (Room)x;
             }
@@ -259,37 +265,12 @@ public class DungeonXMLHandler extends DefaultHandler {
             }
 
             else if(x == (Displayable) currPassage){
-                x = (Passage)x;
-            }
-
-            else if(x == (Displayable) currAction){
-                x = (Action)x;
-            }
-
-            Action y = actstack.peek();
-            if(y == (Action) currAction){
-                y = (Action)y;
-            }
-
-            else if(x == (Action) currRoom){
-                x = (Room)x;
-            }
-
-            else if(x == (Action) currCreature){
-                x = (Creature)x;
-            }
-
-            else if(x == (Action) currItem){
-                x = (Item)x;
-            }
-
-            else if(x == (Action) currPassage){
                 x = (Passage)x;
             }
         }
 
         else if(bposX){
-            Displayable x = dispstack.peek();
+            Displayable x = dispstack.pop();
             if(x == (Displayable) currRoom){
                 x = (Room)x;
             }
@@ -304,15 +285,11 @@ public class DungeonXMLHandler extends DefaultHandler {
 
             else if(x == (Displayable) currPassage){
                 x = (Passage)x;
-            }
-
-            else if(x == (Displayable) currAction){
-                x = (Action)x;
             }
         }
 
         else if(bposY){
-            Displayable x = dispstack.peek();
+            Displayable x = dispstack.pop();
             if(x == (Displayable) currRoom){
                 x = (Room)x;
             }
@@ -328,90 +305,110 @@ public class DungeonXMLHandler extends DefaultHandler {
             else if(x == (Displayable) currPassage){
                 x = (Passage)x;
             }
-
-            else if(x == (Displayable) currAction){
-                x = (Action)x;
-            }
         }
 
         else if(bwidth){
-            Displayable x = dispstack.peek();
+            Displayable x = dispstack.pop();
             if(x == (Displayable) currRoom){
                 x = (Room)x;
             }
         }
 
         else if(bheight){
-            Displayable x = dispstack.peek();
+            Displayable x = dispstack.pop();
             if(x == (Displayable) currRoom){
                 x = (Room)x;
             }
         }
 
         else if(bhp){
-            Displayable x = dispstack.peek();
+            Displayable x = dispstack.pop();
             if(x == (Displayable) currCreature){
                 Creature creature = (Creature)x;
 
                 creature.setHp(data.toString());
                 bhp = false;
             }
-
-
         }
 
         else if(bmaxhit){
-            Displayable x = dispstack.peek();
+            Displayable x = dispstack.pop();
             if(x == (Displayable) currCreature){
                 Creature creature = (Creature)x;
 
                 creature.setHitAction(data.toString());
-                bhp = false;
+                bmaxhit = false;
             }
         }
 
         else if(bactionMessage){
-            //There is no creatureAction currCreatureAction...we have currAction but we cant access creatureAction methods from type Action variable
+            Action x = actstack.pop();
+            else if(x == (Action) currItem){
+                Action action = new Action();
+
+                action.setMessage(data.toString())
+                bactionMessage = false;
+            }
         }
 
         else if(bactionCharValue){
-            //There is no creatureAction currCreatureAction...we have currAction but we cant access creatureAction methods from type Action variable
+            Action x = actstack.pop();
+            else if(x == (Action) currItem){
+                Action action = new Action();
+
+                action.setMessage(data.toString())
+                bactionCharValue = false;
+            }
 
         }
 
         else if(bactionIntValue){
-            //There is no creatureAction currCreatureAction...we have currAction but we cant access creatureAction methods from type Action variable
+            Action x = actstack.pop();
+            else if(x == (Action) currItem){
+                Action action = new Action();
+
+                action.setMessage(data.toString())
+                bactionIntValue = false;
+            }
 
         }
 
         else if(bItemIntValue){
-            Displayable x = dispstack.peek();
+            Displayable x = dispstack.pop();
             else if(x == (Displayable) currItem){
-                Action action = new Action();
 
-                //how do we know if it is sword or armor?
+                if(barmor){
+                    x.setIntValue(data.toString());
+
+                    barmor = false;
+                }
                 
-                bhp = false;
+                else if(bsword){
+                    x.setIntValue(data.toString());
+
+                    bsword = false;
+                }
+
+                bItemIntValue = false;
             }
         }
 
         else if(btype){
-            Displayable x = dispstack.peek();
+            Displayable x = dispstack.pop();
             if(x == (Displayable) currCreature){
                 Creature creature = (Creature)x;
 
-                creature.setHp(data.toString());
-                bhp = false;
+                btype = false;
             }
         }
 
         else if(bhpMoves){
-            Displayable x = dispstack.peek();
+            Displayable x = dispstack.pop();
             if(x == (Displayable) currCreature){
                 Creature creature = (Creature)x;
 
-                creature.setHp(data.toString());
-                bhp = false;
+                creature.setHpMoves(data.toString());
+                bhpMoves = false;
             }
         }
     }
