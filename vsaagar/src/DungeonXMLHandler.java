@@ -239,11 +239,6 @@ public class DungeonXMLHandler extends DefaultHandler {
 
             dispstack.push(currPassage);
         }       
-        else if(qName.equalsIgnoreCase("width")) {
-            bwidth = true;
-        } else if(qName.equalsIgnoreCase("height")) {
-            bheight = true;
-        }       
     }
 
     @Override
@@ -254,54 +249,571 @@ public class DungeonXMLHandler extends DefaultHandler {
             if(x == (Displayable) currRoom){
                 x = (Room)x;
             }
+
+            else if(x == (Displayable) currCreature){
+                x = (Creature)x;
+            }
+
+            else if(x == (Displayable) currItem){
+                x = (Item)x;
+            }
+
+            else if(x == (Displayable) currPassage){
+                x = (Passage)x;
+            }
+
+            else if(x == (Displayable) currAction){
+                x = (Action)x;
+            }
+
+            Action y = actstack.peek();
+            if(y == (Action) currAction){
+                y = (Action)y;
+            }
+
+            else if(y == (Action) currRoom){
+                y = (Room)y;
+            }
+
+            else if(y == (Action) currCreature){
+                y = (Creature)y;
+            }
+
+            else if(y == (Action) currItem){
+                y = (Item)y;
+            }
+
+            else if(y == (Action) currPassage){
+                y = (Passage)y;
+            }
         }
 
         else if(bposX){
+            Displayable x = dispstack.peek();
+            if(x == (Displayable) currRoom){
+                x = (Room)x;
+            }
 
+            else if(x == (Displayable) currCreature){
+                x = (Creature)x;
+            }
+
+            else if(x == (Displayable) currItem){
+                x = (Item)x;
+            }
+
+            else if(x == (Displayable) currPassage){
+                x = (Passage)x;
+            }
+
+            else if(x == (Displayable) currAction){
+                x = (Action)x;
+            }
+
+            Action y = actstack.peek();
+            if(y == (Action) currAction){
+                y = (Action)y;
+            }
+
+            else if(y == (Action) currRoom){
+                y = (Room)y;
+            }
+
+            else if(y == (Action) currCreature){
+                y = (Creature)y;
+            }
+
+            else if(y == (Action) currItem){
+                y = (Item)y;
+            }
+
+            else if(y == (Action) currPassage){
+                y = (Passage)y;
+            }
         }
 
         else if(bposY){
+            Displayable x = dispstack.peek();
+            if(x == (Displayable) currRoom){
+                x = (Room)x;
+            }
 
+            else if(x == (Displayable) currCreature){
+                x = (Creature)x;
+            }
+
+            else if(x == (Displayable) currItem){
+                x = (Item)x;
+            }
+
+            else if(x == (Displayable) currPassage){
+                x = (Passage)x;
+            }
+
+            else if(x == (Displayable) currAction){
+                x = (Action)x;
+            }
+
+            Action y = actstack.peek();
+            if(y == (Action) currAction){
+                y = (Action)y;
+            }
+
+            else if(y == (Action) currRoom){
+                y = (Room)y;
+            }
+
+            else if(y == (Action) currCreature){
+                y = (Creature)y;
+            }
+
+            else if(y == (Action) currItem){
+                y = (Item)y;
+            }
+
+            else if(y == (Action) currPassage){
+                y = (Passage)y;
+            }
         }
 
         else if(bwidth){
+            Displayable x = dispstack.peek();
+            if(x == (Displayable) currRoom){
+                x = (Room)x;
+            }
 
+            else if(x == (Displayable) currCreature){
+                x = (Creature)x;
+            }
+
+            else if(x == (Displayable) currItem){
+                x = (Item)x;
+            }
+
+            else if(x == (Displayable) currPassage){
+                x = (Passage)x;
+            }
+
+            else if(x == (Displayable) currAction){
+                x = (Action)x;
+            }
+
+            Action y = actstack.peek();
+            if(y == (Action) currAction){
+                y = (Action)y;
+            }
+
+            else if(y == (Action) currRoom){
+                y = (Room)y;
+            }
+
+            else if(y == (Action) currCreature){
+                y = (Creature)y;
+            }
+
+            else if(y == (Action) currItem){
+                y = (Item)y;
+            }
+
+            else if(y == (Action) currPassage){
+                y = (Passage)y;
+            }
         }
 
         else if(bheight){
+            Displayable x = dispstack.peek();
+            if(x == (Displayable) currRoom){
+                x = (Room)x;
+            }
 
+            else if(x == (Displayable) currCreature){
+                x = (Creature)x;
+            }
+
+            else if(x == (Displayable) currItem){
+                x = (Item)x;
+            }
+
+            else if(x == (Displayable) currPassage){
+                x = (Passage)x;
+            }
+
+            else if(x == (Displayable) currAction){
+                x = (Action)x;
+            }
+
+            Action y = actstack.peek();
+            if(y == (Action) currAction){
+                y = (Action)y;
+            }
+
+            else if(y == (Action) currRoom){
+                y = (Room)y;
+            }
+
+            else if(y == (Action) currCreature){
+                y = (Creature)y;
+            }
+
+            else if(y == (Action) currItem){
+                y = (Item)y;
+            }
+
+            else if(y == (Action) currPassage){
+                y = (Passage)y;
+            }
         }
 
         else if(bhp){
+            Displayable x = dispstack.peek();
+            if(x == (Displayable) currRoom){
+                x = (Room)x;
+            }
 
+            else if(x == (Displayable) currCreature){
+                x = (Creature)x;
+            }
+
+            else if(x == (Displayable) currItem){
+                x = (Item)x;
+            }
+
+            else if(x == (Displayable) currPassage){
+                x = (Passage)x;
+            }
+
+            else if(x == (Displayable) currAction){
+                x = (Action)x;
+            }
+
+            Action y = actstack.peek();
+            if(y == (Action) currAction){
+                y = (Action)y;
+            }
+
+            else if(y == (Action) currRoom){
+                y = (Room)y;
+            }
+
+            else if(y == (Action) currCreature){
+                y = (Creature)y;
+            }
+
+            else if(y == (Action) currItem){
+                y = (Item)y;
+            }
+
+            else if(y == (Action) currPassage){
+                y = (Passage)y;
+            }
         }
 
         else if(bmaxhit){
+            Displayable x = dispstack.peek();
+            if(x == (Displayable) currRoom){
+                x = (Room)x;
+            }
 
+            else if(x == (Displayable) currCreature){
+                x = (Creature)x;
+            }
+
+            else if(x == (Displayable) currItem){
+                x = (Item)x;
+            }
+
+            else if(x == (Displayable) currPassage){
+                x = (Passage)x;
+            }
+
+            else if(x == (Displayable) currAction){
+                x = (Action)x;
+            }
+
+            Action y = actstack.peek();
+            if(y == (Action) currAction){
+                y = (Action)y;
+            }
+
+            else if(y == (Action) currRoom){
+                y = (Room)y;
+            }
+
+            else if(y == (Action) currCreature){
+                y = (Creature)y;
+            }
+
+            else if(y == (Action) currItem){
+                y = (Item)y;
+            }
+
+            else if(y == (Action) currPassage){
+                y = (Passage)y;
+            }
         }
 
         else if(bactionMessage){
+            Displayable x = dispstack.peek();
+            if(x == (Displayable) currRoom){
+                x = (Room)x;
+            }
 
+            else if(x == (Displayable) currCreature){
+                x = (Creature)x;
+            }
+
+            else if(x == (Displayable) currItem){
+                x = (Item)x;
+            }
+
+            else if(x == (Displayable) currPassage){
+                x = (Passage)x;
+            }
+
+            else if(x == (Displayable) currAction){
+                x = (Action)x;
+            }
+
+            Action y = actstack.peek();
+            if(y == (Action) currAction){
+                y = (Action)y;
+            }
+
+            else if(y == (Action) currRoom){
+                y = (Room)y;
+            }
+
+            else if(y == (Action) currCreature){
+                y = (Creature)y;
+            }
+
+            else if(y == (Action) currItem){
+                y = (Item)y;
+            }
+
+            else if(y == (Action) currPassage){
+                y = (Passage)y;
+            }
         }
 
         else if(bactionCharValue){
+            Displayable x = dispstack.peek();
+            if(x == (Displayable) currRoom){
+                x = (Room)x;
+            }
 
+            else if(x == (Displayable) currCreature){
+                x = (Creature)x;
+            }
+
+            else if(x == (Displayable) currItem){
+                x = (Item)x;
+            }
+
+            else if(x == (Displayable) currPassage){
+                x = (Passage)x;
+            }
+
+            else if(x == (Displayable) currAction){
+                x = (Action)x;
+            }
+
+            Action y = actstack.peek();
+            if(y == (Action) currAction){
+                y = (Action)y;
+            }
+
+            else if(y == (Action) currRoom){
+                y = (Room)y;
+            }
+
+            else if(y == (Action) currCreature){
+                y = (Creature)y;
+            }
+
+            else if(y == (Action) currItem){
+                y = (Item)y;
+            }
+
+            else if(y == (Action) currPassage){
+                y = (Passage)y;
+            }
         }
 
         else if(bactionIntValue){
+            Displayable x = dispstack.peek();
+            if(x == (Displayable) currRoom){
+                x = (Room)x;
+            }
 
+            else if(x == (Displayable) currCreature){
+                x = (Creature)x;
+            }
+
+            else if(x == (Displayable) currItem){
+                x = (Item)x;
+            }
+
+            else if(x == (Displayable) currPassage){
+                x = (Passage)x;
+            }
+
+            else if(x == (Displayable) currAction){
+                x = (Action)x;
+            }
+
+            Action y = actstack.peek();
+            if(y == (Action) currAction){
+                y = (Action)y;
+            }
+
+            else if(y == (Action) currRoom){
+                y = (Room)y;
+            }
+
+            else if(y == (Action) currCreature){
+                y = (Creature)y;
+            }
+
+            else if(y == (Action) currItem){
+                y = (Item)y;
+            }
+
+            else if(y == (Action) currPassage){
+                y = (Passage)y;
+            }
         }
 
         else if(bItemIntValue){
+            Displayable x = dispstack.peek();
+            if(x == (Displayable) currRoom){
+                x = (Room)x;
+            }
 
+            else if(x == (Displayable) currCreature){
+                x = (Creature)x;
+            }
+
+            else if(x == (Displayable) currItem){
+                x = (Item)x;
+            }
+
+            else if(x == (Displayable) currPassage){
+                x = (Passage)x;
+            }
+
+            else if(x == (Displayable) currAction){
+                x = (Action)x;
+            }
+
+            Action y = actstack.peek();
+            if(y == (Action) currAction){
+                y = (Action)y;
+            }
+
+            else if(y == (Action) currRoom){
+                y = (Room)y;
+            }
+
+            else if(y == (Action) currCreature){
+                y = (Creature)y;
+            }
+
+            else if(y == (Action) currItem){
+                y = (Item)y;
+            }
+
+            else if(y == (Action) currPassage){
+                y = (Passage)y;
+            }
         }
 
         else if(btype){
+            Displayable x = dispstack.peek();
+            if(x == (Displayable) currRoom){
+                x = (Room)x;
+            }
 
+            else if(x == (Displayable) currCreature){
+                x = (Creature)x;
+            }
+
+            else if(x == (Displayable) currItem){
+                x = (Item)x;
+            }
+
+            else if(x == (Displayable) currPassage){
+                x = (Passage)x;
+            }
+
+            else if(x == (Displayable) currAction){
+                x = (Action)x;
+            }
+
+            Action y = actstack.peek();
+            if(y == (Action) currAction){
+                y = (Action)y;
+            }
+
+            else if(y == (Action) currRoom){
+                y = (Room)y;
+            }
+
+            else if(y == (Action) currCreature){
+                y = (Creature)y;
+            }
+
+            else if(y == (Action) currItem){
+                y = (Item)y;
+            }
+
+            else if(y == (Action) currPassage){
+                y = (Passage)y;
+            }
         }
 
         else if(bhpMoves){
+            Displayable x = dispstack.peek();
+            if(x == (Displayable) currRoom){
+                x = (Room)x;
+            }
 
+            else if(x == (Displayable) currCreature){
+                x = (Creature)x;
+            }
+
+            else if(x == (Displayable) currItem){
+                x = (Item)x;
+            }
+
+            else if(x == (Displayable) currPassage){
+                x = (Passage)x;
+            }
+
+            else if(x == (Displayable) currAction){
+                x = (Action)x;
+            }
+
+            Action y = actstack.peek();
+            if(y == (Action) currAction){
+                y = (Action)y;
+            }
+
+            else if(y == (Action) currRoom){
+                y = (Room)y;
+            }
+
+            else if(y == (Action) currCreature){
+                y = (Creature)y;
+            }
+
+            else if(y == (Action) currItem){
+                y = (Item)y;
+            }
+
+            else if(y == (Action) currPassage){
+                y = (Passage)y;
+            }
         }
     }
 
