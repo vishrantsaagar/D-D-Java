@@ -259,29 +259,21 @@ public class DungeonXMLHandler extends DefaultHandler {
                 // int vis = int(x);
 
                     d1.setVisible(Integer.parseInt(data.toString()));
-
                     bvisible = false;
-
             }
 
             else if(x == (Displayable) currCreature){
                 // int vis = int(x);
 
                 d1.setVisible(Integer.parseInt(data.toString()));
-
                 bvisible = false;
-
-
             }
 
             else if(x == (Displayable) currItem){
                 // int vis = int(x);
 
                 d1.setVisible(Integer.parseInt(data.toString()));
-
                 bvisible = false;
-
-
             }
 
             else if(x == (Displayable) currPassage){
@@ -301,14 +293,12 @@ public class DungeonXMLHandler extends DefaultHandler {
             if(x == (Displayable) currRoom){
 
                 d1.SetPosX(Integer.parseInt(data.toString()));
-
                 bposX = false;
             }
 
             else if(x == (Displayable) currCreature){
 
                 d1.SetPosX(Integer.parseInt(data.toString()));
-
                 bposX = false;
 
             }
@@ -316,7 +306,6 @@ public class DungeonXMLHandler extends DefaultHandler {
             else if(x == (Displayable) currItem){
 
                 d1.SetPosX(Integer.parseInt(data.toString()));
-
                 bposX = false;
 
             }
@@ -324,7 +313,6 @@ public class DungeonXMLHandler extends DefaultHandler {
             else if(x == (Displayable) currPassage){
 
                 d1.SetPosX(Integer.parseInt(data.toString()));
-
                 bposX = false;
 
             }
@@ -367,7 +355,6 @@ public class DungeonXMLHandler extends DefaultHandler {
                 // int width = (int) x;
 
                 d1.SetWidth(Integer.parseInt(data.toString()));
-
                 bwidth = false;
             }
         }
