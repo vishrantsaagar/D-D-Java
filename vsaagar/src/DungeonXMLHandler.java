@@ -411,6 +411,42 @@ public class DungeonXMLHandler extends DefaultHandler {
                 bhpMoves = false;
             }
         }
+
+        if(qName.equalsIgnoreCase("Dungeon")){
+            dungeon = null;
+        }
+
+        else if(qName.equalsIgnoreCase("Rooms")){
+
+        }
+
+        else if(qName.equalsIgnoreCase("Room")){
+            currRoom = null;
+        }
+
+        else if(qName.equalsIgnoreCase('Monster')){
+            currCreature = null;
+        }
+
+        else if(qName.equalsIgnoreCase('Player')){
+            currCreature = null;
+        }
+
+        else if(qName.equalsIgnoreCase('Sword')){
+            currItem = null;
+        }
+
+        else if(qName.equalsIgnoreCase('Armor')){
+            currItem = null;
+        }
+
+        else if(qName.equalsIgnoreCase('Passage')){
+            curPassage = null;
+        }
+
+        else if(qName.equalsIgnoreCase('CreatureAction')){
+            currAction = null;
+        }
     }
 
 
