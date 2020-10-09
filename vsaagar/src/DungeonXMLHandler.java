@@ -418,9 +418,9 @@ public class DungeonXMLHandler extends DefaultHandler {
             str += " stack: null";
         }
 
-        str += " data:" + data.toString() + "\n";
+        str += " data:" + data.toString() + "\n"; //comment this out?
 
-        if(currRoom != null)
+        if(currRoom != null) //since this is part of dispStack not necessary
         {
             str += " currRoom:\n";
             str += currRoom.toString();
