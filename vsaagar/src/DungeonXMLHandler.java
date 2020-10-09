@@ -382,6 +382,9 @@ public class DungeonXMLHandler extends DefaultHandler {
             currAction = null;
             dispstack.pop();
         }
+
+        else if(qName.equalsIgnoreCase("Passages")){
+        }
     }
 
     @Override
