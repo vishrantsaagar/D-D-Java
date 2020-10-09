@@ -5,12 +5,12 @@ public class Displayable {
         System.out.println("Displayable");
     }
 
-    public void setInvisible()
+    public void setInvisible(int v)
     {
         System.out.println("Displayable:Invisible");
     }
 
-    public void setVisible()
+    public void setVisible(int v)
     {
         System.out.println("Displayable:setVisible");
 
