@@ -36,8 +36,6 @@ public class DungeonXMLHandler extends DefaultHandler {
     private boolean bItemIntValue = false;
     private boolean btype = false;
     private boolean bhpMoves = false;
-    private boolean barmor = false;
-    private boolean bsword = false;
 
     public DungeonXMLHandler() {
     }
@@ -202,8 +200,6 @@ public class DungeonXMLHandler extends DefaultHandler {
             int armor_room = Integer.parseInt(attributes.getValue("room"));
             int armor_serial = Integer.parseInt(attributes.getValue("serial"));
 
-            barmor = true;
-
             Armor a1 = new Armor(armor_name);
             a1.setName(armor_name);
             a1.setID(armor_room, armor_serial);
@@ -220,8 +216,6 @@ public class DungeonXMLHandler extends DefaultHandler {
             String swordName = attributes.getValue("name");
             int swordRoom = Integer.parseInt(attributes.getValue("room"));
             int swordSerial = Integer.parseInt(attributes.getValue("serial"));
-
-            bsword = true;
 
             Sword sw1 = new Sword(swordName);
             sw1.setID(swordRoom, swordSerial);
@@ -454,8 +448,6 @@ public class DungeonXMLHandler extends DefaultHandler {
         str += "bactionCharValue: " + bactionCharValue + "\n";
         str += "btype: " + btype + "\n";
         str += "bhpMoves: " + bhpMoves + "\n";
-        str += "barmor: " + barmor + "\n";
-        str += "bsword: " + bsword + "\n";
         return str;
     }
 
