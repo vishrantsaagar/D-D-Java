@@ -249,84 +249,142 @@ public class DungeonXMLHandler extends DefaultHandler {
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
+
+        Displayable d1 = new Displayable();
+        Action a1 = new Action();
     
         if(bvisible){
             Displayable x = dispstack.pop();
             if(x == (Displayable) currRoom){
-                x = (Room)x;
+                // int vis = int(x);
+
+                d1.setVisible(Integer.parseInt(data.toString()));
+
+                bvisible = false;
+
             }
 
             else if(x == (Displayable) currCreature){
-                x = (Creature)x;
+                // int vis = int(x);
+
+                d1.setVisible(Integer.parseInt(data.toString()));
+
+                bvisible = false;
+
+
             }
 
             else if(x == (Displayable) currItem){
-                x = (Item)x;
+                // int vis = int(x);
+
+                d1.setVisible(Integer.parseInt(data.toString()));
+
+                bvisible = false;
+
+
             }
 
             else if(x == (Displayable) currPassage){
-                x = (Passage)x;
+                // int vis = int(x);
+
+                d1.setVisible(Integer.parseInt(data.toString()));
+
+                bvisible = false;
+
             }
+
+
         }
 
         else if(bposX){
             Displayable x = dispstack.pop();
             if(x == (Displayable) currRoom){
-                x = (Room)x;
+
+                d1.SetPosX(Integer.parseInt(data.toString()));
+
+                bposX = false;
             }
 
             else if(x == (Displayable) currCreature){
-                x = (Creature)x;
+
+                d1.SetPosX(Integer.parseInt(data.toString()));
+
+                bposX = false;
+
             }
 
             else if(x == (Displayable) currItem){
-                x = (Item)x;
+
+                d1.SetPosX(Integer.parseInt(data.toString()));
+
+                bposX = false;
+
             }
 
             else if(x == (Displayable) currPassage){
-                x = (Passage)x;
+
+                d1.SetPosX(Integer.parseInt(data.toString()));
+
+                bposX = false;
+
             }
         }
 
         else if(bposY){
             Displayable x = dispstack.pop();
             if(x == (Displayable) currRoom){
-                x = (Room)x;
+
+                d1.setPosY(Integer.parseInt(data.toString()));
+
+                bposY = false;
             }
 
             else if(x == (Displayable) currCreature){
-                x = (Creature)x;
+
+                d1.setPosY(Integer.parseInt(data.toString()));
+
+                bposY = false;
             }
 
             else if(x == (Displayable) currItem){
-                x = (Item)x;
+
+                d1.setPosY(Integer.parseInt(data.toString()));
+
+                bposY = false;
             }
 
             else if(x == (Displayable) currPassage){
-                x = (Passage)x;
+
+                d1.setPosY(Integer.parseInt(data.toString()));
+
+                bposY = false;
             }
         }
 
         else if(bwidth){
             Displayable x = dispstack.pop();
             if(x == (Displayable) currRoom){
-                x = (Room)x;
+                // int width = (int) x;
+
+                d1.setWidth(Integer.parseInt(data.toString()));
+
+                bwidth = false;
             }
         }
 
         else if(bheight){
             Displayable x = dispstack.pop();
             if(x == (Displayable) currRoom){
-                x = (Room)x;
+               d1.setHeight(Integer.parseInt(data.toString()));
+
+               bheight = false;
             }
         }
 
         else if(bhp){
             Displayable x = dispstack.pop();
             if(x == (Displayable) currCreature){
-                Creature creature = (Creature)x;
-
-                creature.setHp(data.toString());
+                d1.setHp(Integer.parseInt(data.toString()));
                 bhp = false;
             }
         }
@@ -334,29 +392,24 @@ public class DungeonXMLHandler extends DefaultHandler {
         else if(bmaxhit){
             Displayable x = dispstack.pop();
             if(x == (Displayable) currCreature){
-                Creature creature = (Creature)x;
-
-                creature.setHitAction(data.toString());
+                d1.setMaxHit(Integer.parseInt(data.toString()));
                 bmaxhit = false;
             }
         }
 
         else if(bactionMessage){
             Action x = actstack.pop();
-            else if(x == (Action) currItem){
-                Action action = new Action();
+            else if(x == (Action) currAction){
 
-                action.setMessage(data.toString())
+                a1.setMessage(data.toString());
                 bactionMessage = false;
             }
         }
 
         else if(bactionCharValue){
             Action x = actstack.pop();
-            else if(x == (Action) currItem){
-                Action action = new Action();
-
-                action.setMessage(data.toString())
+            else if(x == (Action) currAction){
+                a1.setCharValue(data.toString());
                 bactionCharValue = false;
             }
 
@@ -364,10 +417,8 @@ public class DungeonXMLHandler extends DefaultHandler {
 
         else if(bactionIntValue){
             Action x = actstack.pop();
-            else if(x == (Action) currItem){
-                Action action = new Action();
-
-                action.setMessage(data.toString())
+            else if(x == (Action) currAction){
+                a1.setIntValue(data.toString());
                 bactionIntValue = false;
             }
 
@@ -378,13 +429,13 @@ public class DungeonXMLHandler extends DefaultHandler {
             else if(x == (Displayable) currItem){
 
                 if(barmor){
-                    x.setIntValue(data.toString());
+                    d1.setIntValue(data.toString());
 
                     barmor = false;
                 }
                 
                 else if(bsword){
-                    x.setIntValue(data.toString());
+                    d1.setIntValue(data.toString());
 
                     bsword = false;
                 }
@@ -396,7 +447,8 @@ public class DungeonXMLHandler extends DefaultHandler {
         else if(btype){
             Displayable x = dispstack.pop();
             if(x == (Displayable) currCreature){
-                Creature creature = (Creature)x;
+
+                d1.setType(data.toString()); //String to character
 
                 btype = false;
             }
@@ -405,9 +457,8 @@ public class DungeonXMLHandler extends DefaultHandler {
         else if(bhpMoves){
             Displayable x = dispstack.pop();
             if(x == (Displayable) currCreature){
-                Creature creature = (Creature)x;
 
-                creature.setHpMoves(data.toString());
+                d1.setHpMove(Integer.parseInt(data.toString()));
                 bhpMoves = false;
             }
         }
