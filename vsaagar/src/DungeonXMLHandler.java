@@ -253,14 +253,14 @@ public class DungeonXMLHandler extends DefaultHandler {
         Displayable d1 = new Displayable();
         Action a1 = new Action();
     
-        if(bvisible){
-            Displayable x = dispstack.pop();
-            if(x == (Displayable) currRoom){
+            if(bvisible){
+                Displayable x = dispstack.pop();
+                if(x == (Displayable) currRoom){
                 // int vis = int(x);
 
-                d1.setVisible(Integer.parseInt(data.toString()));
+                    d1.setVisible(Integer.parseInt(data.toString()));
 
-                bvisible = false;
+                    bvisible = false;
 
             }
 
@@ -366,7 +366,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             if(x == (Displayable) currRoom){
                 // int width = (int) x;
 
-                d1.setWidth(Integer.parseInt(data.toString()));
+                d1.SetWidth(Integer.parseInt(data.toString()));
 
                 bwidth = false;
             }
@@ -399,7 +399,7 @@ public class DungeonXMLHandler extends DefaultHandler {
 
         else if(bactionMessage){
             Action x = actstack.pop();
-            else if(x == (Action) currAction){
+            if(x == (Action) currAction){
 
                 a1.setMessage(data.toString());
                 bactionMessage = false;
@@ -408,8 +408,8 @@ public class DungeonXMLHandler extends DefaultHandler {
 
         else if(bactionCharValue){
             Action x = actstack.pop();
-            else if(x == (Action) currAction){
-                a1.setCharValue(data.toString());
+            if(x == (Action) currAction){
+                a1.setCharValue(data.toString().charAt(0)); //string to character
                 bactionCharValue = false;
             }
 
@@ -417,8 +417,8 @@ public class DungeonXMLHandler extends DefaultHandler {
 
         else if(bactionIntValue){
             Action x = actstack.pop();
-            else if(x == (Action) currAction){
-                a1.setIntValue(data.toString());
+            if(x == (Action) currAction){
+                a1.setIntValue(Integer.parseInt(data.toString()));
                 bactionIntValue = false;
             }
 
@@ -426,16 +426,15 @@ public class DungeonXMLHandler extends DefaultHandler {
 
         else if(bItemIntValue){
             Displayable x = dispstack.pop();
-            else if(x == (Displayable) currItem){
+            if(x == (Displayable) currItem){
 
                 if(barmor){
-                    d1.setIntValue(data.toString());
-
+                    d1.setIntValue(Integer.parseInt(data.toString()));
                     barmor = false;
                 }
                 
                 else if(bsword){
-                    d1.setIntValue(data.toString());
+                    d1.setIntValue(Integer.parseInt(data.toString()));
 
                     bsword = false;
                 }
@@ -448,7 +447,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             Displayable x = dispstack.pop();
             if(x == (Displayable) currCreature){
 
-                d1.setType(data.toString()); //String to character
+                d1.setType(data.toString().charAt(0)); //String to character
 
                 btype = false;
             }
@@ -475,27 +474,27 @@ public class DungeonXMLHandler extends DefaultHandler {
             currRoom = null;
         }
 
-        else if(qName.equalsIgnoreCase('Monster')){
+        else if(qName.equalsIgnoreCase("Monster")){
             currCreature = null;
         }
 
-        else if(qName.equalsIgnoreCase('Player')){
+        else if(qName.equalsIgnoreCase("Player")){
             currCreature = null;
         }
 
-        else if(qName.equalsIgnoreCase('Sword')){
+        else if(qName.equalsIgnoreCase("Sword")){
             currItem = null;
         }
 
-        else if(qName.equalsIgnoreCase('Armor')){
+        else if(qName.equalsIgnoreCase("Armor")){
             currItem = null;
         }
 
-        else if(qName.equalsIgnoreCase('Passage')){
-            curPassage = null;
+        else if(qName.equalsIgnoreCase("Passage")){
+            currPassage = null;
         }
 
-        else if(qName.equalsIgnoreCase('CreatureAction')){
+        else if(qName.equalsIgnoreCase("CreatureAction")){
             currAction = null;
         }
     }
