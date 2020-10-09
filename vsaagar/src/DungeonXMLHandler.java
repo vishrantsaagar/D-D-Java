@@ -454,7 +454,6 @@ public class DungeonXMLHandler extends DefaultHandler {
         }
 
         else if(qName.equalsIgnoreCase("Rooms")){
-
         }
 
         else if(qName.equalsIgnoreCase("Room")){
@@ -496,9 +495,6 @@ public class DungeonXMLHandler extends DefaultHandler {
     //public String toString(){
     //    String str = CLASSID + "DungeonXMLHandler\n";
 
-    //    for(int i = 0; i < rooms.size(); i++){
-    //        str += rooms.get(i).toString() + "\n";
-    //    }
 
     //    str += "roomsBeingParsed: " + roomsParsed.toString() + "\n";
     //    //str += "creaturesBeingParsed: " + creaturesParsed + "\n";
@@ -507,6 +503,15 @@ public class DungeonXMLHandler extends DefaultHandler {
     //    str += "bposY: " + bposY + "\n";
     //    str += "bwidth: " + bwidth + "\n";
     //    str += "bheight: " + bheight + "\n";
+    //    str += "bhp: " + bhp + "\n";
+    //    str += "bmaxhit: " + bmaxhit + "\n";
+    //    str += "bactionMessage: " + bactionMessage + "\n";
+    //    str += "bactionIntValue: " + bactionIntValue + "\n";
+    //    str += "bactionCharValue: " + bactionCharValue + "\n";
+    //    str += "btype: " + btype + "\n";
+    //    str += "bhpMoves: " + bhpMoves + "\n";
+    //    str += "barmor: " + barmor + "\n";
+    //    str += "bsword: " + bsword + "\n";
 
     //    //Need to still add rooms, room, monster, player, and scroll
     //    return str;
