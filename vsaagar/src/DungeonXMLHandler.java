@@ -380,7 +380,12 @@ public class DungeonXMLHandler extends DefaultHandler {
 
         else if(qName.equalsIgnoreCase("CreatureAction")){
             currAction = null;
-            dispstack.pop();
+            actstack.pop();
+        }
+
+        else if(qName.equalsIgnoreCase("ItemAction")){
+            currAction = null;
+            actstack.pop();
         }
 
         else if(qName.equalsIgnoreCase("Passages")){
