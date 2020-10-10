@@ -133,16 +133,15 @@ public class DungeonXMLHandler extends DefaultHandler {
 
             currAction = c1;
             actstack.push(currAction);
-        } 
-        else if(qName.equalsIgnoreCase("actionMessage")) {
-            bactionMessage = true;
-
+     
+        }else if(qName.equalsIgnoreCase("actionMessage")) {
+                bactionMessage = true;
+    
         } else if(qName.equalsIgnoreCase("actionIntValue")) {
-            bactionIntValue = true;
-        
+                bactionIntValue = true;
+            
         } else if(qName.equalsIgnoreCase("actionCharValue")) {
-            bactionCharValue = true;
-        
+                bactionCharValue = true;
         }else if(qName.equalsIgnoreCase("Scroll")) {
 
             String scrollName = attributes.getValue("name");
@@ -173,15 +172,6 @@ public class DungeonXMLHandler extends DefaultHandler {
             }
 
             actstack.push(currAction);
-
-        }else if(qName.equalsIgnoreCase("actionMessage")) {
-                bactionMessage = true;
-    
-        } else if(qName.equalsIgnoreCase("actionIntValue")) {
-                bactionIntValue = true;
-            
-        } else if(qName.equalsIgnoreCase("actionCharValue")) {
-                bactionCharValue = true;
             
         } else if(qName.equalsIgnoreCase("Player")) {
 
