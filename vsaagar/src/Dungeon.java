@@ -10,7 +10,7 @@ public class Dungeon {
         _width = width;
         _gameHeight = gameHeight;
         
-        System.out.println("Dungeon:getDunction" + _name + "\n" + _width +"\n" + _gameHeight);
+        System.out.println("Dungeon:getDungeon" + _name + "\n" + _width +"\n" + _gameHeight);
     }
 
     public void addRoom(Room r1)
