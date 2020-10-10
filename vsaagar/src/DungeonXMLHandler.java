@@ -5,7 +5,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class DungeonXMLHandler extends DefaultHandler {
     
-    private StringBuilder data = null;
+    private StringBuilder data;
     private static final String CLASSID = "DungeonXMLHandler";
 
     private Stack<Displayable> dispstack = null;
@@ -51,8 +51,8 @@ public class DungeonXMLHandler extends DefaultHandler {
             int bottomHeight = Integer.parseInt(attributes.getValue("bottomHeight"));
             
             ObjectDisplayGrid.getObjectDisplayGrid(gameHeight, width, topHeight, bottomHeight);
-            
-            dungeon.getDungeon(dunName, gameHeight, width);
+
+            dungeon.getDungeon(dunName, width, gameHeight);
 
         } else if(qName.equalsIgnoreCase("Rooms")) { //order followed in testDrawing.xml
 
