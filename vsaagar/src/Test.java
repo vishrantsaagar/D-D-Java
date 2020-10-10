@@ -7,7 +7,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.SAXException;
 
-public class ZTest {
+public class Test {
     public static void main(String[] args) {
 
         // check if a filename is passed in.  If not, print a usage message.
@@ -41,6 +41,8 @@ public class ZTest {
 
                 //ArrayList<Room> r1 = handler.getRoom();
                 //Dungeon dungeon = handler.getDungeon();
+
+                handler.toString();
 
 	    // print out all of the students.  This will change depending on 
 	    // what kind of XML we are parsing
