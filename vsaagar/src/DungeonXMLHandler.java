@@ -102,8 +102,6 @@ public class DungeonXMLHandler extends DefaultHandler {
         } else if(qName.equalsIgnoreCase("CreatureAction")) {
 
             String creatureName = attributes.getValue("name");
-            // System.out.println("CREATURENAME" + creatureName);
-            // System.out.println(qName);
             String creatureType = attributes.getValue("type");
             CreatureAction c1 = null;
 
@@ -167,24 +165,29 @@ public class DungeonXMLHandler extends DefaultHandler {
                 }
             }
 
-            System.out.println("currCreature: " + currCreature);
+            else if(creatureName.equals("DropPack")){
+                if(currCreature != null){
+                    c1 = new DropPack(creatureName, currCreature); 
+                }
+
+                else{
+                    c1 = new DropPack(creatureName, currPlayer); 
+                }
+            }
 
             if(currCreature != null){
                 if(creatureType.equals("death")){
                     currCreature.setDeathAction(c1);
                 }
-            
                 else if(creatureType.equals("hit")){
                     currCreature.setHitAction(c1);
                 }
             }
 
-
             if(currPlayer != null){
                 if(creatureType.equals("death")){
                     currPlayer.setDeathAction(c1);
                 }
-
                 else if(creatureType.equals("hit")){
                     currPlayer.setHitAction(c1);
                 }
@@ -254,7 +257,10 @@ public class DungeonXMLHandler extends DefaultHandler {
             a1.setName(armor_name);
             a1.setID(armor_room, armor_serial);
             
-            currPlayer.setArmor(a1);
+            if(currPlayer != null)
+            {
+                currPlayer.setArmor(a1);
+            }
             currItem = a1;
             dispstack.push(currItem);
         }
@@ -269,8 +275,11 @@ public class DungeonXMLHandler extends DefaultHandler {
 
             Sword sw1 = new Sword(swordName);
             sw1.setID(swordRoom, swordSerial);
-            
-            currPlayer.setWeapon(sw1);
+
+            if(currPlayer != null)
+            {
+                currPlayer.setWeapon(sw1);
+            }
             currItem = sw1;
             dispstack.push(currItem);
 

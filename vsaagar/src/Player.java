@@ -17,7 +17,7 @@ public class Player extends Creature{
 
     public void setID(int room, int serial)
     {
-       System.out.println("Monster:setID"+room + "\n" +serial);
+       System.out.println("Player:setID"+room + "\n" +serial);
  
     }    
 }
