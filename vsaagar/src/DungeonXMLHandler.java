@@ -38,6 +38,8 @@ public class DungeonXMLHandler extends DefaultHandler {
     private boolean bhpMoves = false;
 
     public DungeonXMLHandler() {
+        dispstack = new Stack<Displayable>();
+        actstack = new Stack<Action>();
     }
 
     @Override
@@ -64,6 +66,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             currRoom = room; 
 
             dispstack.push(currRoom);
+            System.out.println("SOMETHING PUSHED DISP: " + dispstack.peek());
 
         } else if(qName.equalsIgnoreCase("visible")) {
             bvisible = true;
@@ -90,6 +93,9 @@ public class DungeonXMLHandler extends DefaultHandler {
 
             dispstack.push(currCreature);
 
+            System.out.println("SOMETHING PUSHED DISP: " + dispstack.peek());
+
+
         } else if(qName.equalsIgnoreCase("type")) {
             btype = true;
         } else if(qName.equalsIgnoreCase("hp")) {
@@ -100,39 +106,115 @@ public class DungeonXMLHandler extends DefaultHandler {
         } else if(qName.equalsIgnoreCase("CreatureAction")) {
 
             String creatureName = attributes.getValue("name");
+            // System.out.println("CREATURENAME" + creatureName);
+            // System.out.println(qName);
             String creatureType = attributes.getValue("type");
             CreatureAction c1 = null;
 
-            if(creatureName == "Remove"){
-                c1 = new Remove(creatureName, currCreature); 
+            if(creatureName.equals("Remove")){
+                if(currCreature != null){
+                    c1 = new Remove(creatureName, currCreature); 
+                    System.out.println("REMOVE DONE");
+                }
+
+                else{
+                    c1 = new Remove(creatureName, currPlayer); 
+                    System.out.println("REMOVE DONE");
+                }
             }
 
-            else if(creatureName == "YouWin"){
-                c1 = new YouWin(creatureName, currCreature); 
+            else if(creatureName.equals("YouWin")){
+                if(currCreature != null){
+                    c1 = new YouWin(creatureName, currCreature); 
+                    System.out.println("YouWin DONE");
+                }
+
+                else{
+                    c1 = new YouWin(creatureName, currPlayer); 
+                    System.out.println("YouWin DONE");
+                }
             }
 
-            else if(creatureName == "ChangeDisplayType"){
-                c1 = new ChangedDisplayType(creatureName, currCreature);
+            else if(creatureName.equals("Teleport")){
+                if(currCreature != null){
+                    c1 = new Teleport(creatureName, currCreature); 
+                    System.out.println("TELEPORT DONE");
+                }
+
+                else{
+                    c1 = new Teleport(creatureName, currPlayer); 
+                    System.out.println("TELEPORT DONE");
+                }
             }
 
-            else if(creatureName == "UpdateDisplay"){
-                c1 = new UpdateDisplay(creatureName, currCreature);
+            else if(creatureName.equals("ChangeDisplayedType")){
+                if(currCreature != null){
+                    c1 = new ChangedDisplayType(creatureName, currCreature); 
+                    System.out.println("CHANGEDISPLAYTYPE DONE");
+                }
+
+                else{
+                    c1 = new ChangedDisplayType(creatureName, currPlayer); 
+                    System.out.println("CHANGEDISPLAYTYPE DONE");
+                }
             }
 
-            else if(creatureName == "EndGame"){
-                c1 = new EndGame(creatureName, currCreature);
+            else if(creatureName.equals("UpdateDisplay")){
+                if(currCreature != null){
+                    c1 = new UpdateDisplay(creatureName, currCreature); 
+                    System.out.println("UPDATEDISPLAY DONE");
+                }
+
+                else{
+                    c1 = new UpdateDisplay(creatureName, currPlayer); 
+                    System.out.println("UPDATEDISPLAY DONE");
+                }
             }
 
-            if(creatureType == "death"){
-                currCreature.setDeathAction(c1);
+            else if(creatureName.equals("EndGame")){
+                if(currCreature != null){
+                    c1 = new EndGame(creatureName, currCreature); 
+                    System.out.println("ENDGAME");
+                }
+
+                else{
+                    c1 = new EndGame(creatureName, currPlayer); 
+                    System.out.println("ENDGAME");
+                }
             }
 
-            else if(creatureType == "hit"){
-                currCreature.setHitAction(c1);
+            System.out.println("currCreature: " + currCreature);
+
+            if(currCreature != null){
+                if(creatureType.equals("death")){
+                    currCreature.setDeathAction(c1);
+                }
+            
+                else if(creatureType.equals("hit")){
+                    currCreature.setHitAction(c1);
+                }
             }
+
+
+            if(currPlayer != null){
+                if(creatureType.equals("death")){
+                    currPlayer.setDeathAction(c1);
+                }
+
+                else if(creatureType.equals("hit")){
+                    currPlayer.setHitAction(c1);
+                }
+            }
+            
 
             currAction = c1;
+
+            System.out.println("currAction: " + currAction);
+
             actstack.push(currAction);
+
+            System.out.println("SOMETHING PUSHED?: " + actstack.peek());
+
      
         }else if(qName.equalsIgnoreCase("actionMessage")) {
                 bactionMessage = true;
@@ -159,13 +241,13 @@ public class DungeonXMLHandler extends DefaultHandler {
             String itemName = attributes.getValue("name");
             //String itemType = attributes.getValue("type"); unnecessary?
 
-            if(itemName == "BlessArmor"){
+            if(itemName.equals("BlessArmor")){
                 BlessCurseOwner bco1 = new BlessCurseOwner(currItem); 
                 currItem.addItemAction(bco1);
                 currAction = bco1; 
             }
 
-            else if(itemName == "Hallucinate"){
+            else if(itemName.equals("Hallucinate")){
                 Hallucinate h1 = new Hallucinate(currItem);
                 currItem.addItemAction(h1);
                 currAction = h1;
@@ -184,6 +266,8 @@ public class DungeonXMLHandler extends DefaultHandler {
             currPlayer = p1;
             dispstack.push(currPlayer);
 
+            System.out.println("PLAYER PUSHED: " + dispstack.peek());
+
         }else if(qName.equalsIgnoreCase("hpMoves")) {
             bhpMoves = true;
         }else if(qName.equalsIgnoreCase("Armor")){
@@ -194,6 +278,10 @@ public class DungeonXMLHandler extends DefaultHandler {
             Armor a1 = new Armor(armor_name);
             a1.setName(armor_name);
             a1.setID(armor_room, armor_serial);
+
+            if(currPlayer == null){
+                System.out.println("KILL MYSELF");
+            }
             
             currPlayer.setArmor(a1);
             currItem = a1;
@@ -215,6 +303,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             currItem = sw1;
             dispstack.push(currItem);
 
+
         }else if(qName.equalsIgnoreCase("Passages")){ 
 
         }else if(qName.equalsIgnoreCase("Passage")){
@@ -226,104 +315,106 @@ public class DungeonXMLHandler extends DefaultHandler {
             currPassage = p1;
 
             dispstack.push(currPassage);
-        }       
+        } 
+
+        data = new StringBuilder();      
     }
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
 
-        Displayable d1 = new Displayable();
-        Action a1 = new Action();
+        // Displayable d1 = new Displayable();
+        // Action a1 = new Action();
     
         if(bvisible){
             Displayable x = dispstack.peek();
-            d1 = x;
-            d1.setVisible(Integer.parseInt(data.toString()));
+            
+            x.setVisible(Integer.parseInt(data.toString()));
             bvisible = false;
         }
 
         else if(bposX){
             Displayable x = dispstack.peek();
-            d1 = x;
-            d1.SetPosX(Integer.parseInt(data.toString()));
+            
+            x.SetPosX(Integer.parseInt(data.toString()));
             bposX = false;
         }
 
         else if(bposY){
             Displayable x = dispstack.peek();
-            d1 = x;
-            d1.setPosY(Integer.parseInt(data.toString()));
+            
+            x.setPosY(Integer.parseInt(data.toString()));
             bposY = false;
         }
 
         else if(bwidth){
             Displayable x = dispstack.peek();
-            d1 = x;
-            d1.SetWidth(Integer.parseInt(data.toString()));
+            
+            x.SetWidth(Integer.parseInt(data.toString()));
             bwidth = false;
         }
 
         else if(bheight){
             Displayable x = dispstack.peek();
-            d1 = x;
-            d1.setHeight(Integer.parseInt(data.toString()));
+            
+            x.setHeight(Integer.parseInt(data.toString()));
             bheight = false;
         }
         
         else if(bhp){
             Displayable x = dispstack.peek();
-            d1 = x;
-            d1.setHp(Integer.parseInt(data.toString()));
+            
+            x.setHp(Integer.parseInt(data.toString()));
             bhp = false;
         }
 
         else if(bmaxhit){
             Displayable x = dispstack.peek();
-            d1 = x;
-            d1.setMaxHit(Integer.parseInt(data.toString()));
+            
+            x.setMaxHit(Integer.parseInt(data.toString()));
             bmaxhit = false;
         }
 
         else if(bactionMessage){
             Action x = actstack.peek();
-            a1 = x;
-            a1.setMessage(data.toString());
+            x.setMessage(data.toString());
             bactionMessage = false;
         }
 
         else if(bactionCharValue){
             Action x = actstack.peek();
-            a1 = x;
-            a1.setCharValue(data.toString().charAt(0)); //string to character
+
+            System.out.println("JDIWJIWO: " + currAction);
+
+            x.setCharValue(data.toString().charAt(0)); //string to character
             bactionCharValue = false;
         }
 
         else if(bactionIntValue){
             Action x = actstack.peek();
-            a1 = x;
-            a1.setIntValue(Integer.parseInt(data.toString()));
+            x.setIntValue(Integer.parseInt(data.toString()));
             bactionIntValue = false;
         }
 
         else if(bItemIntValue){
             Displayable x = dispstack.peek();
-            d1 = x;
-            d1.setIntValue(Integer.parseInt(data.toString()));
+            
+            x.setIntValue(Integer.parseInt(data.toString()));
             bItemIntValue = false;
         }
 
         else if(btype){
             Displayable x = dispstack.peek();
-            d1 = x;
-            d1.setType(data.toString().charAt(0)); //String to character
+            
+            x.setType(data.toString().charAt(0)); //String to character
             btype = false;
         }
 
         else if(bhpMoves){
             Displayable x = dispstack.peek();
-                d1 = x;
-                d1.setHpMove(Integer.parseInt(data.toString()));
-                bhpMoves = false;
+                
+            x.setHpMove(Integer.parseInt(data.toString()));
+            bhpMoves = false;
         }
 
         if(qName.equalsIgnoreCase("Dungeon")){
@@ -339,6 +430,7 @@ public class DungeonXMLHandler extends DefaultHandler {
         }
 
         else if(qName.equalsIgnoreCase("Monster")){
+            System.out.println("IDIOTS");
             currCreature = null;
             dispstack.pop();
         }
@@ -346,6 +438,8 @@ public class DungeonXMLHandler extends DefaultHandler {
         else if(qName.equalsIgnoreCase("Player")){
             currPlayer = null;
             dispstack.pop();
+
+            System.out.println("PLAYER CLOSED DUMBASS");
         }
 
         else if(qName.equalsIgnoreCase("Sword")){
@@ -369,6 +463,7 @@ public class DungeonXMLHandler extends DefaultHandler {
         }
 
         else if(qName.equalsIgnoreCase("CreatureAction")){
+            System.out.println("FOOLS");
             currAction = null;
             actstack.pop();
         }
