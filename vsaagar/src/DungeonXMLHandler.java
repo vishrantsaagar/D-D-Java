@@ -66,7 +66,6 @@ public class DungeonXMLHandler extends DefaultHandler {
             currRoom = room; 
 
             dispstack.push(currRoom);
-            System.out.println("SOMETHING PUSHED DISP: " + dispstack.peek());
 
         } else if(qName.equalsIgnoreCase("visible")) {
             bvisible = true;
@@ -93,9 +92,6 @@ public class DungeonXMLHandler extends DefaultHandler {
 
             dispstack.push(currCreature);
 
-            System.out.println("SOMETHING PUSHED DISP: " + dispstack.peek());
-
-
         } else if(qName.equalsIgnoreCase("type")) {
             btype = true;
         } else if(qName.equalsIgnoreCase("hp")) {
@@ -114,72 +110,60 @@ public class DungeonXMLHandler extends DefaultHandler {
             if(creatureName.equals("Remove")){
                 if(currCreature != null){
                     c1 = new Remove(creatureName, currCreature); 
-                    System.out.println("REMOVE DONE");
                 }
 
                 else{
                     c1 = new Remove(creatureName, currPlayer); 
-                    System.out.println("REMOVE DONE");
                 }
             }
 
             else if(creatureName.equals("YouWin")){
                 if(currCreature != null){
                     c1 = new YouWin(creatureName, currCreature); 
-                    System.out.println("YouWin DONE");
                 }
 
                 else{
                     c1 = new YouWin(creatureName, currPlayer); 
-                    System.out.println("YouWin DONE");
                 }
             }
 
             else if(creatureName.equals("Teleport")){
                 if(currCreature != null){
                     c1 = new Teleport(creatureName, currCreature); 
-                    System.out.println("TELEPORT DONE");
                 }
 
                 else{
                     c1 = new Teleport(creatureName, currPlayer); 
-                    System.out.println("TELEPORT DONE");
                 }
             }
 
             else if(creatureName.equals("ChangeDisplayedType")){
                 if(currCreature != null){
                     c1 = new ChangedDisplayType(creatureName, currCreature); 
-                    System.out.println("CHANGEDISPLAYTYPE DONE");
                 }
 
                 else{
                     c1 = new ChangedDisplayType(creatureName, currPlayer); 
-                    System.out.println("CHANGEDISPLAYTYPE DONE");
                 }
             }
 
             else if(creatureName.equals("UpdateDisplay")){
                 if(currCreature != null){
                     c1 = new UpdateDisplay(creatureName, currCreature); 
-                    System.out.println("UPDATEDISPLAY DONE");
                 }
 
                 else{
                     c1 = new UpdateDisplay(creatureName, currPlayer); 
-                    System.out.println("UPDATEDISPLAY DONE");
                 }
             }
 
             else if(creatureName.equals("EndGame")){
                 if(currCreature != null){
                     c1 = new EndGame(creatureName, currCreature); 
-                    System.out.println("ENDGAME");
                 }
 
                 else{
                     c1 = new EndGame(creatureName, currPlayer); 
-                    System.out.println("ENDGAME");
                 }
             }
 
@@ -213,9 +197,6 @@ public class DungeonXMLHandler extends DefaultHandler {
 
             actstack.push(currAction);
 
-            System.out.println("SOMETHING PUSHED?: " + actstack.peek());
-
-     
         }else if(qName.equalsIgnoreCase("actionMessage")) {
                 bactionMessage = true;
     
@@ -266,8 +247,6 @@ public class DungeonXMLHandler extends DefaultHandler {
             currPlayer = p1;
             dispstack.push(currPlayer);
 
-            System.out.println("PLAYER PUSHED: " + dispstack.peek());
-
         }else if(qName.equalsIgnoreCase("hpMoves")) {
             bhpMoves = true;
         }else if(qName.equalsIgnoreCase("Armor")){
@@ -278,10 +257,6 @@ public class DungeonXMLHandler extends DefaultHandler {
             Armor a1 = new Armor(armor_name);
             a1.setName(armor_name);
             a1.setID(armor_room, armor_serial);
-
-            if(currPlayer == null){
-                System.out.println("KILL MYSELF");
-            }
             
             currPlayer.setArmor(a1);
             currItem = a1;
@@ -384,8 +359,6 @@ public class DungeonXMLHandler extends DefaultHandler {
         else if(bactionCharValue){
             Action x = actstack.peek();
 
-            System.out.println("JDIWJIWO: " + currAction);
-
             x.setCharValue(data.toString().charAt(0)); //string to character
             bactionCharValue = false;
         }
@@ -430,7 +403,6 @@ public class DungeonXMLHandler extends DefaultHandler {
         }
 
         else if(qName.equalsIgnoreCase("Monster")){
-            System.out.println("IDIOTS");
             currCreature = null;
             dispstack.pop();
         }
@@ -439,7 +411,6 @@ public class DungeonXMLHandler extends DefaultHandler {
             currPlayer = null;
             dispstack.pop();
 
-            System.out.println("PLAYER CLOSED DUMBASS");
         }
 
         else if(qName.equalsIgnoreCase("Sword")){
@@ -463,7 +434,6 @@ public class DungeonXMLHandler extends DefaultHandler {
         }
 
         else if(qName.equalsIgnoreCase("CreatureAction")){
-            System.out.println("FOOLS");
             currAction = null;
             actstack.pop();
         }
