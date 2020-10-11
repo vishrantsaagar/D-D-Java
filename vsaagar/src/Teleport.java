@@ -1,3 +1,5 @@
+package src;
+
 public class Teleport extends CreatureAction{
     
     private String _name;

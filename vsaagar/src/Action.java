@@ -1,3 +1,5 @@
+package src;
+
 public class Action {
       
     public void setMessage(String msg) 

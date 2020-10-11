@@ -1,3 +1,5 @@
+package src;
+
 public class Creature extends Displayable{
     
     public Creature()

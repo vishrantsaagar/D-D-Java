@@ -1,3 +1,5 @@
+package src;
+
 public class Remove extends CreatureAction{
    
     private String _name;

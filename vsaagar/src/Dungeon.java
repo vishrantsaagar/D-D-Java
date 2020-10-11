@@ -1,3 +1,5 @@
+package src;
+
 public class Dungeon {
    
     private String _name;

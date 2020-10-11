@@ -1,3 +1,5 @@
+package src;
+
 public class ObjectDisplayGrid {
    
     public static void getObjectDisplayGrid(int gameHeight, int width, int topHeight, int bottomHeight)
