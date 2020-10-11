@@ -190,11 +190,7 @@ public class DungeonXMLHandler extends DefaultHandler {
                 }
             }
             
-
             currAction = c1;
-
-            System.out.println("currAction: " + currAction);
-
             actstack.push(currAction);
 
         }else if(qName.equalsIgnoreCase("actionMessage")) {
@@ -277,7 +273,6 @@ public class DungeonXMLHandler extends DefaultHandler {
             currPlayer.setWeapon(sw1);
             currItem = sw1;
             dispstack.push(currItem);
-
 
         }else if(qName.equalsIgnoreCase("Passages")){ 
 
