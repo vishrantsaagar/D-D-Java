@@ -1,2 +1,2 @@
 # D&D-Java
-Working on a guided project from school to create Dungeons and Dragons in Java
+Working on a guided project to create Rogue in Java
