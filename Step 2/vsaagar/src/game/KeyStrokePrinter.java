@@ -1,3 +1,4 @@
+package game;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -26,7 +27,6 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
         try {
             Thread.sleep(20);
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

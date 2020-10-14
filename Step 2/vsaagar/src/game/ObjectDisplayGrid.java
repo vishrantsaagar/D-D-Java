@@ -10,4 +10,8 @@ public class ObjectDisplayGrid {
     public void setTopMessageHeight(int topHeight){
         System.out.println("ObjectDisplayGrid: setTopMessageHeight" + topHeight);
     }
+
+	public void registerInputObserver(KeyStrokePrinter keyStrokePrinter) {
+        //gotta modify a bunch of stuff in here
+	}
 }
