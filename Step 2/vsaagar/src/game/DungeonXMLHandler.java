@@ -12,14 +12,14 @@ public class DungeonXMLHandler extends DefaultHandler {
 
     private Stack<Displayable> dispstack = null;
     private Stack<Action> actstack = null;
-
+ 
     private Dungeon dungeon = new Dungeon();
     private Room currRoom = null;
     private Creature currCreature = null;
     private Action currAction = null;
     private Item currItem = null;
     private Passage currPassage = null;
-    private Player currPlayer = null;
+    private Player currPlayer = null; 
 
     public Dungeon getDungeon(){
         return dungeon;
