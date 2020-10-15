@@ -13,7 +13,7 @@ public class DungeonXMLHandler extends DefaultHandler {
     private Stack<Displayable> dispstack = null;
     private Stack<Action> actstack = null;
 
-    private Dungeon dungeon = null;
+    private Dungeon dungeon = new Dungeon();
     private Room currRoom = null;
     private Creature currCreature = null;
     private Action currAction = null;
@@ -56,7 +56,6 @@ public class DungeonXMLHandler extends DefaultHandler {
             
             ObjectDisplayGrid.getObjectDisplayGrid(gameHeight, width, topHeight, bottomHeight);
 
-            dungeon = new Dungeon();
             dungeon.getDungeon(dunName, width, gameHeight);
 
         } else if(qName.equalsIgnoreCase("Rooms")) { //order followed in testDrawing.xml
