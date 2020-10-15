@@ -11,7 +11,7 @@ import org.xml.sax.SAXException;
 
 public class Rogue {
     public static void main(String[] args) {
-
+        
         // check if a filename is passed in.  If not, print a usage message.
         // If it is, open the file
             String fileName = null;
