@@ -15,16 +15,8 @@ public class Rogue {
         // check if a filename is passed in.  If not, print a usage message.
         // If it is, open the file
             String fileName = null;
-            switch (args.length) {
-            case 1:
-               // note that the relative file path may depend on what IDE you are
-           // using.  This worked for NetBeans.
-               fileName = "xmlfiles/" + args[0]; //../xmlfiles. + args[0]
-               break;
-            default:
-               System.out.println("java Test <xmlfilename>");
-           return;
-            }
+               fileName = "game/xmlfiles/" + "testDrawing.xml"; //../xmlfiles. + args[0]
+        
     
             SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
     
