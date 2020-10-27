@@ -21,6 +21,14 @@ public class Dungeon {
         System.out.println("Dungeon:getDungeon" + _name + "\n" + _width +"\n" + _gameHeight);
     }
 
+    public int get_gameHeight() {
+        return _gameHeight;
+    }
+
+    public int get_width() {
+        return _width;
+    }
+    
     public void addRoom(Room r1)
     {
         System.out.println("Dungeon:addRoom");
