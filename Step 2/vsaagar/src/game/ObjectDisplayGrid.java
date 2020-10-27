@@ -103,7 +103,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
     public void addObjectToDisplay(Char ch, int x, int y) {
         if ((0 <= x) && (x < objectGrid.length)) {
             if ((0 <= y) && (y < objectGrid.length)) {
-              // objectGrid[x][y] = ch; //how to change value in stack
+              objectGrid[x][y] = ch; //how to change value in stack
               writeToTerminal(x, y);
             }
         }
