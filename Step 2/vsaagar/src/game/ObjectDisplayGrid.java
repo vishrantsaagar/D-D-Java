@@ -13,7 +13,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
 
     private static AsciiPanel terminal;
     // private Char[][] objectGrid = null;
-    Stack<Integer[][]> objectGrid = new Stack<Integer[][]>(); //how do you use the two stacks in the game?
+    Stack<Char[][]> objectGrid = new Stack<Char[][]>(); //how do you use the two stacks in the game?
 
     // private List<InputObserver> inputObservers = null;
     Stack<InputObserver> inputObservers = new Stack<InputObserver>();
@@ -27,7 +27,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
 
        terminal = new AsciiPanel(width, gameheight);
 
-       objectGrid.push(new Integer[][] {{width}, {gameheight}});
+       objectGrid.push(new Integer[][] {{width, gameheight}});
 
        initializeDisplay();
 
@@ -102,16 +102,18 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
     }
 
     public void addObjectToDisplay(Char ch, int x, int y) {
-        if ((0 <= x) && (x < objectGrid.length)) {
-            if ((0 <= y) && (y < objectGrid[0].length)) {
-                objectGrid[x][y] = ch;
-                writeToTerminal(x, y);
+        if ((0 <= x) && (x < objectGrid.size())) {
+            if ((0 <= y) && (y < objectGrid.peek().length)) {
+
+
+              // objectGrid[x][y] = ch; //how to change value in stack
+              writeToTerminal(x, y);
             }
         }
     }
 
     private void writeToTerminal(int x, int y) {
-        char ch = objectGrid[x][y].getChar();
+        char ch = objectGrid.pop().getChar();
         terminal.write(ch, x, y);
         terminal.repaint();
     }
