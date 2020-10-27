@@ -17,8 +17,6 @@ public class Rogue implements Runnable {
     private Thread keyStrokePrinter;
     private static int WIDTH;
     private static int HEIGHT;
-    public static Dungeon dungeon;
-    public static DungeonXMLHandler handler;
     public char ch;
 
     public Rogue(int width, int height) {
@@ -50,10 +48,6 @@ public class Rogue implements Runnable {
             DungeonXMLHandler handler = new DungeonXMLHandler();
             saxParser.parse(new File(fileName), handler);
 
-        } catch (ParserConfigurationException | SAXException | IOException e) {
-            e.printStackTrace(System.out);
-        }
-        
         handler.toString();
         Dungeon dungeon = handler.getDungeon();
         HEIGHT = dungeon.get_gameHeight();
@@ -76,6 +70,9 @@ public class Rogue implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+    
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            e.printStackTrace(System.out);
         }
+    }
 }
