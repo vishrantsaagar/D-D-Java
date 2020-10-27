@@ -55,7 +55,6 @@ public class Rogue implements Runnable {
             DungeonXMLHandler handler = new DungeonXMLHandler();
             saxParser.parse(new File(fileName), handler);
 
-        handler.toString();
         Dungeon dungeon = handler.getDungeon();
         HEIGHT = dungeon.get_gameHeight();
         WIDTH = dungeon.get_width();

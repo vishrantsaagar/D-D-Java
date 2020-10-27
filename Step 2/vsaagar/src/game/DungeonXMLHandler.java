@@ -396,7 +396,6 @@ public class DungeonXMLHandler extends DefaultHandler {
         }
 
         if(qName.equalsIgnoreCase("Dungeon")){
-            dungeon = null;
         }
 
         else if(qName.equalsIgnoreCase("Rooms")){

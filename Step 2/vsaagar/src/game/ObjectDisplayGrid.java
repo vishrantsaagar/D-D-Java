@@ -13,9 +13,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
 
     private static AsciiPanel terminal;
     private Char[][] objectGrid = null;
-    //Stack<Char[][]> objectGrid = new Stack<Char[][]>(); //how do you use the two stacks in the game?
     private List<InputObserver> inputObservers = null;
-    //Stack<InputObserver> inputObservers = new Stack<InputObserver>();
 
     private static int gameheight;
     private static int width;
@@ -100,7 +98,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
         }
     }
 
-    public void addObjectToDisplay(Char ch, int x, int y) {
+    public void addObjectToDisplay(Char ch, int x, int y) {//main man
         if ((0 <= x) && (x < objectGrid.length)) {
             if ((0 <= y) && (y < objectGrid.length)) {
               objectGrid[x][y] = ch; //how to change value in stack
