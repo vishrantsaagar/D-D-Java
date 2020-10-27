@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubject{
 
@@ -81,11 +82,6 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
     public void keyReleased(KeyEvent e) {
     }
 
-    @Override
-    public void keyTyped(KeyEvent e){
-      KeyEvent keypress = (KeyEvent) e;
-      notifyInputObservers(keypress.getKeyChar());
-    }
 
     public final void initializeDisplay() {
         Char ch = new Char('.');
