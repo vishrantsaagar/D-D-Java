@@ -12,11 +12,10 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
     private static final String CLASSID = ".ObjectDisplayGrid";
 
     private static AsciiPanel terminal;
-    // private Char[][] objectGrid = null;
-    Stack<Char[][]> objectGrid = new Stack<Char[][]>(); //how do you use the two stacks in the game?
-
-    // private List<InputObserver> inputObservers = null;
-    Stack<InputObserver> inputObservers = new Stack<InputObserver>();
+    private Char[][] objectGrid = null;
+    //Stack<Char[][]> objectGrid = new Stack<Char[][]>(); //how do you use the two stacks in the game?
+    private List<InputObserver> inputObservers = null;
+    //Stack<InputObserver> inputObservers = new Stack<InputObserver>();
 
     private static int gameheight;
     private static int width;
@@ -27,7 +26,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
 
        terminal = new AsciiPanel(width, gameheight);
 
-       objectGrid.push(new Integer[][] {{width, gameheight}});
+       objectGrid = new Char[width][gameheight];
 
        initializeDisplay();
 
@@ -57,7 +56,8 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
 
     @Override
     public void registerInputObserver(InputObserver observer) {
-        inputObservers.push(observer);
+        inputObservers.add(observer);
+        //inputObservers.push(observer);
     }
 
     @Override
@@ -82,7 +82,6 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
     public void keyReleased(KeyEvent e) {
     }
 
-
     public final void initializeDisplay() {
         Char ch = new Char('.');
         for (int i = 0; i < width; i++) {
@@ -102,10 +101,8 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
     }
 
     public void addObjectToDisplay(Char ch, int x, int y) {
-        if ((0 <= x) && (x < objectGrid.size())) {
-            if ((0 <= y) && (y < objectGrid.peek().length)) {
-
-
+        if ((0 <= x) && (x < objectGrid.length)) {
+            if ((0 <= y) && (y < objectGrid.length)) {
               // objectGrid[x][y] = ch; //how to change value in stack
               writeToTerminal(x, y);
             }
@@ -113,7 +110,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
     }
 
     private void writeToTerminal(int x, int y) {
-        char ch = objectGrid.pop().getChar();
+        char ch = objectGrid[x][y].getChar();
         terminal.write(ch, x, y);
         terminal.repaint();
     }
