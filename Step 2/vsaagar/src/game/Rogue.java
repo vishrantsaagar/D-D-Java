@@ -34,7 +34,7 @@ public class Rogue implements Runnable {
         displayGrid.initializeDisplay();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         // check if a filename is passed in. If not, print a usage message.
         // If it is, open the file
@@ -60,16 +60,8 @@ public class Rogue implements Runnable {
         rog.keyStrokePrinter = new Thread(new KeyStrokePrinter(displayGrid));
         rog.keyStrokePrinter.start();
 
-        try {
-            rogue.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        try {
-            rog.keyStrokePrinter.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        rogue.join();
+        rog.keyStrokePrinter.join();
     
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace(System.out);
