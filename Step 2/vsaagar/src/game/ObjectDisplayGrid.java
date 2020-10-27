@@ -3,7 +3,7 @@ package game;
 import game.asciiPanel.AsciiPanel;
 import javax.swing.*;
 import java.awt.event.*;
-//import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubject{
@@ -11,34 +11,35 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
     private static final String CLASSID = ".ObjectDisplayGrid";
 
     private static AsciiPanel terminal;
-    private Char[][] objectGrid = null;
+    // private Char[][] objectGrid = null;
+    Stack<Integer[][]> objectGrid = new Stack<Integer[][]>(); //how do you use the two stacks in the game?
 
-    private List<InputObserver> inputObservers = null;
+    // private List<InputObserver> inputObservers = null;
+    Stack<InputObserver> inputObservers = new Stack<InputObserver>();
 
     private static int gameheight;
     private static int width;
 
-   // public ObjectDisplayGrid(int _width, int _height) {
-   //     width = _width;
-   //     gameheight = _height;
-//
-   //     terminal = new AsciiPanel(width, gameheight);
-//
-   //     objectGrid = new Char[width][gameheight];
-//
-   //     initializeDisplay();
-//
-   //     super.add(terminal);
-   //     super.setSize(width * 9, gameheight * 16);
-   //     super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-   //     // super.repaint();
-   //     // terminal.repaint( );
-   //     super.setVisible(true);
-   //     terminal.setVisible(true);
-   //     super.addKeyListener(this);
-   //     inputObservers = new ArrayList<>();
-   //     super.repaint();
-   // }
+    public ObjectDisplayGrid(int _width, int _height) {
+       width = _width;
+       gameheight = _height;
+
+       terminal = new AsciiPanel(width, gameheight);
+
+       objectGrid.push(new Integer[][] {{width}, {gameheight}});
+
+       initializeDisplay();
+
+       super.add(terminal);
+       super.setSize(width * 9, gameheight * 16);
+       super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // super.repaint();
+       // terminal.repaint( );
+       super.setVisible(true);
+       terminal.setVisible(true);
+       super.addKeyListener(this);
+       super.repaint();
+   }
     
     public static void getObjectDisplayGrid(int gameHeight, int width, int topHeight, int bottomHeight)
     {
@@ -49,13 +50,13 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
         System.out.println("ObjectDisplayGrid: setTopMessageHeight" + topHeight);
     }
 
-	public void registerInputObserver(KeyStrokePrinter keyStrokePrinter) {
-        //gotta modify a bunch of stuff in here
-	}
+  	public void registerInputObserver(KeyStrokePrinter keyStrokePrinter) {
+          //gotta modify a bunch of stuff in here
+  	}
 
     @Override
     public void registerInputObserver(InputObserver observer) {
-        inputObservers.add(observer);
+        inputObservers.push(observer);
     }
 
     @Override
@@ -78,6 +79,12 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
     // we have to override, but we don't use this
     @Override
     public void keyReleased(KeyEvent e) {
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e){
+      KeyEvent keypress = (KeyEvent) e;
+      notifyInputObservers(keypress.getKeyChar());
     }
 
     public final void initializeDisplay() {
