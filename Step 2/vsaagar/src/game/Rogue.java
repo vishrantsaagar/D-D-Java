@@ -26,6 +26,13 @@ public class Rogue implements Runnable {
     @Override
     public void run() {
         displayGrid.fireUp();
+        for (int step = 1; step < WIDTH / 2; step *= 2) {
+            for (int i = 0; i < WIDTH; i += step) {
+                for (int j = 0; j < HEIGHT; j += step) {
+                    displayGrid.addObjectToDisplay(new Char('X'), i, j);
+                }
+            }
+        
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -33,7 +40,7 @@ public class Rogue implements Runnable {
         }
         displayGrid.initializeDisplay();
     }
-
+}
     public static void main(String[] args) throws Exception {
 
         // check if a filename is passed in. If not, print a usage message.
