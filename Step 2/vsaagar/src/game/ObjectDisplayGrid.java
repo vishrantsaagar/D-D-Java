@@ -3,11 +3,14 @@ package game;
 import game.asciiPanel.AsciiPanel;
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubject{
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = -8935190168995599950L;
 
     private static final String CLASSID = ".ObjectDisplayGrid";
 
