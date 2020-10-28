@@ -15,14 +15,14 @@ public class Rogue implements Runnable {
     public static final int TIMEPERLOOP = 1000000000 / FRAMESPERSECOND;
     private static ObjectDisplayGrid displayGrid = null;
     private Thread keyStrokePrinter;
-    private static int WIDTH;
-    private static int HEIGHT;
+    private static int width;
+    private static int height;
     public char ch;
 
     public Rogue(Dungeon dungeon) {
-        HEIGHT = dungeon.get_gameHeight();
-        WIDTH = dungeon.get_width();
-        displayGrid = new ObjectDisplayGrid(WIDTH, HEIGHT);
+        height = dungeon.get_gameHeight();
+        width = dungeon.get_width();
+        displayGrid = new ObjectDisplayGrid(width, height);
     }
 
     @Override
@@ -34,9 +34,10 @@ public class Rogue implements Runnable {
         //Connection between Passage and Room - +,
 
         displayGrid.fireUp();
-        for (int step = 1; step < WIDTH / 2; step *= 2) {
-            for (int i = 0; i < WIDTH; i += step) {
-                for (int j = 0; j < HEIGHT; j += step) {
+        for (int step = 1; step < width / 2; step *= 2) {
+            for (int i = 0; i < width; i += step) {
+                for (int j = 0; j < height; j += step) {
+
                     displayGrid.addObjectToDisplay(new Char('X'), i, j);
                 }
             }
