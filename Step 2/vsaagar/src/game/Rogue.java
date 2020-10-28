@@ -16,21 +16,24 @@ public class Rogue implements Runnable {
     public static final int TIMEPERLOOP = 1000000000 / FRAMESPERSECOND;
     private static ObjectDisplayGrid displayGrid = null;
     private Thread keyStrokePrinter;
+    private int game_width;
+    private int game_height;
     private int width;
     private int height;
     private int posX;
     private int posY;
-    private char Type;
+    private char type;
     private int HP;
 
     public char ch;
     private ArrayList<Displayable> list = new ArrayList<Displayable>();
+    private ArrayList<Displayable> subList;
 
     public Rogue(Dungeon dungeon) {
         list = dungeon.getList();
-        height = dungeon.get_gameHeight();
-        width = dungeon.get_width();
-        displayGrid = new ObjectDisplayGrid(width, height);
+        game_height = dungeon.get_gameHeight();
+        game_width = dungeon.get_game_width();
+        displayGrid = new ObjectDisplayGrid(game_width, game_height);
     }
 
     @Override
@@ -45,9 +48,9 @@ public class Rogue implements Runnable {
         //list[2] = items
         //list[3] = passage
         displayGrid.fireUp();
-    //     for (int step = 1; step < width / 2; step *= 2) {
-    //         for (int i = 0; i < width; i += step) {
-    //             for (int j = 0; j < height; j += step) {
+    //     for (int step = 1; step < game_width / 2; step *= 2) {
+    //         for (int i = 0; i < game_width; i += step) {
+    //             for (int j = 0; j < game_height; j += step) {
 
     //                 displayGrid.addObjectToDisplay(new Char('X'), i, j);
     //             }
@@ -62,8 +65,14 @@ public class Rogue implements Runnable {
     // }
 
         for(int i = 0; i < list.size(); i++){
-            for(int j = 0; j < list.get(i).size(); i++){
-                System.out.println("Hello");
+            subList = list.get(i);
+
+            for(int j = 0; j < subList.size(); i++){
+                width = subList.get(j).getWidth();
+                height = subList.get(j).getHeight();
+                posX = subList.get(j).getPosX();
+                posY = subList.get(j).getPosY();
+                type = subList.get(j).getType();
             }
         }
 }
