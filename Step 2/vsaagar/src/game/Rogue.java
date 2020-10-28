@@ -19,8 +19,10 @@ public class Rogue implements Runnable {
     private static int HEIGHT;
     public char ch;
 
-    public Rogue(int width, int height) {
-        displayGrid = new ObjectDisplayGrid(width, height);
+    public Rogue(Dungeon dungeon) {
+        HEIGHT = dungeon.get_gameHeight();
+        WIDTH = dungeon.get_width();
+        displayGrid = new ObjectDisplayGrid(WIDTH, HEIGHT);
     }
 
     @Override
@@ -56,10 +58,7 @@ public class Rogue implements Runnable {
             saxParser.parse(new File(fileName), handler);
 
         Dungeon dungeon = handler.getDungeon();
-        HEIGHT = dungeon.get_gameHeight();
-        WIDTH = dungeon.get_width();
-
-        Rogue rog = new Rogue(WIDTH, HEIGHT);
+        Rogue rog = new Rogue(dungeon);
         Thread rogue = new Thread(rog);
         rogue.start();
 
