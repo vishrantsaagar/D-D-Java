@@ -40,22 +40,32 @@ public class Rogue implements Runnable {
         //rooms: Walls - X and Floor - ., 
         //Passages - #, 
         //Connection between Passage and Room - +,
+        //list[0] = rooms
+        //list[1] = creature
+        //list[2] = items
+        //list[3] = passage
         displayGrid.fireUp();
-        for (int step = 1; step < width / 2; step *= 2) {
-            for (int i = 0; i < width; i += step) {
-                for (int j = 0; j < height; j += step) {
+    //     for (int step = 1; step < width / 2; step *= 2) {
+    //         for (int i = 0; i < width; i += step) {
+    //             for (int j = 0; j < height; j += step) {
 
-                    displayGrid.addObjectToDisplay(new Char('X'), i, j);
-                }
-            }
+    //                 displayGrid.addObjectToDisplay(new Char('X'), i, j);
+    //             }
+    //         }
         
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace(System.err);
+    //     try {
+    //         Thread.sleep(2000);
+    //     } catch (InterruptedException e) {
+    //         e.printStackTrace(System.err);
+    //     }
+    //     displayGrid.initializeDisplay();
+    // }
+
+        for(int i = 0; i < list.length; i++){
+            for(int j = 0; j < list[i].length; i++){
+                System.out.println("Hello");
+            }
         }
-        displayGrid.initializeDisplay();
-    }
 }
     public static void main(String[] args) throws Exception {
 
