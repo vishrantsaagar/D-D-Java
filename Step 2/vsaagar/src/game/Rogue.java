@@ -22,7 +22,6 @@ public class Rogue implements Runnable {
     private ArrayList<Displayable> list = new ArrayList<Displayable>();
 
     public Rogue(Dungeon dungeon) {
-
         list = dungeon.getList();
         height = dungeon.get_gameHeight();
         width = dungeon.get_width();
