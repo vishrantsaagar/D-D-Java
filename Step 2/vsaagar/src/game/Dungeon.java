@@ -7,11 +7,11 @@ public class Dungeon {
     private String _name;
     private int _width;
     private int _gameHeight;
-    private ArrayList<Room> rooms = new ArrayList<Room>();
-    private ArrayList<Creature> creatures = new ArrayList<Creature>();
-    private ArrayList<Item> items = new ArrayList<Item>();
-    private ArrayList<Passage> passages = new ArrayList<Passage>();
-    private ArrayList<Displayable> list = new ArrayList<Displayable>();
+    private ArrayList<Displayable> rooms = new ArrayList<Displayable>();
+    private ArrayList<Displayable> creatures = new ArrayList<Displayable>();
+    private ArrayList<Displayable> items = new ArrayList<Displayable>();
+    private ArrayList<Displayable> passages = new ArrayList<Displayable>();
+    private ArrayList<ArrayList<Displayable>> list = new ArrayList<ArrayList<Displayable>>();
 
 
     public void getDungeon(String name, int width, int gameHeight)
@@ -23,11 +23,11 @@ public class Dungeon {
         System.out.println("Dungeon:getDungeon" + _name + "\n" + _width +"\n" + _gameHeight);
     }
 
-    public ArrayList<Displayable> getList(){
-        list.addAll(rooms);
-        list.addAll(creatures);
-        list.addAll(items);
-        list.addAll(passages);
+    public ArrayList<ArrayList<Displayable>> getList() {
+        list.add(rooms);
+        list.add(creatures);
+        list.add(items);
+        list.add(passages);
 
         return list;
     }
