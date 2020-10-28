@@ -26,7 +26,13 @@ public class Rogue implements Runnable {
     }
 
     @Override
-    public void run() {
+    public void run() { 
+        //Monsters = Trolls: T, Snakes: S, Hob: H, 
+        //player: @ 
+        //rooms: Walls - X and Floor - ., 
+        //Passages - #, 
+        //Connection between Passage and Room - +,
+
         displayGrid.fireUp();
         for (int step = 1; step < WIDTH / 2; step *= 2) {
             for (int i = 0; i < WIDTH; i += step) {
