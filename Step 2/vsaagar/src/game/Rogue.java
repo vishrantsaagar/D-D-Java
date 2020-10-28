@@ -32,7 +32,7 @@ public class Rogue implements Runnable {
     public Rogue(Dungeon dungeon) {
         list = dungeon.getList();
         game_height = dungeon.get_gameHeight();
-        game_width = dungeon.get_game_width();
+        game_width = dungeon.get_width();
         displayGrid = new ObjectDisplayGrid(game_width, game_height);
     }
 
