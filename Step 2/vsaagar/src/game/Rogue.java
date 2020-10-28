@@ -39,23 +39,23 @@ public class Rogue implements Runnable {
     @Override
     public void run() { 
         
-        displayGrid.fireUp();
-         for (int step = 1; step < game_width / 2; step *= 2) {
-             for (int i = 0; i < game_width; i += step) {
-                 for (int j = 0; j < game_height; j += step) {
+       //displayGrid.fireUp();
+       // for (int step = 1; step < game_width / 2; step *= 2) {
+       //     for (int i = 0; i < game_width; i += step) {
+       //         for (int j = 0; j < game_height; j += step) {
 
-                   displayGrid.addObjectToDisplay(new Char('X'), i, j);
-               }
-           }
-        
-         try {
-             Thread.sleep(2000);
-         } catch (InterruptedException e) {
-             e.printStackTrace(System.err);
-         }
-         displayGrid.initializeDisplay();
-     }
-
+        //           displayGrid.addObjectToDisplay(new Char('X'), i, j);
+        //       }
+        //   }
+        //
+        // try {
+        //     Thread.sleep(2000);
+        // } catch (InterruptedException e) {
+        //     e.printStackTrace(System.err);
+        // }
+        // displayGrid.initializeDisplay();
+     //}
+        //rooms, creatues, items, passages
         for(int i = 0; i < list.size(); i++){
             subList = list.get(i);
             for(int j = 0; j < subList.size(); i++){
@@ -66,7 +66,8 @@ public class Rogue implements Runnable {
                 type = subList.get(j).getType();
             }
         }
-    }   
+    } 
+
     public static void main(String[] args) throws Exception {
 
         // check if a filename is passed in. If not, print a usage message.
