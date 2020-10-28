@@ -2,6 +2,7 @@ package game;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -18,8 +19,11 @@ public class Rogue implements Runnable {
     private static int width;
     private static int height;
     public char ch;
+    private ArrayList<Displayable> list = new ArrayList<Displayable>();
 
     public Rogue(Dungeon dungeon) {
+
+        list = dungeon.getList();
         height = dungeon.get_gameHeight();
         width = dungeon.get_width();
         displayGrid = new ObjectDisplayGrid(width, height);

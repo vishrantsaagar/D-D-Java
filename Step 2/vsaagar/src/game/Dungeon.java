@@ -23,11 +23,13 @@ public class Dungeon {
         System.out.println("Dungeon:getDungeon" + _name + "\n" + _width +"\n" + _gameHeight);
     }
 
-    public void retrieveStack(){
-        list.add(rooms);
-        list.add(creatures);
-        list.add(items);
-        list.add(passages);
+    public ArrayList<Displayable> getList(){
+        list.addAll(rooms);
+        list.addAll(creatures);
+        list.addAll(items);
+        list.addAll(passages);
+
+        return list;
     }
 
     public int get_gameHeight() {
