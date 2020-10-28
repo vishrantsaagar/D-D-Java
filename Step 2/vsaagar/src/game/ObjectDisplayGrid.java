@@ -16,6 +16,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
     private List<InputObserver> inputObservers = null;
 
     private static int gameheight;
+    private static int topheight;
     private static int width;
 
     public ObjectDisplayGrid(int _width, int _height) {
@@ -46,6 +47,12 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
 
     public void setTopMessageHeight(int topHeight){
         System.out.println("ObjectDisplayGrid: setTopMessageHeight" + topHeight);
+        topheight = topHeight;
+    }
+
+    public int gettopheight()
+    {
+        return topheight;
     }
 
   	public void registerInputObserver(KeyStrokePrinter keyStrokePrinter) {

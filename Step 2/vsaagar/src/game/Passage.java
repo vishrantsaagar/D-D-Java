@@ -17,5 +17,5 @@ public class Passage extends Structure{
         System.out.println("Passage:setID" + room1 + "\n" + room2);
 
     }
-
+    //RECIEVE POSX AND POSY SEPARATELY, STORE A SET OF ARRAYLISTS WITH COORDINATE VALUES
 }

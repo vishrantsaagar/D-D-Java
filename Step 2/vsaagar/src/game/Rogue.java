@@ -24,6 +24,7 @@ public class Rogue implements Runnable {
     private int posY;
     private char type;
     private int HP;
+    private int topHeight;
 
     public char ch;
     private ArrayList<ArrayList<Displayable>> list;
@@ -34,38 +35,45 @@ public class Rogue implements Runnable {
         game_height = dungeon.get_gameHeight();
         game_width = dungeon.get_width();
         displayGrid = new ObjectDisplayGrid(game_width, game_height);
+        topHeight = displayGrid.gettopheight();
     }
 
     @Override
     public void run() { 
         
-       //displayGrid.fireUp();
-       // for (int step = 1; step < game_width / 2; step *= 2) {
-       //     for (int i = 0; i < game_width; i += step) {
-       //         for (int j = 0; j < game_height; j += step) {
-
-        //           displayGrid.addObjectToDisplay(new Char('X'), i, j);
-        //       }
-        //   }
-        //
-        // try {
-        //     Thread.sleep(2000);
-        // } catch (InterruptedException e) {
-        //     e.printStackTrace(System.err);
-        // }
-        // displayGrid.initializeDisplay();
-     //}
-        //rooms, creatues, items, passages
+       displayGrid.fireUp();
+        //0 - rooms, 1 - creatues, 2 - items, 3 - passages
         for(int i = 0; i < list.size(); i++){
             subList = list.get(i);
-            for(int j = 0; j < subList.size(); i++){
+            for(int j = 0; j < subList.size(); j++){
                 width = subList.get(j).getWidth();
                 height = subList.get(j).getHeight();
                 posX = subList.get(j).getPosX();
                 posY = subList.get(j).getPosY();
                 type = subList.get(j).getType();
+                if(i == 0)
+                {
+                    for(int y = posY; y < posY + height; y++)
+                    {
+                        displayGrid.addObjectToDisplay(new Char('x'), posX, y);
+                    }
+                    for(int x = posX; x < posX + width; x++)
+                    {
+                        displayGrid.addObjectToDisplay(new Char('x'), x, posY);
+
+                    }
+                }
             }
         }
+
+        try {
+             Thread.sleep(1000000);
+        } catch (InterruptedException e) {
+             e.printStackTrace(System.err);
+        }
+
+        displayGrid.initializeDisplay();
+
     } 
 
     public static void main(String[] args) throws Exception {

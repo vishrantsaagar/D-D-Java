@@ -215,6 +215,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             s1.setID(scrollRoom, scrollSerial);
             currItem = s1;
 
+            dungeon.addItem(s1);
             dispstack.push(currItem);
 
         }else if(qName.equalsIgnoreCase("ItemAction")) {
@@ -246,6 +247,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             p1.setID(playerRoom, playerSerial);
             currPlayer = p1;
             dispstack.push(currPlayer);
+            dungeon.addCreature(p1);
 
         }else if(qName.equalsIgnoreCase("hpMoves")) {
             bhpMoves = true;
@@ -257,7 +259,8 @@ public class DungeonXMLHandler extends DefaultHandler {
             Armor a1 = new Armor(armor_name);
             a1.setName(armor_name);
             a1.setID(armor_room, armor_serial);
-            
+            dungeon.addItem(a1);
+
             if(currPlayer != null)
             {
                 currPlayer.setArmor(a1);
@@ -276,6 +279,7 @@ public class DungeonXMLHandler extends DefaultHandler {
 
             Sword sw1 = new Sword(swordName);
             sw1.setID(swordRoom, swordSerial);
+            dungeon.addItem(sw1);
 
             if(currPlayer != null)
             {
@@ -293,6 +297,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             Passage p1 = new Passage();
             p1.setID(room1, room2);
             currPassage = p1;
+            dungeon.addPassage(p1);
 
             dispstack.push(currPassage);
         } 
