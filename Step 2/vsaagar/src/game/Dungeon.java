@@ -11,6 +11,8 @@ public class Dungeon {
     private ArrayList<Creature> creatures = new ArrayList<Creature>();
     private ArrayList<Item> items = new ArrayList<Item>();
     private ArrayList<Passage> passages = new ArrayList<Passage>();
+    private ArrayList<Displayable> list = new ArrayList<Displayable>();
+
 
     public void getDungeon(String name, int width, int gameHeight)
     {
@@ -19,6 +21,13 @@ public class Dungeon {
         _gameHeight = gameHeight;
         
         System.out.println("Dungeon:getDungeon" + _name + "\n" + _width +"\n" + _gameHeight);
+    }
+
+    public void retrieveStack(){
+        list.add(rooms);
+        list.add(creatures);
+        list.add(items);
+        list.add(passages);
     }
 
     public int get_gameHeight() {
