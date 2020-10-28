@@ -61,8 +61,8 @@ public class Rogue implements Runnable {
     //     displayGrid.initializeDisplay();
     // }
 
-        for(int i = 0; i < list.length; i++){
-            for(int j = 0; j < list[i].length; i++){
+        for(int i = 0; i < list.size(); i++){
+            for(int j = 0; j < list.get(i).size(); i++){
                 System.out.println("Hello");
             }
         }
