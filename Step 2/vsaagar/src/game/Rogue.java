@@ -16,8 +16,13 @@ public class Rogue implements Runnable {
     public static final int TIMEPERLOOP = 1000000000 / FRAMESPERSECOND;
     private static ObjectDisplayGrid displayGrid = null;
     private Thread keyStrokePrinter;
-    private static int width;
-    private static int height;
+    private int width;
+    private int height;
+    private int posX;
+    private int posY;
+    private char Type;
+    private int HP;
+
     public char ch;
     private ArrayList<Displayable> list = new ArrayList<Displayable>();
 
@@ -35,7 +40,6 @@ public class Rogue implements Runnable {
         //rooms: Walls - X and Floor - ., 
         //Passages - #, 
         //Connection between Passage and Room - +,
-
         displayGrid.fireUp();
         for (int step = 1; step < width / 2; step *= 2) {
             for (int i = 0; i < width; i += step) {
