@@ -43,6 +43,15 @@ public class Rogue implements Runnable {
         
        displayGrid.fireUp();
         //0 - rooms, 1 - creatues, 2 - items, 3 - passages
+       //Monsters = Trolls: T, Snakes: S, Hob: H, 
+        //player: @ 
+        //rooms: Walls - X and Floor - ., 
+        //Passages - #, 
+        //Connection between Passage and Room - +,
+        //list[0] = rooms
+        //list[1] = creature
+        //list[2] = items
+        //list[3] = passage
         for(int i = 0; i < list.size(); i++){
             subList = list.get(i);
             for(int j = 0; j < subList.size(); j++){
