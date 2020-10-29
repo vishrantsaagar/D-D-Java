@@ -57,10 +57,6 @@ public class Rogue implements Runnable {
             subList = list.get(i);
             for(int j = 0; j < subList.size(); j++){
 
-                if(subList.get(j) instanceof Monster){
-                    System.out.println("YESS YOU IDIOT");
-                }
-
                 width = subList.get(j).getWidth();
                 height = subList.get(j).getHeight();
                 posX = subList.get(j).getPosX();
@@ -93,21 +89,13 @@ public class Rogue implements Runnable {
                     int relativeY = -1;
                     int relativeX = -1;
 
-                    System.out.println("Room ID: " + room_id);
-
-
                     for(int id = 1; id <= list.get(0).size(); id++){
                         if(room_id == id){
-                            System.out.println("ROOM ID DUMBASS: " + room_id);
-                            System.out.println("POSITION X of ROOM: " + list.get(0).get(id - 1).getPosX().get(0));
                             relativeX = list.get(0).get(id - 1).getPosX().get(0) + posX.get(0);
                             relativeY = list.get(0).get(id - 1).getPosY().get(0) + posY.get(0);
 
                         }
                     }
-
-                    System.out.println("RelativeX: " + relativeX);
-                    System.out.println("RelativeY: " + relativeY);
 
                     if(type == 'T' | type == 'S' | type == 'H'){
                         // System.out.println("Monster: PosX: " + posX.get(0) + ", PosY: " + posY.get(0));
@@ -129,22 +117,13 @@ public class Rogue implements Runnable {
                         int relativeY = -1;
                         int relativeX = -1;
 
-                        System.out.println("Room ID: " + room_id);
-
-
                         for(int id = 1; id <= list.get(0).size(); id++){
                             if(room_id == id){
-                                System.out.println("ROOM ID DUMBASS: " + room_id);
-                                System.out.println("POSITION X of ROOM: " + list.get(0).get(id - 1).getPosX().get(0));
                                 relativeX = list.get(0).get(id - 1).getPosX().get(0) + posX.get(0);
                                 relativeY = list.get(0).get(id - 1).getPosY().get(0) + posY.get(0);
 
                             }
                         }
-
-                        System.out.println("RelativeX: " + relativeX);
-                        System.out.println("RelativeY: " + relativeY);
-
 
                         if(subList.get(j) instanceof Scroll){
                             displayGrid.addObjectToDisplay(new Char('?'), relativeX, relativeY + topHeight);
