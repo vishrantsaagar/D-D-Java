@@ -60,7 +60,6 @@ public class Rogue implements Runnable {
                 posX = subList.get(j).getPosX();
                 posY = subList.get(j).getPosY();
                 type = subList.get(j).getType();
-                System.out.println(topHeight);
                 if(i == 0)
                 {
                     for(int y = posY.get(0); y < posY.get(0) + height; y++)
@@ -78,30 +77,28 @@ public class Rogue implements Runnable {
                 else if(i == 1){
                     if(type == 'T' | type == 'S' | type == 'H'){
                         System.out.println("Monster: PosX: " + posX.get(0) + ", PosY: " + posY.get(0));
-
-                        displayGrid.addObjectToDisplay(new Char(type), posX.get(0), posY.get(0));
+                        displayGrid.addObjectToDisplay(new Char(type), posX.get(0), posY.get(0) + topHeight);
                     } //Monster 
 
                     else{
                         System.out.println("Player: PosX: " + posX.get(0) + ", PosY: " + posY.get(0));
-
-                        displayGrid.addObjectToDisplay(new Char('@'), posX.get(0), posY.get(0));
+                        displayGrid.addObjectToDisplay(new Char('@'), posX.get(0), posY.get(0) + topHeight);
                     } //Player
                 }
 
                 else if(i == 2){
                     if(posX.size() != 0 & posY.size() != 0){
                         if(subList.get(j) instanceof Scroll){
-                            displayGrid.addObjectToDisplay(new Char('?'), posX.get(0), posY.get(0));
+                            displayGrid.addObjectToDisplay(new Char('?'), posX.get(0), posY.get(0) + topHeight);
                         }
 
                         else if(subList.get(j) instanceof Sword){
                             System.out.println(posX.get(0) + "Sword" + posY.get(0));
-                            displayGrid.addObjectToDisplay(new Char('|'), posX.get(0), posY.get(0));
+                            displayGrid.addObjectToDisplay(new Char('|'), posX.get(0), posY.get(0) + topHeight);
                         }
 
                         else if(subList.get(j) instanceof Armor){
-                            displayGrid.addObjectToDisplay(new Char(']'), posX.get(0), posY.get(0));
+                            displayGrid.addObjectToDisplay(new Char(']'), posX.get(0), posY.get(0) + topHeight);
                         }
                     }
                 }
@@ -110,7 +107,7 @@ public class Rogue implements Runnable {
                     for(int k = 0; k < posX.size(); k++){
                         System.out.println("------------------------------------------");
                         System.out.println("PosX: " + posX.get(k) + ", PosY: " + posY.get(k));
-                        displayGrid.addObjectToDisplay(new Char('#'), posX.get(k), posY.get(k));
+                        displayGrid.addObjectToDisplay(new Char('+'), posX.get(k), posY.get(k) + topHeight);
                     }
                 }
             }
