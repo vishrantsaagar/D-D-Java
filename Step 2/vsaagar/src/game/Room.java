@@ -1,6 +1,6 @@
 package game;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class Room extends Structure{
     

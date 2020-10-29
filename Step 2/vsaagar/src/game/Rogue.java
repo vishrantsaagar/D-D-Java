@@ -26,6 +26,7 @@ public class Rogue implements Runnable {
     private char type = '@';
     private int HP;
     private int topHeight;
+    private int bottomHeight;
 
     public char ch;
     private ArrayList<ArrayList<Displayable>> list;
@@ -130,7 +131,6 @@ public class Rogue implements Runnable {
                         }
 
                         else if(subList.get(j) instanceof Sword){
-                            System.out.println(posX.get(0) + "Sword" + posY.get(0));
                             displayGrid.addObjectToDisplay(new Char('|'), relativeX, relativeY + topHeight);
                         }
 
@@ -208,7 +208,7 @@ public class Rogue implements Runnable {
         // check if a filename is passed in. If not, print a usage message.
         // If it is, open the file
         String fileName = null;
-        fileName = "game/xmlfiles/" + "death.xml"; // ../xmlfiles. + args[0]
+        fileName = "game/xmlfiles/" + "wear.xml"; // ../xmlfiles. + args[0]
 
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
 

@@ -17,20 +17,21 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
 
     private static int gameheight;
     private static int topheight;
-    private static int width;
+    private static int bottomheight;
+    private static int gamewidth;
 
     public ObjectDisplayGrid(int _width, int _height) {
-       width = _width;
+       gamewidth = _width;
        gameheight = _height;
 
-       terminal = new AsciiPanel(width, gameheight);
+       terminal = new AsciiPanel(gamewidth, gameheight);
 
-       objectGrid = new Char[width][gameheight];
+       objectGrid = new Char[gamewidth][gameheight];
 
        initializeDisplay();
 
        super.add(terminal);
-       super.setSize(width * 9, gameheight * 16);
+       super.setSize(gamewidth * 9, gameheight * 16);
        super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        // super.repaint();
        // terminal.repaint( );
@@ -43,6 +44,8 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
     public static void getObjectDisplayGrid(int gameHeight, int width, int topHeight, int bottomHeight)
     {
         System.out.println("ObjectDisplayGrid: getObjectDisplayGrid" + gameHeight + "\n" + width + "\n" + topHeight + "\n" + bottomHeight);
+        gameheight = gameHeight;
+        gamewidth = width;
         topheight = topHeight;
     }
 
@@ -90,7 +93,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
 
     public final void initializeDisplay() {
         //Char ch = new Char('.');
-        for (int i = 0; i < width; i++) {
+        for (int i = 0; i < gamewidth; i++) {
             for (int j = 0; j < gameheight; j++) {
                 //addObjectToDisplay(ch, i, j);
             }
