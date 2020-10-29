@@ -20,8 +20,8 @@ public class Rogue implements Runnable {
     private int game_height;
     private int width;
     private int height;
-    private int posX;
-    private int posY;
+    private ArrayList<Integer> posX;
+    private ArrayList<Integer> posY;
     private char type = '@';
     private int HP;
     private int topHeight;
@@ -43,7 +43,7 @@ public class Rogue implements Runnable {
         
        displayGrid.fireUp();
         //0 - rooms, 1 - creatues, 2 - items, 3 - passages
-       //Monsters = Trolls: T, Snakes: S, Hob: H, 
+        //Monsters = Trolls: T, Snakes: S, Hob: H, 
         //player: @ 
         //rooms: Walls - X and Floor - ., 
         //Passages - #, 
@@ -63,15 +63,44 @@ public class Rogue implements Runnable {
                 System.out.println(topHeight);
                 if(i == 0)
                 {
-                    for(int y = posY; y < posY + height; y++)
+                    for(int y = posY.get(0); y < posY.get(0) + height; y++)
                     {
-                        displayGrid.addObjectToDisplay(new Char('x'), posX, y + topHeight);
-                        displayGrid.addObjectToDisplay(new Char('x'), posX + width - 1, y + topHeight);
+                        displayGrid.addObjectToDisplay(new Char('x'), posX.get(0), y + topHeight);
+                        displayGrid.addObjectToDisplay(new Char('x'), posX.get(0) + width - 1, y + topHeight);
                     }
-                    for(int x = posX; x < posX + width; x++)
+                    for(int x = posX.get(0); x < posX.get(0) + width; x++)
                     {
-                        displayGrid.addObjectToDisplay(new Char('x'), x, posY + topHeight);
-                        displayGrid.addObjectToDisplay(new Char('x'), x, posY + height - 1 + topHeight);
+                        displayGrid.addObjectToDisplay(new Char('x'), x, posY.get(0) + topHeight);
+                        displayGrid.addObjectToDisplay(new Char('x'), x, posY.get(0) + height - 1 + topHeight);
+                    }
+                }
+
+                else if(i == 1){
+                    if(type == 'T' | type == 'S' | type == 'H'){
+                        System.out.println("Monster: PosX: " + posX.get(0) + ", PosY: " + posY.get(0));
+
+                        displayGrid.addObjectToDisplay(new Char(type), posX.get(0), posY.get(0));
+                    } //Monster 
+
+                    else{
+                        System.out.println("Player: PosX: " + posX.get(0) + ", PosY: " + posY.get(0));
+
+                        displayGrid.addObjectToDisplay(new Char('@'), posX.get(0), posY.get(0));
+                    } //Player
+                }
+
+                else if(i == 2){
+                    if(posX.get(0) != 0 & posY.get(0) != 0){
+                        displayGrid.addObjectToDisplay(new Char('|'), posX.get(0), posY.get(0));
+                        //Distinguish between different parts?
+                    }
+                }
+
+                else if(i == 3){
+                    for(int k = 0; k < posX.size(); k++){
+                        System.out.println("------------------------------------------");
+                        System.out.println("PosX: " + posX.get(k) + ", PosY: " + posY.get(k));
+                        displayGrid.addObjectToDisplay(new Char('#'), posX.get(k), posY.get(k));
                     }
                 }
             }

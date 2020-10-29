@@ -1,5 +1,7 @@
 package game;
 
+import java.util.ArrayList;
+
 public class Displayable {
 
     private int hp;
@@ -8,6 +10,9 @@ public class Displayable {
     private int width;
     private int height;
     private char type;
+
+    private ArrayList<Integer> xPos = new ArrayList<Integer>();
+    private ArrayList<Integer> yPos = new ArrayList<Integer>();
     
     public Displayable()
     {
@@ -18,12 +23,12 @@ public class Displayable {
         return hp;
     }
 
-    public int getPosX(){
-        return posX;
+    public ArrayList<Integer> getPosX(){
+        return xPos;
     }
 
-    public int getPosY(){
-        return posY;
+    public ArrayList<Integer> getPosY(){
+        return yPos;
     }
 
     public int getWidth(){
@@ -81,13 +86,13 @@ public class Displayable {
 
     public void SetPosX(int x)
     {
-        posX = x;
+        xPos.add(x);
         System.out.println("Displayable:SetPosX" + x);
     }
 
     public void setPosY(int y)
     {
-        posY = y;
+        yPos.add(y);
         System.out.println("Displayable:setPosY" + y);
     }
 
