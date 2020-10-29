@@ -2,6 +2,7 @@ package game;
 
 public class Sword extends Item{
   private String _name;
+  private int room_id;
 
     public Sword(String name)
     {
@@ -9,8 +10,13 @@ public class Sword extends Item{
         System.out.println("Sword:Sword" + _name);
     }
 
+    public int getRoomID(){
+        return room_id;
+    }
+
     public void setID(int room, int serial)
     {
-      System.out.println("Sword:setID" + room + "\n" + serial);
+        room_id = room;
+        System.out.println("Sword:setID" + room + "\n" + serial);
     }
 }

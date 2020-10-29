@@ -109,4 +109,11 @@ public class Displayable {
 
     }
 
+    public int getRoomID(){
+
+        // System.out.println("Displayable:RoomID");
+
+        return 0;
+    }
+
 }

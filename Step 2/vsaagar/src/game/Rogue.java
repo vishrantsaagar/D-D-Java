@@ -20,6 +20,7 @@ public class Rogue implements Runnable {
     private int game_height;
     private int width;
     private int height;
+    private int room_id;
     private ArrayList<Integer> posX;
     private ArrayList<Integer> posY;
     private char type = '@';
@@ -55,11 +56,18 @@ public class Rogue implements Runnable {
         for(int i = 0; i < list.size(); i++){
             subList = list.get(i);
             for(int j = 0; j < subList.size(); j++){
+
+                if(subList.get(j) instanceof Monster){
+                    System.out.println("YESS YOU IDIOT");
+                }
+
                 width = subList.get(j).getWidth();
                 height = subList.get(j).getHeight();
                 posX = subList.get(j).getPosX();
                 posY = subList.get(j).getPosY();
                 type = subList.get(j).getType();
+                room_id = subList.get(j).getRoomID();
+
                 if(i == 0)
                 {
                     int l = 0;
@@ -69,6 +77,7 @@ public class Rogue implements Runnable {
                         {
                             displayGrid.addObjectToDisplay(new Char('.'), l, y + topHeight);
                         }
+
                         displayGrid.addObjectToDisplay(new Char('X'), posX.get(0), y + topHeight);
                         displayGrid.addObjectToDisplay(new Char('X'), posX.get(0) + width - 1, y + topHeight);
                     }
@@ -80,30 +89,74 @@ public class Rogue implements Runnable {
                 }
 
                 else if(i == 1){
+
+                    int relativeY = -1;
+                    int relativeX = -1;
+
+                    System.out.println("Room ID: " + room_id);
+
+
+                    for(int id = 1; id <= list.get(0).size(); id++){
+                        if(room_id == id){
+                            System.out.println("ROOM ID DUMBASS: " + room_id);
+                            System.out.println("POSITION X of ROOM: " + list.get(0).get(id - 1).getPosX().get(0));
+                            relativeX = list.get(0).get(id - 1).getPosX().get(0) + posX.get(0);
+                            relativeY = list.get(0).get(id - 1).getPosY().get(0) + posY.get(0);
+
+                        }
+                    }
+
+                    System.out.println("RelativeX: " + relativeX);
+                    System.out.println("RelativeY: " + relativeY);
+
                     if(type == 'T' | type == 'S' | type == 'H'){
                         // System.out.println("Monster: PosX: " + posX.get(0) + ", PosY: " + posY.get(0));
-                        displayGrid.addObjectToDisplay(new Char(type), posX.get(0), posY.get(0) + topHeight);
+                        //id = subList.get(j).getRoomID()
+                        //if(id = 1): list[0].sublist[0].posX and list[0].subList[0].posY
+
+                        displayGrid.addObjectToDisplay(new Char(type), relativeX, relativeY + topHeight);
                     } //Monster 
 
                     else{
                         // System.out.println("Player: PosX: " + posX.get(0) + ", PosY: " + posY.get(0));
-                        displayGrid.addObjectToDisplay(new Char('@'), posX.get(0), posY.get(0) + topHeight);
+                        displayGrid.addObjectToDisplay(new Char('@'), relativeX, relativeY + topHeight);
                     } //Player
                 }
 
                 else if(i == 2){
                     if(posX.size() != 0 & posY.size() != 0){
+
+                        int relativeY = -1;
+                        int relativeX = -1;
+
+                        System.out.println("Room ID: " + room_id);
+
+
+                        for(int id = 1; id <= list.get(0).size(); id++){
+                            if(room_id == id){
+                                System.out.println("ROOM ID DUMBASS: " + room_id);
+                                System.out.println("POSITION X of ROOM: " + list.get(0).get(id - 1).getPosX().get(0));
+                                relativeX = list.get(0).get(id - 1).getPosX().get(0) + posX.get(0);
+                                relativeY = list.get(0).get(id - 1).getPosY().get(0) + posY.get(0);
+
+                            }
+                        }
+
+                        System.out.println("RelativeX: " + relativeX);
+                        System.out.println("RelativeY: " + relativeY);
+
+
                         if(subList.get(j) instanceof Scroll){
-                            displayGrid.addObjectToDisplay(new Char('?'), posX.get(0), posY.get(0) + topHeight);
+                            displayGrid.addObjectToDisplay(new Char('?'), relativeX, relativeY + topHeight);
                         }
 
                         else if(subList.get(j) instanceof Sword){
                             System.out.println(posX.get(0) + "Sword" + posY.get(0));
-                            displayGrid.addObjectToDisplay(new Char('|'), posX.get(0), posY.get(0) + topHeight);
+                            displayGrid.addObjectToDisplay(new Char('|'), relativeX, relativeY + topHeight);
                         }
 
                         else if(subList.get(j) instanceof Armor){
-                            displayGrid.addObjectToDisplay(new Char(']'), posX.get(0), posY.get(0) + topHeight);
+                            displayGrid.addObjectToDisplay(new Char(']'), relativeX, relativeY + topHeight);
                         }
                     }
                 }
@@ -176,7 +229,7 @@ public class Rogue implements Runnable {
         // check if a filename is passed in. If not, print a usage message.
         // If it is, open the file
         String fileName = null;
-        fileName = "game/xmlfiles/" + "testDrawing.xml"; // ../xmlfiles. + args[0]
+        fileName = "game/xmlfiles/" + "death.xml"; // ../xmlfiles. + args[0]
 
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
 

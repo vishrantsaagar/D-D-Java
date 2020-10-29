@@ -62,6 +62,7 @@ public class DungeonXMLHandler extends DefaultHandler {
 
         } else if(qName.equalsIgnoreCase("Room")) {
             int roomid = Integer.parseInt(attributes.getValue("room"));
+            
             Room room = new Room(roomid);
             dungeon.addRoom(room);
             currRoom = room; 
@@ -89,6 +90,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             m1.setID(monRoom, monSerial);
 
             dungeon.addCreature(m1);
+
             currCreature = m1;
 
             dispstack.push(currCreature);
