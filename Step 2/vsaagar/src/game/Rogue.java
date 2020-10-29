@@ -76,12 +76,12 @@ public class Rogue implements Runnable {
 
                 else if(i == 1){
                     if(type == 'T' | type == 'S' | type == 'H'){
-                        System.out.println("Monster: PosX: " + posX.get(0) + ", PosY: " + posY.get(0));
+                        // System.out.println("Monster: PosX: " + posX.get(0) + ", PosY: " + posY.get(0));
                         displayGrid.addObjectToDisplay(new Char(type), posX.get(0), posY.get(0) + topHeight);
                     } //Monster 
 
                     else{
-                        System.out.println("Player: PosX: " + posX.get(0) + ", PosY: " + posY.get(0));
+                        // System.out.println("Player: PosX: " + posX.get(0) + ", PosY: " + posY.get(0));
                         displayGrid.addObjectToDisplay(new Char('@'), posX.get(0), posY.get(0) + topHeight);
                     } //Player
                 }
@@ -105,9 +105,52 @@ public class Rogue implements Runnable {
 
                 else if(i == 3){
                     for(int k = 0; k < posX.size(); k++){
-                        System.out.println("------------------------------------------");
-                        System.out.println("PosX: " + posX.get(k) + ", PosY: " + posY.get(k));
+                        // System.out.println("------------------------------------------");
+                        // System.out.println("PosX: " + posX.get(k) + ", PosY: " + posY.get(k));
                         displayGrid.addObjectToDisplay(new Char('+'), posX.get(k), posY.get(k) + topHeight);
+
+                        int currX = posX.get(k);
+                        int currY = posY.get(k) + topHeight;
+                        int nextX = -1;
+                        int nextY = -1;
+
+                        if(k < posX.size() - 1){
+                            nextX = posX.get(k + 1);
+                            nextY = posY.get(k + 1) + topHeight;
+
+                            System.out.println("CURR: " + currX + "AND " + currY);
+
+                            System.out.println("NEXT: " + nextX + "AND " + nextY);
+                        }
+
+
+                        int relativeY = nextY - currY;
+                        int relativeX = nextX - currX;
+
+                        if(relativeX == 0 & relativeY > 0){
+                            for(int step = currY + 1; step < nextY; step++){
+                                displayGrid.addObjectToDisplay(new Char('#'), currX, step);
+                            }
+                        }
+
+                        else if(relativeX == 0 & relativeY < 0){
+                            for(int step = currY - 1; step > nextY; step--){
+                                displayGrid.addObjectToDisplay(new Char('#'), currX, step);
+                            }
+                        }
+
+                        else if(relativeX > 0 & relativeY == 0){
+                            for(int step = currX + 1; step < nextX; step++){
+                                displayGrid.addObjectToDisplay(new Char('#'), step, currY);
+                            }
+                        }
+
+                        else if(relativeX < 0 & relativeY == 0){
+                            for(int step = currX - 1; step > nextX; step--){
+                                displayGrid.addObjectToDisplay(new Char('#'), step, currY);
+                            }
+                        }
+                        
                     }
                 }
             }
