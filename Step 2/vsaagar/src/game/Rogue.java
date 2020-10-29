@@ -60,7 +60,6 @@ public class Rogue implements Runnable {
                     for(int x = posX; x < posX + width; x++)
                     {
                         displayGrid.addObjectToDisplay(new Char('x'), x, posY);
-
                     }
                 }
             }
