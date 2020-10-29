@@ -51,22 +51,25 @@ public class Rogue implements Runnable {
                 posX = subList.get(j).getPosX();
                 posY = subList.get(j).getPosY();
                 type = subList.get(j).getType();
+                System.out.println(topHeight);
                 if(i == 0)
                 {
                     for(int y = posY; y < posY + height; y++)
                     {
-                        displayGrid.addObjectToDisplay(new Char('x'), posX, y);
+                        displayGrid.addObjectToDisplay(new Char('x'), posX, y + topHeight);
+                        displayGrid.addObjectToDisplay(new Char('x'), posX + width - 1, y + topHeight);
                     }
                     for(int x = posX; x < posX + width; x++)
                     {
-                        displayGrid.addObjectToDisplay(new Char('x'), x, posY);
+                        displayGrid.addObjectToDisplay(new Char('x'), x, posY + topHeight);
+                        displayGrid.addObjectToDisplay(new Char('x'), x, posY + height - 1 + topHeight);
                     }
                 }
             }
         }
 
         try {
-             Thread.sleep(1000000);
+             Thread.sleep(10000000);
         } catch (InterruptedException e) {
              e.printStackTrace(System.err);
         }
