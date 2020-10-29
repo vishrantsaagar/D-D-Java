@@ -131,7 +131,7 @@ public class Rogue implements Runnable {
         // check if a filename is passed in. If not, print a usage message.
         // If it is, open the file
         String fileName = null;
-        fileName = "game/xmlfiles/" + "dropPack.xml"; // ../xmlfiles. + args[0]
+        fileName = "game/xmlfiles/" + "testDrawing.xml"; // ../xmlfiles. + args[0]
 
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
 
