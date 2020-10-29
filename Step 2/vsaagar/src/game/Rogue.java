@@ -90,9 +90,19 @@ public class Rogue implements Runnable {
                 }
 
                 else if(i == 2){
-                    if(posX.get(0) != 0 & posY.get(0) != 0){
-                        displayGrid.addObjectToDisplay(new Char('|'), posX.get(0), posY.get(0));
-                        //Distinguish between different parts?
+                    if(posX.size() != 0 & posY.size() != 0){
+                        if(subList.get(j) instanceof Scroll){
+                            displayGrid.addObjectToDisplay(new Char('?'), posX.get(0), posY.get(0));
+                        }
+
+                        else if(subList.get(j) instanceof Sword){
+                            System.out.println(posX.get(0) + "Sword" + posY.get(0));
+                            displayGrid.addObjectToDisplay(new Char('|'), posX.get(0), posY.get(0));
+                        }
+
+                        else if(subList.get(j) instanceof Armor){
+                            displayGrid.addObjectToDisplay(new Char(']'), posX.get(0), posY.get(0));
+                        }
                     }
                 }
 
@@ -121,7 +131,7 @@ public class Rogue implements Runnable {
         // check if a filename is passed in. If not, print a usage message.
         // If it is, open the file
         String fileName = null;
-        fileName = "game/xmlfiles/" + "testDrawing.xml"; // ../xmlfiles. + args[0]
+        fileName = "game/xmlfiles/" + "dropPack.xml"; // ../xmlfiles. + args[0]
 
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
 
