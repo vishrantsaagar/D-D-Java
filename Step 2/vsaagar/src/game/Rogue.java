@@ -62,15 +62,20 @@ public class Rogue implements Runnable {
                 type = subList.get(j).getType();
                 if(i == 0)
                 {
+                    int l = 0;
                     for(int y = posY.get(0); y < posY.get(0) + height; y++)
                     {
-                        displayGrid.addObjectToDisplay(new Char('x'), posX.get(0), y + topHeight);
-                        displayGrid.addObjectToDisplay(new Char('x'), posX.get(0) + width - 1, y + topHeight);
+                        for(l =  posX.get(0) + 1; l < posX.get(0) + width - 1; l++)
+                        {
+                            displayGrid.addObjectToDisplay(new Char('.'), l, y + topHeight);
+                        }
+                        displayGrid.addObjectToDisplay(new Char('X'), posX.get(0), y + topHeight);
+                        displayGrid.addObjectToDisplay(new Char('X'), posX.get(0) + width - 1, y + topHeight);
                     }
                     for(int x = posX.get(0); x < posX.get(0) + width; x++)
                     {
-                        displayGrid.addObjectToDisplay(new Char('x'), x, posY.get(0) + topHeight);
-                        displayGrid.addObjectToDisplay(new Char('x'), x, posY.get(0) + height - 1 + topHeight);
+                        displayGrid.addObjectToDisplay(new Char('X'), x, posY.get(0) + topHeight);
+                        displayGrid.addObjectToDisplay(new Char('X'), x, posY.get(0) + height - 1 + topHeight);
                     }
                 }
 
@@ -118,9 +123,9 @@ public class Rogue implements Runnable {
                             nextX = posX.get(k + 1);
                             nextY = posY.get(k + 1) + topHeight;
 
-                            System.out.println("CURR: " + currX + "AND " + currY);
+                            //System.out.println("CURR: " + currX + "AND " + currY);
 
-                            System.out.println("NEXT: " + nextX + "AND " + nextY);
+                            //System.out.println("NEXT: " + nextX + "AND " + nextY);
                         }
 
 
