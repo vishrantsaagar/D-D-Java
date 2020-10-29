@@ -9,10 +9,12 @@ import java.util.Stack;
 
 public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubject{
 
+    private static final int DEBUG = 0;
     private static final String CLASSID = ".ObjectDisplayGrid";
 
     private static AsciiPanel terminal;
     private Char[][] objectGrid = null;
+
     private List<InputObserver> inputObservers = null;
 
     private static int gameheight;
@@ -38,6 +40,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
        super.setVisible(true);
        terminal.setVisible(true);
        super.addKeyListener(this);
+       inputObservers = new ArrayList<>();
        super.repaint();
    }
     
@@ -59,28 +62,33 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
         return topheight;
     }
 
-  	public void registerInputObserver(KeyStrokePrinter keyStrokePrinter) {
-          //gotta modify a bunch of stuff in here
-  	}
-
     @Override
     public void registerInputObserver(InputObserver observer) {
-        inputObservers.add(observer);
-        //inputObservers.push(observer);
-    }
+          if (DEBUG > 0) {
+              System.out.println(CLASSID + ".registerInputObserver " + observer.toString());
+          }
+          inputObservers.add(observer);
+      }
+  
 
     @Override
     public void keyTyped(KeyEvent e) {
+        if (DEBUG > 0) {
+            System.out.println(CLASSID + ".keyTyped entered" + e.toString());
+        }
         KeyEvent keypress = (KeyEvent) e;
         notifyInputObservers(keypress.getKeyChar());
     }
 
+
     private void notifyInputObservers(char ch) {
         for (InputObserver observer : inputObservers) {
             observer.observerUpdate(ch);
+            if (DEBUG > 0) {
+                System.out.println(CLASSID + ".notifyInputObserver " + ch);
+            }
         }
     }
-
     // we have to override, but we don't use this
     @Override
     public void keyPressed(KeyEvent even) {

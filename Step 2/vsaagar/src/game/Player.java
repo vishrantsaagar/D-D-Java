@@ -28,6 +28,5 @@ public class Player extends Creature{
     {
        room_id = room;
        System.out.println("Player:setID"+room + "\n" +serial);
- 
     }    
 }

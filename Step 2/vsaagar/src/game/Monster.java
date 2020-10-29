@@ -11,8 +11,6 @@ public class Monster extends Creature{
 
    // @Override
    public int getRoomID(){
-      System.out.println("Monster:RoomID");
-
       return room_id;
    }
 

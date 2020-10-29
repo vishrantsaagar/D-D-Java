@@ -10,6 +10,13 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.SAXException;
 
+//Notes:To make player moves: 
+//Files to mess with: Player, Dungeon, ObjectDisplayGrid, KeyStrokePrinter
+//in player we can add like 4 functions to move in 4 directions
+//in dungeon we can check if a space is moveable to
+//in keyStrokePrinter we can use processInput() function in keystroke printer. Use the if statements to move based on the input.
+//Objectdisplaygrid we can first use a stack instead and then use addobjecttodisplay and create new function like remove objectobjecttodisplay to push and pop the character from position to position
+
 public class Rogue implements Runnable {
 
     public static final int FRAMESPERSECOND = 60;
@@ -208,7 +215,7 @@ public class Rogue implements Runnable {
         // check if a filename is passed in. If not, print a usage message.
         // If it is, open the file
         String fileName = null;
-        fileName = "game/xmlfiles/" + "wear.xml"; // ../xmlfiles. + args[0]
+        fileName = "game/xmlfiles/" + "testDrawing.xml"; // ../xmlfiles. + args[0]
 
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
 
