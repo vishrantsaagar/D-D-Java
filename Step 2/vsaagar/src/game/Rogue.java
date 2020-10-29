@@ -22,7 +22,7 @@ public class Rogue implements Runnable {
     private int height;
     private int posX;
     private int posY;
-    private char type;
+    private char type = '@';
     private int HP;
     private int topHeight;
 
