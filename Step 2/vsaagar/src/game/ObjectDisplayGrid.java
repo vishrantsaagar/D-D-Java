@@ -9,11 +9,16 @@ import java.util.Stack;
 
 public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubject{
 
-    private static final int DEBUG = 0;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -4957170715742113090L;
+
+    // private static final int DEBUG = 0;
     private static final String CLASSID = ".ObjectDisplayGrid";
 
     private static AsciiPanel terminal;
-    private Char[][] objectGrid = null;
+    private Stack<Char>[][] objectGrid = null;
 
     private List<InputObserver> inputObservers = null;
 
@@ -28,7 +33,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
 
        terminal = new AsciiPanel(gamewidth, gameheight);
 
-       objectGrid = new Char[gamewidth][gameheight];
+       objectGrid = (Stack<Char>[][]) new Stack[gamewidth][gameheight];
 
        initializeDisplay();
 
@@ -50,6 +55,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
         gameheight = gameHeight;
         gamewidth = width;
         topheight = topHeight;
+        bottomheight = bottomHeight;
     }
 
     public void setTopMessageHeight(int topHeight){
@@ -62,20 +68,24 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
         return topheight;
     }
 
+    public int getBottomheight() {
+        return bottomheight;
+    }
+
     @Override
     public void registerInputObserver(InputObserver observer) {
-          if (DEBUG > 0) {
-              System.out.println(CLASSID + ".registerInputObserver " + observer.toString());
-          }
+     //     if (DEBUG > 0) {
+     //         System.out.println(CLASSID + ".registerInputObserver " + observer.toString());
+     //     }
           inputObservers.add(observer);
       }
   
 
     @Override
     public void keyTyped(KeyEvent e) {
-        if (DEBUG > 0) {
-            System.out.println(CLASSID + ".keyTyped entered" + e.toString());
-        }
+     //   if (DEBUG > 0) {
+     //       System.out.println(CLASSID + ".keyTyped entered" + e.toString());
+     //   }
         KeyEvent keypress = (KeyEvent) e;
         notifyInputObservers(keypress.getKeyChar());
     }
@@ -84,9 +94,9 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
     private void notifyInputObservers(char ch) {
         for (InputObserver observer : inputObservers) {
             observer.observerUpdate(ch);
-            if (DEBUG > 0) {
-                System.out.println(CLASSID + ".notifyInputObserver " + ch);
-            }
+      //      if (DEBUG > 0) {
+      //          System.out.println(CLASSID + ".notifyInputObserver " + ch);
+      //      }
         }
     }
     // we have to override, but we don't use this
@@ -120,14 +130,15 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
     public void addObjectToDisplay(Char ch, int x, int y) {//main man
         if ((0 <= x) && (x < objectGrid.length)) {
             if ((0 <= y) && (y < objectGrid.length)) {
-              objectGrid[x][y] = ch; 
+              objectGrid[x][y].push(ch); 
               writeToTerminal(x, y);
             }
         }
     }       
 
     private void writeToTerminal(int x, int y) {
-        char ch = objectGrid[x][y].getChar();
+        Char cObj = objectGrid[x][y].peek();
+        char ch = cObj.getChar();
         terminal.write(ch, x, y);
         terminal.repaint();
     }
