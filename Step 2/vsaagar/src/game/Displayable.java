@@ -110,10 +110,26 @@ public class Displayable {
     }
 
     public int getRoomID(){
-
-        // System.out.println("Displayable:RoomID");
-
         return 0;
     }
 
+	public void get_coord() {
+	}
+
+    public void moveUP()
+    {
+    }
+
+    public void moveDOWN()
+    {
+    }
+
+    public void moveLEFT()
+    {
+
+    }
+
+    public void moveRIGHT()
+    {
+    }
 }

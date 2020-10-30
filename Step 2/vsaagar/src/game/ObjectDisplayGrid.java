@@ -108,7 +108,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
         }
         terminal.repaint();
     }
-
+    
     public void fireUp() {
         if (terminal.requestFocusInWindow()) {
             System.out.println(CLASSID + ".ObjectDisplayGrid(...) requestFocusInWindow Succeeded");
@@ -124,7 +124,7 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
               writeToTerminal(x, y);
             }
         }
-    }
+    }       
 
     private void writeToTerminal(int x, int y) {
         char ch = objectGrid[x][y].getChar();

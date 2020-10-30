@@ -101,7 +101,6 @@ public class Rogue implements Runnable {
                         if(room_id == id){
                             relativeX = list.get(0).get(id - 1).getPosX().get(0) + posX.get(0);
                             relativeY = list.get(0).get(id - 1).getPosY().get(0) + posY.get(0);
-
                         }
                     }
 
@@ -116,6 +115,7 @@ public class Rogue implements Runnable {
                     else{
                         // System.out.println("Player: PosX: " + posX.get(0) + ", PosY: " + posY.get(0));
                         displayGrid.addObjectToDisplay(new Char('@'), relativeX, relativeY + topHeight);
+                        //subList.get(j).get_coord();
                     } //Player
                 }
 
