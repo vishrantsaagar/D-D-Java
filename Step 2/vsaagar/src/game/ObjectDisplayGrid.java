@@ -33,8 +33,12 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
 
        terminal = new AsciiPanel(gamewidth, gameheight);
 
-       objectGrid = (Stack<Char>[][]) new Stack[gamewidth][gameheight];
-
+       objectGrid = new Stack[gamewidth][gameheight];
+       for(int i = 0; i < gamewidth; i++) {
+           for (int j = 0; j < gameheight; j++) {
+               objectGrid[i][j] = new Stack<Char>();
+           }
+       }
        initializeDisplay();
 
        super.add(terminal);
@@ -134,7 +138,16 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
               writeToTerminal(x, y);
             }
         }
-    }       
+    }     
+    
+    public void removeObjectFromDisplay(Char ch, int x, int y) {
+        if ((0 <= x) && (x < objectGrid.length)) {
+            if ((0 <= y) && (y < objectGrid[0].length)) {
+                objectGrid[x][y].pop();
+                writeToTerminal(x, y);
+            }
+        }
+    }
 
     private void writeToTerminal(int x, int y) {
         Char cObj = objectGrid[x][y].peek();
