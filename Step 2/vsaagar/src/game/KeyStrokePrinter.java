@@ -8,6 +8,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
     private static int DEBUG = 1;
     private static String CLASSID = "KeyStrokePrinter";
     private static Queue<Character> inputQueue = null;
+    // private Player p;
     private ObjectDisplayGrid displayGrid;
 
     public KeyStrokePrinter(ObjectDisplayGrid grid) {

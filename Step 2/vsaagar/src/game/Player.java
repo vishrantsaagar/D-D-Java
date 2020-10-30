@@ -35,30 +35,38 @@ public class Player extends Creature{
     {
       pos_X = getPosX().get(0);
       pos_Y = getPosY().get(0);
-      System.out.println("Player: posx:" + pos_X +"and posy:" + pos_Y);
+      System.out.println("Player:get_coord => posx:" + pos_X +"and posy:" + pos_Y);
     }
 
-    public void moveUP()
+    public int moveUP()
     {
       pos_Y = getPosY().get(0);
       int new_Y = pos_Y - 1;
+
+      return new_Y;
     }
 
-    public void moveDOWN()
+    public int moveDOWN()
     {
       pos_Y = getPosY().get(0);
       int new_Y = pos_Y + 1;
+
+      return new_Y;
     }
 
-    public void moveLEFT()
+    public int moveLEFT()
     {
       pos_X = getPosY().get(0);
       int new_X = pos_X - 1;
+
+      return new_X;
     }
 
-    public void moveRIGHT()
+    public int moveRIGHT()
     {
       pos_X = getPosY().get(0);
       int new_X = pos_X + 1;
+
+      return new_X;
     }
 }
