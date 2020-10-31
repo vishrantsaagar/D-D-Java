@@ -10,12 +10,11 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.SAXException;
 
-//Notes:To make player moves: 
-//Files to mess with: Player, Dungeon, ObjectDisplayGrid, KeyStrokePrinter
-//in player we can add like 4 functions to move in 4 directions
-//in dungeon we can check if a space is moveable to
-//in keyStrokePrinter we can use processInput() function in keystroke printer. Use the if statements to move based on the input.
-//Objectdisplaygrid we can first use a stack instead and then use addobjecttodisplay and create new function like remove objectobjecttodisplay to push and pop the character from position to position
+//Agenda: 
+//1)Display top message and bottom message
+//2)Player get beaten up or beats monsters, documented damage decrease
+//3)pick up and drop item
+//4)Inventory at the bottom of display
 
 public class Rogue implements Runnable {
 
@@ -48,6 +47,7 @@ public class Rogue implements Runnable {
         game_width = dungeon.get_width();
         displayGrid = new ObjectDisplayGrid(game_width, game_height);
         topHeight = displayGrid.gettopheight();
+        bottomHeight = displayGrid.getBottomheight();
     }
 
     // public static Player getp1() {
@@ -71,6 +71,33 @@ public class Rogue implements Runnable {
         // list[3] = passage
         displayGrid.initializeDisplay();
 
+        //Top Display
+        displayGrid.addObjectToDisplay(new Char('H'), 0,0);
+        displayGrid.addObjectToDisplay(new Char('P'), 1,0);
+        displayGrid.addObjectToDisplay(new Char(':'), 2,0);
+
+        displayGrid.addObjectToDisplay(new Char('S'), 7,0);
+        displayGrid.addObjectToDisplay(new Char('c'), 8,0);
+        displayGrid.addObjectToDisplay(new Char('o'), 9,0);
+        displayGrid.addObjectToDisplay(new Char('r'), 10,0);
+        displayGrid.addObjectToDisplay(new Char('e'), 11,0);
+        displayGrid.addObjectToDisplay(new Char(':'), 12,0);
+        displayGrid.addObjectToDisplay(new Char('0'), 13,0);
+
+        //Bottom Display
+        displayGrid.addObjectToDisplay(new Char('P'), 0,game_height - bottomHeight - 1);
+        displayGrid.addObjectToDisplay(new Char('a'), 1,game_height - bottomHeight - 1);
+        displayGrid.addObjectToDisplay(new Char('c'), 2,game_height - bottomHeight - 1);
+        displayGrid.addObjectToDisplay(new Char('k'), 3,game_height - bottomHeight - 1);
+        displayGrid.addObjectToDisplay(new Char(':'), 4,game_height - bottomHeight - 1);
+
+        displayGrid.addObjectToDisplay(new Char('I'), 0, game_height - 1);
+        displayGrid.addObjectToDisplay(new Char('n'), 1, game_height - 1);
+        displayGrid.addObjectToDisplay(new Char('f'), 2, game_height - 1);
+        displayGrid.addObjectToDisplay(new Char('o'), 3, game_height - 1);
+        displayGrid.addObjectToDisplay(new Char(':'), 4, game_height - 1);
+
+        //Drawing the stuff
         for (int i = 0; i < list.size(); i++) {
             subList = list.get(i);
             for (int j = 0; j < subList.size(); j++) {
@@ -144,15 +171,21 @@ public class Rogue implements Runnable {
                         }
 
                         if (subList.get(j) instanceof Scroll) {
-                            displayGrid.addObjectToDisplay(new Char('?'), relativeX, relativeY + topHeight);
+                            if (displayGrid.getObjectGrid()[posX.get(0)][posY.get(0)].peek().getChar() == 'X'){}
+                            else
+                                displayGrid.addObjectToDisplay(new Char('?'), relativeX, relativeY + topHeight);
                         }
 
                         else if (subList.get(j) instanceof Sword) {
-                            displayGrid.addObjectToDisplay(new Char('|'), relativeX, relativeY + topHeight);
+                            if (displayGrid.getObjectGrid()[posX.get(0)][posY.get(0)].peek().getChar() == 'X'){}
+                            else
+                                displayGrid.addObjectToDisplay(new Char('|'), relativeX, relativeY + topHeight);
                         }
 
                         else if (subList.get(j) instanceof Armor) {
-                            displayGrid.addObjectToDisplay(new Char(']'), relativeX, relativeY + topHeight);
+                            if (displayGrid.getObjectGrid()[posX.get(0)][posY.get(0)].peek().getChar() == 'X'){}
+                            else
+                                displayGrid.addObjectToDisplay(new Char(']'), relativeX, relativeY + topHeight);
                         }
                     }
                 }
@@ -215,7 +248,7 @@ public class Rogue implements Runnable {
         // check if a filename is passed in. If not, print a usage message.
         // If it is, open the file
         String fileName = null;
-        fileName = "game/xmlfiles/" + "testDrawing.xml"; // ../xmlfiles. + args[0]
+        fileName = "game/xmlfiles/" + "badScroll.xml"; // ../xmlfiles. + args[0]
 
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         try {
@@ -247,16 +280,12 @@ public class Rogue implements Runnable {
                     player_room = (Room) roomsreq.get(j-1);
                 }
 
-            System.out.println("X:" + player_room.getPosX());
-            System.out.println("Y:" + player_room.getPosY());
-
             int final_x = player_room.getPosX().get(0);
             int final_y = player_room.getPosY().get(0) + topHeight;
 
             plays.setstartingX(final_x);
             plays.setstartingY(final_y);
 
-            System.out.println("in rogue before start:" + plays + " " + room_ID);
             rogue.start();
 
             rog.keyStrokePrinter = new Thread(new KeyStrokePrinter(displayGrid, plays));
