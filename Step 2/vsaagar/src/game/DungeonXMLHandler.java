@@ -356,7 +356,6 @@ public class DungeonXMLHandler extends DefaultHandler {
         
         else if(bhp){
             Displayable x = dispstack.peek();
-            
             x.setHp(Integer.parseInt(data.toString()));
             bhp = false;
         }

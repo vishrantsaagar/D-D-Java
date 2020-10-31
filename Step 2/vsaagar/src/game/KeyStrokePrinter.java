@@ -52,7 +52,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                 if (ch == 'X') {
                     System.out.println("got an X, ending input checking");
                 }
-                else if(ch == 'k'){
+                else if(ch == 'w'){
                     if(displayGrid.getObjectGrid()[posX][posY-1].peek().getChar() == 'X'){}
                     else if(displayGrid.getObjectGrid()[posX][posY-1].peek().getChar() == ' '){}
                     else {
@@ -62,7 +62,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     }
                 }
 
-                else if(ch == 'h'){
+                else if(ch == 'a'){
                     if(displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'X'){}
                     else if(displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == ' '){}
                     else {
@@ -72,7 +72,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     }
                 }
 
-                else if(ch == 'l'){
+                else if(ch == 'd'){
                     if(displayGrid.getObjectGrid()[posX+1][posY].peek().getChar() == 'X'){}
                     else if(displayGrid.getObjectGrid()[posX+1][posY].peek().getChar() == ' '){}
                     else {
@@ -82,7 +82,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     }
                 }
 
-                else if(ch == 'j'){
+                else if(ch == 's'){
                     if(displayGrid.getObjectGrid()[posX][posY+1].peek().getChar() == 'X'){}
                     else if(displayGrid.getObjectGrid()[posX][posY+1].peek().getChar() == ' '){}
                     else {

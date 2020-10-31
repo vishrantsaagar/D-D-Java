@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Dungeon name="testDrawing" width="80" topHeight="2" gameHeight="34" bottomHeight="4">
+<Dungeon name="testDrawing" width="80" topHeight="2" gameHeight="34" bottomHeight="2">
     <Rooms>
         <Room room="1">
             <visible>1</visible>

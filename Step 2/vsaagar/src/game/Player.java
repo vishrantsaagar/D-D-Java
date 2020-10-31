@@ -8,11 +8,22 @@ public class Player extends Creature{
     private Player player;
     private int startX;
     private int startY;
+    private int hp; 
 
     public void setPlayer(Player _player)
     {
       player = _player;
       System.out.println("Player:" + player);
+    }
+
+    public void setHp(int HP)
+    {
+      hp = HP;
+    }
+
+    public int getHp()
+    {
+      return hp;
     }
 
     public Player getPlayer()
@@ -76,28 +87,4 @@ public class Player extends Creature{
     {
       startY = getPosY().get(0) + y;
     }
-
-    //public void moveUP()
-    //{
-    //  pos_Y = getPosY().get(0);
-    //  int new_Y = pos_Y - 1;
-    //}
-//
-    //public void moveDOWN()
-    //{
-    //  pos_Y = getPosY().get(0);
-    //  int new_Y = pos_Y + 1;
-    //}
-//
-    //public void moveLEFT()
-    //{
-    //  pos_X = getPosY().get(0);
-    //  int new_X = pos_X - 1;
-    //}
-//
-    //public void moveRIGHT()
-    //{
-    //  pos_X = getPosY().get(0);
-    //  int new_X = pos_X + 1;
-    //}
 }

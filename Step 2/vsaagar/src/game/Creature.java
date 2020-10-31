@@ -2,6 +2,8 @@ package game;
 
 public class Creature extends Displayable{
     
+    private int hp;
+
     public Creature()
     {
         System.out.println("Creature");
@@ -9,9 +11,14 @@ public class Creature extends Displayable{
 
     public void setHp(int h)
     {
-        System.out.println("Creature:setHp" + h);
+        hp = h;
     }
 
+    public int getHp()
+    {
+        return hp;
+    }
+    
     public void setHpMoves(int hpm)
     {
         System.out.println("Creature:setHpMoves" + hpm);
