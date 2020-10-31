@@ -118,10 +118,10 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
     }
 
     public final void initializeDisplay() {
-        //Char ch = new Char('.');
+        Char ch = new Char(' ');
         for (int i = 0; i < gamewidth; i++) {
             for (int j = 0; j < gameheight; j++) {
-                //addObjectToDisplay(ch, i, j);
+                addObjectToDisplay(ch, i, j);
             }
         }
         terminal.repaint();

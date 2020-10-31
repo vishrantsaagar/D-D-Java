@@ -54,7 +54,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                 }
                 else if(ch == 'w'){
                     if(displayGrid.getObjectGrid()[posX][posY-1].peek().getChar() == 'X'){}
-                    else if(displayGrid.getObjectGrid()[posX][posY-1] == null){}
+                    else if(displayGrid.getObjectGrid()[posX][posY-1].peek().getChar() == ' '){}
                     else {
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posY = posY - 1;
@@ -64,7 +64,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                 else if(ch == 'a'){
                     if(displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'X'){}
-                    else if(displayGrid.getObjectGrid()[posX-1][posY] == null){}
+                    else if(displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == ' '){}
                     else {
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posX = posX - 1;
@@ -74,7 +74,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                 else if(ch == 'd'){
                     if(displayGrid.getObjectGrid()[posX+1][posY].peek().getChar() == 'X'){}
-                    else if(displayGrid.getObjectGrid()[posX+1][posY] == null){}
+                    else if(displayGrid.getObjectGrid()[posX+1][posY].peek().getChar() == ' '){}
                     else {
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posX = posX + 1;
@@ -84,7 +84,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                 else if(ch == 's'){
                     if(displayGrid.getObjectGrid()[posX][posY+1].peek().getChar() == 'X'){}
-                    else if(displayGrid.getObjectGrid()[posX][posY+1] == null){}
+                    else if(displayGrid.getObjectGrid()[posX][posY+1].peek().getChar() == ' '){}
                     else {
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posY = posY + 1;
@@ -95,6 +95,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                 else {
                     System.out.println("character " + ch + " entered on the keyboard");
                 }
+        
             }
         }
         return true;

@@ -69,6 +69,8 @@ public class Rogue implements Runnable {
         // list[1] = creature
         // list[2] = items
         // list[3] = passage
+        displayGrid.initializeDisplay();
+
         for (int i = 0; i < list.size(); i++) {
             subList = list.get(i);
             for (int j = 0; j < subList.size(); j++) {
@@ -206,9 +208,6 @@ public class Rogue implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace(System.err);
         }
-
-        displayGrid.initializeDisplay();
-
     }
 
     public static void main(String[] args) throws Exception {
