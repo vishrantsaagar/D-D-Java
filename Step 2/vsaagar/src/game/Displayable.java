@@ -116,26 +116,29 @@ public class Displayable {
 	public void get_coord() {
 	}
 
-    public int moveUP()
+    public void moveUP()
     {
-
-        return 0;
     }
 
-    public int moveDOWN()
+    public void moveDOWN()
     {
-
-        return 0;
     }
 
-    public int moveLEFT()
+    public void moveLEFT()
     {
-        return 0;
+
     }
 
-    public int moveRIGHT()
+    public void moveRIGHT()
     {
+    }
 
-        return 0;
+    public void setPlayer(Player _player)
+    {
+    }
+
+    public Player getPlayer()
+    {
+        return null;
     }
 }

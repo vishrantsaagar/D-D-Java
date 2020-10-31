@@ -32,6 +32,10 @@ public class Dungeon {
         return list;
     }
 
+    public ArrayList<Displayable> getRooms(){
+        return rooms;
+    }
+    
     public int get_gameHeight() {
         return _gameHeight;
     }

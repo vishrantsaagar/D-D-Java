@@ -1,12 +1,16 @@
 package game;
 
+import java.util.ArrayList;
+
 //import java.util.ArrayList;
 
 public class Room extends Structure{
     
     private int _r1;
-    // private ArrayList<Displayable> creatures = new ArrayList<Displayable>();
-    // private ArrayList<Displayable> items = new ArrayList<Displayable>();
+    private int pos_X;
+    private int pos_Y;
+    private ArrayList<Creature> creatures = new ArrayList<Creature>();
+    private ArrayList<Item> items = new ArrayList<Item>();
 
     public Room(int r1)
     {
@@ -19,14 +23,31 @@ public class Room extends Structure{
         System.out.println("Room:setID" + room);
     }
 
-    public void setCreature(Creature c1)
+    public void addCreature(Creature c1)
     {
-        // creatures.add(c1);
+        creatures.add(c1);
         System.out.println("Room:setCreature");
     }
 
+    public ArrayList<Creature> getCreatures(){
+        return creatures;
+    }
+
     public void setItem(Item item){
-        // items.add(item);
+        items.add(item);
         System.out.println("Room:setItem");
     }
+
+    public int getX()
+    {
+      pos_X = getPosX().get(0);
+      return pos_X;
+    }
+    
+    public int getY()
+    {
+      pos_Y = getPosY().get(0);
+      return pos_Y;
+    }
+
 }

@@ -5,6 +5,20 @@ public class Player extends Creature{
     private int room_id;
     private int pos_X;
     private int pos_Y;
+    private Player player;
+    private int startX;
+    private int startY;
+
+    public void setPlayer(Player _player)
+    {
+      player = _player;
+      System.out.println("Player:" + player);
+    }
+
+    public Player getPlayer()
+    {
+      return player;
+    }
 
     public Player( )
     {
@@ -31,42 +45,59 @@ public class Player extends Creature{
        System.out.println("Player:setID"+room + "\n" +serial);
     }    
 
-    public void get_coord()
+    public int getX()
     {
       pos_X = getPosX().get(0);
-      pos_Y = getPosY().get(0);
-      System.out.println("Player:get_coord => posx:" + pos_X +"and posy:" + pos_Y);
+      return pos_X;
     }
-
-    public int moveUP()
+    
+    public int getY()
     {
       pos_Y = getPosY().get(0);
-      int new_Y = pos_Y - 1;
-
-      return new_Y;
+      return pos_Y;
     }
 
-    public int moveDOWN()
+    public int getstartingX()
     {
-      pos_Y = getPosY().get(0);
-      int new_Y = pos_Y + 1;
+      return startX;
+    } 
 
-      return new_Y;
-    }
-
-    public int moveLEFT()
+    public int getstartingY()
     {
-      pos_X = getPosY().get(0);
-      int new_X = pos_X - 1;
-
-      return new_X;
+      return startY;
     }
 
-    public int moveRIGHT()
+    public void setstartingX(int x)
     {
-      pos_X = getPosY().get(0);
-      int new_X = pos_X + 1;
+      startX = getPosX().get(0) + x;
+    } 
 
-      return new_X;
+    public void setstartingY(int y)
+    {
+      startY = getPosY().get(0) + y;
     }
+
+    //public void moveUP()
+    //{
+    //  pos_Y = getPosY().get(0);
+    //  int new_Y = pos_Y - 1;
+    //}
+//
+    //public void moveDOWN()
+    //{
+    //  pos_Y = getPosY().get(0);
+    //  int new_Y = pos_Y + 1;
+    //}
+//
+    //public void moveLEFT()
+    //{
+    //  pos_X = getPosY().get(0);
+    //  int new_X = pos_X - 1;
+    //}
+//
+    //public void moveRIGHT()
+    //{
+    //  pos_X = getPosY().get(0);
+    //  int new_X = pos_X + 1;
+    //}
 }

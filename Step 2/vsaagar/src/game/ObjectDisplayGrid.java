@@ -27,6 +27,10 @@ public class ObjectDisplayGrid extends JFrame implements KeyListener, InputSubje
     private static int bottomheight;
     private static int gamewidth;
 
+    public Stack<Char>[][] getObjectGrid(){
+        return objectGrid;
+    }
+
     public ObjectDisplayGrid(int _width, int _height) {
        gamewidth = _width;
        gameheight = _height;

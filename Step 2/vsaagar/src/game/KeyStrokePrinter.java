@@ -7,13 +7,21 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
     private static int DEBUG = 1;
     private static String CLASSID = "KeyStrokePrinter";
-    private static Queue<Character> inputQueue = null;
-    // private Player p;
+    private static Queue<Character> inputQueue;
     private ObjectDisplayGrid displayGrid;
+    private int posX;
+    private int posY;
+    private Player p1;
 
-    public KeyStrokePrinter(ObjectDisplayGrid grid) {
+    public KeyStrokePrinter(ObjectDisplayGrid grid, Player _p1) {
         inputQueue = new ConcurrentLinkedQueue<>();
         displayGrid = grid;
+        p1 = _p1;
+
+        posX = p1.getstartingX();
+        posY = p1.getstartingY();
+
+        System.out.println("Coordinates:" + posX + "," + posY);
     }
 
     @Override
@@ -28,7 +36,6 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
         try {
             Thread.sleep(20);
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -36,27 +43,57 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
     private boolean processInput() {
 
         char ch;
-
         boolean processing = true;
         while (processing) {
             if (inputQueue.peek() == null) {
                 processing = false;
             } else {
                 ch = inputQueue.poll();
-                if (DEBUG > 1) {
-                    System.out.println(CLASSID + ".processInput peek is " + ch);
+                if (ch == 'X') {
+                    System.out.println("got an X, ending input checking");
                 }
-                if (ch == 'w') {
-                    //moveUP();
+                else if(ch == 'w'){
+                    if(displayGrid.getObjectGrid()[posX][posY-1].peek().getChar() == 'X'){}
+                    else if(displayGrid.getObjectGrid()[posX][posY-1].peek().getChar() == 	' '){}
+                    else {
+                        displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                        posY = posY - 1;
+                        displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+                    }
                 }
-                else if (ch == 'd') {
-                    //moveRIGHT();
+
+                else if(ch == 'a'){
+                    if(displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'X'){}
+                    else if(displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 	' '){}
+                    else {
+                        displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                        posX = posX - 1;
+                        displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+                    }
                 }
-                else if (ch == 'a') {
-                    //moveLEFT();
+
+                else if(ch == 'd'){
+                    if(displayGrid.getObjectGrid()[posX+1][posY].peek().getChar() == 'X'){}
+                    else if(displayGrid.getObjectGrid()[posX+1][posY].peek().getChar() == 	' '){}
+                    else {
+                        displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                        posX = posX + 1;
+                        displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+                    }
                 }
-                else if (ch == 's') {
-                    //moveDOWN();
+
+                else if(ch == 's'){
+                    if(displayGrid.getObjectGrid()[posX][posY+1].peek().getChar() == 'X'){}
+                    else if(displayGrid.getObjectGrid()[posX][posY+1].peek().getChar() == 	' '){}
+                    else {
+                        displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                        posY = posY + 1;
+                        displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+                    }
+                }
+                
+                else {
+                    System.out.println("character " + ch + " entered on the keyboard");
                 }
             }
         }

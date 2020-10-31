@@ -32,12 +32,15 @@ public class Rogue implements Runnable {
     private ArrayList<Integer> posY;
     private char type = '@';
     private int HP;
-    private int topHeight;
+    private static int topHeight;
     private int bottomHeight;
-
+    // private static Player currPlayer;
+    private static ArrayList<Creature> creatures;
+    private static ArrayList<Displayable> roomsreq;
     public char ch;
     private ArrayList<ArrayList<Displayable>> list;
     private ArrayList<Displayable> subList;
+    private static Room player_room;
 
     public Rogue(Dungeon dungeon) {
         list = dungeon.getList();
@@ -47,23 +50,28 @@ public class Rogue implements Runnable {
         topHeight = displayGrid.gettopheight();
     }
 
+    // public static Player getp1() {
+    // System.out.println(currPlayer);
+    // return currPlayer;
+    // }
+
     @Override
-    public void run() { 
-        
-       displayGrid.fireUp();
-        //0 - rooms, 1 - creatues, 2 - items, 3 - passages
-        //Monsters = Trolls: T, Snakes: S, Hob: H, 
-        //player: @ 
-        //rooms: Walls - X and Floor - ., 
-        //Passages - #, 
-        //Connection between Passage and Room - +,
-        //list[0] = rooms
-        //list[1] = creature
-        //list[2] = items
-        //list[3] = passage
-        for(int i = 0; i < list.size(); i++){
+    public void run() {
+
+        //displayGrid.fireUp();
+        // 0 - rooms, 1 - creatues, 2 - items, 3 - passages
+        // Monsters = Trolls: T, Snakes: S, Hob: H,
+        // player: @
+        // rooms: Walls - X and Floor - .,
+        // Passages - #,
+        // Connection between Passage and Room - +,
+        // list[0] = rooms
+        // list[1] = creature
+        // list[2] = items
+        // list[3] = passage
+        for (int i = 0; i < list.size(); i++) {
             subList = list.get(i);
-            for(int j = 0; j < subList.size(); j++){
+            for (int j = 0; j < subList.size(); j++) {
 
                 width = subList.get(j).getWidth();
                 height = subList.get(j).getHeight();
@@ -72,85 +80,83 @@ public class Rogue implements Runnable {
                 type = subList.get(j).getType();
                 room_id = subList.get(j).getRoomID();
 
-                if(i == 0)
-                {
+                if (i == 0) {
                     int l = 0;
-                    for(int y = posY.get(0); y < posY.get(0) + height; y++)
-                    {
-                        for(l =  posX.get(0) + 1; l < posX.get(0) + width - 1; l++)
-                        {
+                    for (int y = posY.get(0); y < posY.get(0) + height; y++) {
+                        for (l = posX.get(0) + 1; l < posX.get(0) + width - 1; l++) {
                             displayGrid.addObjectToDisplay(new Char('.'), l, y + topHeight);
                         }
 
                         displayGrid.addObjectToDisplay(new Char('X'), posX.get(0), y + topHeight);
                         displayGrid.addObjectToDisplay(new Char('X'), posX.get(0) + width - 1, y + topHeight);
                     }
-                    for(int x = posX.get(0); x < posX.get(0) + width; x++)
-                    {
+                    for (int x = posX.get(0); x < posX.get(0) + width; x++) {
                         displayGrid.addObjectToDisplay(new Char('X'), x, posY.get(0) + topHeight);
                         displayGrid.addObjectToDisplay(new Char('X'), x, posY.get(0) + height - 1 + topHeight);
                     }
                 }
 
-                else if(i == 1){
+                else if (i == 1) {
 
                     int relativeY = -1;
                     int relativeX = -1;
 
-                    for(int id = 1; id <= list.get(0).size(); id++){
-                        if(room_id == id){
+                    for (int id = 1; id <= list.get(0).size(); id++) {
+                        if (room_id == id) {
                             relativeX = list.get(0).get(id - 1).getPosX().get(0) + posX.get(0);
                             relativeY = list.get(0).get(id - 1).getPosY().get(0) + posY.get(0);
                         }
                     }
 
-                    if(type == 'T' | type == 'S' | type == 'H'){
-                        // System.out.println("Monster: PosX: " + posX.get(0) + ", PosY: " + posY.get(0));
-                        //id = subList.get(j).getRoomID()
-                        //if(id = 1): list[0].sublist[0].posX and list[0].subList[0].posY
+                    if (type == 'T' | type == 'S' | type == 'H') {
+                        // System.out.println("Monster: PosX: " + posX.get(0) + ", PosY: " +
+                        // posY.get(0));
+                        // id = subList.get(j).getRoomID()
+                        // if(id = 1): list[0].sublist[0].posX and list[0].subList[0].posY
 
                         displayGrid.addObjectToDisplay(new Char(type), relativeX, relativeY + topHeight);
-                    } //Monster 
+                    } // Monster
 
-                    else{
-                        // System.out.println("Player: PosX: " + posX.get(0) + ", PosY: " + posY.get(0));
+                    else {
+                        // System.out.println("Player: PosX: " + posX.get(0) + ", PosY: " +
+                        // posY.get(0));
                         displayGrid.addObjectToDisplay(new Char('@'), relativeX, relativeY + topHeight);
-                        //subList.get(j).get_coord();
-                    } //Player
+                        // currPlayer = (Player) subList.get(j);
+                        // subList.get(j).setPlayer(currPlayer);
+                        // System.out.println("display:" + currPlayer);
+
+                    } // Player
                 }
 
-                else if(i == 2){
-                    if(posX.size() != 0 & posY.size() != 0){
+                else if (i == 2) {
+                    if (posX.size() != 0 & posY.size() != 0) {
 
                         int relativeY = -1;
                         int relativeX = -1;
 
-                        for(int id = 1; id <= list.get(0).size(); id++){
-                            if(room_id == id){
+                        for (int id = 1; id <= list.get(0).size(); id++) {
+                            if (room_id == id) {
                                 relativeX = list.get(0).get(id - 1).getPosX().get(0) + posX.get(0);
                                 relativeY = list.get(0).get(id - 1).getPosY().get(0) + posY.get(0);
-
                             }
                         }
 
-                        if(subList.get(j) instanceof Scroll){
+                        if (subList.get(j) instanceof Scroll) {
                             displayGrid.addObjectToDisplay(new Char('?'), relativeX, relativeY + topHeight);
                         }
 
-                        else if(subList.get(j) instanceof Sword){
+                        else if (subList.get(j) instanceof Sword) {
                             displayGrid.addObjectToDisplay(new Char('|'), relativeX, relativeY + topHeight);
                         }
 
-                        else if(subList.get(j) instanceof Armor){
+                        else if (subList.get(j) instanceof Armor) {
                             displayGrid.addObjectToDisplay(new Char(']'), relativeX, relativeY + topHeight);
                         }
                     }
                 }
 
-                else if(i == 3){
-                    for(int k = 0; k < posX.size(); k++){
-                        // System.out.println("------------------------------------------");
-                        // System.out.println("PosX: " + posX.get(k) + ", PosY: " + posY.get(k));
+                else if (i == 3) {
+                    for (int k = 0; k < posX.size(); k++) {
                         displayGrid.addObjectToDisplay(new Char('+'), posX.get(k), posY.get(k) + topHeight);
 
                         int currX = posX.get(k);
@@ -158,57 +164,52 @@ public class Rogue implements Runnable {
                         int nextX = -1;
                         int nextY = -1;
 
-                        if(k < posX.size() - 1){
+                        if (k < posX.size() - 1) {
                             nextX = posX.get(k + 1);
                             nextY = posY.get(k + 1) + topHeight;
-
-                            //System.out.println("CURR: " + currX + "AND " + currY);
-
-                            //System.out.println("NEXT: " + nextX + "AND " + nextY);
                         }
-
 
                         int relativeY = nextY - currY;
                         int relativeX = nextX - currX;
 
-                        if(relativeX == 0 & relativeY > 0){
-                            for(int step = currY + 1; step < nextY; step++){
+                        if (relativeX == 0 & relativeY > 0) {
+                            for (int step = currY + 1; step < nextY; step++) {
                                 displayGrid.addObjectToDisplay(new Char('#'), currX, step);
                             }
                         }
 
-                        else if(relativeX == 0 & relativeY < 0){
-                            for(int step = currY - 1; step > nextY; step--){
+                        else if (relativeX == 0 & relativeY < 0) {
+                            for (int step = currY - 1; step > nextY; step--) {
                                 displayGrid.addObjectToDisplay(new Char('#'), currX, step);
                             }
                         }
 
-                        else if(relativeX > 0 & relativeY == 0){
-                            for(int step = currX + 1; step < nextX; step++){
+                        else if (relativeX > 0 & relativeY == 0) {
+                            for (int step = currX + 1; step < nextX; step++) {
                                 displayGrid.addObjectToDisplay(new Char('#'), step, currY);
                             }
                         }
 
-                        else if(relativeX < 0 & relativeY == 0){
-                            for(int step = currX - 1; step > nextX; step--){
+                        else if (relativeX < 0 & relativeY == 0) {
+                            for (int step = currX - 1; step > nextX; step--) {
                                 displayGrid.addObjectToDisplay(new Char('#'), step, currY);
                             }
                         }
-                        
+
                     }
                 }
             }
         }
 
         try {
-             Thread.sleep(10000000);
+            Thread.sleep(10000000);
         } catch (InterruptedException e) {
-             e.printStackTrace(System.err);
+            e.printStackTrace(System.err);
         }
 
         displayGrid.initializeDisplay();
 
-    } 
+    }
 
     public static void main(String[] args) throws Exception {
 
@@ -218,23 +219,53 @@ public class Rogue implements Runnable {
         fileName = "game/xmlfiles/" + "testDrawing.xml"; // ../xmlfiles. + args[0]
 
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
-
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
             DungeonXMLHandler handler = new DungeonXMLHandler();
             saxParser.parse(new File(fileName), handler);
 
-        Dungeon dungeon = handler.getDungeon();
-        Rogue rog = new Rogue(dungeon);
-        Thread rogue = new Thread(rog);
-        rogue.start();
+            Dungeon dungeon = handler.getDungeon();
+            Room room = handler.getRoom();
 
-        rog.keyStrokePrinter = new Thread(new KeyStrokePrinter(displayGrid));
-        rog.keyStrokePrinter.start();
+            Rogue rog = new Rogue(dungeon);
+            Thread rogue = new Thread(rog);
 
-        rogue.join();
-        rog.keyStrokePrinter.join();
-    
+            roomsreq = dungeon.getRooms();
+            player_room = null;
+
+            Player plays = null;
+            int room_ID = 0;
+
+            creatures = room.getCreatures();
+            for (int i = 0; i < creatures.size(); i++)
+                if (creatures.get(i) instanceof Player) {
+                    plays = (Player) creatures.get(i);
+                    room_ID = creatures.get(i).getRoomID();
+                }
+
+            for (int j = 1; j <= roomsreq.size(); j++) //possible bug around this
+                if (j == room_ID) {
+                    player_room = (Room) roomsreq.get(j-1);
+                }
+
+            System.out.println("X:" + player_room.getPosX());
+            System.out.println("Y:" + player_room.getPosY());
+
+            int final_x = player_room.getPosX().get(0);
+            int final_y = player_room.getPosY().get(0) + topHeight;
+
+            plays.setstartingX(final_x);
+            plays.setstartingY(final_y);
+
+            System.out.println("in rogue before start:" + plays + " " + room_ID);
+            rogue.start();
+
+            rog.keyStrokePrinter = new Thread(new KeyStrokePrinter(displayGrid, plays));
+            rog.keyStrokePrinter.start();
+
+            rogue.join();
+            rog.keyStrokePrinter.join();
+
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace(System.out);
         }

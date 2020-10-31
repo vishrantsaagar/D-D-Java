@@ -14,6 +14,7 @@ public class DungeonXMLHandler extends DefaultHandler {
     private Stack<Action> actstack = null;
  
     private Dungeon dungeon = new Dungeon();
+    private Room room = new Room(0);
     private Room currRoom = null;
     private Creature currCreature = null;
     private Action currAction = null;
@@ -23,6 +24,10 @@ public class DungeonXMLHandler extends DefaultHandler {
 
     public Dungeon getDungeon(){
         return dungeon;
+    }
+
+    public Room getRoom(){
+        return room;
     }
 
     private boolean bvisible = false;
@@ -92,7 +97,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             dungeon.addCreature(m1);
 
             currCreature = m1;
-
+            room.addCreature(m1);
             dispstack.push(currCreature);
 
         } else if(qName.equalsIgnoreCase("type")) {
@@ -250,6 +255,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             currPlayer = p1;
             dispstack.push(currPlayer);
             dungeon.addCreature(p1);
+            room.addCreature(p1);
 
         }else if(qName.equalsIgnoreCase("hpMoves")) {
             bhpMoves = true;
