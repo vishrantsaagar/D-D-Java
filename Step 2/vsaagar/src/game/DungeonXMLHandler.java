@@ -61,7 +61,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             
             ObjectDisplayGrid.getObjectDisplayGrid(gameHeight, width, topHeight, bottomHeight);
 
-            dungeon.getDungeon(dunName, width, gameHeight);
+            dungeon.getDungeon(dunName, width, gameHeight, topHeight, bottomHeight);
 
         } else if(qName.equalsIgnoreCase("Rooms")) { //order followed in testDrawing.xml
 

@@ -33,6 +33,7 @@ public class Rogue implements Runnable {
     private int Hp;
     private static int topHeight;
     private int bottomHeight;
+    private int displayHeight;
     // private static Player currPlayer;
     private static ArrayList<Creature> creatures;
     private static ArrayList<Displayable> roomsreq;
@@ -45,9 +46,10 @@ public class Rogue implements Runnable {
         list = dungeon.getList();
         game_height = dungeon.get_gameHeight();
         game_width = dungeon.get_width();
-        displayGrid = new ObjectDisplayGrid(game_width, game_height);
-        topHeight = displayGrid.gettopheight();
-        bottomHeight = displayGrid.getBottomheight();
+        topHeight = dungeon.gettopheight();
+        bottomHeight = dungeon.getBottomheight();
+        displayHeight = game_height + topHeight + bottomHeight;
+        displayGrid = new ObjectDisplayGrid(game_width, displayHeight);
     }
 
     // public static Player getp1() {
@@ -85,17 +87,17 @@ public class Rogue implements Runnable {
         displayGrid.addObjectToDisplay(new Char('0'), 13,0);
 
         //Bottom Display
-        displayGrid.addObjectToDisplay(new Char('P'), 0,game_height - bottomHeight - 1);
-        displayGrid.addObjectToDisplay(new Char('a'), 1,game_height - bottomHeight - 1);
-        displayGrid.addObjectToDisplay(new Char('c'), 2,game_height - bottomHeight - 1);
-        displayGrid.addObjectToDisplay(new Char('k'), 3,game_height - bottomHeight - 1);
-        displayGrid.addObjectToDisplay(new Char(':'), 4,game_height - bottomHeight - 1);
+        displayGrid.addObjectToDisplay(new Char('P'), 0,displayHeight - bottomHeight - 1);
+        displayGrid.addObjectToDisplay(new Char('a'), 1,displayHeight - bottomHeight - 1);
+        displayGrid.addObjectToDisplay(new Char('c'), 2,displayHeight - bottomHeight - 1);
+        displayGrid.addObjectToDisplay(new Char('k'), 3,displayHeight - bottomHeight - 1);
+        displayGrid.addObjectToDisplay(new Char(':'), 4,displayHeight - bottomHeight - 1);
 
-        displayGrid.addObjectToDisplay(new Char('I'), 0, game_height - 1);
-        displayGrid.addObjectToDisplay(new Char('n'), 1, game_height - 1);
-        displayGrid.addObjectToDisplay(new Char('f'), 2, game_height - 1);
-        displayGrid.addObjectToDisplay(new Char('o'), 3, game_height - 1);
-        displayGrid.addObjectToDisplay(new Char(':'), 4, game_height - 1);
+        displayGrid.addObjectToDisplay(new Char('I'), 0, displayHeight - 1);
+        displayGrid.addObjectToDisplay(new Char('n'), 1, displayHeight - 1);
+        displayGrid.addObjectToDisplay(new Char('f'), 2, displayHeight - 1);
+        displayGrid.addObjectToDisplay(new Char('o'), 3, displayHeight - 1);
+        displayGrid.addObjectToDisplay(new Char(':'), 4, displayHeight - 1);
 
         //Drawing the stuff
         for (int i = 0; i < list.size(); i++) {
