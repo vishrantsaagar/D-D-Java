@@ -256,7 +256,7 @@ public class Rogue implements Runnable {
         case 1:
            // note that the relative file path may depend on what IDE you are
        // using.  This worked for NetBeans.
-           fileName = "xmlfiles/" + args[0]; //../xmlfiles. + args[0]
+           fileName = "../xmlfiles/" + args[0]; //../xmlfiles. + args[0]
            break;
         default:
            System.out.println("java Test <xmlfilename>");
