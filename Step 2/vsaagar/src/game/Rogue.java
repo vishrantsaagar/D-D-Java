@@ -74,16 +74,9 @@ public class Rogue implements Runnable {
         displayGrid.initializeDisplay();
 
         //Top Display
-        displayGrid.addObjectToDisplay(new Char('H'), 0,0);
-        displayGrid.addObjectToDisplay(new Char('P'), 1,0);
-        displayGrid.addObjectToDisplay(new Char(':'), 2,0);
-
-        displayGrid.addObjectToDisplay(new Char('S'), 7,0);
-        displayGrid.addObjectToDisplay(new Char('c'), 8,0);
-        displayGrid.addObjectToDisplay(new Char('o'), 9,0);
-        displayGrid.addObjectToDisplay(new Char('r'), 10,0);
-        displayGrid.addObjectToDisplay(new Char('e'), 11,0);
-        displayGrid.addObjectToDisplay(new Char(':'), 12,0);
+        displayGrid.addObjectToDisplay(new Char('H'), 1,0);
+        displayGrid.addObjectToDisplay(new Char('P'), 2,0);
+        displayGrid.addObjectToDisplay(new Char(':'), 3,0);
 
         //Bottom Display
         displayGrid.addObjectToDisplay(new Char('P'), 0,displayHeight - bottomHeight - 1);
@@ -153,11 +146,20 @@ public class Rogue implements Runnable {
                         displayGrid.addObjectToDisplay(new Char('@'), relativeX, relativeY + topHeight);
                         Hp = subList.get(j).getHp(); //20
                         String nums = Integer.toString(Hp);
-                        int ind = 3;
+                        int ind = 5;
                         for(char h : nums.toCharArray()) {
                             displayGrid.addObjectToDisplay(new Char(h), ind,0);
                             ind++;
                         }
+
+                        ind += 2;
+
+                        displayGrid.addObjectToDisplay(new Char('S'), ind,0);
+                        displayGrid.addObjectToDisplay(new Char('c'), ind + 1,0);
+                        displayGrid.addObjectToDisplay(new Char('o'), ind + 2,0);
+                        displayGrid.addObjectToDisplay(new Char('r'), ind + 3,0);
+                        displayGrid.addObjectToDisplay(new Char('e'), ind + 4,0);
+                        displayGrid.addObjectToDisplay(new Char(':'), ind + 5,0);
                     } // Player
                 }
 
@@ -259,7 +261,7 @@ public class Rogue implements Runnable {
            fileName = "../xmlfiles/" + args[0]; //../xmlfiles. + args[0]
            break;
         default:
-           System.out.println("java Test <xmlfilename>");
+           System.out.println("java game.Rogue <xmlfilename>");
        return;
         }
 
