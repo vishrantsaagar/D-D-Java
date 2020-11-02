@@ -1,2 +1,2 @@
-# D&D-Java
-Working on a guided project to create Rogue in Java
+# Rogue-like game
+Project to create Rogue in Java
