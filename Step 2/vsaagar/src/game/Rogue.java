@@ -152,12 +152,13 @@ public class Rogue implements Runnable {
                         // System.out.println("Player: PosX: " + posX.get(0) + ", PosY: " +
                         // posY.get(0));
                         displayGrid.addObjectToDisplay(new Char('@'), relativeX, relativeY + topHeight);
-                        Hp = subList.get(j).getHp();
-                        char out1s = (char) (Hp + 28);
-                        int dig10 = Hp / 10;
-                        char out10s = (char) (dig10 + 48);
-                        displayGrid.addObjectToDisplay(new Char(out10s), 4, 0);
-                        displayGrid.addObjectToDisplay(new Char(out1s), 5, 0);
+                        Hp = subList.get(j).getHp(); //20
+                        String nums = Integer.toString(Hp);
+                        int ind = 3;
+                        for(char h : nums.toCharArray()) {
+                            displayGrid.addObjectToDisplay(new Char(h), ind,0);
+                            ind++;
+                        }
                     } // Player
                 }
 
@@ -252,7 +253,7 @@ public class Rogue implements Runnable {
         // check if a filename is passed in. If not, print a usage message.
         // If it is, open the file
         String fileName = null;
-        fileName = "game/xmlfiles/" + "testDrawing.xml"; // ../xmlfiles. + args[0]
+        fileName = "game/xmlfiles/" + "badScroll.xml"; // ../xmlfiles. + args[0]
 
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         try {
