@@ -74,10 +74,16 @@ public class Rogue implements Runnable {
         displayGrid.initializeDisplay();
 
         //Top Display
-        displayGrid.addObjectToDisplay(new Char('H'), 1,0);
-        displayGrid.addObjectToDisplay(new Char('P'), 2,0);
-        displayGrid.addObjectToDisplay(new Char(':'), 3,0);
+        displayGrid.addObjectToDisplay(new Char('H'), 0,0);
+        displayGrid.addObjectToDisplay(new Char('P'), 1,0);
+        displayGrid.addObjectToDisplay(new Char(':'), 2,0);
 
+        displayGrid.addObjectToDisplay(new Char('S'), 8 ,0);
+        displayGrid.addObjectToDisplay(new Char('c'), 9 ,0);
+        displayGrid.addObjectToDisplay(new Char('o'), 10 ,0);
+        displayGrid.addObjectToDisplay(new Char('r'), 11 ,0);
+        displayGrid.addObjectToDisplay(new Char('e'), 12 ,0);
+        displayGrid.addObjectToDisplay(new Char(':'), 13 ,0);
         //Bottom Display
         displayGrid.addObjectToDisplay(new Char('P'), 0,displayHeight - bottomHeight - 1);
         displayGrid.addObjectToDisplay(new Char('a'), 1,displayHeight - bottomHeight - 1);
@@ -146,20 +152,12 @@ public class Rogue implements Runnable {
                         displayGrid.addObjectToDisplay(new Char('@'), relativeX, relativeY + topHeight);
                         Hp = subList.get(j).getHp(); //20
                         String nums = Integer.toString(Hp);
-                        int ind = 5;
+                        int ind = 4;
                         for(char h : nums.toCharArray()) {
                             displayGrid.addObjectToDisplay(new Char(h), ind,0);
                             ind++;
                         }
 
-                        ind += 2;
-
-                        displayGrid.addObjectToDisplay(new Char('S'), ind,0);
-                        displayGrid.addObjectToDisplay(new Char('c'), ind + 1,0);
-                        displayGrid.addObjectToDisplay(new Char('o'), ind + 2,0);
-                        displayGrid.addObjectToDisplay(new Char('r'), ind + 3,0);
-                        displayGrid.addObjectToDisplay(new Char('e'), ind + 4,0);
-                        displayGrid.addObjectToDisplay(new Char(':'), ind + 5,0);
                     } // Player
                 }
 
