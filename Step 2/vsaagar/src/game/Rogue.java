@@ -84,7 +84,6 @@ public class Rogue implements Runnable {
         displayGrid.addObjectToDisplay(new Char('r'), 10,0);
         displayGrid.addObjectToDisplay(new Char('e'), 11,0);
         displayGrid.addObjectToDisplay(new Char(':'), 12,0);
-        displayGrid.addObjectToDisplay(new Char('0'), 13,0);
 
         //Bottom Display
         displayGrid.addObjectToDisplay(new Char('P'), 0,displayHeight - bottomHeight - 1);
