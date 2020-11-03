@@ -90,7 +90,7 @@ public class Displayable {
         System.out.println("Displayable:SetPosX" + x);
     }
 
-    public void setPosY(int y)
+    public void SetPosY(int y)
     {
         yPos.add(y);
         System.out.println("Displayable:setPosY" + y);
@@ -170,14 +170,6 @@ public class Displayable {
     public void setScroll(Item scroll)
     {
         
-    }
-
-    public int get_PosX(){ //cant we have the same name?
-        return 0;
-    }
-
-    public int get_PosY(){
-        return 0;
     }
     
 }

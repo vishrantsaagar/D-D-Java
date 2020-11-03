@@ -78,12 +78,14 @@ public class Rogue implements Runnable {
         displayGrid.addObjectToDisplay(new Char('P'), 1,0);
         displayGrid.addObjectToDisplay(new Char(':'), 2,0);
 
-        displayGrid.addObjectToDisplay(new Char('S'), 8 ,0);
-        displayGrid.addObjectToDisplay(new Char('c'), 9 ,0);
-        displayGrid.addObjectToDisplay(new Char('o'), 10 ,0);
-        displayGrid.addObjectToDisplay(new Char('r'), 11 ,0);
-        displayGrid.addObjectToDisplay(new Char('e'), 12 ,0);
-        displayGrid.addObjectToDisplay(new Char(':'), 13 ,0);
+        displayGrid.addObjectToDisplay(new Char('S'), 7,0);
+        displayGrid.addObjectToDisplay(new Char('c'), 8,0);
+        displayGrid.addObjectToDisplay(new Char('o'), 9,0);
+        displayGrid.addObjectToDisplay(new Char('r'), 10,0);
+        displayGrid.addObjectToDisplay(new Char('e'), 11,0);
+        displayGrid.addObjectToDisplay(new Char(':'), 12,0);
+        displayGrid.addObjectToDisplay(new Char('0'), 13,0);
+
         //Bottom Display
         displayGrid.addObjectToDisplay(new Char('P'), 0,displayHeight - bottomHeight - 1);
         displayGrid.addObjectToDisplay(new Char('a'), 1,displayHeight - bottomHeight - 1);
@@ -152,12 +154,11 @@ public class Rogue implements Runnable {
                         displayGrid.addObjectToDisplay(new Char('@'), relativeX, relativeY + topHeight);
                         Hp = subList.get(j).getHp(); //20
                         String nums = Integer.toString(Hp);
-                        int ind = 4;
+                        int ind = 3;
                         for(char h : nums.toCharArray()) {
                             displayGrid.addObjectToDisplay(new Char(h), ind,0);
                             ind++;
                         }
-
                     } // Player
                 }
 
@@ -175,38 +176,34 @@ public class Rogue implements Runnable {
                         }
 
                         if (subList.get(j) instanceof Scroll) {
-                            if (displayGrid.getObjectGrid()[posX.get(0)][posY.get(0)].peek().getChar() == 'X'){}
-                            else{
+                            if (displayGrid.getObjectGrid()[relativeX][relativeY + topHeight].peek().getChar() != 'X'){
+
                                 displayGrid.addObjectToDisplay(new Char('?'), relativeX, relativeY + topHeight);
-
                                 Item item = (Item) subList.get(j);
-                                item.setPosX(relativeX);
-                                item.setPosY(relativeY + topHeight);
+                                item.SetPosX(relativeX);
+                                item.SetPosY(relativeY + topHeight);
                             }
-
-                        } //Scroll
+                        }
 
                         else if (subList.get(j) instanceof Sword) {
-                            if (displayGrid.getObjectGrid()[posX.get(0)][posY.get(0)].peek().getChar() == 'X'){}
-                            else{
-                                displayGrid.addObjectToDisplay(new Char('|'), relativeX, relativeY + topHeight);
+                            if (displayGrid.getObjectGrid()[relativeX][relativeY + topHeight].peek().getChar() != 'X'){
 
+                                displayGrid.addObjectToDisplay(new Char('|'), relativeX, relativeY + topHeight);
                                 Item item = (Item) subList.get(j);
-                                item.setPosX(relativeX);
-                                item.setPosY(relativeY + topHeight);
+                                item.SetPosX(relativeX);
+                                item.SetPosY(relativeY + topHeight);
                             }
-                        } //Sword
+                        }
 
                         else if (subList.get(j) instanceof Armor) {
-                            if (displayGrid.getObjectGrid()[posX.get(0)][posY.get(0)].peek().getChar() == 'X'){}
-                            else{
-                                displayGrid.addObjectToDisplay(new Char(']'), relativeX, relativeY + topHeight);
+                            if (displayGrid.getObjectGrid()[relativeX][relativeY + topHeight].peek().getChar() != 'X'){
 
+                                displayGrid.addObjectToDisplay(new Char(']'), relativeX, relativeY + topHeight);
                                 Item item = (Item) subList.get(j);
-                                item.setPosX(relativeX);
-                                item.setPosY(relativeY + topHeight);
+                                item.SetPosX(relativeX);
+                                item.SetPosY(relativeY + topHeight);
                             }
-                        } //Armor
+                        }
                     }
                 }
 
@@ -265,9 +262,9 @@ public class Rogue implements Runnable {
 
     public static void main(String[] args) throws Exception {
 
-        // check if a filename is passed in.  If not, print a usage message.
+        // check if a filename is passed in. If not, print a usage message.
         // If it is, open the file
-        String fileName = null;
+            String fileName = null;
         switch (args.length) {
         case 1:
            // note that the relative file path may depend on what IDE you are
@@ -278,7 +275,6 @@ public class Rogue implements Runnable {
            System.out.println("java game.Rogue <xmlfilename>");
        return;
         }
-
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();

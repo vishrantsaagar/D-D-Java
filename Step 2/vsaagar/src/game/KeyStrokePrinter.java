@@ -1,8 +1,8 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.ArrayList;
 
 public class KeyStrokePrinter implements InputObserver, Runnable {
 
@@ -10,12 +10,15 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
     private static String CLASSID = "KeyStrokePrinter";
     private static Queue<Character> inputQueue;
     private ObjectDisplayGrid displayGrid;
+    private DungeonXMLHandler handler;
     private int posX;
     private int posY;
+    private int pmaxhit;
+    private int php;
     private Player p1;
-    private DungeonXMLHandler handler;
-    private ArrayList<Displayable> rooms;
     private ArrayList<Item> item_list;
+    private ArrayList<Displayable> rooms;
+
 
     public KeyStrokePrinter(ObjectDisplayGrid grid, Player _p1, DungeonXMLHandler _handler) {
         inputQueue = new ConcurrentLinkedQueue<>();
@@ -25,7 +28,9 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
         posX = p1.getstartingX();
         posY = p1.getstartingY();
-
+        php = p1.getHp();
+        pmaxhit = p1.getMaxHit();
+        
         System.out.println("Coordinates:" + posX + "," + posY);
     }
 
@@ -60,6 +65,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                 else if(ch == 'k'){
                     if(displayGrid.getObjectGrid()[posX][posY-1].peek().getChar() == 'X'){}
                     else if(displayGrid.getObjectGrid()[posX][posY-1].peek().getChar() == ' '){}
+                    else if(displayGrid.getObjectGrid()[posX][posY-1].peek().getChar()== 'T' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'S' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'H'){}
                     else {
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posY = posY - 1;
@@ -70,6 +76,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                 else if(ch == 'h'){
                     if(displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'X'){}
                     else if(displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == ' '){}
+                    else if(displayGrid.getObjectGrid()[posX-1][posY].peek().getChar()== 'T' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'S' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'H'){}
                     else {
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posX = posX - 1;
@@ -80,6 +87,8 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                 else if(ch == 'l'){
                     if(displayGrid.getObjectGrid()[posX+1][posY].peek().getChar() == 'X'){}
                     else if(displayGrid.getObjectGrid()[posX+1][posY].peek().getChar() == ' '){}
+                    else if(displayGrid.getObjectGrid()[posX+1][posY].peek().getChar()== 'T' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'S' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'H'){
+                    }
                     else {
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posX = posX + 1;
@@ -90,6 +99,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                 else if(ch == 'j'){
                     if(displayGrid.getObjectGrid()[posX][posY+1].peek().getChar() == 'X'){}
                     else if(displayGrid.getObjectGrid()[posX][posY+1].peek().getChar() == ' '){}
+                    else if(displayGrid.getObjectGrid()[posX][posY+1].peek().getChar()== 'T' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'S' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'H'){}
                     else {
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posY = posY + 1;
@@ -108,13 +118,12 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         }
                     }
 
-                    System.out.println("HIIII");
                     for(int i = 0; i < item_list.size(); i++){
                         System.out.println(item_list.get(i));
                     }
 
                     for(int item = 0; item < item_list.size(); item++){
-                        if((item_list.get(item).get_PosX() == posX) & (item_list.get(item).get_PosY() == posY)){
+                        if((item_list.get(item).getPosX().get(0) == posX) & (item_list.get(item).getPosY().get(0) == posY)){
                             if(item_list.get(item) instanceof Sword){
                                 p1.setWeapon(item_list.get(item));
                                 System.out.println("Player has Weapon: " + item_list.get(item));
@@ -138,7 +147,6 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         }
                     }
                 }
-                
                 else {
                     System.out.println("character " + ch + " entered on the keyboard");
                 }

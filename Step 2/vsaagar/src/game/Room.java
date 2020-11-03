@@ -9,7 +9,6 @@ public class Room extends Structure{
     private int _r1;
     private int pos_X;
     private int pos_Y;
-    private int roomID;
     private ArrayList<Creature> creatures = new ArrayList<Creature>();
     private ArrayList<Item> items = new ArrayList<Item>();
 
@@ -21,12 +20,7 @@ public class Room extends Structure{
 
     public void setId(int room)
     {
-        roomID = room;
         System.out.println("Room:setID" + room);
-    }
-
-    public int getRoomId(){
-        return roomID;
     }
 
     public void addCreature(Creature c1)

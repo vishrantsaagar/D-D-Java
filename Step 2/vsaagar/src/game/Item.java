@@ -1,37 +1,44 @@
 package game;
 
-public class Item extends Displayable{
-	private int PosX;
-	private int PosY;
+import java.util.ArrayList;
 
-    public void setOwner(Creature owner)
+public class Item extends Displayable {
+
+    private Creature owner;
+    private Creature c = new Creature();
+    private ItemAction action = new ItemAction(c);
+    private ArrayList<Integer> PosX = new ArrayList<Integer>();
+	private ArrayList<Integer> PosY= new ArrayList<Integer>();
+
+    public void setOwner(Creature _owner)
     {
         System.out.println("Item");
+        owner = _owner;
     }
 
     public void addItemAction(ItemAction itemaction)
     {
         System.out.println("ItemAction");
+        action = itemaction;
     }
 
-    public void setPosX(int posX){
-    	PosX = posX;
-    	System.out.println("Item:setPosX");
+    public void SetPosX(int x)
+    {
+        PosX.add(x);
+        System.out.println("Displayable:SetPosX" + x);
     }
 
-    public int get_PosX(){
-    	System.out.println("Item:getPosX");
-    	return PosX;
+    public void SetPosY(int y)
+    {
+        PosY.add(y);
+        System.out.println("Displayable:setPosY" + y);
     }
 
-    public void setPosY(int posY){
-    	PosY = posY;
-    	System.out.println("Item:setPosY");
+    public ArrayList<Integer> getPosX(){
+        return PosX;
     }
 
-    public int get_PosY(){
-    	System.out.println("Item:getPosX");
-    	return PosY;
+    public ArrayList<Integer> getPosY(){
+        return PosY;
     }
-
 }

@@ -2,7 +2,7 @@ package game;
 
 public class ItemAction extends Action{
     
-    public ItemAction(Item owner)
+    public ItemAction(Creature owner)
     {
         System.out.println("ItemAction");
     }

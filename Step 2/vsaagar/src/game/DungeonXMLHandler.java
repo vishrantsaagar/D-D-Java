@@ -222,6 +222,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             s1.setID(scrollRoom, scrollSerial);
             currItem = s1;
 
+            currRoom.setItem(s1);
             dungeon.addItem(s1);
             dispstack.push(currItem);
 
@@ -231,13 +232,13 @@ public class DungeonXMLHandler extends DefaultHandler {
             //String itemType = attributes.getValue("type"); unnecessary?
 
             if(itemName.equals("BlessArmor")){
-                BlessCurseOwner bco1 = new BlessCurseOwner(currItem); 
+                BlessCurseOwner bco1 = new BlessCurseOwner(currCreature); 
                 currItem.addItemAction(bco1);
                 currAction = bco1; 
             }
 
             else if(itemName.equals("Hallucinate")){
-                Hallucinate h1 = new Hallucinate(currItem);
+                Hallucinate h1 = new Hallucinate(currCreature);
                 currItem.addItemAction(h1);
                 currAction = h1;
             }
@@ -273,6 +274,8 @@ public class DungeonXMLHandler extends DefaultHandler {
             {
                 currPlayer.setArmor(a1);
             }
+
+            currRoom.setItem(a1);
             currItem = a1;
             dispstack.push(currItem);
         }
@@ -293,6 +296,8 @@ public class DungeonXMLHandler extends DefaultHandler {
             {
                 currPlayer.setWeapon(sw1);
             }
+
+            currRoom.setItem(sw1);
             currItem = sw1;
             dispstack.push(currItem);
 
@@ -336,7 +341,7 @@ public class DungeonXMLHandler extends DefaultHandler {
         else if(bposY){
             Displayable x = dispstack.peek();
             
-            x.setPosY(Integer.parseInt(data.toString()));
+            x.SetPosY(Integer.parseInt(data.toString()));
             bposY = false;
         }
 

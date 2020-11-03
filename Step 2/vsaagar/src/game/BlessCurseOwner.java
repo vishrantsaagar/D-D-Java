@@ -2,7 +2,7 @@ package game;
 
 public class BlessCurseOwner extends ItemAction{
     
-    public BlessCurseOwner(Item owner){
+    public BlessCurseOwner(Creature owner){
         super(owner);
         System.out.println("BlessCurseOwner");
     }

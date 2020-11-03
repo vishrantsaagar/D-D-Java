@@ -8,9 +8,9 @@ public class Player extends Creature{
     private Player player;
     private int startX;
     private int startY;
-    private int hp; 
+    private int hp;
     private Item _sword;
-    private Item _armour;
+    private Item _armor; 
     private Item _scroll;
 
     public void setPlayer(Player _player)
@@ -43,34 +43,28 @@ public class Player extends Creature{
       return room_id;
     }
 
-    public Item getWeapon()
-    {
-      System.out.println("Player:getWeapon");
-      return _sword;
-    }
-
-    public Item getArmor()
-    {
-      System.out.println("Player:getArmor");
-      return _armour;
-    }
-
-    public Item getScroll()
-    {
-      System.out.println("Player:getScroll");
-      return _scroll;
-    }
-
     public void setWeapon(Item sword)
     {
       _sword = sword;
       System.out.println("Player:setWeapon");
     }
 
+    public Item getWeapon()
+    {
+      System.out.println("Player:getWeapon");
+      return _sword;
+    }
+    
     public void setArmor(Item armor)
     {
-      _armour = armor;
+      _armor = armor;
       System.out.println("Player:setArmor");
+    }
+
+    public Item getArmor()
+    {
+      System.out.println("Player:getArmor");
+      return _armor;
     }
 
     public void setScroll(Item scroll)
@@ -79,10 +73,14 @@ public class Player extends Creature{
       System.out.println("Player:setScroll");
     }
 
+    public Item getScroll() {
+      return _scroll;
+    }
+
     public void setID(int room, int serial)
     {
-      room_id = room;
-      System.out.println("Player:setID"+room + "\n" +serial);
+       room_id = room;
+       System.out.println("Player:setID"+room + "\n" +serial);
     }    
 
     public int getX()

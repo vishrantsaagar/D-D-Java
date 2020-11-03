@@ -1,9 +1,11 @@
 package game;
 
 public class Hallucinate extends ItemAction{
-   
-    Hallucinate(Item owner){
-        super(owner);
+   private Creature owner;
+
+    Hallucinate(Creature _owner){
+        super(_owner);
+        owner = _owner;
         System.out.println("Hallucinate");
 
     }
