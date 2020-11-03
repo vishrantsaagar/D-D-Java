@@ -141,4 +141,43 @@ public class Displayable {
     {
         return null;
     }
+
+    public void getWeapon(Item sword)
+    {
+    
+    }
+
+    public void getArmor(Item armor)
+    {
+    
+    }
+
+    public void getScroll(Item scroll)
+    {
+    
+    }
+
+    public void setWeapon(Item sword)
+    {
+    
+    }
+
+    public void setArmor(Item armor)
+    {
+    
+    }
+
+    public void setScroll(Item scroll)
+    {
+        
+    }
+
+    public int get_PosX(){ //cant we have the same name?
+        return 0;
+    }
+
+    public int get_PosY(){
+        return 0;
+    }
+    
 }

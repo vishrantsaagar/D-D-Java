@@ -176,21 +176,37 @@ public class Rogue implements Runnable {
 
                         if (subList.get(j) instanceof Scroll) {
                             if (displayGrid.getObjectGrid()[posX.get(0)][posY.get(0)].peek().getChar() == 'X'){}
-                            else
+                            else{
                                 displayGrid.addObjectToDisplay(new Char('?'), relativeX, relativeY + topHeight);
-                        }
+
+                                Item item = (Item) subList.get(j);
+                                item.setPosX(relativeX);
+                                item.setPosY(relativeY + topHeight);
+                            }
+
+                        } //Scroll
 
                         else if (subList.get(j) instanceof Sword) {
                             if (displayGrid.getObjectGrid()[posX.get(0)][posY.get(0)].peek().getChar() == 'X'){}
-                            else
+                            else{
                                 displayGrid.addObjectToDisplay(new Char('|'), relativeX, relativeY + topHeight);
-                        }
+
+                                Item item = (Item) subList.get(j);
+                                item.setPosX(relativeX);
+                                item.setPosY(relativeY + topHeight);
+                            }
+                        } //Sword
 
                         else if (subList.get(j) instanceof Armor) {
                             if (displayGrid.getObjectGrid()[posX.get(0)][posY.get(0)].peek().getChar() == 'X'){}
-                            else
+                            else{
                                 displayGrid.addObjectToDisplay(new Char(']'), relativeX, relativeY + topHeight);
-                        }
+
+                                Item item = (Item) subList.get(j);
+                                item.setPosX(relativeX);
+                                item.setPosY(relativeY + topHeight);
+                            }
+                        } //Armor
                     }
                 }
 
@@ -301,7 +317,7 @@ public class Rogue implements Runnable {
 
             rogue.start();
 
-            rog.keyStrokePrinter = new Thread(new KeyStrokePrinter(displayGrid, plays));
+            rog.keyStrokePrinter = new Thread(new KeyStrokePrinter(displayGrid, plays, handler));
             rog.keyStrokePrinter.start();
 
             rogue.join();
