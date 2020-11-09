@@ -152,6 +152,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 displayGrid.addObjectToDisplay(new Char(h),  p, 0);
                             }
                             displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
+                            displayGrid.addObjectToDisplay(new Char(' '),  p + 2, 0);
                         }
 
 
@@ -323,6 +324,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 displayGrid.addObjectToDisplay(new Char(h),  p, 0);
                             }
                             displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
+                            displayGrid.addObjectToDisplay(new Char(' '),  p + 2, 0);
                         }
 
                         System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
@@ -494,6 +496,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 displayGrid.addObjectToDisplay(new Char(h),  p, 0);
                             }
                             displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
+                            displayGrid.addObjectToDisplay(new Char(' '),  p + 2, 0);
                         }
 
                         System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
@@ -665,6 +668,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 displayGrid.addObjectToDisplay(new Char(h),  p, 0);
                             }
                             displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
+                            displayGrid.addObjectToDisplay(new Char(' '),  p + 2, 0);
                         }
 
                         System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
