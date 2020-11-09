@@ -819,42 +819,54 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     item_stack = p1.getItem();
                     item_str_stack = p1.getStrItem();
 
+                    System.out.println("ITEM SIZZE: " + item_str_stack.size());
+
                     if(item_str_stack.size() == 0){
                         System.out.println("There is nothing in the pack!");
+                    }
+
+                    else if(idx >= item_str_stack.size()){
+                        System.out.println("No item at id: " + idx);
                     }
 
                     else{
                         Item dropItem = item_stack.get(idx);
                         String dropItem_str = item_str_stack.get(idx);
 
-                        item_stack.remove(idx);
-                        item_str_stack.remove(idx);
-
-                        if(dropItem instanceof Sword){
-                            displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
-                            displayGrid.addObjectToDisplay(new Char('|'), posX, posY);
-                            displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
-
-                            dropItem.SetPosX(posX);
-                            dropItem.SetPosY(posY);
+                        if(dropItem == null | dropItem_str == null){
+                            System.out.println("You can't drop item at this id: " + idx);
                         }
 
-                        else if(dropItem instanceof Armor){
-                            displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
-                            displayGrid.addObjectToDisplay(new Char(']'), posX, posY);
-                            displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+                        else{
+                            item_stack.remove(idx);
+                            item_str_stack.remove(idx);
 
-                            dropItem.SetPosX(posX);
-                            dropItem.SetPosY(posY);
-                        }
+                            if(dropItem instanceof Sword){
+                                displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                                displayGrid.addObjectToDisplay(new Char('|'), posX, posY);
+                                displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
 
-                        else if(dropItem instanceof Scroll){
-                            displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
-                            displayGrid.addObjectToDisplay(new Char('?'), posX, posY);
-                            displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+                                dropItem.SetPosX(posX);
+                                dropItem.SetPosY(posY);
+                            }
 
-                            dropItem.SetPosX(posX);
-                            dropItem.SetPosY(posY);
+                            else if(dropItem instanceof Armor){
+                                displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                                displayGrid.addObjectToDisplay(new Char(']'), posX, posY);
+                                displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+
+                                dropItem.SetPosX(posX);
+                                dropItem.SetPosY(posY);
+                            }
+
+                            else if(dropItem instanceof Scroll){
+                                displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                                displayGrid.addObjectToDisplay(new Char('?'), posX, posY);
+                                displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+
+                                dropItem.SetPosX(posX);
+                                dropItem.SetPosY(posY);
+                            }
                         }
                     }
                 }
