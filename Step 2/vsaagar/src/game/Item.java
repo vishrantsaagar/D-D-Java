@@ -29,13 +29,13 @@ public class Item extends Displayable {
     public void SetPosX(int x)
     {
         PosX.add(x);
-        System.out.println("Item:SetPosX" + x);
+        System.out.println("Displayable:SetPosX" + x);
     }
 
     public void SetPosY(int y)
     {
         PosY.add(y);
-        System.out.println("Item:setPosY" + y);
+        System.out.println("Displayable:setPosY" + y);
     }
 
     public ArrayList<Integer> getPosX(){

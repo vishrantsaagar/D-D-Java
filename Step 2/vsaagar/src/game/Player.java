@@ -3,7 +3,7 @@ package game;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class Player extends Creature{
+public class Player extends Creature {
 
     private int room_id;
     private int pos_X;
@@ -12,9 +12,6 @@ public class Player extends Creature{
     private int startX;
     private int startY;
     private int hp;
-    // private Item _sword;
-    // private Item _armor; 
-    // private Item _scroll;
     private ArrayList<Integer> PosX = new ArrayList<Integer>();
     private ArrayList<Integer> PosY = new ArrayList<Integer>();
     private Stack<Item> item = new Stack<Item>();
@@ -56,7 +53,6 @@ public class Player extends Creature{
       item_string.push("Sword");
       System.out.println("Player:setWeapon");
     }
-    
     public void setArmor(Item armor)
     {
       item.push(armor);
@@ -82,7 +78,6 @@ public class Player extends Creature{
 
       return item_string;
     }
-
     public void setID(int room, int serial)
     {
        room_id = room;

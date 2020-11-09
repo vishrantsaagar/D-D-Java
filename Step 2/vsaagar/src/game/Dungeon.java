@@ -61,6 +61,10 @@ public class Dungeon {
         creatures.add(c1);
     }
 
+    public ArrayList<Displayable> getCreatures() {
+        return creatures;
+    }
+
     public void addPassage(Passage p1)
     {
         System.out.println("Dungeon:addPassage");

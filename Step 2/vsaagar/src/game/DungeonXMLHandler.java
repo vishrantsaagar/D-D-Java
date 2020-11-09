@@ -279,7 +279,6 @@ public class DungeonXMLHandler extends DefaultHandler {
             {
                 currPlayer.setArmor(a1);
                 a1.setOwner(currPlayer);
-
             }
 
             currRoom.setItem(a1);
@@ -303,7 +302,6 @@ public class DungeonXMLHandler extends DefaultHandler {
             {
                 currPlayer.setWeapon(sw1);
                 sw1.setOwner(currPlayer);
-
             }
 
             currRoom.setItem(sw1);

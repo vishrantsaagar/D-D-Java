@@ -1,8 +1,13 @@
 package game;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+
+import javax.lang.model.util.ElementScanner6;
+
+import java.util.Random;
 import java.util.Stack;
 
 public class KeyStrokePrinter implements InputObserver, Runnable {
@@ -14,13 +19,13 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
     private DungeonXMLHandler handler;
     private int posX;
     private int posY;
-    private int pmaxhit;
-    private int php;
     private Player p1;
     private ArrayList<Item> item_list;
     private Stack<Item> item_stack;
     private Stack<String> item_str_stack;
     private ArrayList<Displayable> rooms;
+    private ArrayList<Displayable> creatures;
+    private ArrayList<Monster> monsters = new ArrayList<Monster>();
     private int gameHeight;
     private int topHeight;
     private int bottomHeight;
@@ -29,20 +34,11 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
     private String pickedItem;
     private Dungeon dungeon;
 
-    // private int playerPositionX;
-    // private int playerPositionY;
-
-
     public KeyStrokePrinter(ObjectDisplayGrid grid, Player _p1, DungeonXMLHandler _handler) {
+    
         inputQueue = new ConcurrentLinkedQueue<>();
         displayGrid = grid;
-        p1 = _p1;
         handler = _handler;
-
-        posX = p1.getstartingX();
-        posY = p1.getstartingY();
-        php = p1.getHp();
-        pmaxhit = p1.getMaxHit();
 
         dungeon = handler.getDungeon();
 
@@ -51,8 +47,21 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
         topHeight = dungeon.gettopheight();
         bottomHeight = dungeon.getBottomheight();
         displayHeight = gameHeight + topHeight + bottomHeight;
+
+        creatures = dungeon.getCreatures();
         
-        System.out.println("Coordinates:" + posX + "," + posY);
+        for (int i = 0; i < creatures.size(); i++)
+        {
+            if (creatures.get(i) instanceof Monster) {
+                monsters.add((Monster)creatures.get(i));
+            }
+            else if(creatures.get(i) instanceof Player){
+                p1 = (Player) creatures.get(i);
+            }
+        }
+        System.out.println(p1);
+        posX = p1.getstartingX();
+        posY = p1.getstartingY(); 
     }
 
     @Override
@@ -86,55 +95,658 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                 else if(ch == 'k'){
                     if(displayGrid.getObjectGrid()[posX][posY-1].peek().getChar() == 'X'){}
                     else if(displayGrid.getObjectGrid()[posX][posY-1].peek().getChar() == ' '){}
-                    else if(displayGrid.getObjectGrid()[posX][posY-1].peek().getChar()== 'T' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'S' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'H'){}
+                    else if(displayGrid.getObjectGrid()[posX][posY-1].peek().getChar()== 'T' || displayGrid.getObjectGrid()[posX][posY-1].peek().getChar() == 'S' || displayGrid.getObjectGrid()[posX][posY-1].peek().getChar() == 'H'){
+                        
+                        ArrayList<Integer> monX = new ArrayList<>();
+                        ArrayList<Integer> monY = new ArrayList<>();
+                        Monster target = null;
+
+                        for(int ind = 0; ind < monsters.size(); ind++)
+                        {
+                            monX.add(monsters.get(ind).getstartingX());
+                            monY.add(monsters.get(ind).getstartingY());
+                        }
+
+                        for(int j = 0; j < monsters.size(); j++)
+                        {
+                           if(monX.get(j) == posX && monY.get(j) == (posY-1))
+                           {
+                                target = monsters.get(j);
+                           }
+                        }
+
+                        int mhp = target.getHp();
+                        int mMaxhit = target.getMaxHit();
+                        int php = p1.getHp();
+                        int pmaxhit = p1.getMaxHit(); 
+
+                        Random random = new Random();
+                        int randphit = random.nextInt(pmaxhit + 1); //player
+                        int randmhit = random.nextInt(mMaxhit + 1); //monster
+
+                        target.setHp(mhp - randphit);
+                        p1.setHp(php - randmhit);
+                        
+                        int newhp = p1.getHp();
+
+                        String num = Integer.toString(newhp);
+                        int p = 3;
+                        
+                        if(num.length() > 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                        }
+                        else if(num.length() == 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
+                        }
+
+
+                        System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
+
+                        System.out.println("Monster HP remaining:" + target.getHp());
+                        if(target.getHp() <= 0)
+                        {
+                            displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY - 1);
+                        }
+
+                        String nums = Integer.toString(randphit);
+                        int z = 6;
+                        
+                        for(char h : nums.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  z, displayHeight - 1);
+                                z++;
+                            }
+
+                        int o = z + 19;
+
+                        String numh = Integer.toString(randmhit);
+                        for(char h : numh.toCharArray()) {
+                            displayGrid.addObjectToDisplay(new Char(h),  o, displayHeight - 1);
+                            o++;
+                        }
+
+                        if(p1.getHp() <= 0)
+                        {
+                            displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                            System.out.println("Game Over!\n\nThanks for playing!");
+                            displayGrid.addObjectToDisplay(new Char(' '), z - 1, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('G'), z, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('A'), z + 1, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('M'), z + 2, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('E'), z + 3, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 4, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('O'), z + 5, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('V'), z + 6, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('E'), z + 7, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('R'), z + 8, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('!'), z + 9, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 10, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 11, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 12, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 13, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 14, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 15, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 16, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 17, displayHeight - 1);
+
+                            displayGrid.addObjectToDisplay(new Char(' '), o - 2, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o - 1, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 1, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 2, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 3, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 4, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 5, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 6, displayHeight - 1);
+
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 8, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 9, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 10, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 11, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 12, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 13, displayHeight - 1);
+
+                            return false;
+
+                            }                        
+                      
+                        displayGrid.addObjectToDisplay(new Char('D'), z + 1, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), z + 2, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('M'), z + 3, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), z + 4, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('G'), z + 5, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('E'), z + 6, displayHeight - 1);
+
+                        displayGrid.addObjectToDisplay(new Char('I'), z + 8, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('N'), z + 9, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('F'), z + 10, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('L'), z + 11, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('I'), z + 12, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('C'), z + 13, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('T'), z + 14, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('E'), z + 15, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('D'), z + 16, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('!'), z + 17, displayHeight - 1);
+
+                        displayGrid.addObjectToDisplay(new Char('D'), o + 1, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), o + 2, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('M'), o + 3, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), o + 4, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('G'), o + 5, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('E'), o + 6, displayHeight - 1);
+
+                        displayGrid.addObjectToDisplay(new Char('T'), o + 8, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), o + 9, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('K'), o + 10, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('E'), o + 11, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('N'), o + 12, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('!'), o + 13, displayHeight - 1);
+                    }
                     else {
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posY = posY - 1;
                         displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
-
-                        // System.out.println("PLAYER POSITION X: " + playerPositionX + " ,Y: " + playerPositionY);
-
-
                     }
                 }
 
                 else if(ch == 'h'){
                     if(displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'X'){}
                     else if(displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == ' '){}
-                    else if(displayGrid.getObjectGrid()[posX-1][posY].peek().getChar()== 'T' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'S' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'H'){}
+                    else if(displayGrid.getObjectGrid()[posX-1][posY].peek().getChar()== 'T' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'S' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'H'){
+
+                        ArrayList<Integer> monX = new ArrayList<>();
+                        ArrayList<Integer> monY = new ArrayList<>();
+                        Monster target = null;
+
+                        for(int ind = 0; ind < monsters.size(); ind++)
+                        {
+                            monX.add(monsters.get(ind).getstartingX());
+                            monY.add(monsters.get(ind).getstartingY());
+                        }
+
+                        for(int j = 0; j < monsters.size(); j++)
+                        {
+                           if(monX.get(j) == posX - 1 && monY.get(j) == (posY))
+                           {
+                                target = monsters.get(j);
+                           }
+                        }
+
+                        int mhp = target.getHp();
+                        int mMaxhit = target.getMaxHit();
+                        int php = p1.getHp();
+                        int pmaxhit = p1.getMaxHit();
+
+                        Random random = new Random();
+                        int randphit = random.nextInt(pmaxhit + 1); //player
+                        int randmhit = random.nextInt(mMaxhit + 1); //monster
+
+                        target.setHp(mhp - randphit);
+                        p1.setHp(php - randmhit);
+                        
+                        int newhp = p1.getHp();
+
+                        String num = Integer.toString(newhp);
+                        int p = 3;
+
+                        if(num.length() > 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                        }
+                        else if(num.length() == 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
+                        }
+
+                        System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
+
+                        //displayGrid.addObjectToDisplay(new Char('D'), z + 1, displayHeight - 1);
+
+                        System.out.println("Monster HP remaining:" + target.getHp());
+                        if(target.getHp() <= 0)
+                        {
+                            displayGrid.removeObjectFromDisplay(new Char(' '), posX - 1, posY);
+                        }
+
+                        String nums = Integer.toString(randphit);
+                        int z = 6;
+                        for(char h : nums.toCharArray()) {
+                            displayGrid.addObjectToDisplay(new Char(h),  z, displayHeight - 1);
+                            z++;
+                        }
+
+                        int o = z + 19;
+
+                        String numh = Integer.toString(randmhit);
+                        for(char h : numh.toCharArray()) {
+                            displayGrid.addObjectToDisplay(new Char(h),  o, displayHeight - 1);
+                            o++;
+                        }
+
+                        if(p1.getHp() <= 0)
+                        {
+                            displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                            System.out.println("Game Over!\n\nThanks for playing!");
+                            displayGrid.addObjectToDisplay(new Char(' '), z - 1, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('G'), z, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('A'), z + 1, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('M'), z + 2, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('E'), z + 3, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 4, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('O'), z + 5, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('V'), z + 6, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('E'), z + 7, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('R'), z + 8, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('!'), z + 9, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 10, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 11, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 12, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 13, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 14, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 15, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 16, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 17, displayHeight - 1);
+
+                            displayGrid.addObjectToDisplay(new Char(' '), o - 2, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o - 1, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 1, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 2, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 3, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 4, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 5, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 6, displayHeight - 1);
+
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 8, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 9, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 10, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 11, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 12, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 13, displayHeight - 1);
+
+                            return false;
+
+                            }                                           
+                      
+                        displayGrid.addObjectToDisplay(new Char('D'), z + 1, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), z + 2, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('M'), z + 3, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), z + 4, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('G'), z + 5, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('E'), z + 6, displayHeight - 1);
+
+                        displayGrid.addObjectToDisplay(new Char('I'), z + 8, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('N'), z + 9, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('F'), z + 10, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('L'), z + 11, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('I'), z + 12, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('C'), z + 13, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('T'), z + 14, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('E'), z + 15, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('D'), z + 16, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('!'), z + 17, displayHeight - 1);
+
+                        displayGrid.addObjectToDisplay(new Char('D'), o + 1, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), o + 2, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('M'), o + 3, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), o + 4, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('G'), o + 5, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('E'), o + 6, displayHeight - 1);
+
+                        displayGrid.addObjectToDisplay(new Char('T'), o + 8, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), o + 9, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('K'), o + 10, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('E'), o + 11, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('N'), o + 12, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('!'), o + 13, displayHeight - 1);
+                    }
                     else {
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posX = posX - 1;
                         displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
-
                     }
                 }
 
                 else if(ch == 'l'){
                     if(displayGrid.getObjectGrid()[posX+1][posY].peek().getChar() == 'X'){}
                     else if(displayGrid.getObjectGrid()[posX+1][posY].peek().getChar() == ' '){}
-                    else if(displayGrid.getObjectGrid()[posX+1][posY].peek().getChar()== 'T' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'S' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'H'){
+                    else if(displayGrid.getObjectGrid()[posX+1][posY].peek().getChar()== 'T' || displayGrid.getObjectGrid()[posX+1][posY].peek().getChar() == 'S' || displayGrid.getObjectGrid()[posX+1][posY].peek().getChar() == 'H'){
+
+                        ArrayList<Integer> monX = new ArrayList<>();
+                        ArrayList<Integer> monY = new ArrayList<>();
+                        Monster target = null;
+
+                        for(int ind = 0; ind < monsters.size(); ind++)
+                        {
+                            monX.add(monsters.get(ind).getstartingX());
+                            monY.add(monsters.get(ind).getstartingY());
+                        }
+
+                        for(int j = 0; j < monsters.size(); j++)
+                        {
+                           if(monX.get(j) == posX + 1 && monY.get(j) == (posY))
+                           {
+                                target = monsters.get(j);
+                           }
+                        }
+
+                        int mhp = target.getHp();
+                        int mMaxhit = target.getMaxHit();
+                        int php = p1.getHp();
+                        int pmaxhit = p1.getMaxHit();
+
+                        Random random = new Random();
+                        int randphit = random.nextInt(pmaxhit + 1); //player
+                        int randmhit = random.nextInt(mMaxhit + 1); //monster
+
+                        target.setHp(mhp - randphit);
+                        p1.setHp(php - randmhit);
+                        
+                        int newhp = p1.getHp();
+
+                        String num = Integer.toString(newhp);
+                        int p = 3;
+
+                        if(num.length() > 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                        }
+                        else if(num.length() == 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
+                        }
+
+                        System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
+
+                        //displayGrid.addObjectToDisplay(new Char('D'), z + 1, displayHeight - 1);
+
+                        System.out.println("Monster HP remaining:" + target.getHp());
+                        if(target.getHp() <= 0)
+                        {
+                            displayGrid.removeObjectFromDisplay(new Char(' '), posX + 1, posY);
+                        }
+
+                        String nums = Integer.toString(randphit);
+                        int z = 6;
+                        for(char h : nums.toCharArray()) {
+                            displayGrid.addObjectToDisplay(new Char(h),  z, displayHeight - 1);
+                            z++;
+                        }
+
+                        int o = z + 19;
+
+                        String numh = Integer.toString(randmhit);
+                        for(char h : numh.toCharArray()) {
+                            displayGrid.addObjectToDisplay(new Char(h),  o, displayHeight - 1);
+                            o++;
+                        }
+
+                        if(p1.getHp() <= 0)
+                        {
+                            displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                            System.out.println("Game Over!\n\nThanks for playing!");
+                            displayGrid.addObjectToDisplay(new Char(' '), z - 1, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('G'), z, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('A'), z + 1, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('M'), z + 2, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('E'), z + 3, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 4, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('O'), z + 5, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('V'), z + 6, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('E'), z + 7, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('R'), z + 8, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('!'), z + 9, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 10, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 11, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 12, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 13, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 14, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 15, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 16, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 17, displayHeight - 1);
+
+                            displayGrid.addObjectToDisplay(new Char(' '), o - 2, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o - 1, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 1, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 2, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 3, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 4, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 5, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 6, displayHeight - 1);
+
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 8, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 9, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 10, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 11, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 12, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 13, displayHeight - 1);
+
+                            return false;
+
+                            }                                               
+                      
+                        displayGrid.addObjectToDisplay(new Char('D'), z + 1, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), z + 2, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('M'), z + 3, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), z + 4, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('G'), z + 5, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('E'), z + 6, displayHeight - 1);
+
+                        displayGrid.addObjectToDisplay(new Char('I'), z + 8, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('N'), z + 9, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('F'), z + 10, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('L'), z + 11, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('I'), z + 12, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('C'), z + 13, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('T'), z + 14, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('E'), z + 15, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('D'), z + 16, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('!'), z + 17, displayHeight - 1);
+
+                        displayGrid.addObjectToDisplay(new Char('D'), o + 1, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), o + 2, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('M'), o + 3, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), o + 4, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('G'), o + 5, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('E'), o + 6, displayHeight - 1);
+
+                        displayGrid.addObjectToDisplay(new Char('T'), o + 8, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), o + 9, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('K'), o + 10, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('E'), o + 11, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('N'), o + 12, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('!'), o + 13, displayHeight - 1);
                     }
                     else {
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posX = posX + 1;
                         displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
-
                     }
                 }
 
                 else if(ch == 'j'){
                     if(displayGrid.getObjectGrid()[posX][posY+1].peek().getChar() == 'X'){}
                     else if(displayGrid.getObjectGrid()[posX][posY+1].peek().getChar() == ' '){}
-                    else if(displayGrid.getObjectGrid()[posX][posY+1].peek().getChar()== 'T' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'S' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'H'){}
+                    else if(displayGrid.getObjectGrid()[posX][posY+1].peek().getChar()== 'T' || displayGrid.getObjectGrid()[posX][posY+1].peek().getChar() == 'S' || displayGrid.getObjectGrid()[posX][posY+1].peek().getChar() == 'H'){
+                        
+                        ArrayList<Integer> monX = new ArrayList<>();
+                        ArrayList<Integer> monY = new ArrayList<>();
+                        Monster target = null;
+
+                        for(int ind = 0; ind < monsters.size(); ind++)
+                        {
+                            monX.add(monsters.get(ind).getstartingX());
+                            monY.add(monsters.get(ind).getstartingY());
+                        }
+
+                        for(int j = 0; j < monsters.size(); j++)
+                        {
+                           if(monX.get(j) == posX && monY.get(j) == (posY + 1))
+                           {
+                                target = monsters.get(j);
+                           }
+                        }
+
+                        int mhp = target.getHp();
+                        int mMaxhit = target.getMaxHit();
+                        int php = p1.getHp();
+                        int pmaxhit = p1.getMaxHit();
+
+                        Random random = new Random();
+                        int randphit = random.nextInt(pmaxhit + 1); //player
+                        int randmhit = random.nextInt(mMaxhit + 1); //monster
+
+                        target.setHp(mhp - randphit);
+                        p1.setHp(php - randmhit);
+                        
+                        int newhp = p1.getHp();
+
+                        String num = Integer.toString(newhp);
+                        int p = 3;
+
+                         if(num.length() > 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                        }
+                        else if(num.length() == 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
+                        }
+
+                        System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
+
+                        //displayGrid.addObjectToDisplay(new Char('D'), z + 1, displayHeight - 1);
+
+                        System.out.println("Monster HP remaining:" + target.getHp());
+                        if(target.getHp() <= 0)
+                        {
+                            displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY + 1);
+                        }
+
+                        String nums = Integer.toString(randphit);
+                        int z = 6;
+                        for(char h : nums.toCharArray()) {
+                            displayGrid.addObjectToDisplay(new Char(h),  z, displayHeight - 1);
+                            z++;
+                        }
+
+                        int o = z + 19;
+
+                        String numh = Integer.toString(randmhit);
+                        for(char h : numh.toCharArray()) {
+                            displayGrid.addObjectToDisplay(new Char(h),  o, displayHeight - 1);
+                            o++;
+                        }
+
+                        if(p1.getHp() <= 0)
+                        {
+                            displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                            System.out.println("Game Over!\n\nThanks for playing!");
+                            displayGrid.addObjectToDisplay(new Char(' '), z - 1, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('G'), z, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('A'), z + 1, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('M'), z + 2, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('E'), z + 3, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 4, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('O'), z + 5, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('V'), z + 6, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('E'), z + 7, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('R'), z + 8, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char('!'), z + 9, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 10, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 11, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 12, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 13, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 14, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 15, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 16, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), z + 17, displayHeight - 1);
+
+                            displayGrid.addObjectToDisplay(new Char(' '), o - 2, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o - 1, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 1, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 2, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 3, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 4, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 5, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 6, displayHeight - 1);
+
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 8, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 9, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 10, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 11, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 12, displayHeight - 1);
+                            displayGrid.addObjectToDisplay(new Char(' '), o + 13, displayHeight - 1);
+
+                            return false;
+
+                        }                                   
+                      
+                        displayGrid.addObjectToDisplay(new Char('D'), z + 1, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), z + 2, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('M'), z + 3, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), z + 4, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('G'), z + 5, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('E'), z + 6, displayHeight - 1);
+
+                        displayGrid.addObjectToDisplay(new Char('I'), z + 8, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('N'), z + 9, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('F'), z + 10, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('L'), z + 11, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('I'), z + 12, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('C'), z + 13, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('T'), z + 14, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('E'), z + 15, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('D'), z + 16, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('!'), z + 17, displayHeight - 1);
+
+                        displayGrid.addObjectToDisplay(new Char('D'), o + 1, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), o + 2, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('M'), o + 3, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), o + 4, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('G'), o + 5, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('E'), o + 6, displayHeight - 1);
+
+                        displayGrid.addObjectToDisplay(new Char('T'), o + 8, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('A'), o + 9, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('K'), o + 10, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('E'), o + 11, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('N'), o + 12, displayHeight - 1);
+                        displayGrid.addObjectToDisplay(new Char('!'), o + 13, displayHeight - 1);
+                    }
                     else {
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posY = posY + 1;
                         displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
-
                     }
                 }
-
                 else if(ch == 'p'){
                     int room_id = p1.getRoomID();
                     rooms = dungeon.getRooms();
@@ -245,30 +857,6 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             dropItem.SetPosY(posY);
                         }
                     }
-
-                        // if(ch == 'i'){
-                        //     for(int i = 6; i <= 30; i++){
-                        //         displayGrid.addObjectToDisplay(new Char(' '), i ,displayHeight - bottomHeight - 1);
-                        //     }
-
-
-                        //     int offset = 6;
-                        //     for(int i = 0; i < item_str_stack.size(); i++){
-                        //         pickedItem = item_str_stack.get(i);
-                        //         int add_punc = 0;
-
-                        //         for(int j = 0; j < pickedItem.length(); j++){
-                        //             displayGrid.addObjectToDisplay(new Char(pickedItem.charAt(j)), j + offset, displayHeight - bottomHeight - 1);
-                        //             add_punc = j + offset;
-                        //         }
-                                
-                        //         // displayGrid.addObjectToDisplay(new Char(','), add_punc + 1, displayHeight - bottomHeight - 1);
-                        //         displayGrid.addObjectToDisplay(new Char(' '), add_punc + 2, displayHeight - bottomHeight - 1);
-
-                        //         offset += pickedItem.length() + 1;
-                        //     }
-                        // }
-                    // }
                 }
 
                 else if(ch == 'i'){
@@ -302,6 +890,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     }
                 }
 
+     
                 else {
                     System.out.println("character " + ch + " entered on the keyboard");
                 }

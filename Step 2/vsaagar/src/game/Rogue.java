@@ -3,7 +3,6 @@ package game;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Stack;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -88,11 +87,11 @@ public class Rogue implements Runnable {
         displayGrid.addObjectToDisplay(new Char('0'), 13,0);
 
         //Bottom Display
-        // displayGrid.addObjectToDisplay(new Char('P'), 0,displayHeight - bottomHeight - 1);
-        // displayGrid.addObjectToDisplay(new Char('a'), 1,displayHeight - bottomHeight - 1);
-        // displayGrid.addObjectToDisplay(new Char('c'), 2,displayHeight - bottomHeight - 1);
-        // displayGrid.addObjectToDisplay(new Char('k'), 3,displayHeight - bottomHeight - 1);
-        // displayGrid.addObjectToDisplay(new Char(':'), 4,displayHeight - bottomHeight - 1);
+        //displayGrid.addObjectToDisplay(new Char('P'), 0,displayHeight - bottomHeight - 1);
+        //displayGrid.addObjectToDisplay(new Char('a'), 1,displayHeight - bottomHeight - 1);
+        //displayGrid.addObjectToDisplay(new Char('c'), 2,displayHeight - bottomHeight - 1);
+        //displayGrid.addObjectToDisplay(new Char('k'), 3,displayHeight - bottomHeight - 1);
+        //displayGrid.addObjectToDisplay(new Char(':'), 4,displayHeight - bottomHeight - 1);
 
         displayGrid.addObjectToDisplay(new Char('I'), 0, displayHeight - 1);
         displayGrid.addObjectToDisplay(new Char('n'), 1, displayHeight - 1);
@@ -147,15 +146,18 @@ public class Rogue implements Runnable {
                         // if(id = 1): list[0].sublist[0].posX and list[0].subList[0].posY
 
                         displayGrid.addObjectToDisplay(new Char(type), relativeX, relativeY + topHeight);
+                        Monster monster = (Monster) subList.get(j);
+                        monster.setstartingX(relativeX);
+                        monster.setstartingY(relativeY + topHeight);
+
+                        int monX = monster.getstartingX();
+                        int monY = monster.getstartingY();
                     } // Monster
 
                     else {
                         // System.out.println("Player: PosX: " + posX.get(0) + ", PosY: " +
                         // posY.get(0));
                         displayGrid.addObjectToDisplay(new Char('@'), relativeX, relativeY + topHeight);
-
-                        Player p1 = (Player) subList.get(j);
-
                         Hp = subList.get(j).getHp(); //20
                         String nums = Integer.toString(Hp);
                         int ind = 3;
@@ -179,90 +181,37 @@ public class Rogue implements Runnable {
                             }
                         }
 
-                        // Player player = (Player)((Item)subList.get(j)).getOwner();
-                        // System.out.println("PLAYER FOR WEAR: " + player);
-                        // if(player != null){
-                        //     Stack<String> item_str_stack = player.getStrItem();
-
-                        //     int offset = 6;
-
-                        //     for(int it = 0; it < item_str_stack.size(); it++){
-                        //         String pickedItem = item_str_stack.get(it);
-                        //         int add_punc = 0;
-
-                        //         for(int c = 0; c < pickedItem.length(); c++){
-                        //             displayGrid.addObjectToDisplay(new Char(pickedItem.charAt(c)), c + offset, displayHeight - bottomHeight - 1);
-                        //             add_punc = c + offset;
-                        //         }
-                                
-                        //         // displayGrid.addObjectToDisplay(new Char(','), add_punc + 1, displayHeight - bottomHeight - 1);
-                        //         displayGrid.addObjectToDisplay(new Char(' '), add_punc + 2, displayHeight - bottomHeight - 1);
-
-                        //         offset += pickedItem.length() + 1;
-                        //     }
-                        // }
-
                         if (subList.get(j) instanceof Scroll) {
                             if (displayGrid.getObjectGrid()[relativeX][relativeY + topHeight].peek().getChar() != 'X'){
 
                                 displayGrid.addObjectToDisplay(new Char('?'), relativeX, relativeY + topHeight);
-                                System.out.println("SCROLL");
                                 Item item = (Item) subList.get(j);
                                 item.SetPosX(relativeX);
                                 item.SetPosY(relativeY + topHeight);
                             }
-                        } //Scroll
+                        }
 
                         else if (subList.get(j) instanceof Sword) {
                             if (displayGrid.getObjectGrid()[relativeX][relativeY + topHeight].peek().getChar() != 'X'){
 
                                 displayGrid.addObjectToDisplay(new Char('|'), relativeX, relativeY + topHeight);
-                                System.out.println("SWORD");
                                 Item item = (Item) subList.get(j);
                                 item.SetPosX(relativeX);
                                 item.SetPosY(relativeY + topHeight);
                             }
-                        } //Sword
+                        }
 
                         else if (subList.get(j) instanceof Armor) {
                             if (displayGrid.getObjectGrid()[relativeX][relativeY + topHeight].peek().getChar() != 'X'){
 
                                 displayGrid.addObjectToDisplay(new Char(']'), relativeX, relativeY + topHeight);
-                                System.out.println("ARMOUR");
                                 Item item = (Item) subList.get(j);
                                 item.SetPosX(relativeX);
                                 item.SetPosY(relativeY + topHeight);
                             }
-                        } //Armour
+                        }
                     }
-
-                    // else if(posX.size() == 0 & posY.size() == 0){
-                    //     Player player = (Player)((Item)subList.get(j)).getOwner();
-                    //     System.out.println("PLAYER FOR WEAR: " + player);
-                    //     if(player != null){
-                    //         Stack<String> item_str_stack = player.getStrItem();
-
-                    //         int offset = 6;
-
-                    //         for(int it = 0; it < item_str_stack.size(); it++){
-                    //             String pickedItem = item_str_stack.get(it);
-                    //             int add_punc = 0;
-
-                    //             for(int c = 0; c < pickedItem.length(); c++){
-                    //                 displayGrid.addObjectToDisplay(new Char(pickedItem.charAt(c)), c + offset, displayHeight - bottomHeight - 1);
-                    //                 add_punc = c + offset;
-
-                    //             }
-                                
-                    //             // displayGrid.addObjectToDisplay(new Char(','), add_punc + 1, displayHeight - bottomHeight - 1);
-                    //             displayGrid.addObjectToDisplay(new Char(' '), add_punc + 2, displayHeight - bottomHeight - 1);
-
-
-                    //             offset += pickedItem.length() + 1;
-                    //         }
-                    //     }
-                    // }
-                } //Items
+                }
 
                 else if (i == 3) {
                     for (int k = 0; k < posX.size(); k++) {
