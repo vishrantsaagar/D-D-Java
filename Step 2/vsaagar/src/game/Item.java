@@ -16,6 +16,10 @@ public class Item extends Displayable {
         owner = _owner;
     }
 
+    public Creature getOwner(){
+        return owner;
+    }
+
     public void addItemAction(ItemAction itemaction)
     {
         System.out.println("ItemAction");
@@ -25,13 +29,13 @@ public class Item extends Displayable {
     public void SetPosX(int x)
     {
         PosX.add(x);
-        System.out.println("Displayable:SetPosX" + x);
+        System.out.println("Item:SetPosX" + x);
     }
 
     public void SetPosY(int y)
     {
         PosY.add(y);
-        System.out.println("Displayable:setPosY" + y);
+        System.out.println("Item:setPosY" + y);
     }
 
     public ArrayList<Integer> getPosX(){

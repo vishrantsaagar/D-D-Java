@@ -1,5 +1,8 @@
 package game;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 public class Player extends Creature{
 
     private int room_id;
@@ -9,9 +12,13 @@ public class Player extends Creature{
     private int startX;
     private int startY;
     private int hp;
-    private Item _sword;
-    private Item _armor; 
-    private Item _scroll;
+    // private Item _sword;
+    // private Item _armor; 
+    // private Item _scroll;
+    private ArrayList<Integer> PosX = new ArrayList<Integer>();
+    private ArrayList<Integer> PosY = new ArrayList<Integer>();
+    private Stack<Item> item = new Stack<Item>();
+    private Stack<String> item_string = new Stack<String>();
 
     public void setPlayer(Player _player)
     {
@@ -45,36 +52,35 @@ public class Player extends Creature{
 
     public void setWeapon(Item sword)
     {
-      _sword = sword;
+      item.push(sword);
+      item_string.push("Sword");
       System.out.println("Player:setWeapon");
-    }
-
-    public Item getWeapon()
-    {
-      System.out.println("Player:getWeapon");
-      return _sword;
     }
     
     public void setArmor(Item armor)
     {
-      _armor = armor;
+      item.push(armor);
+      item_string.push("Armor");
       System.out.println("Player:setArmor");
-    }
-
-    public Item getArmor()
-    {
-      System.out.println("Player:getArmor");
-      return _armor;
     }
 
     public void setScroll(Item scroll)
     {
-      _scroll = scroll;
+      item.push(scroll);
+      item_string.push("Scroll");
       System.out.println("Player:setScroll");
     }
 
-    public Item getScroll() {
-      return _scroll;
+    public Stack<Item> getItem() {
+      System.out.println("Player:getItem");
+
+      return item;
+    }
+
+    public Stack<String> getStrItem(){
+      System.out.println("Player:getStrItem");
+
+      return item_string;
     }
 
     public void setID(int room, int serial)

@@ -222,6 +222,11 @@ public class DungeonXMLHandler extends DefaultHandler {
             s1.setID(scrollRoom, scrollSerial);
             currItem = s1;
 
+            if(currPlayer != null){
+                s1.setOwner(currPlayer);
+                currPlayer.setScroll(s1);
+            }
+
             currRoom.setItem(s1);
             dungeon.addItem(s1);
             dispstack.push(currItem);
@@ -273,6 +278,8 @@ public class DungeonXMLHandler extends DefaultHandler {
             if(currPlayer != null)
             {
                 currPlayer.setArmor(a1);
+                a1.setOwner(currPlayer);
+
             }
 
             currRoom.setItem(a1);
@@ -295,6 +302,8 @@ public class DungeonXMLHandler extends DefaultHandler {
             if(currPlayer != null)
             {
                 currPlayer.setWeapon(sw1);
+                sw1.setOwner(currPlayer);
+
             }
 
             currRoom.setItem(sw1);
