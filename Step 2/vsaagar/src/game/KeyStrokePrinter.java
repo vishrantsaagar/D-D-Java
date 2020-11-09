@@ -132,28 +132,32 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         String num = Integer.toString(newhp);
                         int p = 3;
                         
-                        if(num.length() > 1)
+                        if(num.length() == 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
+                        }
+                        
+                        else if(num.length() == 2)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
+                        }
+
+                        else if(num.length() > 1)
                         {
                             for(char h : num.toCharArray()) {
                                 displayGrid.addObjectToDisplay(new Char(h),  p, 0);
                                 p++;
                             }
                         }
-                        else if(num.length() == 1)
-                        {
-                            for(char h : num.toCharArray()) {
-                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
-                            }
-                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
-                        }
-                        else if(num.length() == 2)
-                        {
-                            for(char h : num.toCharArray()) {
-                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
-                            }
-                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
-                            displayGrid.addObjectToDisplay(new Char(' '),  p + 2, 0);
-                        }
+
 
 
                         System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
@@ -304,28 +308,32 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         String num = Integer.toString(newhp);
                         int p = 3;
 
-                        if(num.length() > 1)
+                        if(num.length() == 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
+                        }
+                        
+                        else if(num.length() == 2)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
+                        }
+
+                        else if(num.length() > 1)
                         {
                             for(char h : num.toCharArray()) {
                                 displayGrid.addObjectToDisplay(new Char(h),  p, 0);
                                 p++;
                             }
                         }
-                        else if(num.length() == 1)
-                        {
-                            for(char h : num.toCharArray()) {
-                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
-                            }
-                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
-                        }
-                        else if(num.length() == 2)
-                        {
-                            for(char h : num.toCharArray()) {
-                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
-                            }
-                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
-                            displayGrid.addObjectToDisplay(new Char(' '),  p + 2, 0);
-                        }
+
 
                         System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
 
@@ -476,28 +484,32 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         String num = Integer.toString(newhp);
                         int p = 3;
 
-                        if(num.length() > 1)
+                        if(num.length() == 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
+                        }
+                        
+                        else if(num.length() == 2)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
+                        }
+
+                        else if(num.length() > 1)
                         {
                             for(char h : num.toCharArray()) {
                                 displayGrid.addObjectToDisplay(new Char(h),  p, 0);
                                 p++;
                             }
                         }
-                        else if(num.length() == 1)
-                        {
-                            for(char h : num.toCharArray()) {
-                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
-                            }
-                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
-                        }
-                        else if(num.length() == 2)
-                        {
-                            for(char h : num.toCharArray()) {
-                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
-                            }
-                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
-                            displayGrid.addObjectToDisplay(new Char(' '),  p + 2, 0);
-                        }
+
 
                         System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
 
@@ -648,27 +660,30 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         String num = Integer.toString(newhp);
                         int p = 3;
 
-                         if(num.length() > 1)
+                        if(num.length() == 1)
                         {
                             for(char h : num.toCharArray()) {
                                 displayGrid.addObjectToDisplay(new Char(h),  p, 0);
                                 p++;
                             }
-                        }
-                        else if(num.length() == 1)
-                        {
-                            for(char h : num.toCharArray()) {
-                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
-                            }
                             displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
                         }
+
                         else if(num.length() == 2)
                         {
                             for(char h : num.toCharArray()) {
                                 displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
                             }
                             displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
-                            displayGrid.addObjectToDisplay(new Char(' '),  p + 2, 0);
+                        }
+
+                        else if(num.length() > 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
                         }
 
                         System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
