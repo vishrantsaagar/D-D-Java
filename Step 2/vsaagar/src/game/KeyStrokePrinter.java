@@ -808,13 +808,6 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         System.out.println(item_list.get(i));
                     }
 
-                    System.out.println("BEFORE PICKUP-------------------------------------------------");
-                    item_stack = p1.getItem();
-                    for(int i = 0; i < item_stack.size(); i++){
-                        System.out.println("ITEM: " + item_stack.get(i));
-                    }
-                    System.out.println("-------------------------------------------------");
-
                     for(int item = 0; item < item_list.size(); item++){
                         if(item_list.get(item).getPosX().size() == 0){
                             item += 1;
@@ -823,55 +816,46 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         int index_pos = item_list.get(item).getPosX().size() - 1;
 
                         if((item_list.get(item).getPosX().get(index_pos) == posX) & (item_list.get(item).getPosY().get(index_pos) == posY)){
-                            if(displayGrid.getObjectGrid()[posX][posY].get(3).getChar() == '|'){
+                            int index = displayGrid.getObjectGrid()[posX][posY].size() - 2;
+
+                            if(displayGrid.getObjectGrid()[posX][posY].get(index).getChar() == '|'){
                                 p1.setWeapon(item_list.get(item));
                                 item_list.get(item).setOwner(p1);
 
-                                System.out.println("SWORD PICKUP-------------------------------------------------");
-                                item_stack = p1.getItem();
-                                for(int i = 0; i < item_stack.size(); i++){
-                                    System.out.println("ITEM: " + item_stack.get(i));
-                                }
-                                System.out.println("-------------------------------------------------");
-
                                 displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                                 displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                                 displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+
+                                item_list.get(item).SetPosX(-1);
+                                item_list.get(item).SetPosY(-1);
+
                                 break;
                             }
 
-                            else if(displayGrid.getObjectGrid()[posX][posY].get(3).getChar() == ']'){
+                            else if(displayGrid.getObjectGrid()[posX][posY].get(index).getChar() == ']'){
                                 p1.setArmor(item_list.get(item));
                                 item_list.get(item).setOwner(p1);
 
-                                System.out.println("ARMOUR PICKUP-------------------------------------------------");
-                                item_stack = p1.getItem();
-                                for(int i = 0; i < item_stack.size(); i++){
-                                    System.out.println("ITEM: " + item_stack.get(i));
-                                }
-                                System.out.println("-------------------------------------------------");
-
                                 displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                                 displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                                 displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+
+                                item_list.get(item).SetPosX(-1);
+                                item_list.get(item).SetPosY(-1);
                                 break;
 
                             }
 
-                            else if(displayGrid.getObjectGrid()[posX][posY].get(3).getChar() == '?'){
+                            else if(displayGrid.getObjectGrid()[posX][posY].get(index).getChar() == '?'){
                                 p1.setScroll(item_list.get(item));
                                 item_list.get(item).setOwner(p1);
-
-                                System.out.println("SCROLL PICKUP-------------------------------------------------");
-                                item_stack = p1.getItem();
-                                for(int i = 0; i < item_stack.size(); i++){
-                                    System.out.println("ITEM: " + item_stack.get(i));
-                                }
-                                System.out.println("-------------------------------------------------");
 
                                 displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                                 displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                                 displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+
+                                item_list.get(item).SetPosX(-1);
+                                item_list.get(item).SetPosY(-1);
                                 break;
                             }
                         }
@@ -908,10 +892,6 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         
                         item_stack.remove(idx);
                         item_str_stack.remove(idx);
-
-                        System.out.println("DROP-------------------------------------------------");
-                        System.out.println("ITEM: " + dropItem);
-                        System.out.println("-------------------------------------------------");
 
                         if(dropItem instanceof Sword){
                             displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
