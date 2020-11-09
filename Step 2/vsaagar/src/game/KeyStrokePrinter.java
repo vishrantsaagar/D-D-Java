@@ -808,6 +808,13 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         System.out.println(item_list.get(i));
                     }
 
+                    System.out.println("BEFORE PICKUP-------------------------------------------------");
+                    item_stack = p1.getItem();
+                    for(int i = 0; i < item_stack.size(); i++){
+                        System.out.println("ITEM: " + item_stack.get(i));
+                    }
+                    System.out.println("-------------------------------------------------");
+
                     for(int item = 0; item < item_list.size(); item++){
                         if(item_list.get(item).getPosX().size() == 0){
                             item += 1;
@@ -820,6 +827,13 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 p1.setWeapon(item_list.get(item));
                                 item_list.get(item).setOwner(p1);
 
+                                System.out.println("SWORD PICKUP-------------------------------------------------");
+                                item_stack = p1.getItem();
+                                for(int i = 0; i < item_stack.size(); i++){
+                                    System.out.println("ITEM: " + item_stack.get(i));
+                                }
+                                System.out.println("-------------------------------------------------");
+
                                 displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                                 displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                                 displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
@@ -829,6 +843,13 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             else if(displayGrid.getObjectGrid()[posX][posY].get(3).getChar() == ']'){
                                 p1.setArmor(item_list.get(item));
                                 item_list.get(item).setOwner(p1);
+
+                                System.out.println("ARMOUR PICKUP-------------------------------------------------");
+                                item_stack = p1.getItem();
+                                for(int i = 0; i < item_stack.size(); i++){
+                                    System.out.println("ITEM: " + item_stack.get(i));
+                                }
+                                System.out.println("-------------------------------------------------");
 
                                 displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                                 displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
@@ -840,6 +861,13 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             else if(displayGrid.getObjectGrid()[posX][posY].get(3).getChar() == '?'){
                                 p1.setScroll(item_list.get(item));
                                 item_list.get(item).setOwner(p1);
+
+                                System.out.println("SCROLL PICKUP-------------------------------------------------");
+                                item_stack = p1.getItem();
+                                for(int i = 0; i < item_stack.size(); i++){
+                                    System.out.println("ITEM: " + item_stack.get(i));
+                                }
+                                System.out.println("-------------------------------------------------");
 
                                 displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                                 displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
@@ -914,6 +942,10 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             }
                         }
                     }
+
+                    System.out.println("DROP-------------------------------------------------");
+                    System.out.println("ITEM: " + dropItem);
+                    System.out.println("-------------------------------------------------");
                 }
 
                 else if(ch == 'i'){
