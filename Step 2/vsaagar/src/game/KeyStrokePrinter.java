@@ -148,6 +148,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 p++;
                             }
                             displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
+                            displayGrid.addObjectToDisplay(new Char(' '),  p + 2, 0);
                         }
 
                         else if(num.length() > 1)
