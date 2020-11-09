@@ -146,6 +146,13 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             }
                             displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
                         }
+                        else if(num.length() == 2)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
+                        }
 
 
                         System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
@@ -304,6 +311,13 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             }
                         }
                         else if(num.length() == 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
+                        }
+                        else if(num.length() == 2)
                         {
                             for(char h : num.toCharArray()) {
                                 displayGrid.addObjectToDisplay(new Char(h),  p, 0);
@@ -474,6 +488,13 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             }
                             displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
                         }
+                        else if(num.length() == 2)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
+                        }
 
                         System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
 
@@ -632,6 +653,13 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             }
                         }
                         else if(num.length() == 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p + 1, 0);
+                        }
+                        else if(num.length() == 2)
                         {
                             for(char h : num.toCharArray()) {
                                 displayGrid.addObjectToDisplay(new Char(h),  p, 0);
@@ -818,8 +846,6 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                     item_stack = p1.getItem();
                     item_str_stack = p1.getStrItem();
-
-                    System.out.println("ITEM SIZZE: " + item_str_stack.size());
 
                     if(item_str_stack.size() == 0){
                         System.out.println("There is nothing in the pack!");
