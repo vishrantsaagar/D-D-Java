@@ -11,10 +11,11 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.SAXException;
 
 //Agenda: 
-//1)Display top message and bottom message
-//2)Player get beaten up or beats monsters, documented damage decrease
-//3)pick up and drop item
-//4)Inventory at the bottom of display
+//1) Everytime the player moves, gains one hitpoint (via hpMoves)
+//2) Retrieve ActionInt Value Element (For Hallucinate)
+//3) When a victim creature, either the player or a monster, is hit, all hitActions associated with the victim creature are performed by that creature
+//4) DeathAction for player and monster
+//5) All the other key inputs in the pdf
 
 public class Rogue implements Runnable {
 
