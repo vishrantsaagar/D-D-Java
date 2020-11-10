@@ -872,7 +872,11 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     }
 
                     if(chk == true){
-                        idx = Integer.parseInt(String.valueOf(inputQueue.poll()));
+                        try{
+                            idx = Integer.parseInt(String.valueOf(inputQueue.poll())) - 1;
+                        } catch(NumberFormatException e){
+                            System.out.println("Valid Id not entered");
+                        }
                     }
 
                     item_stack = p1.getItem();
@@ -882,7 +886,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         System.out.println("There is nothing in the pack!");
                     }
 
-                    else if(idx >= item_str_stack.size()){
+                    else if(idx >= item_str_stack.size() | idx < 0){
                         System.out.println("No item at id: " + idx);
                     }
 
@@ -936,8 +940,8 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     item_str_stack = p1.getStrItem();
 
                     int offset = 6;
-                    for(int i = 0; i < item_str_stack.size(); i++){
-                        String item = item_str_stack.get(i);
+                    for(int i = 1; i <= item_str_stack.size(); i++){
+                        String item = item_str_stack.get(i - 1);
                         int add_space = 0;
 
                         item = Integer.toString(i) + ": " + item;
