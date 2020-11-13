@@ -14,6 +14,15 @@ public class Sword extends Item{
         return room_id;
     }
 
+    public String getName(){
+        return _name;
+    }
+
+    public void setName(String name){
+        _name = name;
+    }
+
+
     public void setID(int room, int serial)
     {
         room_id = room;

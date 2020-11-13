@@ -938,11 +938,25 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     }
 
                     item_str_stack = p1.getStrItem();
+                    item_stack = p1.getItem();
 
                     int offset = 6;
                     for(int i = 1; i <= item_str_stack.size(); i++){
                         String item = item_str_stack.get(i - 1);
+                        Item item_it = item_stack.get(i - 1);
                         int add_space = 0;
+
+                        if(item_it instanceof Sword){
+                            item = ((Sword)item_it).getName();
+                        }
+
+                        else if(item_it instanceof Armor){
+                            item = ((Armor)item_it).getName();
+                        }
+
+                        else if(item_it instanceof Scroll){
+                            item = ((Scroll)item_it).getName();
+                        }
 
                         item = Integer.toString(i) + ": " + item;
 

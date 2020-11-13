@@ -16,6 +16,10 @@ public class Armor extends Item{
         System.out.println("Armor:setName" + name);
     }
 
+    public String getName(){
+        return _name;
+    }
+
     public int getRoomID(){
         return room_id;
     }
