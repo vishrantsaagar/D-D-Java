@@ -9,6 +9,7 @@ public class Displayable {
     private int posY;
     private int width;
     private int height;
+    private int hpmoves;
     private char type;
 
     private ArrayList<Integer> xPos = new ArrayList<Integer>();
@@ -62,7 +63,11 @@ public class Displayable {
     public void setHpMove(int hpMoves)
     {
         System.out.println("Displayable:setHpMove" + hpMoves);
+        hpmoves = hpMoves;
+    }
 
+    public int getHpmoves() {
+        return hpmoves;
     }
 
     public void setHp(int Hp)

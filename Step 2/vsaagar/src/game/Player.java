@@ -12,6 +12,7 @@ public class Player extends Creature {
     private int startX;
     private int startY;
     private int hp;
+    private int hpmoves;
     private ArrayList<Integer> PosX = new ArrayList<Integer>();
     private ArrayList<Integer> PosY = new ArrayList<Integer>();
     private Stack<Item> item = new Stack<Item>();
@@ -26,6 +27,15 @@ public class Player extends Creature {
     public void setHp(int HP)
     {
       hp = HP;
+    }
+
+    public void setHpMove(int hpMoves)
+    {
+        hpmoves = hpMoves;
+    }
+
+    public int getHpMoves() {
+        return hpmoves;
     }
 
     public int getHp()

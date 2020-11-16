@@ -33,6 +33,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
     private int displayHeight;
     private String pickedItem;
     private Dungeon dungeon;
+    private int steps;
 
     public KeyStrokePrinter(ObjectDisplayGrid grid, Player _p1, DungeonXMLHandler _handler) {
     
