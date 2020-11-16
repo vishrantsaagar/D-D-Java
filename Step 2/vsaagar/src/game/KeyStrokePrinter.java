@@ -33,7 +33,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
     private int displayHeight;
     private String pickedItem;
     private Dungeon dungeon;
-    private int steps;
+    private int steps = 0;
 
     public KeyStrokePrinter(ObjectDisplayGrid grid, Player _p1, DungeonXMLHandler _handler) {
     
@@ -130,9 +130,15 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         
                         int newhp = p1.getHp();
 
+                        steps++;
+                        if(steps == p1.getHpMoves() - 1)
+                        {
+                            newhp = p1.getHp() + 1;
+                        }
+
                         String num = Integer.toString(newhp);
                         int p = 3;
-                        
+
                         if(num.length() == 1)
                         {
                             for(char h : num.toCharArray()) {
@@ -267,6 +273,8 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         posY = posY - 1;
                         displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
                     }
+
+
                 }
 
                 else if(ch == 'h'){

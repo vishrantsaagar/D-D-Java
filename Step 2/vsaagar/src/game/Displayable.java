@@ -66,7 +66,7 @@ public class Displayable {
         hpmoves = hpMoves;
     }
 
-    public int getHpmoves() {
+    public int getHpMoves() {
         return hpmoves;
     }
 
