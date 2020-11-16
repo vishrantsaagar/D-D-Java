@@ -10,4 +10,9 @@ public class Teleport extends CreatureAction{
         System.out.println("Teleport:Teleport" + _name);
 
     }
+
+    public String getname()
+    {
+        return _name;
+    }
 }

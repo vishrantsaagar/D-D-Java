@@ -10,4 +10,9 @@ public class Remove extends CreatureAction{
         _name = name;
         System.out.println("Remove:Remove" + _name);
     }
+
+    public String getname()
+    {
+        return _name;
+    }
 }

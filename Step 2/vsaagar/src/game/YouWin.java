@@ -10,4 +10,9 @@ public class YouWin extends CreatureAction{
         _name = name;
         System.out.println("YouWin:YouWin" + _name);
     }
+
+    public String getname()
+    {
+        return _name;
+    }
 }

@@ -9,4 +9,9 @@ public class DropPack extends CreatureAction{
         _name = name;
         System.out.println("DropPack" + _name);
     }
+
+    public String getname()
+    {
+        return _name;
+    }
 }
