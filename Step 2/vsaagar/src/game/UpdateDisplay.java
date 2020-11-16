@@ -9,4 +9,9 @@ public class UpdateDisplay extends CreatureAction{
         _name = name;
         System.out.println("UpdateDisplay" + _name);
     }
+
+    public String getname()
+    {
+        return _name;
+    }
 }
