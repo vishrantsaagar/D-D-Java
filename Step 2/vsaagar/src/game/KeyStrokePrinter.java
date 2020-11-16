@@ -34,6 +34,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
     private String pickedItem;
     private Dungeon dungeon;
     private int steps = 0;
+    private int phpmoves;
 
     public KeyStrokePrinter(ObjectDisplayGrid grid, Player _p1, DungeonXMLHandler _handler) {
     
@@ -60,6 +61,8 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                 p1 = (Player) creatures.get(i);
             }
         }
+
+        phpmoves = p1.getHpMoves();
         System.out.println(p1);
         posX = p1.getstartingX();
         posY = p1.getstartingY(); 
@@ -127,14 +130,8 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                         target.setHp(mhp - randphit);
                         p1.setHp(php - randmhit);
-                        
-                        int newhp = p1.getHp();
 
-                        steps++;
-                        if(steps == p1.getHpMoves() - 1)
-                        {
-                            newhp = p1.getHp() + 1;
-                        }
+                        int newhp = p1.getHp();
 
                         String num = Integer.toString(newhp);
                         int p = 3;
@@ -164,8 +161,6 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 p++;
                             }
                         }
-
-
 
                         System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
 
@@ -271,6 +266,48 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     else {
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posY = posY - 1;
+                        steps = steps + 1;
+                        System.out.println(steps);
+                        int php = p1.getHp();
+
+                        if(steps == (phpmoves))
+                        {
+                            System.out.println("1+");
+                            p1.setHp(php + 1);
+                            steps = 0;
+                        }
+
+                        int newhp = p1.getHp();
+
+                        String num = Integer.toString(newhp);
+                        int p = 3;
+
+                        if(num.length() == 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                        }
+                        
+                        else if(num.length() == 2)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                        }
+
+                        else if(num.length() > 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                        }
+
                         displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
                     }
 
@@ -449,6 +486,49 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     else {
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posX = posX - 1;
+
+                        steps = steps + 1;
+                        System.out.println(steps);
+                        int php = p1.getHp();
+
+                        if(steps == (phpmoves))
+                        {
+                            System.out.println("1+");
+                            p1.setHp(php + 1);
+                            steps = 0;
+                        }
+
+                        int newhp = p1.getHp();
+
+                        String num = Integer.toString(newhp);
+                        int p = 3;
+
+                        if(num.length() == 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                        }
+                        
+                        else if(num.length() == 2)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                        }
+
+                        else if(num.length() > 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                        }
+
                         displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
                     }
                 }
@@ -625,6 +705,49 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     else {
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posX = posX + 1;
+
+                        steps = steps + 1;
+                        int php = p1.getHp();
+                        System.out.println(steps);
+
+                        if(steps == (phpmoves))
+                        {
+                            System.out.println("1+");
+                            p1.setHp(php + 1);
+                            steps = 0;
+                        }
+
+                        int newhp = p1.getHp();
+
+                        String num = Integer.toString(newhp);
+                        int p = 3;
+
+                        if(num.length() == 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                        }
+                        
+                        else if(num.length() == 2)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                        }
+
+                        else if(num.length() > 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                        }
+
                         displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
                     }
                 }
@@ -800,6 +923,49 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     else {
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posY = posY + 1;
+
+                        steps = steps + 1;
+                        System.out.println(steps);
+                        int php = p1.getHp();
+
+                        if(steps == (phpmoves))
+                        {
+                            System.out.println("1+");
+                            p1.setHp(php + 1);
+                            steps = 0;
+                        }
+
+                        int newhp = p1.getHp();
+
+                        String num = Integer.toString(newhp);
+                        int p = 3;
+
+                        if(num.length() == 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                        }
+                        
+                        else if(num.length() == 2)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                        }
+
+                        else if(num.length() > 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                        }
+
                         displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
                     }
                 }

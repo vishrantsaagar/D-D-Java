@@ -11,11 +11,10 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.SAXException;
 
 //Agenda: 
-//1) Everytime the player moves, gains one hitpoint (via hpMoves)
-//2) Retrieve ActionInt Value Element (For Hallucinate)
-//3) When a victim creature, either the player or a monster, is hit, all hitActions associated with the victim creature are performed by that creature
-//4) DeathAction for player and monster
-//5) All the other key inputs in the pdf
+//1) Retrieve ActionInt Value Element (For Hallucinate)
+//2) When a victim creature, either the player or a monster, is hit, all hitActions associated with the victim creature are performed by that creature
+//3) DeathAction for player and monster
+//4) All the other key inputs in the pdf
 
 public class Rogue implements Runnable {
 
