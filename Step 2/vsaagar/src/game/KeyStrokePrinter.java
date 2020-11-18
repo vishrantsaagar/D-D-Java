@@ -1146,6 +1146,56 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     }
                 }
 
+                else if(ch == 'w'){
+                    int idx = -1;
+
+                    boolean chk = false;
+
+                    while(inputQueue.peek() == null){
+                        chk = true;
+                    }
+
+                    if(chk == true){
+                        try{
+                            idx = Integer.parseInt(String.valueOf(inputQueue.poll())) - 1;
+                        } catch(NumberFormatException e){
+                            System.out.println("Valid Id not entered");
+                        }
+                    }
+
+                    item_stack = p1.getItem();
+                    item_str_stack = p1.getStrItem();
+
+                    if(item_str_stack.size() == 0){
+                        System.out.println("There is nothing in the pack!");
+                    }
+
+                    else if(idx >= item_str_stack.size() | idx < 0){
+                        System.out.println("No item at id: " + idx);
+                    }
+
+                    else{
+                        if(item_stack.get(idx) instanceof Armor){
+                            p1.wearArmour(item_stack.get(idx));
+                            item_stack.remove(idx);
+                            item_str_stack.remove(idx);
+                            //When pressing c, add item back into pack so item_stack and item_str_stack
+                        }
+
+                        else{
+                            String message = "THE ITEM SELECTED IS NOT AN ARMOUR. PLEASE TRY AGAIN";
+                            int length = message.length();
+
+                            int offset = 6;
+                            for(int i = 0; i < length; i++){
+                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                            }
+                        }
+                    }
+
+
+                }
+
      
                 else {
                     System.out.println("character " + ch + " entered on the keyboard");
