@@ -11,6 +11,7 @@ public class Displayable {
     private int height;
     private int hpmoves;
     private char type;
+    private int intvalue;
 
     private ArrayList<Integer> xPos = new ArrayList<Integer>();
     private ArrayList<Integer> yPos = new ArrayList<Integer>();
@@ -87,6 +88,12 @@ public class Displayable {
     public void setIntValue(int v)
     {
         System.out.println("Displayable:setIntValue" + v);
+        intvalue = v;
+    }
+
+    public int getintvalue()
+    {
+        return intvalue;
     }
 
     public void SetPosX(int x)

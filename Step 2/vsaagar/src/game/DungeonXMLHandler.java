@@ -399,8 +399,7 @@ public class DungeonXMLHandler extends DefaultHandler {
         }
 
         else if(bItemIntValue){
-            Displayable x = dispstack.peek();
-            
+            Displayable x = dispstack.peek(); 
             x.setIntValue(Integer.parseInt(data.toString()));
             bItemIntValue = false;
         }

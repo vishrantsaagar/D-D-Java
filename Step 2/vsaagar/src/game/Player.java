@@ -15,7 +15,7 @@ public class Player extends Creature {
     private int hpmoves;
     private ArrayList<Integer> PosX = new ArrayList<Integer>();
     private ArrayList<Integer> PosY = new ArrayList<Integer>();
-    private Item wear_armour;
+    private Item wear_armor;
     private Stack<Item> item = new Stack<Item>();
     private Stack<String> item_string = new Stack<String>();
 
@@ -95,8 +95,8 @@ public class Player extends Creature {
        System.out.println("Player:setID"+room + "\n" +serial);
     }
 
-    public void wearArmour(Item armour){
-      wear_armour = armour;
+    public void wearArmor(Item armour){
+      wear_armor = armour;
       System.out.println("Player:wearArmour");
     }    
 

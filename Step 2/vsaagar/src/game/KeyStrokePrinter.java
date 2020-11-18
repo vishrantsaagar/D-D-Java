@@ -101,6 +101,10 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     else if(displayGrid.getObjectGrid()[posX][posY-1].peek().getChar() == ' '){}
                     else if(displayGrid.getObjectGrid()[posX][posY-1].peek().getChar()== 'T' || displayGrid.getObjectGrid()[posX][posY-1].peek().getChar() == 'S' || displayGrid.getObjectGrid()[posX][posY-1].peek().getChar() == 'H'){
                         
+                        for(int i = 0; i < 50; i++){
+                            displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                        }
+
                         ArrayList<Integer> monX = new ArrayList<>();
                         ArrayList<Integer> monY = new ArrayList<>();
                         Monster target = null;
@@ -229,8 +233,8 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                             return false;
 
-                            }                        
-                      
+                            }                           
+
                         displayGrid.addObjectToDisplay(new Char('D'), z + 1, displayHeight - 1);
                         displayGrid.addObjectToDisplay(new Char('A'), z + 2, displayHeight - 1);
                         displayGrid.addObjectToDisplay(new Char('M'), z + 3, displayHeight - 1);
@@ -318,6 +322,10 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     if(displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'X'){}
                     else if(displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == ' '){}
                     else if(displayGrid.getObjectGrid()[posX-1][posY].peek().getChar()== 'T' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'S' || displayGrid.getObjectGrid()[posX-1][posY].peek().getChar() == 'H'){
+
+                        for(int i = 0; i < 50; i++){
+                            displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                        }
 
                         ArrayList<Integer> monX = new ArrayList<>();
                         ArrayList<Integer> monY = new ArrayList<>();
@@ -449,8 +457,8 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                             return false;
 
-                            }                                           
-                      
+                            }    
+
                         displayGrid.addObjectToDisplay(new Char('D'), z + 1, displayHeight - 1);
                         displayGrid.addObjectToDisplay(new Char('A'), z + 2, displayHeight - 1);
                         displayGrid.addObjectToDisplay(new Char('M'), z + 3, displayHeight - 1);
@@ -537,6 +545,10 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     if(displayGrid.getObjectGrid()[posX+1][posY].peek().getChar() == 'X'){}
                     else if(displayGrid.getObjectGrid()[posX+1][posY].peek().getChar() == ' '){}
                     else if(displayGrid.getObjectGrid()[posX+1][posY].peek().getChar()== 'T' || displayGrid.getObjectGrid()[posX+1][posY].peek().getChar() == 'S' || displayGrid.getObjectGrid()[posX+1][posY].peek().getChar() == 'H'){
+
+                        for(int i = 0; i < 50; i++){
+                            displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                        }
 
                         ArrayList<Integer> monX = new ArrayList<>();
                         ArrayList<Integer> monY = new ArrayList<>();
@@ -668,8 +680,8 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                             return false;
 
-                            }                                               
-                      
+                            }   
+
                         displayGrid.addObjectToDisplay(new Char('D'), z + 1, displayHeight - 1);
                         displayGrid.addObjectToDisplay(new Char('A'), z + 2, displayHeight - 1);
                         displayGrid.addObjectToDisplay(new Char('M'), z + 3, displayHeight - 1);
@@ -757,6 +769,10 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     else if(displayGrid.getObjectGrid()[posX][posY+1].peek().getChar() == ' '){}
                     else if(displayGrid.getObjectGrid()[posX][posY+1].peek().getChar()== 'T' || displayGrid.getObjectGrid()[posX][posY+1].peek().getChar() == 'S' || displayGrid.getObjectGrid()[posX][posY+1].peek().getChar() == 'H'){
                         
+                        for(int i = 0; i < 50; i++){
+                            displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                        }
+
                         ArrayList<Integer> monX = new ArrayList<>();
                         ArrayList<Integer> monY = new ArrayList<>();
                         Monster target = null;
@@ -887,7 +903,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             return false;
 
                         }                                   
-                      
+
                         displayGrid.addObjectToDisplay(new Char('D'), z + 1, displayHeight - 1);
                         displayGrid.addObjectToDisplay(new Char('A'), z + 2, displayHeight - 1);
                         displayGrid.addObjectToDisplay(new Char('M'), z + 3, displayHeight - 1);
@@ -1176,14 +1192,58 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                     else{
                         if(item_stack.get(idx) instanceof Armor){
-                            p1.wearArmour(item_stack.get(idx));
-                            item_stack.remove(idx);
-                            item_str_stack.remove(idx);
-                            //When pressing c, add item back into pack so item_stack and item_str_stack
-                        }
+                            p1.wearArmor(item_stack.get(idx));
+                            int armorhp = p1.getHp() + item_stack.get(idx).getintvalue();
+                            p1.setHp(armorhp);
+
+                            int newhp = p1.getHp();
+
+                            String message = "ARMOR WORN:" + "+" + item_stack.get(idx).getintvalue() + " HP";
+                            int length = message.length();
+
+                            for(int i = 0; i < 50; i++){
+                                displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                            }
+
+                            for(int i = 0; i < length; i++){
+                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), 6 + i, displayHeight - 1);
+                            }
+
+                            String num = Integer.toString(newhp);
+                            int p = 3;
+
+                            if(num.length() == 1)
+                            {
+                                for(char h : num.toCharArray()) {
+                                    displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                    p++;
+                                }
+                                displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                            }
+
+                            else if(num.length() == 2)
+                            {
+                                for(char h : num.toCharArray()) {
+                                    displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                    p++;
+                                }
+                                displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                            }
+
+                            else if(num.length() > 1)
+                            {
+                                for(char h : num.toCharArray()) {
+                                    displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                    p++;
+                                }
+                            }
+                                item_stack.remove(idx);
+                                item_str_stack.remove(idx);
+                                //When pressing c, add item back into pack so item_stack and item_str_stack
+                            }
 
                         else{
-                            String message = "THE ITEM SELECTED IS NOT AN ARMOUR";
+                            String message = "THE ITEM SELECTED IS NOT AN ARMOR";
                             int length = message.length();
 
                             int offset = 6;
