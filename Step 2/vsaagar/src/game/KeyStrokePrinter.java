@@ -1183,10 +1183,15 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         }
 
                         else{
-                            String message = "THE ITEM SELECTED IS NOT AN ARMOUR. PLEASE TRY AGAIN";
+                            String message = "THE ITEM SELECTED IS NOT AN ARMOUR";
                             int length = message.length();
 
                             int offset = 6;
+
+                            for(int i = 0; i < 50; i++){
+                                displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                            }
+
                             for(int i = 0; i < length; i++){
                                 displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
                             }
