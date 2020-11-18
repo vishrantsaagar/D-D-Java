@@ -268,6 +268,11 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         displayGrid.addObjectToDisplay(new Char('!'), o + 13, displayHeight - 1);
                     }
                     else {
+
+                        for(int i = 0; i < 50; i++){
+                            displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                        }
+
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posY = posY - 1;
                         steps = steps + 1;
@@ -492,6 +497,11 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         displayGrid.addObjectToDisplay(new Char('!'), o + 13, displayHeight - 1);
                     }
                     else {
+
+                        for(int i = 0; i < 50; i++){
+                            displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                        }
+
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posX = posX - 1;
 
@@ -715,6 +725,11 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         displayGrid.addObjectToDisplay(new Char('!'), o + 13, displayHeight - 1);
                     }
                     else {
+
+                        for(int i = 0; i < 50; i++){
+                            displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                        }
+
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posX = posX + 1;
 
@@ -937,6 +952,11 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         displayGrid.addObjectToDisplay(new Char('!'), o + 13, displayHeight - 1);
                     }
                     else {
+
+                        for(int i = 0; i < 50; i++){
+                            displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                        }
+                        
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posY = posY + 1;
 
