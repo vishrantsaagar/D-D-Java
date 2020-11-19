@@ -26,6 +26,9 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
     private ArrayList<Displayable> rooms;
     private ArrayList<Displayable> creatures;
     private ArrayList<Monster> monsters = new ArrayList<Monster>();
+    private Item worn_armor;
+    private int itemIntAction;
+    private char itemCharAction;
     private int gameHeight;
     private int topHeight;
     private int bottomHeight;
@@ -999,6 +1002,13 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         System.out.println(item_list.get(i));
                     }
 
+                    for(int i = 0; i < displayGrid.getObjectGrid()[posX][posY].size(); i++){
+                        System.out.println("---------------------------------------------------");
+                        System.out.println(displayGrid.getObjectGrid()[posX][posY].get(i).getChar());
+                        System.out.println("---------------------------------------------------");
+
+                    }
+
                     for(int item = 0; item < item_list.size(); item++){
                         if(item_list.get(item).getPosX().size() == 0){
                             item += 1;
@@ -1009,7 +1019,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         if((item_list.get(item).getPosX().get(index_pos) == posX) & (item_list.get(item).getPosY().get(index_pos) == posY)){
                             int index = displayGrid.getObjectGrid()[posX][posY].size() - 2;
 
-                            if(displayGrid.getObjectGrid()[posX][posY].get(index).getChar() == '|'){
+                            if(item_list.get(item) instanceof Sword & displayGrid.getObjectGrid()[posX][posY].get(index).getChar() == '|'){
                                 p1.setWeapon(item_list.get(item));
                                 item_list.get(item).setOwner(p1);
 
@@ -1023,7 +1033,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 break;
                             }
 
-                            else if(displayGrid.getObjectGrid()[posX][posY].get(index).getChar() == ']'){
+                            else if(item_list.get(item) instanceof Armor & displayGrid.getObjectGrid()[posX][posY].get(index).getChar() == ']'){
                                 p1.setArmor(item_list.get(item));
                                 item_list.get(item).setOwner(p1);
 
@@ -1037,7 +1047,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                             }
 
-                            else if(displayGrid.getObjectGrid()[posX][posY].get(index).getChar() == '?'){
+                            else if(item_list.get(item) instanceof Scroll & displayGrid.getObjectGrid()[posX][posY].get(index).getChar() == '?'){
                                 p1.setScroll(item_list.get(item));
                                 item_list.get(item).setOwner(p1);
 
@@ -1075,15 +1085,25 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                     if(item_str_stack.size() == 0){
                         System.out.println("There is nothing in the pack!");
+                        //Display this in INFO
                     }
 
                     else if(idx >= item_str_stack.size() | idx < 0){
                         System.out.println("No item at id: " + idx);
+                        //Display this in INFO
                     }
 
                     else{
                         Item dropItem = item_stack.get(idx);
                         String dropItem_str = item_str_stack.get(idx);
+
+                        if(dropItem == p1.getWieldSword()){
+                            p1.wieldSword(null);
+                        }
+
+                        if(dropItem == p1.getWornArmor()){
+                            p1.wearArmor(null);
+                        }
                         
                         item_stack.remove(idx);
                         item_str_stack.remove(idx);
@@ -1139,10 +1159,18 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                         if(item_it instanceof Sword){
                             item = ((Sword)item_it).getName();
+
+                            if(item_it == p1.getWieldSword()){
+                                item += "(w)";
+                            }
                         }
 
                         else if(item_it instanceof Armor){
                             item = ((Armor)item_it).getName();
+
+                            if(item_it == p1.getWornArmor()){
+                                item += "(a)";
+                            }
                         }
 
                         else if(item_it instanceof Scroll){
@@ -1237,10 +1265,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                     p++;
                                 }
                             }
-                                item_stack.remove(idx);
-                                item_str_stack.remove(idx);
-                                //When pressing c, add item back into pack so item_stack and item_str_stack
-                            }
+                        }
 
                         else{
                             String message = "THE ITEM SELECTED IS NOT AN ARMOR";
@@ -1255,6 +1280,154 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             for(int i = 0; i < length; i++){
                                 displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
                             }
+                        }
+                    }
+
+
+                }
+
+                else if(ch == 'c'){
+                    worn_armor = p1.getWornArmor();
+                    item_stack = p1.getItem();
+                    item_str_stack = p1.getStrItem();
+
+                    if(worn_armor == null){
+                        // If no armor is being work a message should be shown in the info area of the game display
+                    }
+
+                    else{
+                        p1.wearArmor(null);
+                    }
+                }
+
+                else if(ch == 'T'){
+                    int idx = -1;
+
+                    boolean chk = false;
+
+                    while(inputQueue.peek() == null){
+                        chk = true;
+                    }
+
+                    if(chk == true){
+                        try{
+                            idx = Integer.parseInt(String.valueOf(inputQueue.poll())) - 1;
+                        } catch(NumberFormatException e){
+                            System.out.println("Valid Id not entered");
+                        }
+                    }
+
+                    item_stack = p1.getItem();
+                    item_str_stack = p1.getStrItem();
+
+                    if(item_str_stack.size() == 0){
+                        System.out.println("There is nothing in the pack!");
+                    }
+
+                    else if(idx >= item_str_stack.size() | idx < 0){
+                        System.out.println("No item at id: " + idx);
+                    }
+
+                    else{
+                        if(item_stack.get(idx) instanceof Sword){
+                            p1.wieldSword(item_stack.get(idx));
+
+                        }
+
+                        else{
+                            //Display that item isnt sword in INFO
+                        }
+                    }
+                }
+
+                else if(ch == 'r'){
+                    int idx = -1;
+
+                    boolean chk = false;
+
+                    while(inputQueue.peek() == null){
+                        chk = true;
+                    }
+
+                    if(chk == true){
+                        try{
+                            idx = Integer.parseInt(String.valueOf(inputQueue.poll())) - 1;
+                        } catch(NumberFormatException e){
+                            System.out.println("Valid Id not entered");
+                        }
+                    }
+
+                    item_stack = p1.getItem();
+                    item_str_stack = p1.getStrItem();
+
+                    if(item_str_stack.size() == 0){
+                        System.out.println("There is nothing in the pack!");
+                    }
+
+                    else if(idx >= item_str_stack.size() | idx < 0){
+                        System.out.println("No item at id: " + idx);
+                    }
+
+                    else{
+                        Item scroll = item_stack.get(idx);
+
+                        if(scroll instanceof Scroll){
+                            item_stack.remove(idx);
+                            item_str_stack.remove(idx);
+
+                            itemIntAction = scroll.getItemAction().getIntValue();
+                            itemCharAction = scroll.getItemAction().getCharValue();
+                        }
+
+                        else{
+                            //Display to INFO not Scroll
+                        }
+                    }
+                }
+
+                else if(ch == '?'){
+                    //Display all commands in INFO
+                }
+
+                else if(ch == 'H'){
+                    boolean chk = false;
+                    char instruction = '\0';
+
+                    while(inputQueue.peek() == null){
+                        chk = true;
+                    }
+
+                    if(chk == true){
+                        instruction = String.valueOf(inputQueue.poll()).charAt(0);
+
+                        if(instruction == 'h' | instruction == 'j' | instruction == 'k' | instruction == 'l' | instruction == 'p' | instruction == 'i' | instruction == 'd' | instruction == 'c' | instruction == 'w' | instruction == 'E' | instruction == '?' | instruction == 'H' | instruction == 'r' | instruction == 'T'){
+                            //Display what each command does in INFO
+                        }
+
+                        else{
+                            instruction = '\0';
+                        }
+                    }
+                }
+
+                else if(ch == 'E'){
+                    boolean chk = false;
+                    char endgame = '\0';
+
+                    while(inputQueue.peek() == null){
+                        chk = true;
+                    }
+
+                    if(chk == true){
+                        endgame = String.valueOf(inputQueue.poll()).charAt(0);
+
+                        if(endgame == 'Y' | endgame == 'y'){
+                            //Print a message in the info area using Char objects added to the
+                            // objectGrid to make it clear why the game ended. Display in INFO
+                        }
+
+                        else{
+                            endgame = '\0';
                         }
                     }
 
