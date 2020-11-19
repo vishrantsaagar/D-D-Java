@@ -23,8 +23,13 @@ public class Item extends Displayable {
 
     public void addItemAction(ItemAction itemaction)
     {
-        System.out.println("ItemAction");
+        System.out.println("Item:addItemAction");
         action = itemaction;
+    }
+
+    public ItemAction getItemAction(){
+        System.out.println("Item:getItemAction");
+        return action;
     }
 
     public void SetPosX(int x)

@@ -16,6 +16,7 @@ public class Player extends Creature {
     private ArrayList<Integer> PosX = new ArrayList<Integer>();
     private ArrayList<Integer> PosY = new ArrayList<Integer>();
     private Item wear_armor;
+    private Item wield_sword;
     private Stack<Item> item = new Stack<Item>();
     private Stack<String> item_string = new Stack<String>();
 
@@ -61,20 +62,21 @@ public class Player extends Creature {
     public void setWeapon(Item sword)
     {
       item.push(sword);
-      item_string.push("Sword");
+      item_string.push(((Sword)sword).getName());
       System.out.println("Player:setWeapon");
     }
+    
     public void setArmor(Item armor)
     {
       item.push(armor);
-      item_string.push("Armor");
+      item_string.push(((Armor)armor).getName());
       System.out.println("Player:setArmor");
     }
 
     public void setScroll(Item scroll)
     {
       item.push(scroll);
-      item_string.push("Scroll");
+      item_string.push(((Scroll)scroll).getName());
       System.out.println("Player:setScroll");
     }
 
@@ -98,6 +100,21 @@ public class Player extends Creature {
     public void wearArmor(Item armour){
       wear_armor = armour;
       System.out.println("Player:wearArmour");
+    }
+
+    public Item getWornArmor(){
+      System.out.println("Player:getWornArmor");
+      return wear_armor;
+    }
+
+    public void wieldSword(Item sword){
+      System.out.println("Player:wieldSword");
+      wield_sword = sword;
+    }
+
+    public Item getWieldSword(){
+      System.out.println("Player:getWieldSword");
+      return wield_sword;
     }    
 
     public int getX()
