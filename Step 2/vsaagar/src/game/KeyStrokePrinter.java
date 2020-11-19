@@ -39,6 +39,9 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
     private int steps = 0;
     private int phpmoves;
 
+    private Stack<Item> takenoffitems = new Stack<Item>(); //to store the items we wear for when we insert it back into the stack
+    private Stack<String> takenoffstrings = new Stack<String>(); 
+
     public KeyStrokePrinter(ObjectDisplayGrid grid, Player _p1, DungeonXMLHandler _handler) {
     
         inputQueue = new ConcurrentLinkedQueue<>();
@@ -1232,14 +1235,43 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                     if(item_str_stack.size() == 0){
                         System.out.println("There is nothing in the pack!");
+
+                        String message = "THERE IS NOTHING IN PACK!";
+                            int length = message.length();
+
+                            int offset = 6;
+
+                            for(int i = 0; i < 50; i++){
+                                displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                            }
+
+                            for(int i = 0; i < length; i++){
+                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                            }
                     }
 
                     else if(idx >= item_str_stack.size() | idx < 0){
                         System.out.println("No item at id: " + idx);
+                        String message = "NO ITEM AT " + (idx + 1);
+                            int length = message.length();
+
+                            int offset = 6;
+
+                            for(int i = 0; i < 50; i++){
+                                displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                            }
+
+                            for(int i = 0; i < length; i++){
+                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                            }
                     }
 
                     else{
                         if(item_stack.get(idx) instanceof Armor){
+
+                            takenoffitems.add(item_stack.get(idx)); //storage
+                            takenoffstrings.add(item_str_stack.get(idx)); //storage
+
                             p1.wearArmor(item_stack.get(idx));
                             int armorhp = p1.getHp() + item_stack.get(idx).getintvalue();
                             p1.setHp(armorhp);
@@ -1303,24 +1335,91 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         }
                     }
 
-
+                    item_stack.remove(idx);
+                    item_str_stack.remove(idx);
                 }
 
                 else if(ch == 'c'){
                     worn_armor = p1.getWornArmor();
-                    item_stack = p1.getItem();
-                    item_str_stack = p1.getStrItem();
+                    for(int id = 0; id < takenoffitems.size(); id++){
+
+                        item_stack.add(takenoffitems.get(id)); 
+                        item_str_stack.add(takenoffstrings.get(id));
+                        takenoffitems.remove(id);
+                        takenoffstrings.remove(id);
+                    }
 
                     if(worn_armor == null){
-                        // If no armor is being work a message should be shown in the info area of the game display
+
+                        String message = "NO ARMOR IS CURRENTLY WORN";
+                        int length = message.length();
+
+                        int offset = 6;
+
+                        for(int i = 0; i < 50; i++){
+                            displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                        }
+
+                        for(int i = 0; i < length; i++){
+                            displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                        }                    
+                    
                     }
 
                     else{
-                        p1.wearArmor(null);
-                    }
-                }
 
-                else if(ch == 'T'){
+                        int armorhp = p1.getHp() - worn_armor.getintvalue();
+                        p1.setHp(armorhp);
+
+                        int newhp = p1.getHp();
+
+                        String message = "ARMOR TAKEN OFF:" + "-" + worn_armor.getintvalue() + " HP";
+
+                        int length = message.length();
+
+                        for(int i = 0; i < 50; i++){
+                            displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                        }
+
+                        for(int i = 0; i < length; i++){
+                            displayGrid.addObjectToDisplay(new Char(message.charAt(i)), 6 + i, displayHeight - 1);
+                        }
+
+                        String num = Integer.toString(newhp);
+                        int p = 3;
+
+                        if(num.length() == 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                        }
+
+                        else if(num.length() == 2)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                            displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                        }
+
+                        else if(num.length() > 1)
+                        {
+                            for(char h : num.toCharArray()) {
+                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                p++;
+                            }
+                        }
+
+                        p1.wearArmor(null);
+
+                        }
+                    }
+
+                else if(ch == 'T' || ch == 't'){
                     int idx = -1;
 
                     boolean chk = false;
@@ -1341,21 +1440,73 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     item_str_stack = p1.getStrItem();
 
                     if(item_str_stack.size() == 0){
+                        
                         System.out.println("There is nothing in the pack!");
+                        String message = "THERE IS NOTHING IN PACK!";
+                            
+                        int length = message.length();
+
+                        int offset = 6;
+                        for(int f = 0; f < 50; f++){
+                            displayGrid.addObjectToDisplay(new Char(' '), offset + f, displayHeight - 1);
+                        }
+                        for(int j = 0; j < length; j++){
+                            displayGrid.addObjectToDisplay(new Char(message.charAt(j)), offset + j, displayHeight - 1);
+                        }
                     }
 
                     else if(idx >= item_str_stack.size() | idx < 0){
                         System.out.println("No item at id: " + idx);
+                        String message = "NO ITEM SELECTED";
+                        int length = message.length();
+
+                        int offset = 6;
+
+                        for(int j = 0; j < 50; j++){
+                            displayGrid.addObjectToDisplay(new Char(' '), offset + j, displayHeight - 1);
+                        }
+
+                        for(int f = 0; f < length; f++){
+                            displayGrid.addObjectToDisplay(new Char(message.charAt(f)), offset + f, displayHeight - 1);
+                        }
                     }
 
                     else{
                         if(item_stack.get(idx) instanceof Sword){
                             p1.wieldSword(item_stack.get(idx));
+                            int damage = item_stack.get(idx).getintvalue();
+                            int pmaxhit = p1.getMaxHit();
 
+                            p1.setMaxHit(pmaxhit + damage);
+                            System.out.println(damage);
+
+                            String message = "SWORD WEILDED - DAMAGE INCREASE:" + "+" + damage;
+                            int length = message.length();
+    
+                            int offset = 6;
+    
+                            for(int i = 0; i < 100; i++){
+                                displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                            }
+    
+                            for(int i = 0; i < length; i++){
+                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                            }
                         }
 
                         else{
-                            //Display that item isnt sword in INFO
+                            String message = "ITEM IS NOT A SWORD";
+                            int length = message.length();
+    
+                            int offset = 6;
+    
+                            for(int i = 0; i < 100; i++){
+                                displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                            }
+    
+                            for(int i = 0; i < length; i++){
+                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                            }                                  
                         }
                     }
                 }
@@ -1443,7 +1594,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                         if(endgame == 'Y' | endgame == 'y'){
                             //Print a message in the info area using Char objects added to the
-                            // objectGrid to make it clear why the game ended. Display in INFO
+                            //objectGrid to make it clear why the game ended. Display in INFO
                         }
 
                         else{
