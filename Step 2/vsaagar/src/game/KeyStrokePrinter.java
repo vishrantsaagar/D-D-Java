@@ -1269,74 +1269,74 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     else{
                         if(item_stack.get(idx) instanceof Armor){
 
-                        if(p1.getWornArmor() == null){
-                
-                            takenoffitems.add(item_stack.get(idx)); //storage
-                            takenoffstrings.add(item_str_stack.get(idx)); //storage
-                        
-                            p1.wearArmor(item_stack.get(idx));
-                            int armorhp = p1.getHp() + item_stack.get(idx).getintvalue();
-                            p1.setHp(armorhp);
+                            if(p1.getWornArmor() == null){
+                    
+                                takenoffitems.add(item_stack.get(idx)); //storage
+                                takenoffstrings.add(item_str_stack.get(idx)); //storage
+                            
+                                p1.wearArmor(item_stack.get(idx));
+                                int armorhp = p1.getHp() + item_stack.get(idx).getintvalue();
+                                p1.setHp(armorhp);
 
-                            int newhp = p1.getHp();
+                                int newhp = p1.getHp();
 
-                            String message = "ARMOR WORN:" + "+" + item_stack.get(idx).getintvalue() + " HP";
-                            int length = message.length();
+                                String message = "ARMOR WORN:" + "+" + item_stack.get(idx).getintvalue() + " HP";
+                                int length = message.length();
 
-                            for(int i = 0; i < 50; i++){
-                                displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
-                            }
-
-                            for(int i = 0; i < length; i++){
-                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), 6 + i, displayHeight - 1);
-                            }
-
-                            String num = Integer.toString(newhp);
-                            int p = 3;
-
-                            if(num.length() == 1)
-                            {
-                                for(char h : num.toCharArray()) {
-                                    displayGrid.addObjectToDisplay(new Char(h),  p, 0);
-                                    p++;
+                                for(int i = 0; i < 50; i++){
+                                    displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
                                 }
-                                displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
-                            }
 
-                            else if(num.length() == 2)
-                            {
-                                for(char h : num.toCharArray()) {
-                                    displayGrid.addObjectToDisplay(new Char(h),  p, 0);
-                                    p++;
+                                for(int i = 0; i < length; i++){
+                                    displayGrid.addObjectToDisplay(new Char(message.charAt(i)), 6 + i, displayHeight - 1);
                                 }
-                                displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+
+                                String num = Integer.toString(newhp);
+                                int p = 3;
+
+                                if(num.length() == 1)
+                                {
+                                    for(char h : num.toCharArray()) {
+                                        displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                        p++;
+                                    }
+                                    displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                                }
+
+                                else if(num.length() == 2)
+                                {
+                                    for(char h : num.toCharArray()) {
+                                        displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                        p++;
+                                    }
+                                    displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                                }
+
+                                else if(num.length() > 1)
+                                {
+                                    for(char h : num.toCharArray()) {
+                                        displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                        p++;
+                                    }
+                                }
+
+                                item_stack.remove(idx);
+                                item_str_stack.remove(idx);
+
                             }
 
-                            else if(num.length() > 1)
-                            {
-                                for(char h : num.toCharArray()) {
-                                    displayGrid.addObjectToDisplay(new Char(h),  p, 0);
-                                    p++;
+                            else {
+                                String message = "ARMOR ALREADY WORN";
+                                int length = message.length();
+
+                                for(int i = 0; i < 50; i++){
+                                    displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                                }
+
+                                for(int i = 0; i < length; i++){
+                                    displayGrid.addObjectToDisplay(new Char(message.charAt(i)), 6 + i, displayHeight - 1);
                                 }
                             }
-
-                            item_stack.remove(idx);
-                            item_str_stack.remove(idx);
-
-                            }
-
-                        else {
-                            String message = "ARMOR ALREADY WORN";
-                            int length = message.length();
-
-                            for(int i = 0; i < 50; i++){
-                                displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
-                            }
-
-                            for(int i = 0; i < length; i++){
-                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), 6 + i, displayHeight - 1);
-                            }
-                        }
 
                         }
 
