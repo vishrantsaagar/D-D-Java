@@ -1782,46 +1782,46 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                     switch(instruction){
                         case 'h': 
-                            message = "Move player left";
+                            message = "h: Move player left";
                             break;
                         case 'j':
-                            message = "Move player down";
+                            message = "j: Move player down";
                             break;
                         case 'k':
-                            message = "Move player up";
+                            message = "k: Move player up";
                             break;
                         case 'l':
-                            message = "Move player right";
+                            message = "l: Move player right";
                             break;
                         case 'p':
-                            message = "Pick up item";
+                            message = "p: Pick up item";
                             break;
                         case 'd':
-                            message = "Drop item <id>";
+                            message = "d: Drop item <id>";
                             break;
                         case 'i':
-                            message = "Display pack";
+                            message = "i: Display pack";
                             break;
                         case 'c':
-                            message = "Take off armor";
+                            message = "c: Take off armor";
                             break;
                         case 'w':
-                            message = "Wear armor <id>";
+                            message = "w: Wear armor <id>";
                             break;
                         case 'E':
-                            message = "End the game <Y or y>";
+                            message = "E: End the game <Y or y>";
                             break;
                         case '?':
-                            message = "Display list of commands";
+                            message = "?: Display list of commands";
                             break;
                         case 'H':
-                            message = "Info on command <command>";
+                            message = "H: Info on command <command>";
                             break;
                         case 'r':
-                            message = "Read scroll <id>";
+                            message = "r: Read scroll <id>";
                             break;
                         case 'T':
-                            message = "Wield sword <id>";
+                            message = "T: Wield sword <id>";
                             break;
                         default: message = "Wrong input entered";
                     }
