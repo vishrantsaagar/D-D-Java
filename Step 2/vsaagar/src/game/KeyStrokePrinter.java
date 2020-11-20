@@ -1577,6 +1577,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                         for(int i = 0; i < item_stack.size(); i++){
                                             if(item_stack.get(i) instanceof Sword){
                                                 sword_wielded = item_stack.get(i);
+                                                break;
                                             }
                                         }
 
@@ -1654,6 +1655,14 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                     worn_armor = p1.getWornArmor();
 
                                     if(worn_armor == null){
+                                        for(int i = 0; i < item_stack.size(); i++){
+                                            if(item_stack.get(i) instanceof Armor){
+                                                worn_armor = item_stack.get(i);
+                                                break;
+                                            }
+                                        }
+
+
                                         String message = "scroll of cursing does nothing because " + ((Armor)worn_armor).getName() + " not being used";
 
                                         int offset = 6;
@@ -1737,11 +1746,25 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                 else if(ch == '?'){
                     //Display all commands in INFO
+                    String message = "h, j, k, l, p, d, i, c, w, E, ?, H, r, T";
+                    //check this?
+                    int length = message.length();
+
+                    int offset = 6;
+
+                    for(int i = 0; i < 100; i++){
+                        displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                    }
+
+                    for(int i = 0; i < message.length(); i++){
+                        displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                    }
                 }
 
                 else if(ch == 'H'){
                     boolean chk = false;
                     char instruction = '\0';
+                    String message = "";
 
                     while(inputQueue.peek() == null){
                         chk = true;
@@ -1751,13 +1774,68 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         instruction = String.valueOf(inputQueue.poll()).charAt(0);
 
                         if(instruction == 'h' | instruction == 'j' | instruction == 'k' | instruction == 'l' | instruction == 'p' | instruction == 'i' | instruction == 'd' | instruction == 'c' | instruction == 'w' | instruction == 'E' | instruction == '?' | instruction == 'H' | instruction == 'r' | instruction == 'T'){
-                            //Display what each command does in INFO
                         }
 
                         else{
                             instruction = '\0';
                         }
                     }
+
+                    switch(instruction){
+                        case 'h': 
+                            message = "Move player left";
+                            break;
+                        case 'j':
+                            message = "Move player down";
+                            break;
+                        case 'k':
+                            message = "Move player up";
+                            break;
+                        case 'l':
+                            message = "Move player right";
+                            break;
+                        case 'p':
+                            message = "Pick up item";
+                            break;
+                        case 'd':
+                            message = "Drop item <id>";
+                            break;
+                        case 'i':
+                            message = "Display pack";
+                            break;
+                        case 'c':
+                            message = "Take off armor";
+                            break;
+                        case 'w':
+                            message = "Wear armor <id>";
+                            break;
+                        case 'E':
+                            message = "End the game <Y or y>";
+                            break;
+                        case '?':
+                            message = "Display list of commands";
+                            break;
+                        case 'H':
+                            message = "Info on command <command>";
+                            break;
+                        case 'r':
+                            message = "Read scroll <id>";
+                            break;
+                        case 'T':
+                            message = "Wield sword <id>";
+                            break;
+                        default: message = " ";
+                    }
+
+                    int offset = 6;
+                    for(int i = 0; i < 100; i++){
+                        displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                    }
+
+                    for(int i = 0; i < message.length(); i++){
+                        displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                    }
+
                 }
 
                 else if(ch == 'E'){
@@ -1772,8 +1850,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         endgame = String.valueOf(inputQueue.poll()).charAt(0);
 
                         if(endgame == 'Y' | endgame == 'y'){
-                            //Print a message in the info area using Char objects added to the
-                            //objectGrid to make it clear why the game ended. Display in INFO
+                            //how do you end the game?
                         }
 
                         else{
@@ -1781,6 +1858,16 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         }
                     }
 
+                    String message = "Game ended since user entered the command Y/y";
+
+                    int offset = 6;
+                    for(int i = 0; i < 100; i++){
+                        displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                    }
+
+                    for(int i = 0; i < message.length(); i++){
+                        displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                    }
 
                 }
 
