@@ -1849,8 +1849,21 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     if(chk == true){
                         endgame = String.valueOf(inputQueue.poll()).charAt(0);
 
-                        if(endgame == 'Y' | endgame == 'y'){
-                            //how do you end the game?
+                        if(endgame == 'Y' | endgame == 'y'){ 
+                            displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                            String message = "Game ended since user entered the command Y/y";
+
+                            int offset = 6;
+                            for(int i = 0; i < 100; i++){
+                                displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                            }
+                        
+                            for(int i = 0; i < message.length(); i++){
+                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                            }
+
+                            return false;
+
                         }
 
                         else{
@@ -1858,16 +1871,16 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         }
                     }
 
-                    String message = "Game ended since user entered the command Y/y";
-
-                    int offset = 6;
-                    for(int i = 0; i < 100; i++){
-                        displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
-                    }
-
-                    for(int i = 0; i < message.length(); i++){
-                        displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
-                    }
+                    //String message = "Game ended since user entered the command Y/y";
+//
+                    //int offset = 6;
+                    //for(int i = 0; i < 100; i++){
+                    //    displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                    //}
+//
+                    //for(int i = 0; i < message.length(); i++){
+                    //    displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                    //}
 
                 }
 
