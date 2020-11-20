@@ -1748,7 +1748,6 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     //Display all commands in INFO
                     String message = "h, j, k, l, p, d, i, c, w, E, ?, H, r, T";
                     //check this?
-                    int length = message.length();
 
                     int offset = 6;
 
