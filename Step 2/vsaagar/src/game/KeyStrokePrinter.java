@@ -39,8 +39,8 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
     private int steps = 0;
     private int phpmoves;
 
-    private Stack<Item> takenoffitems = new Stack<Item>(); //to store the items we wear for when we insert it back into the stack
-    private Stack<String> takenoffstrings = new Stack<String>(); 
+    //private Stack<Item> takenoffitems = new Stack<Item>(); //to store the items we wear for when we insert it back into the stack
+    //private Stack<String> takenoffstrings = new Stack<String>(); 
 
     public KeyStrokePrinter(ObjectDisplayGrid grid, Player _p1, DungeonXMLHandler _handler) {
     
@@ -1271,8 +1271,8 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                             if(p1.getWornArmor() == null){
                     
-                                takenoffitems.add(item_stack.get(idx)); //storage
-                                takenoffstrings.add(item_str_stack.get(idx)); //storage
+                                //takenoffitems.add(item_stack.get(idx)); //storage
+                                //takenoffstrings.add(item_str_stack.get(idx)); //storage
                             
                                 p1.wearArmor(item_stack.get(idx));
                                 int armorhp = p1.getHp() + item_stack.get(idx).getintvalue();
@@ -1320,8 +1320,8 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                     }
                                 }
 
-                                item_stack.remove(idx);
-                                item_str_stack.remove(idx);
+                                //item_stack.remove(idx);
+                                //item_str_stack.remove(idx);
 
                             }
 
@@ -1361,15 +1361,15 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                 else if(ch == 'c'){
                     worn_armor = p1.getWornArmor();
 
-                    if(takenoffitems != null)
-                    {
-                        item_stack.add(takenoffitems.firstElement());
-                        item_str_stack.add(takenoffstrings.firstElement());
-                        takenoffitems.pop();
-                        takenoffstrings.pop();
-                    }
-                    else
-                    {}
+                    //if(takenoffitems != null)
+                    //{
+                    //    item_stack.add(takenoffitems.firstElement());
+                    //    item_str_stack.add(takenoffstrings.firstElement());
+                    //    takenoffitems.pop();
+                    //    takenoffstrings.pop();
+                    //}
+                    //else
+                    //{}
 
                     if(worn_armor == null){
 
