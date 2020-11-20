@@ -1565,15 +1565,172 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         Item scroll = item_stack.get(idx);
 
                         if(scroll instanceof Scroll){
-                            item_stack.remove(idx);
-                            item_str_stack.remove(idx);
-
                             itemIntAction = scroll.getItemAction().getIntValue();
                             itemCharAction = scroll.getItemAction().getCharValue();
+
+                            if(scroll.getItemAction() instanceof BlessCurseOwner){
+                                if(itemCharAction == 'w'){
+                                    //Sword
+                                    Item sword_wielded = p1.getWieldSword();
+
+                                    if(sword_wielded == null){
+                                        for(int i = 0; i < item_stack.size(); i++){
+                                            if(item_stack.get(i) instanceof Sword){
+                                                sword_wielded = item_stack.get(i);
+                                            }
+                                        }
+
+                                        String message = "scroll of cursing does nothing because " + ((Sword)sword_wielded).getName() + " not being used";
+
+                                        //Do we use message from pdf file for step 4 & 5 or actionMessage
+
+                                        int offset = 6;
+                                        
+                                        for(int i = 0; i < 100; i++){
+                                            displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                                        }
+                
+                                        for(int i = 0; i < message.length(); i++){
+                                            displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                                        }
+                                    }
+
+                                    else{
+                                        int swordHpDamage = p1.getHp() + itemIntAction;
+                                        p1.setHp(swordHpDamage);
+
+                                        item_stack.remove(idx);
+                                        item_str_stack.remove(idx);
+
+                                        int newhp = p1.getHp();
+
+                                        String message = ((Sword)sword_wielded).getName() + " cursed! " + String.valueOf(itemIntAction) + " taken from its effectiveness";
+                                        int length = message.length();
+                
+                                        int offset = 6;
+                
+                                        for(int i = 0; i < 100; i++){
+                                            displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                                        }
+                
+                                        for(int i = 0; i < length; i++){
+                                            displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                                        }
+
+                                        String num = Integer.toString(newhp);
+                                        int p = 3;
+
+                                        if(num.length() == 1)
+                                        {
+                                            for(char h : num.toCharArray()) {
+                                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                                p++;
+                                            }
+                                            displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                                        }
+
+                                        else if(num.length() == 2)
+                                        {
+                                            for(char h : num.toCharArray()) {
+                                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                                p++;
+                                            }
+                                            displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                                        }
+
+                                        else if(num.length() > 1)
+                                        {
+                                            for(char h : num.toCharArray()) {
+                                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                                p++;
+                                            }
+                                        }
+
+                                    }
+                                }
+
+                                else if(itemCharAction == 'a'){
+                                    //Armour
+                                    worn_armor = p1.getWornArmor();
+
+                                    if(worn_armor == null){
+                                        String message = "scroll of cursing does nothing because " + ((Armor)worn_armor).getName() + " not being used";
+
+                                        int offset = 6;
+
+                                        for(int i = 0; i < 100; i++){
+                                            displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                                        }
+                
+                                        for(int i = 0; i < message.length(); i++){
+                                            displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                                        }
+                                    }
+
+                                    else{
+                                        int armorHpDamage = p1.getHp() + itemIntAction;
+                                        p1.setHp(armorHpDamage);
+
+                                        int newhp = p1.getHp();
+
+                                        String message = ((Armor)worn_armor).getName() + " cursed! " + String.valueOf(itemIntAction) + " taken from its effectiveness";
+                                        int length = message.length();
+                
+                                        int offset = 6;
+                
+                                        for(int i = 0; i < 100; i++){
+                                            displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                                        }
+                
+                                        for(int i = 0; i < length; i++){
+                                            displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                                        }
+
+                                        String num = Integer.toString(newhp);
+                                        int p = 3;
+
+                                        if(num.length() == 1)
+                                        {
+                                            for(char h : num.toCharArray()) {
+                                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                                p++;
+                                            }
+                                            displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                                        }
+
+                                        else if(num.length() == 2)
+                                        {
+                                            for(char h : num.toCharArray()) {
+                                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                                p++;
+                                            }
+                                            displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                                        }
+
+                                        else if(num.length() > 1)
+                                        {
+                                            for(char h : num.toCharArray()) {
+                                                displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                                p++;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
 
                         else{
-                            //Display to INFO not Scroll
+                            String message = "ITEM SELECTED IS NOT A SCROLL";
+
+                            int offset = 6;
+
+                            for(int i = 0; i < 100; i++){
+                                displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                            }
+    
+                            for(int i = 0; i < message.length(); i++){
+                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                            }
                         }
                     }
                 }
