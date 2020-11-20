@@ -5,7 +5,7 @@ public class Action {
   private int itemActionInt;
   private char itemActionChar; 
   private String message;
-      
+
     public void setMessage(String msg) 
    {
     System.out.println("Action: msg" + msg);
@@ -13,7 +13,7 @@ public class Action {
    }
 
    public String getMessage(){
-    System.out.println("Action:message");
+    System.out.println("Action:getMessage");
     return message;
    }
 
