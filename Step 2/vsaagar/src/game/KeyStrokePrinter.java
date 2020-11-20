@@ -1269,9 +1269,11 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     else{
                         if(item_stack.get(idx) instanceof Armor){
 
+                        if(p1.getWornArmor() == null){
+                
                             takenoffitems.add(item_stack.get(idx)); //storage
                             takenoffstrings.add(item_str_stack.get(idx)); //storage
-
+                        
                             p1.wearArmor(item_stack.get(idx));
                             int armorhp = p1.getHp() + item_stack.get(idx).getintvalue();
                             p1.setHp(armorhp);
@@ -1317,6 +1319,25 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                     p++;
                                 }
                             }
+
+                            item_stack.remove(idx);
+                            item_str_stack.remove(idx);
+
+                            }
+
+                        else {
+                            String message = "ARMOR ALREADY WORN";
+                            int length = message.length();
+
+                            for(int i = 0; i < 50; i++){
+                                displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                            }
+
+                            for(int i = 0; i < length; i++){
+                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), 6 + i, displayHeight - 1);
+                            }
+                        }
+
                         }
 
                         else{
@@ -1335,19 +1356,20 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         }
                     }
 
-                    item_stack.remove(idx);
-                    item_str_stack.remove(idx);
                 }
 
                 else if(ch == 'c'){
                     worn_armor = p1.getWornArmor();
-                    for(int id = 0; id < takenoffitems.size(); id++){
 
-                        item_stack.add(takenoffitems.get(id)); 
-                        item_str_stack.add(takenoffstrings.get(id));
-                        takenoffitems.remove(id);
-                        takenoffstrings.remove(id);
+                    if(takenoffitems != null)
+                    {
+                        item_stack.add(takenoffitems.firstElement());
+                        item_str_stack.add(takenoffstrings.firstElement());
+                        takenoffitems.pop();
+                        takenoffstrings.pop();
                     }
+                    else
+                    {}
 
                     if(worn_armor == null){
 
