@@ -1236,7 +1236,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     if(item_str_stack.size() == 0){
                         System.out.println("There is nothing in the pack!");
 
-                        String message = "THERE IS NOTHING IN PACK!";
+                        String message = "There is nothing in the pack!";
                             int length = message.length();
 
                             int offset = 6;
@@ -1252,7 +1252,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                     else if(idx >= item_str_stack.size() | idx < 0){
                         System.out.println("No item at id: " + idx);
-                        String message = "NO ITEM AT " + (idx + 1);
+                        String message = "No item at " + (idx + 1);
                             int length = message.length();
 
                             int offset = 6;
@@ -1326,7 +1326,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             }
 
                             else {
-                                String message = "ARMOR ALREADY WORN";
+                                String message = "Armor already equipped";
                                 int length = message.length();
 
                                 for(int i = 0; i < 50; i++){
@@ -1341,7 +1341,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         }
 
                         else{
-                            String message = "THE ITEM SELECTED IS NOT AN ARMOR";
+                            String message = "The item selected is not an armor";
                             int length = message.length();
 
                             int offset = 6;
@@ -1373,7 +1373,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                     if(worn_armor == null){
 
-                        String message = "NO ARMOR IS CURRENTLY WORN";
+                        String message = "No armor is currently worn";
                         int length = message.length();
 
                         int offset = 6;
@@ -1395,7 +1395,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                         int newhp = p1.getHp();
 
-                        String message = "ARMOR TAKEN OFF:" + "-" + worn_armor.getintvalue() + " HP";
+                        String message = "Armor taken off:" + "-" + worn_armor.getintvalue() + " HP";
 
                         int length = message.length();
 
@@ -1464,7 +1464,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     if(item_str_stack.size() == 0){
                         
                         System.out.println("There is nothing in the pack!");
-                        String message = "THERE IS NOTHING IN PACK!";
+                        String message = "There is nothing in the pack!";
                             
                         int length = message.length();
 
@@ -1479,7 +1479,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                     else if(idx >= item_str_stack.size() | idx < 0){
                         System.out.println("No item at id: " + idx);
-                        String message = "NO ITEM SELECTED";
+                        String message = "No Item selected";
                         int length = message.length();
 
                         int offset = 6;
@@ -1502,7 +1502,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             p1.setMaxHit(pmaxhit + damage);
                             System.out.println(damage);
 
-                            String message = "SWORD WEILDED - DAMAGE INCREASE:" + "+" + damage;
+                            String message = "Sword weilded - Damage Increase:" + "+" + damage;
                             int length = message.length();
     
                             int offset = 6;
@@ -1517,7 +1517,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         }
 
                         else{
-                            String message = "ITEM IS NOT A SWORD";
+                            String message = "Item is not a sword!";
                             int length = message.length();
     
                             int offset = 6;
@@ -1729,7 +1729,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         }
 
                         else{
-                            String message = "ITEM SELECTED IS NOT A SCROLL";
+                            String message = "Item selected is not a scroll!";
 
                             int offset = 6;
 
