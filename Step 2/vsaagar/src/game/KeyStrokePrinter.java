@@ -1824,7 +1824,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         case 'T':
                             message = "Wield sword <id>";
                             break;
-                        default: message = " ";
+                        default: message = "Wrong input entered";
                     }
 
                     int offset = 6;
