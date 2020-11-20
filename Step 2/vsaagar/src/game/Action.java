@@ -4,10 +4,17 @@ public class Action {
 
   private int itemActionInt;
   private char itemActionChar; 
+  private String message;
       
     public void setMessage(String msg) 
    {
     System.out.println("Action: msg" + msg);
+    message = msg;
+   }
+
+   public String getMessage(){
+    System.out.println("Action:message");
+    return message;
    }
 
    public void setIntValue(int v)
