@@ -116,7 +116,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             if(creatureName.equals("Remove")){
                 if(currCreature != null){
                     c1 = new Remove(creatureName, currCreature);
-                    currCreature.setRemoveActionc1(c1); 
+                    currCreature.setRemoveAction(c1); 
                 }
 
                 else{

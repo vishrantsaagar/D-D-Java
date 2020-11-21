@@ -119,7 +119,7 @@ public class Creature extends Displayable {
 
     public CreatureAction getTeleport(){
         System.out.println("Creature:getupdateDisplay");
-        return tele;
+        return teleport;
     }
 
 }

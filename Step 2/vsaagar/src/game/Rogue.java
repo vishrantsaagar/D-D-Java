@@ -326,7 +326,8 @@ public class Rogue implements Runnable {
             rogue.join();
             rog.keyStrokePrinter.join();
 
-        } catch (ParserConfigurationException | SAXException | IOException e) {
+        } 
+        catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace(System.out);
         }
     }
