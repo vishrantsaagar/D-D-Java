@@ -10,7 +10,11 @@ public class Creature extends Displayable {
     private ArrayList<CreatureAction> cact = new ArrayList<CreatureAction>();
     // private Creature c = new Creature();
     private CreatureAction changeDisplay;
+    private CreatureAction remove;
+    private CreatureAction updateDisplay;
+    private CreatureAction youWin;
     private CreatureAction dact;
+    private CreatureAction teleport;
     private Item weapon;
     private Item armor;
     
@@ -76,6 +80,46 @@ public class Creature extends Displayable {
     public CreatureAction getChangeDisplay(){
         System.out.println("Creature:gerChangeDisplay");
         return changeDisplay;
+    }
+
+    public void setRemoveAction(CreatureAction ra){
+        System.out.println("Creature:setRemoveAction");
+        remove = ra;
+    }
+
+    public CreatureAction getRemoveAction(){
+        System.out.println("Creature:getRemoveAction");
+        return remove;
+    }
+
+    public void setYouWinAction(CreatureAction yw){
+        System.out.println("Creature:setYouWinAction");
+        youWin = yw;
+    }
+
+    public CreatureAction getYouWinAction(){
+        System.out.println("Creature:getYouWinAction");
+        return youWin;
+    }
+
+    public void setUpdateDisplay(CreatureAction ud){
+        System.out.println("Creature:setUpdateDisplay");
+        updateDisplay = ud;
+    }
+
+    public CreatureAction getUpdateDisplay(){
+        System.out.println("Creature:getupdateDisplay");
+        return updateDisplay;
+    }
+
+    public void setTeleport(CreatureAction tele){
+        System.out.println("Creature:setUpdateDisplay");
+        teleport = tele;
+    }
+
+    public CreatureAction getTeleport(){
+        System.out.println("Creature:getupdateDisplay");
+        return tele;
     }
 
 }

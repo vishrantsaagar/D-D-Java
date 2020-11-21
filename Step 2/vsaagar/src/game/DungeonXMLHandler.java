@@ -115,7 +115,8 @@ public class DungeonXMLHandler extends DefaultHandler {
 
             if(creatureName.equals("Remove")){
                 if(currCreature != null){
-                    c1 = new Remove(creatureName, currCreature); 
+                    c1 = new Remove(creatureName, currCreature);
+                    currCreature.setRemoveActionc1(c1); 
                 }
 
                 else{
@@ -126,6 +127,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             else if(creatureName.equals("YouWin")){
                 if(currCreature != null){
                     c1 = new YouWin(creatureName, currCreature); 
+                    currCreature.setYouWinAction(c1);
                 }
 
                 else{
@@ -136,6 +138,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             else if(creatureName.equals("Teleport")){
                 if(currCreature != null){
                     c1 = new Teleport(creatureName, currCreature); 
+                    currCreature.setTeleport(c1);
                 }
 
                 else{
@@ -146,7 +149,7 @@ public class DungeonXMLHandler extends DefaultHandler {
             else if(creatureName.equals("ChangeDisplayedType")){
                 if(currCreature != null){
                     c1 = new ChangedDisplayType(creatureName, currCreature); 
-                    currCreature.setChangeDisplay(c1);
+                    // currCreature.setChangeDisplay(c1);
                 }
 
                 else{
@@ -158,10 +161,12 @@ public class DungeonXMLHandler extends DefaultHandler {
             else if(creatureName.equals("UpdateDisplay")){
                 if(currCreature != null){
                     c1 = new UpdateDisplay(creatureName, currCreature); 
+                    currCreature.setUpdateDisplay(c1);
                 }
 
                 else{
                     c1 = new UpdateDisplay(creatureName, currPlayer); 
+                    currPlayer.setUpdateDisplay(c1);
                 }
             }
 
