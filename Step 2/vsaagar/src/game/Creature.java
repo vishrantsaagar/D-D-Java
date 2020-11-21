@@ -8,6 +8,8 @@ public class Creature extends Displayable {
     private int HpMoves;
     private int maxHit;
     private ArrayList<CreatureAction> cact = new ArrayList<CreatureAction>();
+    // private Creature c = new Creature();
+    private CreatureAction changeDisplay;
     private CreatureAction dact;
     private Item weapon;
     private Item armor;
@@ -64,6 +66,16 @@ public class Creature extends Displayable {
 
     public ArrayList<CreatureAction> getCact() {
         return cact;
+    }
+
+    public void setChangeDisplay(CreatureAction ca){
+        changeDisplay = ca;
+        System.out.println("Creature:setChangeDisplay");
+    }
+
+    public CreatureAction getChangeDisplay(){
+        System.out.println("Creature:gerChangeDisplay");
+        return changeDisplay;
     }
 
 }

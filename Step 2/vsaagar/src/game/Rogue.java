@@ -306,10 +306,11 @@ public class Rogue implements Runnable {
                     room_ID = creatures.get(i).getRoomID();
                 }
 
-            for (int j = 1; j <= roomsreq.size(); j++) //possible bug around this
+            for (int j = 1; j <= roomsreq.size(); j++){ //possible bug around this
                 if (j == room_ID) {
                     player_room = (Room) roomsreq.get(j-1);
                 }
+            }
 
             int final_x = player_room.getPosX().get(0);
             int final_y = player_room.getPosY().get(0) + topHeight;

@@ -146,10 +146,12 @@ public class DungeonXMLHandler extends DefaultHandler {
             else if(creatureName.equals("ChangeDisplayedType")){
                 if(currCreature != null){
                     c1 = new ChangedDisplayType(creatureName, currCreature); 
+                    currCreature.setChangeDisplay(c1);
                 }
 
                 else{
                     c1 = new ChangedDisplayType(creatureName, currPlayer); 
+                    currPlayer.setChangeDisplay(c1);
                 }
             }
 

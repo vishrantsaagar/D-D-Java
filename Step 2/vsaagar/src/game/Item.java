@@ -6,7 +6,7 @@ public class Item extends Displayable {
 
     private Creature owner;
     private Creature c = new Creature();
-    private ItemAction action = new ItemAction(c);
+    private ItemAction action;
     private int itemintvalue;
     private ArrayList<Integer> PosX = new ArrayList<Integer>();
 	private ArrayList<Integer> PosY= new ArrayList<Integer>();

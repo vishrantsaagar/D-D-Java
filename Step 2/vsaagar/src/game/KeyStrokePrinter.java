@@ -198,7 +198,9 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                         if(p1.getHp() <= 0)
                         {
-                            displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                            // displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                            displayGrid.addObjectToDisplay(new Char(p1.getChangeDisplay().getCharValue()), posX, posY);
+
                             System.out.println("Game Over!\n\nThanks for playing!");
                             displayGrid.addObjectToDisplay(new Char(' '), z - 1, displayHeight - 1);
                             displayGrid.addObjectToDisplay(new Char('G'), z, displayHeight - 1);
@@ -427,7 +429,9 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                         if(p1.getHp() <= 0)
                         {
-                            displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                            // displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                            displayGrid.addObjectToDisplay(new Char(p1.getChangeDisplay().getCharValue()), posX, posY);
+
                             System.out.println("Game Over!\n\nThanks for playing!");
                             displayGrid.addObjectToDisplay(new Char(' '), z - 1, displayHeight - 1);
                             displayGrid.addObjectToDisplay(new Char('G'), z, displayHeight - 1);
@@ -655,7 +659,9 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                         if(p1.getHp() <= 0)
                         {
-                            displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                            // displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                            displayGrid.addObjectToDisplay(new Char(p1.getChangeDisplay().getCharValue()), posX, posY);
+
                             System.out.println("Game Over!\n\nThanks for playing!");
                             displayGrid.addObjectToDisplay(new Char(' '), z - 1, displayHeight - 1);
                             displayGrid.addObjectToDisplay(new Char('G'), z, displayHeight - 1);
@@ -882,7 +888,11 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                         if(p1.getHp() <= 0)
                         {
-                            displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                            displayGrid.addObjectToDisplay(new Char(p1.getChangeDisplay().getCharValue()), posX, posY);
+                            // displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+
+                            System.out.println("HUHWDUIW: " + p1.getChangeDisplay());
+
                             System.out.println("Game Over!\n\nThanks for playing!");
                             displayGrid.addObjectToDisplay(new Char(' '), z - 1, displayHeight - 1);
                             displayGrid.addObjectToDisplay(new Char('G'), z, displayHeight - 1);
@@ -1023,13 +1033,6 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                     for(int i = 0; i < item_list.size(); i++){
                         System.out.println(item_list.get(i));
-                    }
-
-                    for(int i = 0; i < displayGrid.getObjectGrid()[posX][posY].size(); i++){
-                        System.out.println("---------------------------------------------------");
-                        System.out.println(displayGrid.getObjectGrid()[posX][posY].get(i).getChar());
-                        System.out.println("---------------------------------------------------");
-
                     }
 
                     for(int item = 0; item < item_list.size(); item++){
@@ -1870,17 +1873,8 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         }
                     }
 
-                    //String message = "Game ended since user entered the command Y/y";
-//
-                    //int offset = 6;
-                    //for(int i = 0; i < 100; i++){
-                    //    displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
-                    //}
-//
-                    //for(int i = 0; i < message.length(); i++){
-                    //    displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
-                    //}
-
+                    //TODO
+                    //EndGame: typically executed when the player dies, it causes the game to be ended and all further input to be ignored. I do this by setting a static flag in the Dungeon that signals the end of the game
                 }
 
      
