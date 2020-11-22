@@ -182,16 +182,16 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             item_stack.remove(0);
                             item_str_stack.remove(0);
 
-                            String message = p1.getDropPack().getMessage();
+                            // String message = p1.getDropPack().getMessage();
 
-                            int offset = 6;
-                            for(int i = 0; i < 100; i++){
-                                displayGrid.removeObjectFromDisplay(new Char(' '), offset + i, displayHeight - 1);
-                            }
+                            // int offset = 6;
+                            // for(int i = 0; i < 100; i++){
+                            //     displayGrid.removeObjectFromDisplay(new Char(' '), offset + i, displayHeight - 1);
+                            // }
 
-                            for(int i = 0; i < message.length(); i++){
-                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
-                            }
+                            // for(int i = 0; i < message.length(); i++){
+                            //     displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                            // }
                         }
 
                         System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
@@ -528,16 +528,16 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             item_stack.remove(0);
                             item_str_stack.remove(0);
 
-                            String message = p1.getDropPack().getMessage();
+                            // String message = p1.getDropPack().getMessage();
 
-                            int offset = 6;
-                            for(int i = 0; i < 100; i++){
-                                displayGrid.removeObjectFromDisplay(new Char(' '), offset + i, displayHeight - 1);
-                            }
+                            // int offset = 6;
+                            // for(int i = 0; i < 100; i++){
+                            //     displayGrid.removeObjectFromDisplay(new Char(' '), offset + i, displayHeight - 1);
+                            // }
 
-                            for(int i = 0; i < message.length(); i++){
-                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
-                            }
+                            // for(int i = 0; i < message.length(); i++){
+                            //     displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                            // }
                         }
 
 
@@ -859,16 +859,16 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             item_stack.remove(0);
                             item_str_stack.remove(0);
 
-                            String message = p1.getDropPack().getMessage();
+                            // String message = p1.getDropPack().getMessage();
 
-                            int offset = 6;
-                            for(int i = 0; i < 100; i++){
-                                displayGrid.removeObjectFromDisplay(new Char(' '), offset + i, displayHeight - 1);
-                            }
+                            // int offset = 6;
+                            // for(int i = 0; i < 100; i++){
+                            //     displayGrid.removeObjectFromDisplay(new Char(' '), offset + i, displayHeight - 1);
+                            // }
 
-                            for(int i = 0; i < message.length(); i++){
-                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
-                            }
+                            // for(int i = 0; i < message.length(); i++){
+                            //     displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                            // }
                         }
 
 
@@ -1205,16 +1205,16 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             item_stack.remove(0);
                             item_str_stack.remove(0);
 
-                            String message = p1.getDropPack().getMessage();
+                            // String message = p1.getDropPack().getMessage();
 
-                            int offset = 6;
-                            for(int i = 0; i < 100; i++){
-                                displayGrid.removeObjectFromDisplay(new Char(' '), offset + i, displayHeight - 1);
-                            }
+                            // int offset = 6;
+                            // for(int i = 0; i < 100; i++){
+                            //     displayGrid.removeObjectFromDisplay(new Char(' '), offset + i, displayHeight - 1);
+                            // }
 
-                            for(int i = 0; i < message.length(); i++){
-                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
-                            }
+                            // for(int i = 0; i < message.length(); i++){
+                            //     displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                            // }
                         }
 
                         System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
