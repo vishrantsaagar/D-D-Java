@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Item extends Displayable {
 
     private Creature owner;
-    private Creature c = new Creature();
+    //private Creature c = new Creature();
     private ItemAction action;
     private int itemintvalue;
     private ArrayList<Integer> PosX = new ArrayList<Integer>();

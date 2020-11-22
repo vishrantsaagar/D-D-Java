@@ -9,4 +9,8 @@ public class Hallucinate extends ItemAction{
         System.out.println("Hallucinate");
 
     }
+
+    public Creature getOwner() {
+        return owner;
+    }
 }

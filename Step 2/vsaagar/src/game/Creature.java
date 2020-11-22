@@ -10,13 +10,13 @@ public class Creature extends Displayable {
     private ArrayList<CreatureAction> cact = new ArrayList<CreatureAction>();
     // private Creature c = new Creature();
     private CreatureAction changeDisplay;
-    private CreatureAction remove;
     private CreatureAction updateDisplay;
     private CreatureAction youWin;
     private CreatureAction dact;
     private CreatureAction teleport;
-    private Item weapon;
-    private Item armor;
+    private CreatureAction endgame;
+    //private Item weapon;
+    //private Item armor;
     
     public Creature()
     {
@@ -82,14 +82,14 @@ public class Creature extends Displayable {
         return changeDisplay;
     }
 
-    public void setRemoveAction(CreatureAction ra){
-        System.out.println("Creature:setRemoveAction");
-        remove = ra;
+    public void setEndAction(CreatureAction ea){
+        System.out.println("Creature:setEndAction");
+        endgame = ea;
     }
 
-    public CreatureAction getRemoveAction(){
-        System.out.println("Creature:getRemoveAction");
-        return remove;
+    public CreatureAction getEndAction(){
+        System.out.println("Creature:getEndAction");
+        return endgame;
     }
 
     public void setYouWinAction(CreatureAction yw){

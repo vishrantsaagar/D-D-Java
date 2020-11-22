@@ -1,6 +1,4 @@
 package game;
-
-import java.util.ArrayList;
 import java.util.Stack;
 
 public class Player extends Creature {
@@ -13,8 +11,8 @@ public class Player extends Creature {
     private int startY;
     private int hp;
     private int hpmoves;
-    private ArrayList<Integer> PosX = new ArrayList<Integer>();
-    private ArrayList<Integer> PosY = new ArrayList<Integer>();
+    //private ArrayList<Integer> PosX = new ArrayList<Integer>();
+    //private ArrayList<Integer> PosY = new ArrayList<Integer>();
     private Item wear_armor;
     private Item wield_sword;
     private CreatureAction dropPack;

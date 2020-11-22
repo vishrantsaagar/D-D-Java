@@ -1,11 +1,8 @@
 package game;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-
-import javax.lang.model.util.ElementScanner6;
 
 import java.util.Random;
 import java.util.Stack;
@@ -34,7 +31,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
     private int bottomHeight;
     private int gameWidth;
     private int displayHeight;
-    private String pickedItem;
+    //private String pickedItem;
     private Dungeon dungeon;
     private int steps = 0;
     private int phpmoves;
@@ -227,43 +224,30 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                             System.out.println("Game Over!\n\nThanks for playing!");
 
-                            displayGrid.addObjectToDisplay(new Char(' '), z - 1, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('G'), z, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('A'), z + 1, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('M'), z + 2, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('E'), z + 3, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 4, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('O'), z + 5, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('V'), z + 6, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('E'), z + 7, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('R'), z + 8, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('!'), z + 9, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 10, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 11, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 12, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 13, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 14, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 15, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 16, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 17, displayHeight - 1);
+                            if(p1.getEndAction() != null)
+                            {
+                                String message = p1.getEndAction().getMessage();
 
-                            displayGrid.addObjectToDisplay(new Char(' '), o - 2, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o - 1, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 1, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 2, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 3, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 4, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 5, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 6, displayHeight - 1);
+                                for(int i = 0; i < 200; i++){
+                                    displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                                }
 
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 8, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 9, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 10, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 11, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 12, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 13, displayHeight - 1);
+                                for(int i = 0; i < message.length(); i++){
+                                    displayGrid.addObjectToDisplay(new Char(message.charAt(i)), i + 6, displayHeight - 1);
+                                }
+                            }
+                            else
+                            {
+                                String message = "Player is killed! Game Over!";
 
+                                for(int i = 0; i < 200; i++){
+                                    displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                                }
+
+                                for(int i = 0; i < message.length(); i++){
+                                    displayGrid.addObjectToDisplay(new Char(message.charAt(i)), i + 6, displayHeight - 1);
+                                }
+                            }
                             return false;
 
                             }                   
@@ -404,6 +388,14 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                         if(halcheck == 1){
                             halsteps++;
+                            String mess = "Effective: " + (halmoves - halsteps) + " more steps!";
+                            for(int i = 0; i < 200; i++){
+                                displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                            }
+
+                            for(int i = 0; i < mess.length(); i++){
+                                displayGrid.addObjectToDisplay(new Char(mess.charAt(i)), i + 6, displayHeight - 1);
+                            }
                             if(halsteps == halmoves){
                                 for(int i = 0; i < monsters.size(); i++)
                                 {
@@ -576,45 +568,31 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 displayGrid.addObjectToDisplay(new Char(p1.getChangeDisplay().getCharValue()), posX, posY);
 
                             System.out.println("Game Over!\n\nThanks for playing!");
-                            displayGrid.addObjectToDisplay(new Char(' '), z - 1, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('G'), z, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('A'), z + 1, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('M'), z + 2, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('E'), z + 3, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 4, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('O'), z + 5, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('V'), z + 6, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('E'), z + 7, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('R'), z + 8, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('!'), z + 9, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 10, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 11, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 12, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 13, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 14, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 15, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 16, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 17, displayHeight - 1);
+                            if(p1.getEndAction() != null)
+                            {
+                                String message = p1.getEndAction().getMessage();
 
-                            displayGrid.addObjectToDisplay(new Char(' '), o - 2, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o - 1, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 1, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 2, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 3, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 4, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 5, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 6, displayHeight - 1);
+                                for(int i = 0; i < 200; i++){
+                                    displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                                }
 
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 8, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 9, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 10, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 11, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 12, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 13, displayHeight - 1);
+                                for(int i = 0; i < message.length(); i++){
+                                    displayGrid.addObjectToDisplay(new Char(message.charAt(i)), i + 6, displayHeight - 1);
+                                }
+                            }
+                            else
+                            {
+                                String message = "Player is killed! Game Over!";
 
+                                for(int i = 0; i < 200; i++){
+                                    displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                                }
+
+                                for(int i = 0; i < message.length(); i++){
+                                    displayGrid.addObjectToDisplay(new Char(message.charAt(i)), i + 6, displayHeight - 1);
+                                }
+                            }
                             return false;
-
                             }    
 
                         displayGrid.addObjectToDisplay(new Char('D'), z + 1, displayHeight - 1);
@@ -723,6 +701,22 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
                         }
 
+                        if(halcheck == 1)
+                        {
+                            String chlist = "@THSX#!?|";
+                                Random r = new Random();
+                                char halSymb = ' ';
+
+                            for(int i = 0; i < monsters.size(); i++)
+                                {
+                                    int X = monsters.get(i).getstartingX();
+                                    int Y = monsters.get(i).getstartingY();
+
+                                    halSymb = chlist.charAt(r.nextInt(chlist.length()));
+                                    displayGrid.addObjectToDisplay(new Char(halSymb),  X, Y);
+                                }
+                        }
+
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posX = posX - 1;
 
@@ -739,6 +733,13 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                         if(halcheck == 1){
                             halsteps++;
+                            String mess = "Effective: " + (halmoves - halsteps) + " more steps!";
+                            for(int i = 0; i < 200; i++){
+                                displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                            }
+                            for(int i = 0; i < mess.length(); i++){
+                                displayGrid.addObjectToDisplay(new Char(mess.charAt(i)), i + 6, displayHeight - 1);
+                            }
                             if(halsteps == halmoves){
                                 for(int i = 0; i < monsters.size(); i++)
                                 {
@@ -909,43 +910,30 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 displayGrid.addObjectToDisplay(new Char(p1.getChangeDisplay().getCharValue()), posX, posY);
 
                             System.out.println("Game Over!\n\nThanks for playing!");
-                            displayGrid.addObjectToDisplay(new Char(' '), z - 1, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('G'), z, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('A'), z + 1, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('M'), z + 2, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('E'), z + 3, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 4, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('O'), z + 5, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('V'), z + 6, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('E'), z + 7, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('R'), z + 8, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('!'), z + 9, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 10, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 11, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 12, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 13, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 14, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 15, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 16, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 17, displayHeight - 1);
+                            if(p1.getEndAction() != null)
+                            {
+                                String message = p1.getEndAction().getMessage();
 
-                            displayGrid.addObjectToDisplay(new Char(' '), o - 2, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o - 1, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 1, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 2, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 3, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 4, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 5, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 6, displayHeight - 1);
+                                for(int i = 0; i < 200; i++){
+                                    displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                                }
 
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 8, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 9, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 10, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 11, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 12, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 13, displayHeight - 1);
+                                for(int i = 0; i < message.length(); i++){
+                                    displayGrid.addObjectToDisplay(new Char(message.charAt(i)), i + 6, displayHeight - 1);
+                                }
+                            }
+                            else
+                            {
+                                String message = "Player is killed! Game Over!";
 
+                                for(int i = 0; i < 200; i++){
+                                    displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                                }
+
+                                for(int i = 0; i < message.length(); i++){
+                                    displayGrid.addObjectToDisplay(new Char(message.charAt(i)), i + 6, displayHeight - 1);
+                                }
+                            }
                             return false;
 
                             }   
@@ -1087,6 +1075,13 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                         if(halcheck == 1){
                             halsteps++;
+                            String mess = "Effective: " + (halmoves - halsteps) + " more steps!";
+                            for(int i = 0; i < 200; i++){
+                                displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                            }
+                            for(int i = 0; i < mess.length(); i++){
+                                displayGrid.addObjectToDisplay(new Char(mess.charAt(i)), i + 6, displayHeight - 1);
+                            }
                             if(halsteps == halmoves){
                                 for(int i = 0; i < monsters.size(); i++)
                                 {
@@ -1260,43 +1255,30 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 displayGrid.addObjectToDisplay(new Char(p1.getChangeDisplay().getCharValue()), posX, posY);
 
                             System.out.println("Game Over!\n\nThanks for playing!");
-                            displayGrid.addObjectToDisplay(new Char(' '), z - 1, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('G'), z, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('A'), z + 1, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('M'), z + 2, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('E'), z + 3, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 4, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('O'), z + 5, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('V'), z + 6, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('E'), z + 7, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('R'), z + 8, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char('!'), z + 9, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 10, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 11, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 12, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 13, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 14, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 15, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 16, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), z + 17, displayHeight - 1);
+                            if(p1.getEndAction() != null)
+                            {
+                                String message = p1.getEndAction().getMessage();
 
-                            displayGrid.addObjectToDisplay(new Char(' '), o - 2, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o - 1, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 1, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 2, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 3, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 4, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 5, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 6, displayHeight - 1);
+                                for(int i = 0; i < 200; i++){
+                                    displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                                }
 
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 8, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 9, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 10, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 11, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 12, displayHeight - 1);
-                            displayGrid.addObjectToDisplay(new Char(' '), o + 13, displayHeight - 1);
+                                for(int i = 0; i < message.length(); i++){
+                                    displayGrid.addObjectToDisplay(new Char(message.charAt(i)), i + 6, displayHeight - 1);
+                                }
+                            }
+                            else
+                            {
+                                String message = "Player is killed! Game Over!";
 
+                                for(int i = 0; i < 200; i++){
+                                    displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                                }
+
+                                for(int i = 0; i < message.length(); i++){
+                                    displayGrid.addObjectToDisplay(new Char(message.charAt(i)), i + 6, displayHeight - 1);
+                                }
+                            }
                             return false;
 
                         }                                   
@@ -1438,6 +1420,14 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                         if(halcheck == 1){
                             halsteps++;
+                            String mess = "Effective: " + (halmoves - halsteps) + " more steps!";
+                            for(int i = 0; i < 200; i++){
+                                displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                            }
+                            for(int i = 0; i < mess.length(); i++){
+                                displayGrid.addObjectToDisplay(new Char(mess.charAt(i)), i + 6, displayHeight - 1);
+                            }
+
                             if(halsteps == halmoves){
                                 for(int i = 0; i < monsters.size(); i++)
                                 {
@@ -1576,24 +1566,91 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                     if(item_str_stack.size() == 0){
                         System.out.println("There is nothing in the pack!");
-                        //Display this in INFO
-                    }
+                        String message = "There is nothing in the pack!";
+                        int length = message.length();
+
+                        int offset = 6;
+
+                        for(int i = 0; i < 200; i++){
+                            displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                        }
+
+                        for(int i = 0; i < length; i++){
+                            displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                        }                    }
 
                     else if(idx >= item_str_stack.size() | idx < 0){
                         System.out.println("No item at id: " + idx);
-                        //Display this in INFO
-                    }
+                        String message = "There is no item at: " + (idx+1);
+                        int length = message.length();
+
+                        int offset = 6;
+
+                        for(int i = 0; i < 200; i++){
+                            displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                        }
+
+                        for(int i = 0; i < length; i++){
+                            displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                        }                    }
 
                     else{
                         Item dropItem = item_stack.get(idx);
-                        String dropItem_str = item_str_stack.get(idx);
+                        //String dropItem_str = item_str_stack.get(idx);
 
                         if(dropItem == p1.getWieldSword()){
                             p1.wieldSword(null);
                         }
 
                         if(dropItem == p1.getWornArmor()){
+                            int armorhp = p1.getHp() - p1.getWornArmor().getIntValue();
+                            p1.setHp(armorhp);
+
+                            int newhp = p1.getHp();
+
+                            String message = "Armor dropped while equipped:" + "-" + p1.getWornArmor().getIntValue() + " HP";
+
+                            int length = message.length();
+
+                            for(int i = 0; i < 200; i++){
+                                displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                            }
+
+                            for(int i = 0; i < length; i++){
+                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), 6 + i, displayHeight - 1);
+                            }
+
+                            String num = Integer.toString(newhp);
+                            int p = 3;
+
+                            if(num.length() == 1)
+                            {
+                                for(char h : num.toCharArray()) {
+                                    displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                    p++;
+                                }
+                                displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                            }
+
+                            else if(num.length() == 2)
+                            {
+                                for(char h : num.toCharArray()) {
+                                    displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                    p++;
+                                }
+                                displayGrid.addObjectToDisplay(new Char(' '),  p, 0);
+                            }
+
+                            else if(num.length() > 1)
+                            {
+                                for(char h : num.toCharArray()) {
+                                    displayGrid.addObjectToDisplay(new Char(h),  p, 0);
+                                    p++;
+                                }
+                            }
+
                             p1.wearArmor(null);
+
                         }
                         
                         item_stack.remove(idx);
@@ -1714,7 +1771,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                             int offset = 6;
 
-                            for(int i = 0; i < 50; i++){
+                            for(int i = 0; i < 200; i++){
                                 displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
                             }
 
@@ -1730,7 +1787,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                             int offset = 6;
 
-                            for(int i = 0; i < 50; i++){
+                            for(int i = 0; i < 200; i++){
                                 displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
                             }
 
@@ -1753,10 +1810,10 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                                 int newhp = p1.getHp();
 
-                                String message = "ARMOR WORN:" + "+" + item_stack.get(idx).getIntValue() + " HP";
+                                String message = "Armor worn:" + "+" + item_stack.get(idx).getIntValue() + " HP";
                                 int length = message.length();
 
-                                for(int i = 0; i < 50; i++){
+                                for(int i = 0; i < 200; i++){
                                     displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
                                 }
 
@@ -1802,7 +1859,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 String message = "Armor already equipped";
                                 int length = message.length();
 
-                                for(int i = 0; i < 50; i++){
+                                for(int i = 0; i < 200; i++){
                                     displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
                                 }
 
@@ -1819,7 +1876,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                             int offset = 6;
 
-                            for(int i = 0; i < 50; i++){
+                            for(int i = 0; i < 200; i++){
                                 displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
                             }
 
@@ -1851,7 +1908,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                         int offset = 6;
 
-                        for(int i = 0; i < 50; i++){
+                        for(int i = 0; i < 200; i++){
                             displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
                         }
 
@@ -1872,7 +1929,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                         int length = message.length();
 
-                        for(int i = 0; i < 50; i++){
+                        for(int i = 0; i < 200; i++){
                             displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
                         }
 
@@ -1942,7 +1999,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         int length = message.length();
 
                         int offset = 6;
-                        for(int f = 0; f < 50; f++){
+                        for(int f = 0; f < 200; f++){
                             displayGrid.addObjectToDisplay(new Char(' '), offset + f, displayHeight - 1);
                         }
                         for(int j = 0; j < length; j++){
@@ -1957,7 +2014,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                         int offset = 6;
 
-                        for(int j = 0; j < 50; j++){
+                        for(int j = 0; j < 200; j++){
                             displayGrid.addObjectToDisplay(new Char(' '), offset + j, displayHeight - 1);
                         }
 
@@ -1980,7 +2037,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
     
                             int offset = 6;
     
-                            for(int i = 0; i < 100; i++){
+                            for(int i = 0; i < 200; i++){
                                 displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
                             }
     
@@ -1995,7 +2052,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
     
                             int offset = 6;
     
-                            for(int i = 0; i < 100; i++){
+                            for(int i = 0; i < 200; i++){
                                 displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
                             }
     
@@ -2060,7 +2117,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                                         int offset = 6;
                                         
-                                        for(int i = 0; i < 100; i++){
+                                        for(int i = 0; i < 200; i++){
                                             displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
                                         }
                 
@@ -2085,7 +2142,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                 
                                         int offset = 6;
                 
-                                        for(int i = 0; i < 100; i++){
+                                        for(int i = 0; i < 200; i++){
                                             displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
                                         }
                 
@@ -2142,7 +2199,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                                         int offset = 6;
 
-                                        for(int i = 0; i < 100; i++){
+                                        for(int i = 0; i < 200; i++){
                                             displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
                                         }
                 
@@ -2162,7 +2219,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                 
                                         int offset = 6;
                 
-                                        for(int i = 0; i < 100; i++){
+                                        for(int i = 0; i < 200; i++){
                                             displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
                                         }
                 
@@ -2230,11 +2287,11 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                     halcheck = 1;
                                 }
 
-                                String message = "You have picked up and activated a scroll of hallucination for " + Integer.toString(halmoves) + " steps!";
+                                String message = "You have picked up and activated a scroll of hallucination for " + Integer.toString(halmoves - 1) + " steps!";
 
                                 int offset = 6;
 
-                                for(int i = 0; i < 100; i++){
+                                for(int i = 0; i < 200; i++){
                                     displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
                                 }
                 
@@ -2250,7 +2307,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                             int offset = 6;
 
-                            for(int i = 0; i < 100; i++){
+                            for(int i = 0; i < 200; i++){
                                 displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
                             }
     
@@ -2268,7 +2325,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                     int offset = 6;
 
-                    for(int i = 0; i < 100; i++){
+                    for(int i = 0; i < 200; i++){
                         displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
                     }
 
@@ -2344,7 +2401,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     }
 
                     int offset = 6;
-                    for(int i = 0; i < 100; i++){
+                    for(int i = 0; i < 200; i++){
                         displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
                     }
 
@@ -2370,7 +2427,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             String message = "Game ended since user entered the command Y/y";
 
                             int offset = 6;
-                            for(int i = 0; i < 100; i++){
+                            for(int i = 0; i < 200; i++){
                                 displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
                             }
                         
