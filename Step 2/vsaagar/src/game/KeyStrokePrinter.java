@@ -342,13 +342,29 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 }
 
                             }
-                            displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY - 1);
+                            displayGrid.addObjectToDisplay(new Char('.'), posX, posY - 1);
                         }
                     }
                     else {
 
                         for(int i = 0; i < 200; i++){
                             displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                        }
+
+                        if(halcheck == 1)
+                        {
+                            String chlist = "@THSX#!?|";
+                                Random r = new Random();
+                                char halSymb = ' ';
+
+                            for(int i = 0; i < monsters.size(); i++)
+                                {
+                                    int X = monsters.get(i).getstartingX();
+                                    int Y = monsters.get(i).getstartingY();
+
+                                    halSymb = chlist.charAt(r.nextInt(chlist.length()));
+                                    displayGrid.addObjectToDisplay(new Char(halSymb),  X, Y);
+                                }
                         }
 
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
@@ -371,8 +387,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 {
                                     int X = monsters.get(i).getstartingX();
                                     int Y = monsters.get(i).getstartingY();
-
-                                    displayGrid.removeObjectFromDisplay(new Char(' '),  X, Y);
+                                    displayGrid.addObjectToDisplay(new Char(monsters.get(i).getType()),  X, Y);
                                     halcheck = 0;
                                 }
                                 halsteps = 0;
@@ -595,6 +610,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         {}
                         else
                         {
+                                
                             int newX = topHeight;
                             int newY = topHeight;
 
@@ -655,7 +671,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 }
 
                             }
-                            displayGrid.removeObjectFromDisplay(new Char(' '), posX - 1, posY);
+                            displayGrid.addObjectToDisplay(new Char('.'), posX - 1, posY);
                         }
                     }
                     else {
@@ -685,8 +701,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 {
                                     int X = monsters.get(i).getstartingX();
                                     int Y = monsters.get(i).getstartingY();
-
-                                    displayGrid.removeObjectFromDisplay(new Char(' '),  X, Y);
+                                    displayGrid.addObjectToDisplay(new Char(monsters.get(i).getType()),  X, Y);
                                     halcheck = 0;
                                 }
                                 halsteps = 0;
@@ -966,13 +981,29 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 }
 
                             }
-                            displayGrid.removeObjectFromDisplay(new Char(' '), posX + 1, posY);
+                            displayGrid.addObjectToDisplay(new Char('.'), posX + 1, posY);
                         }
                     }
                     else {
 
                         for(int i = 0; i < 200; i++){
                             displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
+                        }
+
+                        if(halcheck == 1)
+                        {
+                            String chlist = "@THSX#!?|";
+                                Random r = new Random();
+                                char halSymb = ' ';
+
+                            for(int i = 0; i < monsters.size(); i++)
+                                {
+                                    int X = monsters.get(i).getstartingX();
+                                    int Y = monsters.get(i).getstartingY();
+
+                                    halSymb = chlist.charAt(r.nextInt(chlist.length()));
+                                    displayGrid.addObjectToDisplay(new Char(halSymb),  X, Y);
+                                }
                         }
 
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
@@ -997,7 +1028,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                     int X = monsters.get(i).getstartingX();
                                     int Y = monsters.get(i).getstartingY();
 
-                                    displayGrid.removeObjectFromDisplay(new Char(' '),  X, Y);
+                                    displayGrid.addObjectToDisplay(new Char(monsters.get(i).getType()),  X, Y);
                                     halcheck = 0;
                                 }
                                 halsteps = 0;
@@ -1277,7 +1308,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 }
 
                             }
-                            displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY + 1);
+                            displayGrid.addObjectToDisplay(new Char('.'), posX, posY + 1);
                         }
                     }
                     else {
@@ -1285,7 +1316,23 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         for(int i = 0; i < 200; i++){
                             displayGrid.addObjectToDisplay(new Char(' '), 6 + i, displayHeight - 1);
                         }
-                        
+
+                        if(halcheck == 1)
+                        {
+                            String chlist = "@THSX#!?|";
+                                Random r = new Random();
+                                char halSymb = ' ';
+
+                            for(int i = 0; i < monsters.size(); i++)
+                                {
+                                    int X = monsters.get(i).getstartingX();
+                                    int Y = monsters.get(i).getstartingY();
+
+                                    halSymb = chlist.charAt(r.nextInt(chlist.length()));
+                                    displayGrid.addObjectToDisplay(new Char(halSymb),  X, Y);
+                                }
+                        }  
+
                         displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
                         posY = posY + 1;
 
@@ -1308,7 +1355,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                     int X = monsters.get(i).getstartingX();
                                     int Y = monsters.get(i).getstartingY();
 
-                                    displayGrid.removeObjectFromDisplay(new Char(' '),  X, Y);
+                                    displayGrid.addObjectToDisplay(new Char(monsters.get(i).getType()),  X, Y);                              
                                     halcheck = 0;
                                 }
                                 halsteps = 0;
@@ -1349,6 +1396,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
                     }
                 }
+
                 else if(ch == 'p'){
                     int room_id = p1.getRoomID();
                     rooms = dungeon.getRooms();
@@ -2086,7 +2134,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                     halcheck = 1;
                                 }
 
-                                String message = "You have picked up a scroll of hallucination!";
+                                String message = "You have picked up and activated a scroll of hallucination!";
 
                                 int offset = 6;
 
