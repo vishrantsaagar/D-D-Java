@@ -2216,7 +2216,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                     halcheck = 1;
                                 }
 
-                                String message = "You have picked up and activated a scroll of hallucination!";
+                                String message = "You have picked up and activated a scroll of hallucination for " + Integer.toString(halmoves) + " steps!";
 
                                 int offset = 6;
 
