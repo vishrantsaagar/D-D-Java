@@ -179,9 +179,6 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             item_stack = p1.getItem();
                             item_str_stack = p1.getStrItem();
 
-                            item_stack.remove(0);
-                            item_str_stack.remove(0);
-
                             if(item_stack.size() != 0){
                                 item_stack.remove(0);
                                 item_str_stack.remove(0);
@@ -529,9 +526,6 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         if(p1.getDropPack() != null){
                             item_stack = p1.getItem();
                             item_str_stack = p1.getStrItem();
-
-                            item_stack.remove(0);
-                            item_str_stack.remove(0);
 
                             if(item_stack.size() != 0){
                                 item_stack.remove(0);
