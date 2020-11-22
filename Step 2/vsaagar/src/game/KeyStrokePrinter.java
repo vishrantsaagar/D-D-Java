@@ -1748,12 +1748,12 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 //takenoffstrings.add(item_str_stack.get(idx)); //storage
                             
                                 p1.wearArmor(item_stack.get(idx));
-                                int armorhp = p1.getHp() + item_stack.get(idx).getintvalue();
+                                int armorhp = p1.getHp() + item_stack.get(idx).getIntValue();
                                 p1.setHp(armorhp);
 
                                 int newhp = p1.getHp();
 
-                                String message = "ARMOR WORN:" + "+" + item_stack.get(idx).getintvalue() + " HP";
+                                String message = "ARMOR WORN:" + "+" + item_stack.get(idx).getIntValue() + " HP";
                                 int length = message.length();
 
                                 for(int i = 0; i < 50; i++){
@@ -1863,12 +1863,12 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                     else{
 
-                        int armorhp = p1.getHp() - worn_armor.getintvalue();
+                        int armorhp = p1.getHp() - worn_armor.getIntValue();
                         p1.setHp(armorhp);
 
                         int newhp = p1.getHp();
 
-                        String message = "Armor taken off:" + "-" + worn_armor.getintvalue() + " HP";
+                        String message = "Armor taken off:" + "-" + worn_armor.getIntValue() + " HP";
 
                         int length = message.length();
 
@@ -1969,7 +1969,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                     else{
                         if(item_stack.get(idx) instanceof Sword){
                             p1.wieldSword(item_stack.get(idx));
-                            int damage = item_stack.get(idx).getintvalue();
+                            int damage = item_stack.get(idx).getIntValue();
                             int pmaxhit = p1.getMaxHit();
 
                             p1.setMaxHit(pmaxhit + damage);
