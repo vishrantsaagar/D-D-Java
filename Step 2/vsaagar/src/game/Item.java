@@ -32,6 +32,16 @@ public class Item extends Displayable {
         return action;
     }
 
+    public void setIntValue(int intVal){
+        System.out.println("Item:setIntValue");
+        itemintvalue = intVal;
+    }
+
+    public int getIntValue(){
+        System.out.println("Item:getIntValue");
+        return itemintvalue;
+    }
+
     public void SetPosX(int x)
     {
         PosX.add(x);

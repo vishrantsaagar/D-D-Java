@@ -17,6 +17,7 @@ public class Player extends Creature {
     private ArrayList<Integer> PosY = new ArrayList<Integer>();
     private Item wear_armor;
     private Item wield_sword;
+    private CreatureAction dropPack;
     private Stack<Item> item = new Stack<Item>();
     private Stack<String> item_string = new Stack<String>();
 
@@ -115,6 +116,16 @@ public class Player extends Creature {
     public Item getWieldSword(){
       System.out.println("Player:getWieldSword");
       return wield_sword;
+    }
+
+    public void setDropPack(CreatureAction dp){
+      System.out.println("Player:setDropPack");
+      dropPack = dp;
+    }
+
+    public CreatureAction getDropPack(){
+      System.out.println("Player:getDropPack");
+      return dropPack;
     }    
 
     public int getX()

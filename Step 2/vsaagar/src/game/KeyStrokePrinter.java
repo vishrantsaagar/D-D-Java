@@ -175,6 +175,25 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             }
                         }
 
+                        if(p1.getDropPack() != null){
+                            item_stack = p1.getItem();
+                            item_str_stack = p1.getStrItem();
+
+                            item_stack.remove(0);
+                            item_str_stack.remove(0);
+
+                            String message = p1.getDropPack().getMessage();
+
+                            int offset = 6;
+                            for(int i = 0; i < 100; i++){
+                                displayGrid.removeObjectFromDisplay(new Char(' '), offset + i, displayHeight - 1);
+                            }
+
+                            for(int i = 0; i < message.length(); i++){
+                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                            }
+                        }
+
                         System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
 
                         System.out.println("Monster HP remaining:" + target.getHp());
@@ -205,6 +224,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 displayGrid.addObjectToDisplay(new Char(p1.getChangeDisplay().getCharValue()), posX, posY);
 
                             System.out.println("Game Over!\n\nThanks for playing!");
+
                             displayGrid.addObjectToDisplay(new Char(' '), z - 1, displayHeight - 1);
                             displayGrid.addObjectToDisplay(new Char('G'), z, displayHeight - 1);
                             displayGrid.addObjectToDisplay(new Char('A'), z + 1, displayHeight - 1);
@@ -244,7 +264,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                             return false;
 
-                            }                           
+                            }                   
 
                         displayGrid.addObjectToDisplay(new Char('D'), z + 1, displayHeight - 1);
                         displayGrid.addObjectToDisplay(new Char('A'), z + 2, displayHeight - 1);
@@ -498,6 +518,25 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             for(char h : num.toCharArray()) {
                                 displayGrid.addObjectToDisplay(new Char(h),  p, 0);
                                 p++;
+                            }
+                        }
+
+                        if(p1.getDropPack() != null){
+                            item_stack = p1.getItem();
+                            item_str_stack = p1.getStrItem();
+
+                            item_stack.remove(0);
+                            item_str_stack.remove(0);
+
+                            String message = p1.getDropPack().getMessage();
+
+                            int offset = 6;
+                            for(int i = 0; i < 100; i++){
+                                displayGrid.removeObjectFromDisplay(new Char(' '), offset + i, displayHeight - 1);
+                            }
+
+                            for(int i = 0; i < message.length(); i++){
+                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
                             }
                         }
 
@@ -810,6 +849,25 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             for(char h : num.toCharArray()) {
                                 displayGrid.addObjectToDisplay(new Char(h),  p, 0);
                                 p++;
+                            }
+                        }
+
+                        if(p1.getDropPack() != null){
+                            item_stack = p1.getItem();
+                            item_str_stack = p1.getStrItem();
+
+                            item_stack.remove(0);
+                            item_str_stack.remove(0);
+
+                            String message = p1.getDropPack().getMessage();
+
+                            int offset = 6;
+                            for(int i = 0; i < 100; i++){
+                                displayGrid.removeObjectFromDisplay(new Char(' '), offset + i, displayHeight - 1);
+                            }
+
+                            for(int i = 0; i < message.length(); i++){
+                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
                             }
                         }
 
@@ -1137,6 +1195,25 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             for(char h : num.toCharArray()) {
                                 displayGrid.addObjectToDisplay(new Char(h),  p, 0);
                                 p++;
+                            }
+                        }
+
+                        if(p1.getDropPack() != null){
+                            item_stack = p1.getItem();
+                            item_str_stack = p1.getStrItem();
+
+                            item_stack.remove(0);
+                            item_str_stack.remove(0);
+
+                            String message = p1.getDropPack().getMessage();
+
+                            int offset = 6;
+                            for(int i = 0; i < 100; i++){
+                                displayGrid.removeObjectFromDisplay(new Char(' '), offset + i, displayHeight - 1);
+                            }
+
+                            for(int i = 0; i < message.length(); i++){
+                                displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
                             }
                         }
 
@@ -1560,15 +1637,18 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         int add_space = 0;
 
                         if(item_it instanceof Sword){
-                            item = ((Sword)item_it).getName();
+                            // item = ((Sword)item_it).getName();
+
+                            item += " (" + Integer.toString(item_it.getIntValue()) + ")";
 
                             if(item_it == p1.getWieldSword()){
                                 item += "(w)";
+
                             }
                         }
 
                         else if(item_it instanceof Armor){
-                            item = ((Armor)item_it).getName();
+                            // item = ((Armor)item_it).getName();
 
                             if(item_it == p1.getWornArmor()){
                                 item += "(a)";
@@ -1576,7 +1656,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         }
 
                         else if(item_it instanceof Scroll){
-                            item = ((Scroll)item_it).getName();
+                            // item = ((Scroll)item_it).getName();
                         }
 
                         item = Integer.toString(i) + ": " + item;
@@ -1978,6 +2058,8 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                     else{
                                         int swordHpDamage = p1.getHp() + itemIntAction;
                                         p1.setHp(swordHpDamage);
+
+                                        sword_wielded.setIntValue(sword_wielded.getIntValue() + itemIntAction);
 
                                         item_stack.remove(idx);
                                         item_str_stack.remove(idx);

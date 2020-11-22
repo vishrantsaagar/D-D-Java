@@ -187,6 +187,7 @@ public class DungeonXMLHandler extends DefaultHandler {
 
                 else{
                     c1 = new DropPack(creatureName, currPlayer); 
+                    currPlayer.setDropPack(c1);
                 }
             }
 
@@ -400,9 +401,16 @@ public class DungeonXMLHandler extends DefaultHandler {
         }
 
         else if(bactionIntValue){
-            Action x = actstack.peek();
-            x.setIntValue(Integer.parseInt(data.toString()));
-            bactionIntValue = false;
+            if(currAction != null){
+                Action x = actstack.peek();
+                x.setIntValue(Integer.parseInt(data.toString()));
+                bactionIntValue = false;
+            }
+
+            else{
+                currItem.setIntValue(Integer.parseInt(data.toString()));
+            }
+            
         }
 
         else if(bItemIntValue){
