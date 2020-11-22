@@ -182,6 +182,11 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             item_stack.remove(0);
                             item_str_stack.remove(0);
 
+                            if(item_stack.size() != 0){
+                                item_stack.remove(0);
+                                item_str_stack.remove(0);
+                            }
+
                             // String message = p1.getDropPack().getMessage();
 
                             // int offset = 6;
@@ -528,6 +533,11 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             item_stack.remove(0);
                             item_str_stack.remove(0);
 
+                            if(item_stack.size() != 0){
+                                item_stack.remove(0);
+                                item_str_stack.remove(0);
+                            }
+
                             // String message = p1.getDropPack().getMessage();
 
                             // int offset = 6;
@@ -856,8 +866,11 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             item_stack = p1.getItem();
                             item_str_stack = p1.getStrItem();
 
-                            item_stack.remove(0);
-                            item_str_stack.remove(0);
+                            if(item_stack.size() != 0){
+                                item_stack.remove(0);
+                                item_str_stack.remove(0);
+                            }
+                            
 
                             // String message = p1.getDropPack().getMessage();
 
@@ -1204,6 +1217,11 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                             item_stack.remove(0);
                             item_str_stack.remove(0);
+
+                            if(item_stack.size() != 0){
+                                item_stack.remove(0);
+                                item_str_stack.remove(0);
+                            }
 
                             // String message = p1.getDropPack().getMessage();
 
@@ -1649,6 +1667,8 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                         else if(item_it instanceof Armor){
                             // item = ((Armor)item_it).getName();
+
+                            item += " (" + Integer.toString(item_it.getIntValue()) + ")";
 
                             if(item_it == p1.getWornArmor()){
                                 item += "(a)";
