@@ -2207,6 +2207,8 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
 
                     else{
                         Item scroll = item_stack.get(idx);
+                        item_stack.remove(idx);
+                        item_str_stack.remove(idx);
 
                         if(scroll instanceof Scroll){
                             itemIntAction = scroll.getItemAction().getIntValue();
@@ -2325,6 +2327,8 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                     else{
                                         int armorHpDamage = p1.getHp() + itemIntAction;
                                         p1.setHp(armorHpDamage);
+
+                                        worn_armor.setIntValue(worn_armor.getIntValue() + itemIntAction);
 
                                         int newhp = p1.getHp();
 
