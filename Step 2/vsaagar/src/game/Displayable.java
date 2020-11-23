@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Displayable {
 
     private int hp;
-    private int posX;
-    private int posY;
+    //private int posX;
+    //private int posY;
     private int width;
     private int height;
     private int hpmoves;

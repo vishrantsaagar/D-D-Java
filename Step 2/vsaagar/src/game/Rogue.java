@@ -150,8 +150,8 @@ public class Rogue implements Runnable {
                         monster.setstartingX(relativeX);
                         monster.setstartingY(relativeY + topHeight);
 
-                        int monX = monster.getstartingX();
-                        int monY = monster.getstartingY();
+                        //int monX = monster.getstartingX();
+                        //int monY = monster.getstartingY();
                     } // Monster
 
                     else {
