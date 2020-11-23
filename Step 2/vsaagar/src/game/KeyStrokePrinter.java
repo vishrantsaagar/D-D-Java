@@ -172,55 +172,6 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             }
                         }
 
-                        if(p1.getDropPack() != null){
-                            item_stack = p1.getItem();
-                            item_str_stack = p1.getStrItem();
-
-                            if(item_stack.size() != 0){
-                                if(item_stack.get(0) instanceof Sword){
-                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('|'), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
-
-                                    item_stack.get(0).SetPosX(posX);
-                                    item_stack.get(0).SetPosY(posY);
-
-                                }
-
-                                else if(item_stack.get(0) instanceof Armor){
-                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char(']'), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
-
-                                    item_stack.get(0).SetPosX(posX);
-                                    item_stack.get(0).SetPosY(posY);
-                                }
-
-                                else if(item_stack.get(0) instanceof Scroll){
-                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('|'), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
-
-                                    item_stack.get(0).SetPosX(posX);
-                                    item_stack.get(0).SetPosY(posY);
-                                }
-
-                                item_stack.remove(0);
-                                item_str_stack.remove(0);
-                            }
-
-                            // String message = p1.getDropPack().getMessage();
-
-                            // int offset = 6;
-                            // for(int i = 0; i < 100; i++){
-                            //     displayGrid.removeObjectFromDisplay(new Char(' '), offset + i, displayHeight - 1);
-                            // }
-
-                            // for(int i = 0; i < message.length(); i++){
-                            //     displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
-                            // }
-                        }
-
                         System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
 
                         System.out.println("Monster HP remaining:" + target.getHp());
@@ -311,6 +262,57 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         displayGrid.addObjectToDisplay(new Char('E'), o + 11, displayHeight - 1);
                         displayGrid.addObjectToDisplay(new Char('N'), o + 12, displayHeight - 1);
                         displayGrid.addObjectToDisplay(new Char('!'), o + 13, displayHeight - 1);
+
+                        if(p1.getDropPack() != null){
+                            item_stack = p1.getItem();
+                            item_str_stack = p1.getStrItem();
+
+                            if(item_stack.size() != 0){
+                                if(item_stack.get(0) instanceof Sword){
+                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('|'), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+
+                                    item_stack.get(0).SetPosX(posX);
+                                    item_stack.get(0).SetPosY(posY);
+
+                                }
+
+                                else if(item_stack.get(0) instanceof Armor){
+                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char(']'), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+
+                                    item_stack.get(0).SetPosX(posX);
+                                    item_stack.get(0).SetPosY(posY);
+                                }
+
+                                else if(item_stack.get(0) instanceof Scroll){
+                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('|'), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+
+                                    item_stack.get(0).SetPosX(posX);
+                                    item_stack.get(0).SetPosY(posY);
+                                }
+
+                                item_stack.remove(0);
+                                item_str_stack.remove(0);
+
+                                String message = p1.getDropPack().getMessage();
+
+                                if(message.length() != 0){
+                                    int offset = 6;
+                                    for(int i = 0; i < 200; i++){
+                                        displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                                    }
+
+                                    for(int i = 0; i < message.length(); i++){
+                                        displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                                    }
+                                }
+                            }
+                        }
 
                         if(target.getTeleport() == null)
                         {}
@@ -543,56 +545,6 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             }
                         }
 
-                        if(p1.getDropPack() != null){
-                            item_stack = p1.getItem();
-                            item_str_stack = p1.getStrItem();
-
-                            if(item_stack.size() != 0){
-                                if(item_stack.get(0) instanceof Sword){
-                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('|'), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
-
-                                    item_stack.get(0).SetPosX(posX);
-                                    item_stack.get(0).SetPosY(posY);
-
-                                }
-
-                                else if(item_stack.get(0) instanceof Armor){
-                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char(']'), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
-
-                                    item_stack.get(0).SetPosX(posX);
-                                    item_stack.get(0).SetPosY(posY);
-                                }
-
-                                else if(item_stack.get(0) instanceof Scroll){
-                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('|'), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
-
-                                    item_stack.get(0).SetPosX(posX);
-                                    item_stack.get(0).SetPosY(posY);
-                                }
-
-                                item_stack.remove(0);
-                                item_str_stack.remove(0);
-                            }
-
-                            // String message = p1.getDropPack().getMessage();
-
-                            // int offset = 6;
-                            // for(int i = 0; i < 100; i++){
-                            //     displayGrid.removeObjectFromDisplay(new Char(' '), offset + i, displayHeight - 1);
-                            // }
-
-                            // for(int i = 0; i < message.length(); i++){
-                            //     displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
-                            // }
-                        }
-
-
                         System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
 
                         //displayGrid.addObjectToDisplay(new Char('D'), z + 1, displayHeight - 1);
@@ -682,6 +634,57 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         displayGrid.addObjectToDisplay(new Char('E'), o + 11, displayHeight - 1);
                         displayGrid.addObjectToDisplay(new Char('N'), o + 12, displayHeight - 1);
                         displayGrid.addObjectToDisplay(new Char('!'), o + 13, displayHeight - 1);
+
+                        if(p1.getDropPack() != null){
+                            item_stack = p1.getItem();
+                            item_str_stack = p1.getStrItem();
+
+                            if(item_stack.size() != 0){
+                                if(item_stack.get(0) instanceof Sword){
+                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('|'), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+
+                                    item_stack.get(0).SetPosX(posX);
+                                    item_stack.get(0).SetPosY(posY);
+
+                                }
+
+                                else if(item_stack.get(0) instanceof Armor){
+                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char(']'), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+
+                                    item_stack.get(0).SetPosX(posX);
+                                    item_stack.get(0).SetPosY(posY);
+                                }
+
+                                else if(item_stack.get(0) instanceof Scroll){
+                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('|'), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+
+                                    item_stack.get(0).SetPosX(posX);
+                                    item_stack.get(0).SetPosY(posY);
+                                }
+
+                                item_stack.remove(0);
+                                item_str_stack.remove(0);
+
+                                String message = p1.getDropPack().getMessage();
+
+                                if(message.length() != 0){
+                                    int offset = 6;
+                                    for(int i = 0; i < 200; i++){
+                                        displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                                    }
+
+                                    for(int i = 0; i < message.length(); i++){
+                                        displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                                    }
+                                }
+                            }
+                        }
 
                         if(target.getTeleport() == null)
                         {}
@@ -913,56 +916,6 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             }
                         }
 
-                        if(p1.getDropPack() != null){
-                            item_stack = p1.getItem();
-                            item_str_stack = p1.getStrItem();
-
-                            if(item_stack.size() != 0){
-                                if(item_stack.get(0) instanceof Sword){
-                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('|'), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
-
-                                    item_stack.get(0).SetPosX(posX);
-                                    item_stack.get(0).SetPosY(posY);
-
-                                }
-
-                                else if(item_stack.get(0) instanceof Armor){
-                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char(']'), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
-
-                                    item_stack.get(0).SetPosX(posX);
-                                    item_stack.get(0).SetPosY(posY);
-                                }
-
-                                else if(item_stack.get(0) instanceof Scroll){
-                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('|'), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
-
-                                    item_stack.get(0).SetPosX(posX);
-                                    item_stack.get(0).SetPosY(posY);
-                                }
-
-                                item_stack.remove(0);
-                                item_str_stack.remove(0);
-                            }
-
-                            // String message = p1.getDropPack().getMessage();
-
-                            // int offset = 6;
-                            // for(int i = 0; i < 100; i++){
-                            //     displayGrid.removeObjectFromDisplay(new Char(' '), offset + i, displayHeight - 1);
-                            // }
-
-                            // for(int i = 0; i < message.length(); i++){
-                            //     displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
-                            // }
-                        }
-
-
                         System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
 
                         //displayGrid.addObjectToDisplay(new Char('D'), z + 1, displayHeight - 1);
@@ -1052,6 +1005,57 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         displayGrid.addObjectToDisplay(new Char('E'), o + 11, displayHeight - 1);
                         displayGrid.addObjectToDisplay(new Char('N'), o + 12, displayHeight - 1);
                         displayGrid.addObjectToDisplay(new Char('!'), o + 13, displayHeight - 1);
+                        
+                        if(p1.getDropPack() != null){
+                            item_stack = p1.getItem();
+                            item_str_stack = p1.getStrItem();
+
+                            if(item_stack.size() != 0){
+                                if(item_stack.get(0) instanceof Sword){
+                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('|'), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+
+                                    item_stack.get(0).SetPosX(posX);
+                                    item_stack.get(0).SetPosY(posY);
+
+                                }
+
+                                else if(item_stack.get(0) instanceof Armor){
+                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char(']'), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+
+                                    item_stack.get(0).SetPosX(posX);
+                                    item_stack.get(0).SetPosY(posY);
+                                }
+
+                                else if(item_stack.get(0) instanceof Scroll){
+                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('|'), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+
+                                    item_stack.get(0).SetPosX(posX);
+                                    item_stack.get(0).SetPosY(posY);
+                                }
+
+                                item_stack.remove(0);
+                                item_str_stack.remove(0);
+
+                                String message = p1.getDropPack().getMessage();
+
+                                if(message.length() != 0){
+                                    int offset = 6;
+                                    for(int i = 0; i < 200; i++){
+                                        displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                                    }
+
+                                    for(int i = 0; i < message.length(); i++){
+                                        displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                                    }
+                                }
+                            }
+                        }
 
                         if(target.getTeleport() == null)
                         {}
@@ -1283,57 +1287,6 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                             }
                         }
 
-                        if(p1.getDropPack() != null){
-                            item_stack = p1.getItem();
-                            item_str_stack = p1.getStrItem();
-
-                            if(item_stack.size() != 0){
-                                if(item_stack.get(0) instanceof Sword){
-                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('|'), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
-
-                                    item_stack.get(0).SetPosX(posX);
-                                    item_stack.get(0).SetPosY(posY);
-
-                                }
-
-                                else if(item_stack.get(0) instanceof Armor){
-                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char(']'), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
-
-                                    item_stack.get(0).SetPosX(posX);
-                                    item_stack.get(0).SetPosY(posY);
-                                }
-
-                                else if(item_stack.get(0) instanceof Scroll){
-                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('|'), posX, posY);
-                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
-
-                                    item_stack.get(0).SetPosX(posX);
-                                    item_stack.get(0).SetPosY(posY);
-                                }
-
-                                item_stack.remove(0);
-                                item_str_stack.remove(0);
-
-                                String message = p1.getDropPack().getMessage();
-
-                                if(message.length() != 0){
-                                    int offset = 6;
-                                    for(int i = 0; i < 200; i++){
-                                        displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
-                                    }
-
-                                    for(int i = 0; i < message.length(); i++){
-                                        displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
-                                    }
-                                }
-                            }
-                        }
-
                         System.out.println("Player HP remaining:" + newhp + "Damage recieved:" + randmhit);
 
                         //displayGrid.addObjectToDisplay(new Char('D'), z + 1, displayHeight - 1);
@@ -1424,6 +1377,57 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                         displayGrid.addObjectToDisplay(new Char('E'), o + 11, displayHeight - 1);
                         displayGrid.addObjectToDisplay(new Char('N'), o + 12, displayHeight - 1);
                         displayGrid.addObjectToDisplay(new Char('!'), o + 13, displayHeight - 1);
+
+                        if(p1.getDropPack() != null){
+                            item_stack = p1.getItem();
+                            item_str_stack = p1.getStrItem();
+
+                            if(item_stack.size() != 0){
+                                if(item_stack.get(0) instanceof Sword){
+                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('|'), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+
+                                    item_stack.get(0).SetPosX(posX);
+                                    item_stack.get(0).SetPosY(posY);
+
+                                }
+
+                                else if(item_stack.get(0) instanceof Armor){
+                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char(']'), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+
+                                    item_stack.get(0).SetPosX(posX);
+                                    item_stack.get(0).SetPosY(posY);
+                                }
+
+                                else if(item_stack.get(0) instanceof Scroll){
+                                    displayGrid.removeObjectFromDisplay(new Char(' '), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('|'), posX, posY);
+                                    displayGrid.addObjectToDisplay(new Char('@'), posX, posY);
+
+                                    item_stack.get(0).SetPosX(posX);
+                                    item_stack.get(0).SetPosY(posY);
+                                }
+
+                                item_stack.remove(0);
+                                item_str_stack.remove(0);
+
+                                String message = p1.getDropPack().getMessage();
+
+                                if(message.length() != 0){
+                                    int offset = 6;
+                                    for(int i = 0; i < 200; i++){
+                                        displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
+                                    }
+
+                                    for(int i = 0; i < message.length(); i++){
+                                        displayGrid.addObjectToDisplay(new Char(message.charAt(i)), offset + i, displayHeight - 1);
+                                    }
+                                }
+                            }
+                        }
 
                         if(target.getTeleport() == null)
                         {}
