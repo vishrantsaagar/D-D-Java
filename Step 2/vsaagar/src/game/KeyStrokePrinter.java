@@ -1324,7 +1324,7 @@ public class KeyStrokePrinter implements InputObserver, Runnable {
                                 if(message.length() != 0){
                                     int offset = 6;
                                     for(int i = 0; i < 200; i++){
-                                        displayGrid.removeObjectFromDisplay(new Char(' '), offset + i, displayHeight - 1);
+                                        displayGrid.addObjectToDisplay(new Char(' '), offset + i, displayHeight - 1);
                                     }
 
                                     for(int i = 0; i < message.length(); i++){
