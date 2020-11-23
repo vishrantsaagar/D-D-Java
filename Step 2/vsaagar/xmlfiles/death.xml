@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Dungeon name="Death" width="80" topHeight="2" gameHeight="34" bottomHeight="2">
+<Dungeon name="Death" width="80" topHeight="2" gameHeight="34" bottomHeight="4">
     <Rooms>
         <Room room="1">
             <visible>1</visible>
@@ -21,7 +21,7 @@
                     <actionIntValue>5</actionIntValue>
                 </CreatureAction>
             </Monster>
-            <Player name="Player" room="1" serial="8">
+            <Player name="Player" room="3" serial="8">
                 <visible>1</visible>
                 <posX>1</posX>
                 <posY>1</posY>
@@ -29,7 +29,7 @@
                 <hpMoves>5</hpMoves>
                 <maxhit>6</maxhit>
                 <CreatureAction name="ChangeDisplayedType" type="death">
-                    <actionCharValue>?</actionCharValue>
+                    <actionCharValue>+</actionCharValue>
                 </CreatureAction>
                 <CreatureAction name="UpdateDisplay" type="death">
                 </CreatureAction>
@@ -44,6 +44,7 @@
                 <ItemAction name="BlessArmor" type="item">
                     <actionMessage>You have picked up a scroll of weakened armor</actionMessage>
                     <actionIntValue>-5</actionIntValue>
+                    <actionCharValue>a</actionCharValue>
                 </ItemAction>
             </Scroll>
         </Room>
